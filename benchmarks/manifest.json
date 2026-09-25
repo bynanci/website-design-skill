@@ -1,0 +1,75 @@
+{
+  "suite_name": "website-design-skill-cross-agent",
+  "suite_version": "0.1.0",
+  "skill_path": "SKILL.md",
+  "rubric_path": "benchmarks/rubric.md",
+  "cases": [
+    {
+      "id": "ia-audit-001",
+      "type": "behavioral",
+      "input_paths": [
+        "evals/ia-audit/case-001/input.md"
+      ],
+      "evaluator_reference_paths": [
+        "evals/ia-audit/case-001/expected.md"
+      ],
+      "rubric_criteria": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6"
+      ],
+      "max_score": 12
+    },
+    {
+      "id": "component-reuse-001",
+      "type": "behavioral",
+      "input_paths": [
+        "evals/component-reuse/case-001/input.md"
+      ],
+      "evaluator_reference_paths": [
+        "evals/component-reuse/case-001/expected.md"
+      ],
+      "rubric_criteria": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "max_score": 12
+    },
+    {
+      "id": "end-to-end-b2b-001",
+      "type": "artifact-chain",
+      "input_paths": [
+        "examples/end-to-end-b2b/input/project-context.md",
+        "examples/end-to-end-b2b/input/current-site.md",
+        "examples/end-to-end-b2b/input/component-inventory.md"
+      ],
+      "evaluator_reference_paths": [
+        "examples/end-to-end-b2b/output/site-audit.md",
+        "examples/end-to-end-b2b/output/navigation.md",
+        "examples/end-to-end-b2b/output/homepage-spec.md",
+        "examples/end-to-end-b2b/output/component-mapping.md",
+        "examples/end-to-end-b2b/output/implementation-plan.md",
+        "examples/end-to-end-b2b/output/validation.md"
+      ],
+      "rubric_criteria": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8"
+      ],
+      "max_score": 16
+    }
+  ],
+  "total_max_score": 40
+}
