@@ -39,6 +39,29 @@ A useful PR should explain:
 
 For methodology changes, include or update an evaluation fixture when practical.
 
+## Benchmark result contributions
+
+Cross-agent benchmark submissions belong under:
+
+```text
+benchmarks/results/<run-id>/
+```
+
+Before submitting a result:
+
+1. pin the exact repository commit used by the tested agent;
+2. use the suite version from `benchmarks/manifest.json`;
+3. follow `benchmarks/runner-instruction.md`;
+4. keep evaluator references and the rubric hidden from the tested agent;
+5. preserve raw outputs without cleanup;
+6. set `manual_edit=false` for official runs;
+7. score after generation using `benchmarks/rubric.md`;
+8. run both repository validators.
+
+Do not submit an official run from a context that already saw the expected answers.
+
+If a run is useful but not clean/reproducible, mark it `exploratory`.
+
 ## Scope
 
 Use:
@@ -47,6 +70,7 @@ Use:
 - `templates/` for reusable artifacts;
 - `examples/` for inspectable workflows;
 - `evals/` for behavioral validation;
+- `benchmarks/` for cross-agent compatibility protocol and results;
 - `integrations/` for platform-specific adapters.
 
 Keep the core small.
