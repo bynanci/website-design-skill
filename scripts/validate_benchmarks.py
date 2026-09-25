@@ -8,6 +8,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 BENCH = ROOT / "benchmarks"
 MANIFEST_PATH = BENCH / "manifest.json"
+POLICY_PATH = BENCH / "release-policy.json"
+RESULT_TEMPLATE_PATH = BENCH / "result.template.json"
 RESULTS_DIR = BENCH / "results"
 
 EXPECTED_CASE_IDS = {
@@ -101,6 +103,64 @@ def validate_manifest():
         )
 
     return manifest
+
+
+def validate_release_policy(manifest: dict) -> None:
+    policy = load_json(POLICY_PATH)
+
+    required = {
+        "release_line",
+        "minimum_official_runs",
+        "minimum_distinct_agent_signatures",
+        "minimum_total_score_per_run",
+        "block_on_shared_zero_criterion",
+        "required_suite_version",
+    }
+    missing = required - policy.keys()
+    if missing:
+        fail("Release policy missing keys: " + ", ".join(sorted(missing)))
+
+    if policy["required_suite_version"] != manifest["suite_version"]:
+        fail(
+            "Release policy required_suite_version must match "
+            "benchmark manifest suite_version."
+        )
+
+    if policy["minimum_official_runs"] < 1:
+        fail("Release policy minimum_official_runs must be >= 1.")
+
+    if policy["minimum_distinct_agent_signatures"] < 1:
+        fail("Release policy minimum_distinct_agent_signatures must be >= 1.")
+
+    if policy["minimum_distinct_agent_signatures"] > policy["minimum_official_runs"]:
+        fail(
+            "Release policy cannot require more distinct agent signatures "
+            "than official runs."
+        )
+
+    minimum_score = policy["minimum_total_score_per_run"]
+    if minimum_score < 0 or minimum_score > manifest["total_max_score"]:
+        fail("Release policy minimum_total_score_per_run is out of range.")
+
+
+def validate_result_template(manifest: dict) -> None:
+    template = load_json(RESULT_TEMPLATE_PATH)
+
+    if template.get("schema_version") != "1.0":
+        fail("Benchmark result template schema_version must be 1.0.")
+
+    if template.get("suite_version") != manifest["suite_version"]:
+        fail("Benchmark result template suite_version must match manifest.")
+
+    case_ids = [case.get("id") for case in template.get("cases", [])]
+    expected_ids = [case["id"] for case in manifest["cases"]]
+    if case_ids != expected_ids:
+        fail(
+            "Benchmark result template cases must match manifest order exactly."
+        )
+
+    if template.get("aggregate", {}).get("max_score") != manifest["total_max_score"]:
+        fail("Benchmark result template aggregate max_score must match manifest.")
 
 
 def validate_result(run_dir: Path, result: dict, manifest: dict) -> None:
@@ -212,6 +272,8 @@ def validate_results(manifest: dict) -> None:
 
 def main() -> None:
     manifest = validate_manifest()
+    validate_release_policy(manifest)
+    validate_result_template(manifest)
     validate_results(manifest)
     print("Benchmark validation passed.")
 
