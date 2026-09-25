@@ -18,3 +18,6 @@ jobs:
 
       - name: Validate skill
         run: python3 scripts/validate_skill.py
+
+      - name: Validate benchmarks
+        run: python3 scripts/validate_benchmarks.py
