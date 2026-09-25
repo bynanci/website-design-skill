@@ -42,7 +42,7 @@ The project is intentionally independent of any specific AI model, design tool, 
 2. Provide the existing website, sitemap, content, repository, or other available project evidence.
 3. State the redesign goal and constraints.
 4. Let the skill start from the earliest unstable layer instead of forcing a visual redesign immediately.
-5. Preserve the generated artifacts so later agents or contributors can continue from explicit state.
+5. Preserve generated artifacts so later agents or contributors can continue from explicit state.
 
 For information-architecture work, the skill routes to:
 
@@ -88,13 +88,13 @@ For reusable component work:
 - Fix the highest reusable layer possible
 - Keep the core tool- and platform-agnostic
 
-## Example
+## Examples
 
-A synthetic B2B SaaS example is available under:
+### Focused SaaS IA example
 
 `examples/saas-analytics/`
 
-It demonstrates:
+Demonstrates:
 
 ```text
 current sitemap
@@ -105,21 +105,51 @@ current sitemap
 → component mapping
 ```
 
-The example intentionally contains mixed taxonomy so the reasoning can be inspected.
+### End-to-end B2B fixture
+
+`examples/end-to-end-b2b/`
+
+Demonstrates the longer artifact chain:
+
+```text
+project context
+→ current-site audit
+→ information architecture
+→ homepage specification
+→ component mapping
+→ implementation plan
+→ validation
+```
+
+The fixture intentionally omits analytics, user research, and competitor evidence so unsupported assumptions are visible instead of silently invented.
 
 ## Evaluations
 
-The first behavioral fixture is:
+Behavioral cases currently cover two independent failure modes.
+
+### IA audit
 
 `evals/ia-audit/case-001/`
 
-It checks that an agent:
+Checks that an agent:
 
 - detects mixed taxonomy;
 - explains the user impact;
 - preserves required content;
 - distinguishes evidence from assumption;
 - does not jump directly to styling or code.
+
+### Component reuse
+
+`evals/component-reuse/case-001/`
+
+Checks that an agent follows:
+
+```text
+Reuse → Extend → Variant → Compose → New
+```
+
+and does not create page-specific duplicates when the existing component inventory already satisfies the responsibility.
 
 The goal is behavioral consistency, not exact-output matching.
 
@@ -139,20 +169,27 @@ It currently verifies:
 - `SKILL.md` has required frontmatter;
 - local references used by `SKILL.md` resolve;
 - the core skill does not accidentally name selected tool/platform-specific products;
-- README and LICENSE remain aligned.
+- README and LICENSE remain aligned;
+- every discovered eval case contains both `input.md` and `expected.md`;
+- the end-to-end fixture contains the complete required artifact chain;
+- the end-to-end validation artifact contains the major validation sections.
 
 ## Status
 
-**v0.1 foundation in progress.**
+**v0.1 candidate foundation.**
 
-The core methodology, first reusable templates, one synthetic example, one IA evaluation fixture, and repository validation are now present.
+The repository now includes:
 
-Before calling v0.1 stable, the next priorities are:
+- core methodology;
+- focused references;
+- reusable artifact templates;
+- a focused redesign example;
+- a full end-to-end synthetic fixture;
+- IA and component-reuse behavioral evals;
+- zero-dependency repository validation;
+- CI enforcement.
 
-- add a component-reuse evaluation;
-- add at least one full end-to-end redesign fixture;
-- refine output contracts based on cross-agent runs;
-- document compatibility without moving platform-specific behavior into the core.
+Before tagging `v0.1.0`, the remaining priority is to run the current skill against multiple agent environments and refine any output contracts that prove ambiguous without moving platform-specific behavior into the core.
 
 See [SKILL.md](./SKILL.md) for the agent operating contract.
 
