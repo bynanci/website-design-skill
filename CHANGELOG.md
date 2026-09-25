@@ -24,6 +24,9 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Criterion-level compatibility scoring rubric
 - Benchmark result JSON schema and starter result template
 - Standard benchmark runner instruction
+- Frozen clean-run packet
+- Runner eligibility requirements
+- Runner availability matrix
 - Compatibility matrix and result-submission structure
 - Machine-readable v0.1 release policy
 - Release readiness script
@@ -41,5 +44,12 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Repository validation enforces complete eval case pairs and the required end-to-end artifact chain
 - Benchmark validation enforces suite integrity, release-policy consistency, result-template consistency, raw-output preservation, canonical criteria, and aggregate-score consistency
 - Evaluation documentation defines behavioral contracts instead of exact-output golden files
+- Runner availability is tracked separately from skill compatibility so access/subscription failures are not mis-scored
 - Contribution guidance defines clean vs exploratory benchmark submissions
-- README documents the cross-agent compatibility suite, release gates, and current v0.1 release-candidate state
+- README documents the cross-agent compatibility suite, runner eligibility, release gates, and current v0.1 release-candidate state
+
+### Runner evidence
+
+- Replit Agent exploratory attempt produced no retrievable raw outputs
+- A narrowed clean IA retry failed with `requires_active_subscription`
+- Replit is therefore classified as unavailable in the current environment, not as a compatibility failure
