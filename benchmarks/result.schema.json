@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/website-design-skill/benchmark-result.schema.json",
+  "title": "Website Design Skill Benchmark Result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "status",
+    "repository_commit",
+    "suite_version",
+    "agent",
+    "environment",
+    "manual_edit",
+    "cases",
+    "aggregate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "official",
+        "exploratory"
+      ]
+    },
+    "repository_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "suite_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent": {
+      "type": "object",
+      "required": [
+        "provider",
+        "product",
+        "model"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "product": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "environment": {
+      "type": "object",
+      "required": [
+        "run_date",
+        "interface",
+        "capabilities"
+      ],
+      "properties": {
+        "run_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "interface": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capabilities": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "manual_edit": {
+      "type": "boolean"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "raw_output_path",
+          "scores",
+          "notes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "raw_output_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scores": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "required": [
+        "score",
+        "max_score",
+        "interpretation"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_score": {
+          "type": "integer",
+          "const": 40
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
