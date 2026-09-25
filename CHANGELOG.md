@@ -22,11 +22,16 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Component reuse behavioral evaluation fixture
 - Cross-agent benchmark protocol and canonical manifest
 - Criterion-level compatibility scoring rubric
-- Benchmark result JSON schema
+- Benchmark result JSON schema and starter result template
 - Standard benchmark runner instruction
 - Compatibility matrix and result-submission structure
+- Machine-readable v0.1 release policy
+- Release readiness script
+- Release process documentation
+- Benchmark run GitHub Issue template
+- v0.1.0 release-tracking Issue #1
 - Zero-dependency skill and benchmark validators
-- GitHub Actions validation workflow
+- GitHub Actions validation and release-readiness reporting
 - Integration boundary
 - Open-source contribution guidelines
 
@@ -34,7 +39,7 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 - Core phase routing loads focused references and templates instead of relying only on the general workflow document
 - Repository validation enforces complete eval case pairs and the required end-to-end artifact chain
-- Benchmark validation enforces suite integrity, raw-output preservation, canonical criteria, and aggregate-score consistency
+- Benchmark validation enforces suite integrity, release-policy consistency, result-template consistency, raw-output preservation, canonical criteria, and aggregate-score consistency
 - Evaluation documentation defines behavioral contracts instead of exact-output golden files
-- Contribution guidance now defines clean vs exploratory benchmark submissions
-- README documents the cross-agent compatibility suite and v0.1 release-candidate infrastructure
+- Contribution guidance defines clean vs exploratory benchmark submissions
+- README documents the cross-agent compatibility suite, release gates, and current v0.1 release-candidate state
