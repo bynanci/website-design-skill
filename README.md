@@ -67,6 +67,7 @@ For reusable component work:
 │   └── workflows/
 ├── SKILL.md
 ├── README.md
+├── RELEASE.md
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
@@ -173,6 +174,8 @@ Key files:
 - `benchmarks/runner-instruction.md` — standard test instruction
 - `benchmarks/rubric.md` — criterion-level 0/1/2 scoring
 - `benchmarks/result.schema.json` — portable result contract
+- `benchmarks/result.template.json` — starter result payload
+- `benchmarks/release-policy.json` — machine-readable v0.1 release gate
 - `benchmarks/compatibility-matrix.md` — accepted-run summary
 - `benchmarks/results/` — raw outputs and scored results
 
@@ -187,9 +190,10 @@ Run:
 ```bash
 python3 scripts/validate_skill.py
 python3 scripts/validate_benchmarks.py
+python3 scripts/release_status.py
 ```
 
-Both validators run in CI on pushes to `main` and pull requests.
+All three commands run in CI. The first two are hard validators; `release_status.py` reports readiness without failing while official clean runs are still missing.
 
 Validation covers:
 
@@ -199,21 +203,43 @@ Validation covers:
 - complete behavioral eval pairs;
 - complete end-to-end artifact chain;
 - benchmark manifest integrity;
+- release-policy consistency;
+- benchmark result-template consistency;
 - benchmark score maxima and canonical cases;
 - official result metadata;
 - exact criterion score keys;
 - preserved raw output paths;
 - aggregate-score consistency.
 
+## Release gate
+
+The release procedure is documented in `RELEASE.md`.
+
+For v0.1, the current gate requires:
+
+- at least 2 official clean benchmark runs;
+- at least 2 distinct agent signatures;
+- at least 30/40 for every official run;
+- suite version `0.1.0`;
+- `manual_edit=false`;
+- no criterion scored 0 by two or more official runs;
+- both repository validators green.
+
+Use the strict gate before tagging:
+
+```bash
+python3 scripts/release_status.py --require-ready
+```
+
+Release evidence is tracked in GitHub Issue #1.
+
 ## Status
 
 **v0.1 release candidate infrastructure.**
 
-The methodology, artifacts, behavioral evals, end-to-end fixture, benchmark protocol, machine-checkable result format, and CI enforcement are now present.
+The methodology, artifacts, behavioral evals, end-to-end fixture, benchmark protocol, result contract, release gate, and CI enforcement are now present.
 
-No official cross-agent runs are claimed yet.
-
-Before tagging `v0.1.0`, run the canonical benchmark suite in clean agent contexts, commit the raw outputs/results, and use repeated failures to refine ambiguous platform-agnostic contracts.
+No official cross-agent runs are claimed yet. The repository should remain untagged until clean runs satisfy the release policy.
 
 See [SKILL.md](./SKILL.md) for the agent operating contract.
 
