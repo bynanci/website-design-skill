@@ -70,4 +70,4 @@ See [SKILL.md](./SKILL.md) for the agent operating contract.
 
 ## License
 
-Apache-2.0.
+MIT.
