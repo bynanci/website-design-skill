@@ -74,6 +74,7 @@ For reusable component work:
 ├── templates/
 ├── examples/
 ├── evals/
+├── benchmarks/
 ├── integrations/
 └── scripts/
 ```
@@ -109,7 +110,7 @@ current sitemap
 
 `examples/end-to-end-b2b/`
 
-Demonstrates the longer artifact chain:
+Demonstrates:
 
 ```text
 project context
@@ -153,43 +154,66 @@ and does not create page-specific duplicates when the existing component invento
 
 The goal is behavioral consistency, not exact-output matching.
 
+## Cross-agent compatibility
+
+`benchmarks/` defines a reproducible compatibility suite for running the same skill and fixtures across different agent environments.
+
+The initial suite contains:
+
+| Case | Focus | Max |
+|---|---|---:|
+| IA Audit | workflow routing, taxonomy, evidence, content integrity | 12 |
+| Component Reuse | inventory-first reuse and component restraint | 12 |
+| End-to-End B2B | full artifact-chain discipline | 16 |
+| **Total** |  | **40** |
+
+Key files:
+
+- `benchmarks/manifest.json` — canonical cases and suite version
+- `benchmarks/runner-instruction.md` — standard test instruction
+- `benchmarks/rubric.md` — criterion-level 0/1/2 scoring
+- `benchmarks/result.schema.json` — portable result contract
+- `benchmarks/compatibility-matrix.md` — accepted-run summary
+- `benchmarks/results/` — raw outputs and scored results
+
+The tested agent must not receive evaluator reference files or the rubric during generation.
+
+No official cross-agent result is committed until the raw output and metadata pass repository validation.
+
 ## Validation
 
-Run the zero-dependency repository validator:
+Run:
 
 ```bash
 python3 scripts/validate_skill.py
+python3 scripts/validate_benchmarks.py
 ```
 
-The same validator runs in CI on pushes to `main` and pull requests.
+Both validators run in CI on pushes to `main` and pull requests.
 
-It currently verifies:
+Validation covers:
 
-- required v0.1 artifacts exist;
-- `SKILL.md` has required frontmatter;
-- local references used by `SKILL.md` resolve;
-- the core skill does not accidentally name selected tool/platform-specific products;
-- README and LICENSE remain aligned;
-- every discovered eval case contains both `input.md` and `expected.md`;
-- the end-to-end fixture contains the complete required artifact chain;
-- the end-to-end validation artifact contains the major validation sections.
+- required v0.1 artifacts;
+- `SKILL.md` frontmatter and local references;
+- platform-agnostic core constraints;
+- complete behavioral eval pairs;
+- complete end-to-end artifact chain;
+- benchmark manifest integrity;
+- benchmark score maxima and canonical cases;
+- official result metadata;
+- exact criterion score keys;
+- preserved raw output paths;
+- aggregate-score consistency.
 
 ## Status
 
-**v0.1 candidate foundation.**
+**v0.1 release candidate infrastructure.**
 
-The repository now includes:
+The methodology, artifacts, behavioral evals, end-to-end fixture, benchmark protocol, machine-checkable result format, and CI enforcement are now present.
 
-- core methodology;
-- focused references;
-- reusable artifact templates;
-- a focused redesign example;
-- a full end-to-end synthetic fixture;
-- IA and component-reuse behavioral evals;
-- zero-dependency repository validation;
-- CI enforcement.
+No official cross-agent runs are claimed yet.
 
-Before tagging `v0.1.0`, the remaining priority is to run the current skill against multiple agent environments and refine any output contracts that prove ambiguous without moving platform-specific behavior into the core.
+Before tagging `v0.1.0`, run the canonical benchmark suite in clean agent contexts, commit the raw outputs/results, and use repeated failures to refine ambiguous platform-agnostic contracts.
 
 See [SKILL.md](./SKILL.md) for the agent operating contract.
 
