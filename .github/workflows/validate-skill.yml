@@ -21,3 +21,6 @@ jobs:
 
       - name: Validate benchmarks
         run: python3 scripts/validate_benchmarks.py
+
+      - name: Report release readiness
+        run: python3 scripts/release_status.py
