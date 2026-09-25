@@ -1,0 +1,77 @@
+name: Benchmark run submission
+description: Track a clean or exploratory cross-agent benchmark run.
+title: "[Benchmark] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to track a cross-agent compatibility run. Do not paste hidden evaluator materials into the tested agent context.
+
+  - type: input
+    id: repository_commit
+    attributes:
+      label: Repository commit
+      description: Exact 40-character commit SHA used by the tested agent.
+      placeholder: 0123456789abcdef0123456789abcdef01234567
+    validations:
+      required: true
+
+  - type: input
+    id: suite_version
+    attributes:
+      label: Benchmark suite version
+      placeholder: 0.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Run status
+      options:
+        - official
+        - exploratory
+    validations:
+      required: true
+
+  - type: input
+    id: agent
+    attributes:
+      label: Agent / model
+      description: Provider, product, and model/version when available.
+      placeholder: provider / product / model
+    validations:
+      required: true
+
+  - type: textarea
+    id: capabilities
+    attributes:
+      label: Capability profile
+      description: Repository access, web research, rendering, code execution, persistent context, and other relevant capabilities.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: cleanliness
+    attributes:
+      label: Clean-run assertions
+      options:
+        - label: The tested agent did not see evaluator reference files.
+        - label: The tested agent did not see the rubric before generation.
+        - label: Raw outputs were not manually corrected after generation.
+        - label: The run uses the canonical inputs from the pinned commit.
+
+  - type: textarea
+    id: output_location
+    attributes:
+      label: Result location
+      description: PR, branch, or benchmarks/results/<run-id>/ path containing raw outputs and result.json.
+      placeholder: benchmarks/results/provider-model-YYYYMMDD-id/
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / limitations
+      description: Record tool limitations, context constraints, or deviations from the standard runner protocol.
