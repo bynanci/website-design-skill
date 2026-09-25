@@ -17,7 +17,9 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Content coverage template
 - Component contract template
 - Synthetic SaaS redesign example
-- First IA audit evaluation fixture
+- End-to-end B2B redesign fixture
+- IA audit behavioral evaluation fixture
+- Component reuse behavioral evaluation fixture
 - Zero-dependency repository validator
 - GitHub Actions validation workflow
 - Integration boundary
@@ -26,4 +28,6 @@ The project intends to follow Semantic Versioning once the public artifact contr
 ### Changed
 
 - Core phase routing now loads focused references and templates instead of relying only on the general workflow document
-- README now documents quick-start usage, shipped artifacts, example, evals, and validation
+- Repository validation now enforces complete eval case pairs and the required end-to-end artifact chain
+- Evaluation documentation now defines behavioral contracts instead of exact-output golden files
+- README now documents both examples, both eval tracks, and the v0.1 candidate state
