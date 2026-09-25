@@ -23,8 +23,19 @@ REQUIRED_PATHS = [
     "examples/saas-analytics/input/current-sitemap.md",
     "examples/saas-analytics/output/navigation-comparison.md",
     "examples/saas-analytics/output/homepage-spec.md",
+    "examples/end-to-end-b2b/input/project-context.md",
+    "examples/end-to-end-b2b/input/current-site.md",
+    "examples/end-to-end-b2b/input/component-inventory.md",
+    "examples/end-to-end-b2b/output/site-audit.md",
+    "examples/end-to-end-b2b/output/navigation.md",
+    "examples/end-to-end-b2b/output/homepage-spec.md",
+    "examples/end-to-end-b2b/output/component-mapping.md",
+    "examples/end-to-end-b2b/output/implementation-plan.md",
+    "examples/end-to-end-b2b/output/validation.md",
     "evals/ia-audit/case-001/input.md",
     "evals/ia-audit/case-001/expected.md",
+    "evals/component-reuse/case-001/input.md",
+    "evals/component-reuse/case-001/expected.md",
 ]
 
 CORE_SPECIFIC_PRODUCT_NAMES = [
@@ -34,6 +45,18 @@ CORE_SPECIFIC_PRODUCT_NAMES = [
     "Cursor",
     "React",
     "Vue",
+]
+
+END_TO_END_CHAIN = [
+    "input/project-context.md",
+    "input/current-site.md",
+    "input/component-inventory.md",
+    "output/site-audit.md",
+    "output/navigation.md",
+    "output/homepage-spec.md",
+    "output/component-mapping.md",
+    "output/implementation-plan.md",
+    "output/validation.md",
 ]
 
 
@@ -89,6 +112,47 @@ def validate_license_readme() -> None:
         fail("README license label is not aligned with LICENSE.")
 
 
+def validate_eval_cases() -> None:
+    eval_root = ROOT / "evals"
+    case_dirs = sorted(path for path in eval_root.glob("*/case-*") if path.is_dir())
+    if not case_dirs:
+        fail("No evaluation cases found under evals/*/case-*.")
+
+    errors = []
+    for case_dir in case_dirs:
+        for filename in ("input.md", "expected.md"):
+            if not (case_dir / filename).exists():
+                errors.append(str((case_dir / filename).relative_to(ROOT)))
+
+    if errors:
+        fail("Incomplete evaluation cases:\n- " + "\n- ".join(errors))
+
+
+def validate_end_to_end_example() -> None:
+    base = ROOT / "examples" / "end-to-end-b2b"
+    missing = [path for path in END_TO_END_CHAIN if not (base / path).exists()]
+    if missing:
+        fail(
+            "End-to-end example is incomplete:\n- "
+            + "\n- ".join(f"examples/end-to-end-b2b/{path}" for path in missing)
+        )
+
+    validation = (base / "output" / "validation.md").read_text(encoding="utf-8")
+    required_sections = [
+        "## Evidence integrity",
+        "## Information architecture",
+        "## Content coverage",
+        "## Component architecture",
+        "## Implementation readiness",
+    ]
+    absent_sections = [section for section in required_sections if section not in validation]
+    if absent_sections:
+        fail(
+            "End-to-end validation artifact is missing sections:\n- "
+            + "\n- ".join(absent_sections)
+        )
+
+
 def main() -> None:
     validate_required_paths()
     skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
@@ -96,6 +160,8 @@ def main() -> None:
     validate_local_references(skill)
     validate_platform_agnostic_core(skill)
     validate_license_readme()
+    validate_eval_cases()
+    validate_end_to_end_example()
     print("Skill validation passed.")
 
 
