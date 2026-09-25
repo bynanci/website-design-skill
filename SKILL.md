@@ -61,6 +61,10 @@ Use for information architecture, sitemap, taxonomy, navigation, page grouping, 
 
 Read:
 - `references/workflow.md`
+- `references/information-architecture.md`
+
+Use:
+- `templates/navigation-comparison.md`
 
 Expected artifacts:
 - current IA map
@@ -72,6 +76,10 @@ Expected artifacts:
 ### WIREFRAME
 
 Use after the relevant structure is stable.
+
+Use:
+- `templates/page-spec.md`
+- `templates/content-coverage.md`
 
 Expected artifacts:
 - page goal
@@ -97,6 +105,12 @@ Vary:
 Do not silently rewrite information architecture during visual exploration.
 
 ### SYSTEMIZE
+
+Read:
+- `references/component-architecture.md`
+
+Use:
+- `templates/component-contract.md`
 
 Extract stable design rules into:
 - design tokens
