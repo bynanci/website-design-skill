@@ -1,0 +1,14 @@
+{
+  "release_line": "v0.1",
+  "minimum_official_runs": 2,
+  "minimum_distinct_agent_signatures": 2,
+  "minimum_total_score_per_run": 30,
+  "block_on_shared_zero_criterion": true,
+  "required_suite_version": "0.1.0",
+  "notes": [
+    "Official runs must already pass scripts/validate_benchmarks.py.",
+    "Agent signature is provider/product/model.",
+    "A criterion scored 0 by two or more official runs is treated as a shared contract ambiguity and blocks release.",
+    "Release readiness is diagnostic; human review of criterion-level failures remains required."
+  ]
+}
