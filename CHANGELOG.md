@@ -53,3 +53,5 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Replit Agent exploratory attempt produced no retrievable raw outputs
 - A narrowed clean IA retry failed with `requires_active_subscription`
 - Replit is therefore classified as unavailable in the current environment, not as a compatibility failure
+- Superpowers was verified as installed and enabled, but it exposes methodology/skills behavior rather than an isolated agent execution context
+- Superpowers is therefore classified as a non-runner and produces no compatibility score
