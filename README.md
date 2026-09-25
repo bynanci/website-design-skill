@@ -172,12 +172,17 @@ Key files:
 
 - `benchmarks/manifest.json` — canonical cases and suite version
 - `benchmarks/runner-instruction.md` — standard test instruction
+- `benchmarks/clean-run-packet.md` — frozen clean-run packet
+- `benchmarks/runner-requirements.md` — runner eligibility contract
+- `benchmarks/runner-matrix.md` — execution-environment availability
 - `benchmarks/rubric.md` — criterion-level 0/1/2 scoring
 - `benchmarks/result.schema.json` — portable result contract
 - `benchmarks/result.template.json` — starter result payload
 - `benchmarks/release-policy.json` — machine-readable v0.1 release gate
-- `benchmarks/compatibility-matrix.md` — accepted-run summary
+- `benchmarks/compatibility-matrix.md` — accepted compatibility results
 - `benchmarks/results/` — raw outputs and scored results
+
+Runner availability and skill compatibility are tracked separately. A subscription, connector, or raw-output retrieval failure is a runner problem and must not be scored as a skill failure.
 
 The tested agent must not receive evaluator reference files or the rubric during generation.
 
@@ -238,6 +243,8 @@ Release evidence is tracked in GitHub Issue #1.
 **v0.1 release candidate infrastructure.**
 
 The methodology, artifacts, behavioral evals, end-to-end fixture, benchmark protocol, result contract, release gate, and CI enforcement are now present.
+
+The first external runner attempt established runner-availability evidence only: Replit Agent could not complete a reproducible run in the current environment because a narrowed retry required an active subscription. That attempt is not scored and does not count as compatibility evidence.
 
 No official cross-agent runs are claimed yet. The repository should remain untagged until clean runs satisfy the release policy.
 
