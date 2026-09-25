@@ -20,14 +20,21 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - End-to-end B2B redesign fixture
 - IA audit behavioral evaluation fixture
 - Component reuse behavioral evaluation fixture
-- Zero-dependency repository validator
+- Cross-agent benchmark protocol and canonical manifest
+- Criterion-level compatibility scoring rubric
+- Benchmark result JSON schema
+- Standard benchmark runner instruction
+- Compatibility matrix and result-submission structure
+- Zero-dependency skill and benchmark validators
 - GitHub Actions validation workflow
 - Integration boundary
 - Open-source contribution guidelines
 
 ### Changed
 
-- Core phase routing now loads focused references and templates instead of relying only on the general workflow document
-- Repository validation now enforces complete eval case pairs and the required end-to-end artifact chain
-- Evaluation documentation now defines behavioral contracts instead of exact-output golden files
-- README now documents both examples, both eval tracks, and the v0.1 candidate state
+- Core phase routing loads focused references and templates instead of relying only on the general workflow document
+- Repository validation enforces complete eval case pairs and the required end-to-end artifact chain
+- Benchmark validation enforces suite integrity, raw-output preservation, canonical criteria, and aggregate-score consistency
+- Evaluation documentation defines behavioral contracts instead of exact-output golden files
+- Contribution guidance now defines clean vs exploratory benchmark submissions
+- README documents the cross-agent compatibility suite and v0.1 release-candidate infrastructure
