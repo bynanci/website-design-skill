@@ -4,11 +4,12 @@ This file tracks whether an environment can execute the benchmark protocol at al
 
 It is intentionally separate from `compatibility-matrix.md`.
 
-A runner can be unavailable without implying anything about Website Design Skill compatibility.
+A runner can be unavailable or non-runnable without implying anything about Website Design Skill compatibility.
 
 | Runner | Independent context | Repo-readable | Can hide evaluator files | Raw output retrievable | Status | Notes |
 |---|---|---|---|---|---|---|
 | Replit Agent | Yes | Intended | Yes by instruction | Not reliably available in current environment | Unavailable | Clean-run attempt blocked by `requires_active_subscription`; earlier workspace retrieval also timed out |
+| Superpowers | No isolated runner exposed | No independent repo execution surface | N/A | N/A | Non-runner | Installed and enabled, but exposes methodology/skills behavior rather than a callable isolated agent execution environment |
 | Current ChatGPT conversation | No | Yes | No | Yes | Contaminated | Current context has already seen rubric/expected material, so it cannot produce an official clean result |
 
 ## Status definitions
@@ -19,9 +20,15 @@ The environment can execute the canonical suite while keeping evaluator material
 
 ### Unavailable
 
-The environment cannot currently complete the protocol because of access, subscription, connector, execution, or output-retrieval limitations.
+The environment is conceptually a runner but cannot currently complete the protocol because of access, subscription, connector, execution, or output-retrieval limitations.
 
 This is a runner limitation, not a compatibility failure.
+
+### Non-runner
+
+The connected product may provide methods, skills, tooling, or workflow guidance but does not expose an independent execution context capable of running the benchmark.
+
+Installed or enabled does not imply runner eligibility.
 
 ### Contaminated
 
