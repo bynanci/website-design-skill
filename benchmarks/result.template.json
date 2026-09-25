@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "run_id": "REPLACE_WITH_RUN_ID",
+  "status": "exploratory",
+  "repository_commit": "0000000000000000000000000000000000000000",
+  "suite_version": "0.1.0",
+  "agent": {
+    "provider": "REPLACE",
+    "product": "REPLACE",
+    "model": "REPLACE",
+    "version": null
+  },
+  "environment": {
+    "run_date": "YYYY-MM-DD",
+    "interface": "REPLACE",
+    "capabilities": {
+      "repository_read": false,
+      "repository_write": false,
+      "web_research": false,
+      "browser_render": false,
+      "image_generation": false,
+      "code_execution": false,
+      "persistent_context": false
+    }
+  },
+  "manual_edit": false,
+  "cases": [
+    {
+      "id": "ia-audit-001",
+      "raw_output_path": "benchmarks/results/REPLACE_WITH_RUN_ID/ia-audit.md",
+      "scores": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 0,
+        "A5": 0,
+        "A6": 0
+      },
+      "notes": ""
+    },
+    {
+      "id": "component-reuse-001",
+      "raw_output_path": "benchmarks/results/REPLACE_WITH_RUN_ID/component-reuse.md",
+      "scores": {
+        "B1": 0,
+        "B2": 0,
+        "B3": 0,
+        "B4": 0,
+        "B5": 0,
+        "B6": 0
+      },
+      "notes": ""
+    },
+    {
+      "id": "end-to-end-b2b-001",
+      "raw_output_path": "benchmarks/results/REPLACE_WITH_RUN_ID/end-to-end.md",
+      "scores": {
+        "C1": 0,
+        "C2": 0,
+        "C3": 0,
+        "C4": 0,
+        "C5": 0,
+        "C6": 0,
+        "C7": 0,
+        "C8": 0
+      },
+      "notes": ""
+    }
+  ],
+  "aggregate": {
+    "score": 0,
+    "max_score": 40,
+    "interpretation": "REPLACE_AFTER_SCORING"
+  }
+}
