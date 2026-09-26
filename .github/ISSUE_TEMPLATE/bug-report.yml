@@ -1,0 +1,46 @@
+name: Bug report
+description: Report a reproducible repository, validator, documentation, or fixture problem
+title: "[Bug] "
+labels: []
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - SKILL.md
+        - Reference
+        - Template
+        - Example
+        - Evaluation
+        - Benchmark
+        - Validator or script
+        - CI
+        - Documentation
+        - Integration
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Provide the smallest reproducible case or affected path.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      description: Note whether this may change a public artifact contract or benchmark behavior.
