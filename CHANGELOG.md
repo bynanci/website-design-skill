@@ -37,6 +37,10 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - GitHub Actions validation and release-readiness reporting
 - Integration boundary
 - Open-source contribution guidelines
+- Public roadmap from v0.1 MVP through v1.0 contract stability
+- Lightweight project governance and deprecation policy
+- Repository security reporting policy
+- General bug-report and methodology-proposal issue forms
 
 ### Changed
 
@@ -47,6 +51,7 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Runner availability is tracked separately from skill compatibility so access/subscription failures are not mis-scored
 - Contribution guidance defines clean vs exploratory benchmark submissions
 - README documents the cross-agent compatibility suite, runner eligibility, release gates, and current v0.1 release-candidate state
+- Repository validation requires roadmap, governance, and security documents as part of the public-maintenance baseline
 
 ### Runner evidence
 
