@@ -68,6 +68,9 @@ For reusable component work:
 ├── SKILL.md
 ├── README.md
 ├── RELEASE.md
+├── ROADMAP.md
+├── GOVERNANCE.md
+├── SECURITY.md
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
@@ -237,6 +240,16 @@ python3 scripts/release_status.py --require-ready
 ```
 
 Release evidence is tracked in GitHub Issue #1.
+
+## Project maintenance
+
+- [ROADMAP.md](./ROADMAP.md) — public MVP and post-v0.1 roadmap
+- [GOVERNANCE.md](./GOVERNANCE.md) — core boundaries, change classes, releases, and deprecation
+- [SECURITY.md](./SECURITY.md) — repository security reporting policy
+- [CONTRIBUTING.md](./CONTRIBUTING.md) — contribution and benchmark-result expectations
+- [RELEASE.md](./RELEASE.md) — versioning and release procedure
+
+Platform-specific adapters remain optional and outside the core methodology.
 
 ## Status
 
