@@ -1,11 +1,12 @@
 # Responsive Account Dashboard — Optional v0.2 Example
 
-This synthetic fixture shows how to apply the optional v0.2 artifact contracts
-to a dense, authenticated B2B dashboard **without silently losing content**.
+This public, **synthetic** fixture shows how to apply optional v0.2 artifact contracts
+to a dense B2B account dashboard **without silently losing content**.
 
-The example deliberately does not include source code, rendered screenshots,
-real analytics, brand tokens, accessibility test evidence or measured device
-behavior. Output documents are proposed contracts, not production verification.
+It now includes an executable HTML/CSS/JavaScript specimen and GitHub Actions
+Chromium QA evidence. The original contract documents remain proposals; the
+browser tests cover the fictional specimen only, not a production account
+service, real data source, physical device or screen-reader certification.
 
 ## Input
 
