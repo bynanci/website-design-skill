@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bynanci/website-design-skill/blob/main/integrations/context-aware-ui/project-profile.schema.json",
+  "title": "Website Design Skill project profile",
+  "description": "A scoped, evidence-bearing snapshot of project conventions and UI ownership. This schema defines a proposed contract; it does not implement a scanner.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileVersion",
+    "workspace",
+    "task",
+    "revision",
+    "sources",
+    "stack",
+    "aliases",
+    "tokens",
+    "components",
+    "stateOwners",
+    "capabilities",
+    "unknowns"
+  ],
+  "properties": {
+    "profileVersion": {
+      "const": "0.1"
+    },
+    "workspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "root"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The approved workspace root. Do not place credentials or unrelated absolute paths in a shared profile."
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request",
+        "affectedPaths"
+      ],
+      "properties": {
+        "request": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affectedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "revision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "dirty"
+      ],
+      "properties": {
+        "commit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dirty": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "kind",
+          "status"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "observed",
+              "unavailable",
+              "stale",
+              "unsupported",
+              "illustrative"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stack": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "version",
+          "evidencePaths"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidencePaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "targets",
+          "status",
+          "evidencePaths"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "resolved",
+              "missing",
+              "conflicting",
+              "dynamic",
+              "unknown"
+            ]
+          },
+          "evidencePaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "reference",
+          "syntax",
+          "status",
+          "evidencePaths"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "syntax": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "resolved",
+              "missing",
+              "conflicting",
+              "theme-dependent",
+              "unknown"
+            ]
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidencePaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exception": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "responsibility",
+          "path",
+          "evidencePaths"
+        ],
+        "properties": {
+          "responsibility": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "publicApi": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "states": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidencePaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "stateOwners": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "kind",
+          "path",
+          "evidencePaths"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidencePaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "read",
+        "parse",
+        "patchProposal",
+        "patchWrite",
+        "build",
+        "render",
+        "imageReview",
+        "nativeShell"
+      ],
+      "properties": {
+        "read": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "parse": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "patchProposal": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "patchWrite": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "build": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "render": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "imageReview": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        },
+        "nativeShell": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
