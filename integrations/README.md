@@ -1,5 +1,7 @@
 # Integrations
 
+[繁體中文版本](README.zh-TW.md)
+
 The core skill remains platform-agnostic. Optional adapters may translate its capability-based workflow into project- or tool-specific operations, but must not become dependencies of `SKILL.md` or redefine the methodology.
 
 ## Proposed architecture
