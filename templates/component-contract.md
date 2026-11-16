@@ -1,5 +1,7 @@
 # Component Contract
 
+[繁體中文版本](component-contract.zh-TW.md)
+
 ## Component
 
 - Name:

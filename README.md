@@ -1,5 +1,7 @@
 # Website Design Skill
 
+[繁體中文](README.zh-TW.md)
+
 A platform-agnostic Agent Skill for systematically redesigning existing websites.
 
 It helps AI agents move through:
@@ -10,6 +12,20 @@ audit → information architecture → wireframe → visual direction
 ```
 
 The project is intentionally independent of any specific AI model, design tool, frontend framework, CMS, or hosting platform.
+
+## Documentation languages
+
+English and Traditional Chinese versions are available for the README, core skill, roadmap, change history, reference guides, templates, and optional UI-adapter contracts. Benchmark inputs, expected outputs, scoring rubric, raw evidence, and repository policy documents remain canonical English in this localization pass. English uses clear technical prose informed by ASD-STE100 Issue 9 where applicable; this repository does not claim formal compliance. ASD-STE100 does not define Traditional Chinese compliance. See [the bilingual writing policy](docs/WRITING-STYLE.md).
+
+## Proposed direction: context-aware UI collaboration
+
+The optional integration layer is being specified to help UI changes fit an
+existing project's design tokens, reusable components, state/API contracts and
+source boundaries. The [architecture proposal](integrations/context-aware-ui/README.md)
+covers token awareness, AST-guided patches, applicable state transitions,
+bounded visual repair and a separate declarative runtime UI experiment.
+
+These are draft contracts in PR #9. PR #16 adds a bounded, read-only project-profile inspector for static manifests, TypeScript JSONC aliases and source candidates. It does not resolve semantic token roles, component APIs, state ownership, runtime values or rendered behavior. The inspector is a repository utility; it does not provide a general-purpose agent or runtime engine. Vue is the first proposed adapter; each framework needs its own fixture and evidence. Follow [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) for the implementation index and keep the v0.1 release gate separate.
 
 ## What this is
 

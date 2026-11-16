@@ -1,8 +1,27 @@
 # Roadmap
 
+[繁體中文版本](ROADMAP.zh-TW.md)
+
 Website Design Skill is developed as a platform-agnostic redesign methodology with explicit artifact contracts and behavioral evaluation.
 
 The roadmap separates **core contract stability** from **optional ecosystem integrations** so adoption can grow without coupling the skill to a specific model, design tool, frontend framework, CMS, or hosting platform.
+
+## Current integration work — Context-aware UI collaboration
+
+The integration layer is proposed to become a UI collaborator that understands
+the existing project's design system, components, state/API ownership and edit
+boundaries. The [architecture](integrations/context-aware-ui/README.md) defines
+five capability contracts: token/component fit, AST-guided patches, applicable
+state transitions, bounded responsive repair and declarative runtime UI.
+
+Start with inspectable project context and one Vue adapter. Generalize across
+frameworks after shared contracts survive independent adapter fixtures. Dynamic
+runtime UI is a separate P2 experiment with a host-controlled registry and
+fallback, not a prerequisite for design-time adoption.
+
+The [Issue #8 umbrella](https://github.com/bynanci/website-design-skill/issues/8) is an index only. Child issues #11–#15 are the source of truth for scope and acceptance criteria.
+
+Release gates remain independently verifiable. PR #9 contains bilingual contract documentation and a proposed machine-readable profile shape. PR #16 adds a bounded, read-only inspector for static manifests, TypeScript JSONC aliases and source candidates. Semantic token resolution, component APIs, state ownership and runtime behavior remain open work under Issue #11.
 
 ## v0.1 — Minimum viable public release
 
@@ -61,13 +80,20 @@ Goal: make the core easier to adopt in different environments without moving pla
 Candidate work:
 
 - documented adapter contract under `integrations/`;
-- examples for repository-aware agents;
-- examples for visual/prototyping tools;
-- examples for browser-capable research agents;
+- scoped project profiles with token/component provenance and state/API ownership;
+- project-aware Vue 3 + SCSS guidance, with Tauri desktop behavior kept optional;
+- AST-guided edits with revision checks, protected regions and idempotence;
+- applicable UI state/transition contracts that reuse existing stores and services;
+- a capability-gated browser-render / screenshot / visual-review loop with explicit evidence states;
+- an MCP adapter contract that separates read-only inspection, patch proposals, bounded execution, and authorized writes;
+- examples for repository-aware agents, visual/prototyping tools, and browser-capable research agents;
+- research-dashboard and short-lived schema-driven UI pilots using synthetic or approved data;
 - optional machine-readable artifact metadata;
 - compatibility reports across a wider agent set.
 
-Adapters must remain optional. The core must still work using structured text artifacts when specialized capabilities are unavailable.
+These are optional integration candidates, not core defaults or implemented runtime features. The Vue/Tauri, visual-validation, and MCP contracts are tracked under `integrations/`. The OpenFilm-style editor, research CSV dashboard, and dynamic UI scenarios are examples for later pilots.
+
+Adapters must remain optional. The core must still work using structured text artifacts when specialized capabilities are unavailable. An adapter may claim rendered, measured, visually reviewed, or applied results only when it preserves evidence from those actual operations.
 
 ## v0.4 — Quality and migration discipline
 
@@ -75,6 +101,8 @@ Goal: make redesign execution safer for larger existing systems.
 
 Candidate work:
 
+- bounded multi-condition repair with stopping, regression and rollback rules;
+- token drift and state-transition regression evidence on real adapter fixtures;
 - regression-oriented redesign checklist;
 - component migration planning;
 - design-system drift detection guidance;
