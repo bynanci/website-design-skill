@@ -30,6 +30,7 @@ class BenchmarkEvidenceIntegrityTests(unittest.TestCase):
         self.raw.write_text("# Agent response\nA usable answer.\n", encoding="utf-8")
 
         self.manifest = {
+            "suite_version": "0.1.0",
             "cases": [{"id": "ia-audit-001", "rubric_criteria": ["A1"]}],
             "total_max_score": 2,
         }
