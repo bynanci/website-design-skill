@@ -213,6 +213,7 @@ dialog::backdrop{background:rgba(22,36,34,.42)}
 }
 /* Touch and keyboard ergonomics are part of the shared component contract. */
 .fixture-label-short{display:none}
+.quick-insight-link{display:none}
 .direction-btn,.primary-btn,.text-btn,.icon-btn{min-height:44px}
 .text-btn{min-width:80px}
 .icon-btn{min-width:44px;min-height:44px}
@@ -225,6 +226,7 @@ dialog::backdrop{background:rgba(22,36,34,.42)}
 .evidence-row{font-size:12px}
 .chart-feedback{font-size:12px;line-height:1.6}
 @container dashboard (max-width:525px){
+  .quick-insight-link{display:inline-flex;align-items:center;min-height:44px;margin-top:8px;font-size:13px;font-weight:750;text-decoration:underline;gap:6px}
   .panel-subtitle{font-size:13px}
   .legend-item,.legend-item strong{font-size:12px}
   .legend-item{min-height:44px}
