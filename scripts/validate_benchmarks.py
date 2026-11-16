@@ -285,6 +285,7 @@ def validate_result(run_dir: Path, result: dict, manifest: dict, policy: dict) -
 
     canonical = {case["id"]: case for case in manifest["cases"]}
     seen = set()
+    seen_raw_paths = set()
     aggregate_score = 0
 
     for case_result in result["cases"]:
@@ -299,7 +300,11 @@ def validate_result(run_dir: Path, result: dict, manifest: dict, policy: dict) -
             fail(f"{rel_dir}: duplicate case result {case_id}.")
         seen.add(case_id)
 
-        validate_raw_output_path(run_dir, case_result["raw_output_path"])
+        raw_output_path = case_result["raw_output_path"]
+        validate_raw_output_path(run_dir, raw_output_path)
+        if raw_output_path in seen_raw_paths:
+            fail(f"{rel_dir}: raw output reused across cases: {raw_output_path}.")
+        seen_raw_paths.add(raw_output_path)
 
         expected_criteria = set(canonical[case_id]["rubric_criteria"])
         actual_criteria = set(case_result["scores"].keys())
