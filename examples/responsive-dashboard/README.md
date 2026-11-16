@@ -17,6 +17,9 @@ service, real data source, physical device or screen-reader certification.
 - [Responsive behavior contract](output/responsive-behavior.md)
 - [Visual-direction comparison](output/visual-direction-comparison.md)
 - [Token extraction and migration plan](output/design-token-extraction.md)
+- [Executable responsive Dashboard](specimen/README.md)
+- [Measured QA review (2026-11-16)](output/qa-review-2026-11-16.md)
+- [Reproducible browser-QA runner](qa/README.md)
 
 ## What this demonstrates
 
