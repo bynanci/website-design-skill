@@ -54,6 +54,18 @@ Acceptance principle:
 
 > New methodology should be accompanied by a concrete artifact contract or an evaluation path.
 
+### v0.2 opt-in pilot artifacts
+
+The first optional preview defines inspectable output contracts for visual
+direction comparison, responsive/container/zoom behavior, and design-token
+extraction; it also includes a synthetic dashboard example and new behavioral
+pilot cases for responsive layout and accessibility.
+
+They are **not** required by the v0.1 skill, do **not** change canonical
+v0.1 benchmark inputs or rubric, and must not be scored as official v0.1
+compatibility evidence. Broader fixtures, formal evaluation criteria, and
+core routing changes require a separate versioned decision after v0.1.
+
 ## v0.3 — Interoperability and adapters
 
 Goal: make the core easier to adopt in different environments without moving platform-specific logic into the core skill.
