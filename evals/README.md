@@ -68,6 +68,17 @@ Future cases should verify that redesign changes do not accidentally remove:
 - essential interactions;
 - established component responsibilities.
 
+## Optional v0.2 pilot cases
+
+- Responsive-layout pilot: preserve dense dashboard content and actions across
+  desktop, narrow containers, zoom, keyboard and touch conditions.
+- Accessibility pilot: trace reported keyboard/semantic/visual defects to
+  reusable components and specify verifiable remediations.
+
+These pairs are additional behavioral fixtures only. The official v0.1
+benchmark suite and its 40-point manifest remain unchanged. Do not include
+pilot expected responses or evaluator files in a v0.1 clean-run input.
+
 ## Adding a case
 
 Create:
