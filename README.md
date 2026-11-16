@@ -138,8 +138,8 @@ without changing the frozen v0.1 core contract:
 - [Design token extraction / migration](templates/design-token-extraction.md)
 
 The [visual quality reference](references/visual-quality.md) provides review
-criteria. A [synthetic responsive account dashboard](examples/responsive-dashboard/)
-demonstrates the contracts. Pilot behavioral cases cover
+criteria. An [executable synthetic account dashboard](examples/responsive-dashboard/)
+demonstrates the contracts, supported by [Chromium/axe-core QA evidence](examples/responsive-dashboard/output/qa-review-2026-11-16.md). Pilot behavioral cases cover
 [responsive layout](evals/responsive-layout/) and
 [accessibility](evals/accessibility/).
 
