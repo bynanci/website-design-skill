@@ -1,0 +1,36 @@
+name: Dashboard specimen browser QA
+
+on:
+  pull_request:
+    paths:
+      - "examples/responsive-dashboard/specimen/**"
+      - "examples/responsive-dashboard/qa/**"
+      - ".github/workflows/dashboard-specimen-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install 'playwright==1.56.0'
+          python -m playwright install --with-deps chromium
+      - name: Run real-browser QA
+        run: python examples/responsive-dashboard/qa/run_browser_qa.py
+      - name: Upload screenshots and raw measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-browser-qa
+          path: examples/responsive-dashboard/evidence/
+          retention-days: 30
+          if-no-files-found: warn
