@@ -101,3 +101,19 @@ The adapter should enforce approved token use where the project defines a role. 
 | Exercise native shell / browser zoom / assistive technology | | | |
 
 A project profile may be useful while partially complete. Block only the operation whose missing evidence makes it unsafe or unsupported; carry the unknown forward explicitly.
+
+
+## Read-only pilot tool
+
+The first implementation slice is scripts/inspect_project_profile.py. It reads static package and TypeScript configuration plus bounded source candidates. It does not execute project configuration, install dependencies, run a build, render the app, or write files.
+
+Example:
+
+```sh
+python3 scripts/inspect_project_profile.py ./target-project \
+  --task "Map the media-library warning state" \
+  --required-alias "@common" \
+  --required-token "--color-warning"
+```
+
+The command emits JSON that follows project-profile.schema.json. Static token declarations, Vue paths, and state/API path names are candidates only. The tool does not establish semantic token roles, computed theme values, component APIs, state ownership, behavior, or cache freshness. Treat those fields as unknown until a capable parser, renderer, or reviewer supplies evidence.
