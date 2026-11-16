@@ -128,6 +128,25 @@ project context
 
 The fixture intentionally omits analytics, user research, and competitor evidence so unsupported assumptions are visible instead of silently invented.
 
+## Optional v0.2 preview (not part of the v0.1 release gate)
+
+Three additional **opt-in** artifacts extend visual and responsive design work
+without changing the frozen v0.1 core contract:
+
+- [Visual direction comparison](templates/visual-direction-comparison.md)
+- [Responsive behavior](templates/responsive-behavior.md)
+- [Design token extraction / migration](templates/design-token-extraction.md)
+
+The [visual quality reference](references/visual-quality.md) provides review
+criteria. A [synthetic responsive account dashboard](examples/responsive-dashboard/)
+demonstrates the contracts. Pilot behavioral cases cover
+[responsive layout](evals/responsive-layout/) and
+[accessibility](evals/accessibility/).
+
+These are deliberately excluded from the official v0.1 40-point benchmark
+manifest. They are proposals for v0.2 adoption and do not represent verified
+cross-agent compatibility, measured accessibility, or production implementation.
+
 ## Evaluations
 
 Behavioral cases currently cover two independent failure modes.
