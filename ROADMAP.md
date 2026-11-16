@@ -21,7 +21,7 @@ fallback, not a prerequisite for design-time adoption.
 
 The [Issue #8 umbrella](https://github.com/bynanci/website-design-skill/issues/8) is an index only. Child issues #11–#15 are the source of truth for scope and acceptance criteria.
 
-Release gates remain independently verifiable. PR #9 contains bilingual contract documentation and a proposed machine-readable profile shape; it does not ship a scanner or runtime engine.
+Release gates remain independently verifiable. PR #9 contains bilingual contract documentation and a proposed machine-readable profile shape. PR #16 adds a bounded, read-only inspector for static manifests, TypeScript JSONC aliases and source candidates. Semantic token resolution, component APIs, state ownership and runtime behavior remain open work under Issue #11.
 
 ## v0.1 — Minimum viable public release
 

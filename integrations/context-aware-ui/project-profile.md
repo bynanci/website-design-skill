@@ -113,7 +113,9 @@ Example:
 python3 scripts/inspect_project_profile.py ./target-project \
   --task "Map the media-library warning state" \
   --required-alias "@common" \
-  --required-token "--color-warning"
+  --required-token=--color-warning
 ```
+
+The token reference starts with `--`. Pass it as `--required-token=--color-warning` so the argument parser reads it as a value.
 
 The command emits JSON that follows project-profile.schema.json. Static token declarations, Vue paths, and state/API path names are candidates only. The tool does not establish semantic token roles, computed theme values, component APIs, state ownership, behavior, or cache freshness. Treat those fields as unknown until a capable parser, renderer, or reviewer supplies evidence.

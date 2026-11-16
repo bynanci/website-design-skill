@@ -14,7 +14,7 @@ runtime rendering require their own evidence.
 
 ## Proposed adapter contracts
 
-These documents are specifications only; they do not imply an implemented generator, runner, server, or successful validation.
+These documents specify adapter contracts. They do not imply an implemented generator, runner, server, or successful validation. A bounded read-only project-profile inspector is available at `scripts/inspect_project_profile.py`; its static findings remain candidates and do not establish semantic or runtime behavior.
 
 - [Project profile and token mapping](./context-aware-ui/project-profile.md) — preserve source provenance, theme resolution, aliases and API/state ownership.
 - [Applicable UI states](./context-aware-ui/state-contract.md) — specify transitions, recovery and cancellation at the existing owner.

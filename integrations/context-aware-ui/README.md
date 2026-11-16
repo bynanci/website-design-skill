@@ -2,7 +2,7 @@
 
 [繁體中文版本](integrations/context-aware-ui/README.zh-TW.md)
 
-Status: **proposal / documentation only**, associated with draft PR #9 and roadmap Issue #8. No context scanner, patch engine, state generator, visual repair agent, or runtime renderer is shipped here.
+Status: **proposal with a bounded read-only inspector**, associated with PR #9 and roadmap Issue #8. `scripts/inspect_project_profile.py` reads static manifests and source candidates. It does not execute project configuration, resolve semantic tokens, confirm component APIs or state ownership, apply patches, render the application, or verify runtime behavior. No patch engine, state generator, visual repair agent, or runtime renderer is shipped here.
 
 ## Decision and scope
 

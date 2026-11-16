@@ -66,7 +66,9 @@ Profile 可以不完整。只有在缺少證據使該操作不安全或不受支
 python3 scripts/inspect_project_profile.py ./target-project \
   --task "Map the media-library warning state" \
   --required-alias "@common" \
-  --required-token "--color-warning"
+  --required-token=--color-warning
 ```
+
+Token 參照以 `--` 開頭，請使用 `--required-token=--color-warning` 傳入，避免命令列解析器將它當成另一個選項。
 
 輸出 JSON 遵循 project-profile.schema.json。靜態 token 宣告、Vue 檔案路徑，以及 state/API 路徑名稱都只是候選證據。工具不會確認語意 token 角色、實際 theme 計算值、元件 API、狀態所有權、執行行為或快取新鮮度；在 parser、renderer 或 reviewer 提供證據前，這些欄位應維持 unknown。

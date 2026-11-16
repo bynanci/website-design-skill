@@ -30,7 +30,7 @@ Website Design Skill 是一套與工具及前端框架無關的網站改版方�
 
 ## Context-aware UI 整合進度
 
-[整合層索引](integrations/README.zh-TW.md)描述如何讀取專案既有設計 token、元件、狀態與 API 所有權，並提出有界限的修改與驗收紀錄。這些內容目前屬於 PR #9 的提案規格；尚未提供掃描器、AST 修改器、Playwright runner、MCP server 或 runtime renderer。
+[整合層索引](integrations/README.zh-TW.md)描述如何讀取專案既有設計 token、元件、狀態與 API 所有權，並提出有界限的修改與驗收紀錄。PR #16 加入有限範圍的唯讀 project-profile inspector，可盤點靜態 manifest、TypeScript JSONC alias 與來源候選檔。它不會解析語意 token 角色、元件 API、狀態所有權、執行期值或渲染行為，也不提供通用 agent 或 runtime engine。AST 修改器、Playwright runner、MCP server 與 runtime renderer 仍是提案能力。
 
 實作任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整，細項為 #11–#15。核心 v0.1 發布證據與 v0.2 實作仍依各自的 release gate 管理。
 

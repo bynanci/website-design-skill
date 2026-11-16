@@ -214,6 +214,83 @@ def config_files(root, sources, unknowns):
             )
 
 
+def parse_jsonc(text):
+    """Parse TypeScript-style JSONC without evaluating configuration code."""
+    if text.startswith("\ufeff"):
+        text = text[1:]
+
+    output = []
+    in_string = False
+    escaped = False
+    index = 0
+    while index < len(text):
+        char = text[index]
+        if in_string:
+            output.append(char)
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            index += 1
+            continue
+
+        if char == '"':
+            in_string = True
+            output.append(char)
+            index += 1
+            continue
+        if text.startswith("//", index):
+            while index < len(text) and text[index] not in "\r\n":
+                output.append(" ")
+                index += 1
+            continue
+        if text.startswith("/*", index):
+            start = index
+            output.extend("  ")
+            index += 2
+            closed = False
+            while index < len(text):
+                if text.startswith("*/", index):
+                    output.extend("  ")
+                    index += 2
+                    closed = True
+                    break
+                output.append(text[index] if text[index] in "\r\n" else " ")
+                index += 1
+            if not closed:
+                raise json.JSONDecodeError("Unterminated block comment", text, start)
+            continue
+
+        output.append(char)
+        index += 1
+
+    cleaned = list("".join(output))
+    in_string = False
+    escaped = False
+    for index, char in enumerate(cleaned):
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+            continue
+        if char == ",":
+            lookahead = index + 1
+            while lookahead < len(cleaned) and cleaned[lookahead].isspace():
+                lookahead += 1
+            if lookahead < len(cleaned) and cleaned[lookahead] in "}]":
+                cleaned[index] = " "
+
+    return json.loads("".join(cleaned))
+
+
 def static_aliases(root, sources, unknowns, required_aliases):
     path = root / "tsconfig.json"
     aliases = []
@@ -229,16 +306,22 @@ def static_aliases(root, sources, unknowns, required_aliases):
     else:
         text = read_source(path, root, sources, "typescript-config")
         config = {}
+        has_extends = False
         if text is not None:
             try:
-                config = json.loads(text)
-                config_available = isinstance(config, dict)
+                parsed = parse_jsonc(text)
+                if isinstance(parsed, dict):
+                    config = parsed
+                    config_available = True
+                else:
+                    unknowns.append("The root tsconfig.json must contain a JSON object; aliases were not resolved.")
             except json.JSONDecodeError as exc:
-                unknowns.append("The root tsconfig.json is invalid JSON: " + str(exc))
+                unknowns.append("The root tsconfig.json is invalid JSONC: " + str(exc))
         else:
             unknowns.append("The root tsconfig.json could not be read as supported UTF-8 text.")
 
-        if config.get("extends"):
+        has_extends = bool(config.get("extends"))
+        if has_extends:
             unknowns.append("tsconfig extends another file; inherited compiler options were not resolved.")
         options = config.get("compilerOptions", {}) if isinstance(config, dict) else {}
         paths = options.get("paths", {}) if isinstance(options, dict) else {}
@@ -274,6 +357,8 @@ def static_aliases(root, sources, unknowns, required_aliases):
                     if candidate.exists():
                         existing_targets += 1
                 status = "unknown" if target_unknown else ("resolved" if normalized_targets and existing_targets else "missing")
+                if has_extends:
+                    status = "unknown"
                 if len(normalized_targets) > 1 and existing_targets > 1:
                     status = "unknown"
                     unknowns.append(
@@ -303,7 +388,7 @@ def static_aliases(root, sources, unknowns, required_aliases):
                 {
                     "name": required,
                     "targets": [],
-                    "status": "missing" if config_available else "unknown",
+                    "status": "missing" if config_available and not has_extends else "unknown",
                     "evidencePaths": ["tsconfig.json"],
                 }
             )
@@ -421,7 +506,7 @@ def main():
         "--required-token",
         action="append",
         default=[],
-        help="Exact CSS/SCSS token reference to check. Can be repeated; this does not assign semantic meaning.",
+        help="Exact CSS/SCSS token reference to check. Can be repeated; use --required-token=--name when the value starts with --.",
     )
     args = parser.parse_args()
 

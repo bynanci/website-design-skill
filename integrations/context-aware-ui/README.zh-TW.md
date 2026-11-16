@@ -2,7 +2,7 @@
 
 [English](README.md) · 繁體中文
 
-**狀態：文件規格，尚未實作。** 本目錄定義選用整合層的契約，不含專案掃描器、patch engine、狀態產生器、視覺修正 agent 或 runtime renderer。
+**狀態：提案架構，另含有限範圍的唯讀檢查器。** `scripts/inspect_project_profile.py` 讀取靜態 manifest 與來源候選檔，不執行專案設定、不解析語意 token、不確認元件 API 或狀態所有權，也不套用 patch、渲染 app 或驗證執行期行為。本目錄的 patch engine、狀態產生器、視覺修正 agent 與 runtime renderer 仍未實作。
 
 ## 目標與範圍
 

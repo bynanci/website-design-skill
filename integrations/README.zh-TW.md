@@ -18,7 +18,7 @@
 - [MCP adapter](mcp-server/README.zh-TW.md)：以明確的 workspace、執行與寫入界限提供窄範圍操作。
 - [Declarative runtime UI](runtime-ui/README.zh-TW.md)：以已註冊的元件與 action 描述暫時介面，並提供靜態 fallback。
 
-以上均為 PR #9 的提案契約，尚未代表已實作的產生器、runner、server 或 renderer。
+以上均為 PR #9 的提案契約，尚未代表已實作的產生器、runner、server 或 renderer。`scripts/inspect_project_profile.py` 提供有限範圍的唯讀 profile 檢查；其靜態結果仍是候選證據，不代表已確認語意或執行期行為。
 
 ## 預定試點
 
