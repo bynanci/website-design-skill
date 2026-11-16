@@ -249,6 +249,7 @@ def static_aliases(root, sources, unknowns, required_aliases):
                 targets = target_values if isinstance(target_values, list) else []
                 normalized_targets = []
                 existing_targets = 0
+                target_unknown = False
                 for target in targets:
                     if not isinstance(target, str):
                         continue
@@ -256,6 +257,7 @@ def static_aliases(root, sources, unknowns, required_aliases):
                     normalized = str(combined)
                     if PurePosixPath(normalized).is_absolute() or ".." in PurePosixPath(normalized).parts:
                         normalized_targets.append("<target outside workspace omitted>")
+                        target_unknown = True
                         unknowns.append("Alias " + name + " has a target outside the approved workspace; it was not inspected.")
                         continue
                     normalized_targets.append(normalized)
@@ -264,11 +266,12 @@ def static_aliases(root, sources, unknowns, required_aliases):
                     try:
                         candidate.relative_to(root)
                     except ValueError:
+                        target_unknown = True
                         unknowns.append("Alias " + name + " resolves outside the approved workspace; it was not inspected.")
                         continue
                     if candidate.exists():
                         existing_targets += 1
-                status = "resolved" if normalized_targets and existing_targets else "missing"
+                status = "unknown" if target_unknown else ("resolved" if normalized_targets and existing_targets else "missing")
                 if len(normalized_targets) > 1 and existing_targets > 1:
                     status = "unknown"
                     unknowns.append(
