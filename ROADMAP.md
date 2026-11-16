@@ -1,10 +1,12 @@
 # Roadmap
 
+[繁體中文版本](ROADMAP.zh-TW.md)
+
 Website Design Skill is developed as a platform-agnostic redesign methodology with explicit artifact contracts and behavioral evaluation.
 
 The roadmap separates **core contract stability** from **optional ecosystem integrations** so adoption can grow without coupling the skill to a specific model, design tool, frontend framework, CMS, or hosting platform.
 
-## Proposed evolution — Context-aware UI collaboration
+## Current integration work — Context-aware UI collaboration
 
 The integration layer is proposed to become a UI collaborator that understands
 the existing project's design system, components, state/API ownership and edit
@@ -17,13 +19,9 @@ frameworks after shared contracts survive independent adapter fixtures. Dynamic
 runtime UI is a separate P2 experiment with a host-controlled registry and
 fallback, not a prerequisite for design-time adoption.
 
-Implementation work is tracked under [Issue #8](https://github.com/bynanci/website-design-skill/issues/8):
-P0 [#11](https://github.com/bynanci/website-design-skill/issues/11) (project profile/tokens), [#12](https://github.com/bynanci/website-design-skill/issues/12) (Vue patch pilot) and
-[#13](https://github.com/bynanci/website-design-skill/issues/13) (state transitions), followed by P1 [#14](https://github.com/bynanci/website-design-skill/issues/14) (bounded
-responsive repair) and P2 [#15](https://github.com/bynanci/website-design-skill/issues/15) (declarative runtime panel).
+The [Issue #8 umbrella](https://github.com/bynanci/website-design-skill/issues/8) is an index only. Child issues #11–#15 are the source of truth for scope and acceptance criteria.
 
-Design and release gates below remain independently verifiable. PR #9 contains
-the proposed contracts only.
+Release gates remain independently verifiable. PR #9 contains bilingual contract documentation and a proposed machine-readable profile shape; it does not ship a scanner or runtime engine.
 
 ## v0.1 — Minimum viable public release
 
