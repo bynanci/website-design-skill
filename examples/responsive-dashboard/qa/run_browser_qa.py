@@ -24,6 +24,7 @@ REQUIRED = ["#account-name",".metrics","#observations","#mix-heading",
             "#trend-heading","#opportunities-heading","#cases-heading",
             "#notes-heading","#sources-heading"]
 records = []
+axe_reports = []
 failures = []
 
 
@@ -58,6 +59,7 @@ def intersect(a, b):
 
 
 def main():
+    check(AXE_BUNDLE.is_file(), "axe-core bundle missing from CI installation")
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)
         try:
@@ -82,6 +84,20 @@ def main():
                     check(page.locator("#note-form .primary-btn").bounding_box()["height"]>=44,name+": save control below 44px target")
                 check(not intersect(result["donut"],result["legend"]),name+": donut/legend overlap")
                 check(result["requiredContentPresent"],name+": lost required content")
+                if name in ("desktop-laptop", "mobile-390", "mobile-320") and AXE_BUNDLE.is_file():
+                    page.add_script_tag(path=str(AXE_BUNDLE))
+                    violations = page.evaluate("""async () => {
+                      const result = await window.axe.run(document, {
+                        runOnly: {type: 'tag', values: ['wcag2a','wcag2aa','wcag21a','wcag21aa']}
+                      });
+                      return result.violations.map(v=>({
+                        id:v.id,impact:v.impact,description:v.help,
+                        nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary})).slice(0,8)
+                      }));
+                    }""")
+                    axe_reports.append({"scenario":name,"violations":violations})
+                    check(not violations,name+": axe-core WCAG violations: "+
+                          json.dumps(violations,ensure_ascii=False)[:1500])
                 page.screenshot(path=str(EVIDENCE/(name+"-editorial.png")),
                                 full_page=True,animations="disabled")
                 records.append({"scenario":name,"measurements":result,"javascript_errors":errors})
@@ -165,7 +181,7 @@ def main():
                  "200% zoom uses effective CSS-width proxy, not native browser zoom.",
                  "Physical devices, screen readers and WCAG conformance not tested.",
                  "No real customer data or performance certification."],
-        "checks":records,"failures":failures,"passed":not failures
+        "checks":records,"axe_audits":axe_reports,"failures":failures,"passed":not failures
     }
     (EVIDENCE/"qa-results.json").write_text(
         json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
