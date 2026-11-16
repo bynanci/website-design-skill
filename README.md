@@ -1,6 +1,6 @@
 # Website Design Skill
 
-[English](README.md) · [繁體中文](README.zh-TW.md)
+[繁體中文](README.zh-TW.md)
 
 A platform-agnostic Agent Skill for systematically redesigning existing websites.
 
