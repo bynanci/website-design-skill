@@ -1,0 +1,30 @@
+name: Build pinned clean benchmark packets
+
+on:
+  pull_request:
+    paths:
+      - "scripts/build_clean_packets.py"
+      - "tests/test_clean_packets.py"
+      - ".github/workflows/clean-benchmark-packets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-clean-packets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Assert no evaluator leakage in packet builder
+        run: python3 -m unittest discover -s tests -v
+      - name: Build packets from frozen v0.1 commit
+        run: python3 scripts/build_clean_packets.py
+      - name: Upload pinned clean-run packet bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: v01-clean-run-input-packets
+          path: benchmarks/packets/
+          retention-days: 90
