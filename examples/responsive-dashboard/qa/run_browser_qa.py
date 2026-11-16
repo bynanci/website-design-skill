@@ -8,6 +8,8 @@ import json
 import os
 from pathlib import Path
 from datetime import datetime, timezone
+
+AXE_BUNDLE = Path(__file__).resolve().parents[3] / 'node_modules/axe-core/axe.min.js'
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,6 +74,12 @@ def main():
                 check(page.locator('[data-chart-point="trend"]').count()==18,name+": trend must have 18 labeled points")
                 result = measurements(page)
                 check(result["page"]["scrollWidth"]<=width+1,name+": global horizontal overflow")
+                if width<=390:
+                    label=page.locator(".fixture-label").bounding_box()
+                    avatar=page.locator(".avatar").bounding_box()
+                    check(label["x"]+label["width"]<=avatar["x"]+1,name+": compact header label overlaps account avatar")
+                    check(page.locator(".direction-btn").first.bounding_box()["height"]>=44,name+": design-mode button below 44px target")
+                    check(page.locator("#note-form .primary-btn").bounding_box()["height"]>=44,name+": save control below 44px target")
                 check(not intersect(result["donut"],result["legend"]),name+": donut/legend overlap")
                 check(result["requiredContentPresent"],name+": lost required content")
                 page.screenshot(path=str(EVIDENCE/(name+"-editorial.png")),
@@ -94,8 +102,24 @@ def main():
             page.locator('[data-chart-point="trend"]').first.focus()
             check("6 月" in page.locator("#trend-feedback").inner_text(),
                   "focused trend has no accessible value feedback")
-            check(all(x.get_attribute("tabindex")=="0" for x in page.locator("[data-chart-point]").all()),
-                  "chart point missing keyboard focus")
+            for kind in ("mix","trend"):
+                points=page.locator('[data-chart-point="'+kind+'"]')
+                check(sum(point.get_attribute("tabindex")=="0" for point in points.all())==1,
+                      kind+": expected one roving Tab stop for entire chart")
+            page.locator('[data-chart-point="mix"]').first.focus()
+            page.keyboard.press("ArrowRight")
+            check("企業網路" in page.locator("#mix-feedback").inner_text(),
+                  "donut ArrowRight did not navigate or announce next segment")
+            page.keyboard.press("Home")
+            check(page.evaluate("document.activeElement.getAttribute('data-series')")=="雲端專線",
+                  "donut Home should return to first segment")
+            page.locator('[data-chart-point="trend"]').first.focus()
+            page.keyboard.press("End")
+            check("資訊安全" in page.locator("#trend-feedback").inner_text() and "11 月" in page.locator("#trend-feedback").inner_text(),
+                  "trend End should reach last series/month")
+            page.keyboard.press("Home")
+            check("雲端專線" in page.locator("#trend-feedback").inner_text() and "6 月" in page.locator("#trend-feedback").inner_text(),
+                  "trend Home should reach first point")
             page.locator(".chart-panel details summary").click()
             check(page.locator("#mix-data tr").count()==5,"mix accessible table incomplete")
             total=sum(int(row.locator("td").first.inner_text()) for row in page.locator("#mix-data tr").all())
@@ -107,6 +131,8 @@ def main():
             page.keyboard.press("Enter")
             check(page.locator("#case-dialog").evaluate("(e)=>e.open"),"keyboard Enter fails to open modal")
             check(page.evaluate("document.activeElement.id")=="case-dialog-title","modal initial focus incorrect")
+            check(page.locator("#close-dialog").bounding_box()["height"]>=44,
+                  "dialog close touch target below 44px")
             page.keyboard.press("Escape")
             check(not page.locator("#case-dialog").evaluate("(e)=>e.open"),"Escape fails to close modal")
             check(page.evaluate("document.activeElement.getAttribute('data-case')")=="CS-2026-081",
