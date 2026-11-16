@@ -17,6 +17,8 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Proposed integration delivery sequence tracked under Issue #8; these documents
   do not ship an execution engine or alter the frozen v0.1 suite.
 
+#### Initial release-candidate baseline
+
 - Initial platform-agnostic `SKILL.md`
 - Core redesign workflow reference
 - Information architecture reference
@@ -56,6 +58,8 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Enforce the v0.1 frozen benchmark commit for official evidence and validate identity/capability metadata.
 - Reject empty, cross-run, reused, absolute, or escaping raw benchmark files; release readiness now validates evidence before reporting.
 - Add regression tests for benchmark evidence integrity and run them in CI.
+
+#### Release-candidate maintenance history
 
 - Core phase routing loads focused references and templates instead of relying only on the general workflow document
 - Repository validation enforces complete eval case pairs and the required end-to-end artifact chain
