@@ -6,7 +6,7 @@
 
 Write technical instructions in short, direct sentences. Prefer active voice, one instruction per sentence, stable terms, explicit preconditions, and observable completion criteria. Define acronyms at first use. Separate requirements, recommendations, examples, assumptions, and evidence.
 
-Use ASD-STE100 Issue 9 as a reference for clear English technical writing where its rules apply. This repository does not claim formal ASD-STE100 compliance. A compliance claim requires review against the complete current specification, including its controlled dictionary and all applicable rules. Do not copy or redistribute the specification.
+Use the official [ASD-STE100 Issue 9](https://www.asd-ste100.org/) as a reference for clear English technical writing where its rules apply. This repository does not claim formal ASD-STE100 compliance. A compliance claim requires review against the complete current specification, including its controlled dictionary and all applicable rules. Do not copy or redistribute the specification.
 
 ASD-STE100 is a controlled English language standard. It does not define Traditional Chinese compliance. Do not label Chinese text as ASD-STE100 compliant.
 
