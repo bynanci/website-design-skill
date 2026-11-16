@@ -18,7 +18,12 @@ proxy for 200% zoom. The proxy is not a native browser zoom test.
 
 Checks: no global horizontal overflow, chart/legend non-overlap,
 content parity, two visual directions, accessible chart data tables,
-keyboard chart feedback, keyboard Enter/Escape dialog and focus
-restoration, local-only notes state. No screen reader, physical device,
-actual 200% browser zoom, network performance, or WCAG certification
+arrow-key roving (one Tab stop per chart), keyboard Enter/Escape dialog and
+focus restoration, visible mobile shortcut, minimum primary touch-control
+height, local-only notes state. A pinned axe-core 4.10.3 WCAG A/AA tagged
+scan runs against 1366px, 390px and 320px.
+
+For full recorded evidence, see [2026-11-16 review](../output/qa-review-2026-11-16.md).
+No screen reader, physical device, actual 200% browser zoom, network
+performance, full automated accessibility coverage, or WCAG certification
 is claimed. Humans still need to inspect screenshots and usability.
