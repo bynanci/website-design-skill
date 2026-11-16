@@ -135,7 +135,7 @@ textarea::placeholder{color:#64756e}
 .cases-panel .mono{font-family:ui-monospace,SFMono-Regular,monospace;color:#395b57;font-size:11px}
 .severity{display:inline-block;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:750}
 .severity.high{background:#fff2eb;color:#a45733}
-.severity.normal{background:#eef3f1;color:#5c746c}
+.severity.normal{background:#eef3f1;color:#4f675e}
 .case-state::before{content:"";display:inline-block;width:6px;height:6px;background:#c4a050;border-radius:50%;margin-right:7px;vertical-align:middle}
 .text-btn{border:none;background:transparent;color:var(--accent);font-size:12px;font-weight:750;text-decoration:underline;text-underline-offset:3px;padding:6px 2px}
 .text-btn:hover{color:#0f4942}
