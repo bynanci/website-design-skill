@@ -180,11 +180,44 @@ def main():
             check(narrow["page"]["scrollWidth"]<=1281,"embedded container: global overflow")
             records.append({"scenario":"embedded-360-css-px-container","measurements":narrow})
             page.close()
+
+            # Long, unbroken evidence tokens and localized descriptive copy:
+            # test the real layout instead of assuming fixture text length.
+            stress=browser.new_page(viewport={"width":320,"height":700},reduced_motion="reduce")
+            stress.goto(ENTRY,wait_until="load")
+            stress.evaluate("""() => {
+                const long='跨區備援部署、維運流程與雲端專線調整的實際影響需依客戶需求逐項確認。'.repeat(16);
+                document.querySelector('.observation .obs-content > p').textContent=long;
+                document.querySelector('.evidence-row a').textContent='source:'+('unbroken_1234567890'.repeat(18));
+                document.querySelector('#account-name').textContent='HarborCloudEnterpriseAccountWithVeryLongUnbrokenName';
+            }""")
+            long_stats=stress.evaluate("""() => {
+                const paragraph=document.querySelector('.observation .obs-content > p');
+                const link=document.querySelector('.evidence-row a');
+                const rect=e=>e.getBoundingClientRect();
+                return {
+                    scrollWidth:document.documentElement.scrollWidth,
+                    viewportWidth:window.innerWidth,
+                    paragraphVisible:rect(paragraph).width>0 &&
+                      paragraph.scrollHeight<=paragraph.clientHeight+2,
+                    linkInViewport:rect(link).left>=0 && rect(link).right<=innerWidth+1,
+                    companyInViewport:rect(document.querySelector('#account-name')).right<=innerWidth+1
+                };
+            }""")
+            check(long_stats["scrollWidth"]<=321,"long-copy-320: global horizontal overflow")
+            check(long_stats["paragraphVisible"],"long-copy-320: observation text is clipped")
+            check(long_stats["linkInViewport"],"long-copy-320: evidence link escapes viewport")
+            check(long_stats["companyInViewport"],"long-copy-320: long company name escapes viewport")
+            stress.screenshot(path=str(EVIDENCE/"stress-long-copy-320.png"),
+                              full_page=True,animations="disabled")
+            records.append({"scenario":"stress-long-copy-320","measurements":long_stats,
+                "method":"Synthetic oversized content injected into real Chromium DOM; not a production data scenario"})
+            stress.close()
         finally:
             browser.close()
     report={
         "source":"public synthetic account dashboard","timestamp_utc":datetime.now(timezone.utc).isoformat(),
-        "browser":"Playwright Chromium headless","rendered_cases":len(SCENARIOS),
+        "browser":"Playwright Chromium headless","rendered_cases":len(records),
         "notes":["Screenshots captured but automated checks are not human visual approval.",
                  "200% zoom uses effective CSS-width proxy, not native browser zoom.",
                  "Physical devices, screen readers and WCAG conformance not tested.",
