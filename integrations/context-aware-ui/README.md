@@ -1,5 +1,7 @@
 # Context-Aware UI Collaboration — Proposed Architecture
 
+[繁體中文版本](integrations/context-aware-ui/README.zh-TW.md)
+
 Status: **proposal / documentation only**, associated with draft PR #9 and roadmap Issue #8. No context scanner, patch engine, state generator, visual repair agent, or runtime renderer is shipped here.
 
 ## Decision and scope
