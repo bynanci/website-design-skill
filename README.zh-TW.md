@@ -36,7 +36,18 @@ Website Design Skill 是一套與工具及前端框架無關的網站改版方�
 
 ## 文件語言與寫作規範
 
-繁體中文文件採用台灣用語、明確術語與可操作步驟。英文文件參考 ASD-STE100 Issue 9 的清楚、直接寫法；這不代表已通過 ASD-STE100 合規審查。該標準是英文受控語言，不能用來宣稱繁體中文合規。詳見[雙語寫作規範](docs/WRITING-STYLE.md)。
+本次雙語範圍包含 README、核心技能、roadmap、核心參考文件、範本與選用 UI adapter 契約。Benchmark 輸入、預期輸出、評分量表、原始證據與 repository 政策文件仍維持英文版本。繁中使用台灣用語、固定術語與可操作步驟；英文參考 ASD-STE100 Issue 9 的清楚寫法，但本專案不宣稱正式合規。該標準不定義繁體中文合規。詳見[雙語寫作規範](docs/WRITING-STYLE.md)。
+
+## 核心參考資料與範本
+
+- [網站改版流程](references/workflow.zh-TW.md)
+- [資訊架構](references/information-architecture.zh-TW.md)
+- [元件架構](references/component-architecture.zh-TW.md)
+- [專案背景範本](templates/project-context.zh-TW.md)
+- [頁面規格範本](templates/page-spec.zh-TW.md)
+- [導覽比較範本](templates/navigation-comparison.zh-TW.md)
+- [內容涵蓋範本](templates/content-coverage.zh-TW.md)
+- [元件契約範本](templates/component-contract.zh-TW.md)
 
 ## 相關文件
 
