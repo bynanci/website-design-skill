@@ -11,6 +11,8 @@ The canonical policy lives in:
 For v0.1, release readiness currently requires:
 
 - at least 2 official benchmark runs;
+- every official run uses the exact frozen commit declared in `benchmarks/release-policy.json`;
+- raw evidence is non-empty, stays in its own run directory, and cannot be shared across benchmark cases;
 - at least 2 distinct agent signatures;
 - each official run scores at least 30/40;
 - all official runs use benchmark suite `0.1.0`;
