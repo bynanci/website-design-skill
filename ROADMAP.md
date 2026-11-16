@@ -61,13 +61,17 @@ Goal: make the core easier to adopt in different environments without moving pla
 Candidate work:
 
 - documented adapter contract under `integrations/`;
-- examples for repository-aware agents;
-- examples for visual/prototyping tools;
-- examples for browser-capable research agents;
+- project-aware Vue 3 + SCSS generation guidance, with Tauri desktop behavior kept optional;
+- a capability-gated browser-render / screenshot / visual-review loop with explicit evidence states;
+- an MCP adapter contract that separates read-only inspection, patch proposals, bounded execution, and authorized writes;
+- examples for repository-aware agents, visual/prototyping tools, and browser-capable research agents;
+- research-dashboard and short-lived schema-driven UI pilots using synthetic or approved data;
 - optional machine-readable artifact metadata;
 - compatibility reports across a wider agent set.
 
-Adapters must remain optional. The core must still work using structured text artifacts when specialized capabilities are unavailable.
+These are optional integration candidates, not core defaults or implemented runtime features. The Vue/Tauri, visual-validation, and MCP contracts are tracked under `integrations/`. The OpenFilm-style editor, research CSV dashboard, and dynamic UI scenarios are examples for later pilots.
+
+Adapters must remain optional. The core must still work using structured text artifacts when specialized capabilities are unavailable. An adapter may claim rendered, measured, visually reviewed, or applied results only when it preserves evidence from those actual operations.
 
 ## v0.4 — Quality and migration discipline
 
