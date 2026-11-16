@@ -51,6 +51,7 @@ Website Design Skill 是一套與工具及前端框架無關的網站改版方�
 
 ## 相關文件
 
+- [繁體中文變更紀錄](CHANGELOG.zh-TW.md)
 - [繁體中文核心技能](SKILL.zh-TW.md)
 - [繁體中文 Roadmap](ROADMAP.zh-TW.md)
 - [繁體中文整合層索引](integrations/README.zh-TW.md)
