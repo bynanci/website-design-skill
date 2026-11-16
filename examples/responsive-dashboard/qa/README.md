@@ -13,8 +13,9 @@ machine-readable evidence to examples/responsive-dashboard/evidence/.
 The GitHub workflow uploads the screenshots and raw JSON as an artifact.
 
 Test matrix: 1920x1080, 1366x768, 768 CSS px, 390 CSS px, 320 CSS px,
-narrow embedded 360 CSS px container and a 683 CSS px effective-width
-proxy for 200% zoom. The proxy is not a native browser zoom test.
+narrow embedded 360 CSS px container, a 683 CSS px effective-width
+proxy for 200% zoom, and a 320px long-content stress case. The proxy is
+not a native browser zoom test; stress content is synthetic DOM injection.
 
 Checks: no global horizontal overflow, chart/legend non-overlap,
 content parity, two visual directions, accessible chart data tables,
