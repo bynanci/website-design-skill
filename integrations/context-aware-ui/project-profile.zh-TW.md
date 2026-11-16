@@ -72,3 +72,10 @@ python3 scripts/inspect_project_profile.py ./target-project \
 Token 參照以 `--` 開頭，請使用 `--required-token=--color-warning` 傳入，避免命令列解析器將它當成另一個選項。
 
 輸出 JSON 遵循 project-profile.schema.json。靜態 token 宣告、Vue 檔案路徑，以及 state/API 路徑名稱都只是候選證據。工具不會確認語意 token 角色、實際 theme 計算值、元件 API、狀態所有權、執行行為或快取新鮮度；在 parser、renderer 或 reviewer 提供證據前，這些欄位應維持 unknown。
+
+
+## 合成 Vue fixture
+
+[合成 Vue fixture](../../examples/project-profile-vue/README.zh-TW.md) 保存範圍受限的範例專案與唯讀 inspector 的實際輸出。回歸測試會比對該輸出，並確認來源檔變動時會產生新 digest，而未變動元件的 digest 保持一致。
+
+Fixture 使用 manifest 宣告的套件版本、JSONC alias、SCSS/CSS token 候選、dark theme override、Vue 元件、Pinia store 與 API service 路徑。它不安裝依賴、不執行 Vite 設定、不解析匯入或 theme 計算值、不剖析公開元件 API、不確認狀態所有權，也不渲染 app。這些項目仍應標記為 unknown。

@@ -21,7 +21,7 @@ fallback, not a prerequisite for design-time adoption.
 
 The [Issue #8 umbrella](https://github.com/bynanci/website-design-skill/issues/8) is an index only. Child issues #11–#15 are the source of truth for scope and acceptance criteria.
 
-Release gates remain independently verifiable. PR #9 contains bilingual contract documentation and a proposed machine-readable profile shape. PR #16 adds a bounded, read-only inspector for static manifests, TypeScript JSONC aliases and source candidates. Semantic token resolution, component APIs, state ownership and runtime behavior remain open work under Issue #11.
+Release gates remain independently verifiable. Main now contains the bilingual contract documentation, profile schema and bounded read-only inspector delivered by PRs #9 and #16. Issue #11 has an initial synthetic Vue fixture, a recorded profile output and regression coverage that checks source-digest refresh. The fixture covers static manifest versions, JSONC aliases, style-token candidates, a dark-theme override, and candidate component/store/service paths. Semantic token roles, import and theme resolution, component APIs, state ownership, and rendered behavior remain open under #11.
 
 ## v0.1 — Minimum viable public release
 

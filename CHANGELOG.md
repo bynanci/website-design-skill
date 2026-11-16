@@ -13,6 +13,7 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Bilingual Traditional Chinese counterparts for the core skill, roadmap, reference guides, templates, and context-aware UI adapter guides, with a writing policy that distinguishes ASD-STE100-informed English from Chinese documentation.
 - Proposed JSON Schema and synthetic example for the project profile tracked by Issue #11; these define a data contract and do not implement a project scanner.
 - Bounded read-only project-profile inspector for static package metadata, TypeScript JSONC aliases, token candidates and evidence digests; semantic roles and runtime behavior remain unverified.
+- Bilingual synthetic Vue project-profile fixture with a recorded inspector output and regression coverage for fixture conformance and changed-source digest refresh. The profile records candidates; it does not verify semantic token roles, computed themes, component APIs, state ownership or rendered behavior.
 - Draft optional context-aware UI architecture, scoped project profile and token mapping,
   applicable state-transition, AST-patch and declarative runtime UI contracts.
 - Vue/Tauri, rendered visual-validation and MCP guidance connected to those contracts;

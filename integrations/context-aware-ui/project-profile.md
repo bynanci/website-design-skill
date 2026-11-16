@@ -121,3 +121,10 @@ python3 scripts/inspect_project_profile.py ./target-project \
 The token reference starts with `--`. Pass it as `--required-token=--color-warning` so the argument parser reads it as a value.
 
 The command emits JSON that follows project-profile.schema.json. Static token declarations, Vue paths, and state/API path names are candidates only. The tool does not establish semantic token roles, computed theme values, component APIs, state ownership, behavior, or cache freshness. Treat those fields as unknown until a capable parser, renderer, or reviewer supplies evidence.
+
+
+## Synthetic Vue fixture
+
+The [synthetic Vue fixture](../../examples/project-profile-vue/README.md) preserves a bounded example repository and the exact output of the read-only inspector. Its regression tests compare the output and verify that a changed source file receives a new digest while an unchanged component digest remains stable.
+
+The fixture uses declared dependency versions, a JSONC alias, SCSS/CSS token candidates, a dark-theme override, a Vue component, a Pinia store and an API service path. It does not install dependencies, execute Vite configuration, resolve imports or computed themes, parse public component APIs, confirm state ownership, or render the application. Treat those results as unknown.
