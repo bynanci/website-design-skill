@@ -1,6 +1,6 @@
 # Rendered Visual Validation Adapter
 
-[繁體中文版本](integrations/visual-validation/README.zh-TW.md)
+[繁體中文版本](README.zh-TW.md)
 
 Status: **proposed integration contract; documentation only**. No Playwright runner, screenshot service, vision model, or automatic code-fix loop is implemented by this document.
 

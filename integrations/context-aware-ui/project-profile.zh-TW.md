@@ -54,3 +54,21 @@ JavaScript 設定檔不可為了讀取設定而直接執行。能靜態解析的
 逐項記錄讀取、語法解析、patch 提案/寫入、build/type-check、web rendering、實際影像審查、DOM/可及性量測，以及 native shell、browser zoom 或輔助科技測試的 available、unavailable 或 unknown 狀態與證據。
 
 Profile 可以不完整。只有在缺少證據使該操作不安全或不受支援時才阻擋該操作，並明確保留未知項目。
+
+
+## 唯讀 Profile 試點工具
+
+第一個實作切片是 scripts/inspect_project_profile.py。它讀取靜態 package/TypeScript 設定與有限數量的來源候選檔，不執行專案設定、不安裝依賴、不執行 build、不渲染 app，也不寫入檔案。
+
+使用範例：
+
+```sh
+python3 scripts/inspect_project_profile.py ./target-project \
+  --task "Map the media-library warning state" \
+  --required-alias "@common" \
+  --required-token=--color-warning
+```
+
+Token 參照以 `--` 開頭，請使用 `--required-token=--color-warning` 傳入，避免命令列解析器將它當成另一個選項。
+
+輸出 JSON 遵循 project-profile.schema.json。靜態 token 宣告、Vue 檔案路徑，以及 state/API 路徑名稱都只是候選證據。工具不會確認語意 token 角色、實際 theme 計算值、元件 API、狀態所有權、執行行為或快取新鮮度；在 parser、renderer 或 reviewer 提供證據前，這些欄位應維持 unknown。

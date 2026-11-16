@@ -1,6 +1,6 @@
 # Component Architecture
 
-[繁體中文版本](references/component-architecture.zh-TW.md)
+[繁體中文版本](component-architecture.zh-TW.md)
 
 Use this reference when translating wireframes or visual patterns into a reusable design and implementation system.
 

@@ -1,6 +1,6 @@
 # Project Context
 
-[繁體中文版本](templates/project-context.zh-TW.md)
+[繁體中文版本](project-context.zh-TW.md)
 
 ## Business goals
 

@@ -25,7 +25,7 @@ source boundaries. The [architecture proposal](integrations/context-aware-ui/REA
 covers token awareness, AST-guided patches, applicable state transitions,
 bounded visual repair and a separate declarative runtime UI experiment.
 
-These are draft contracts in PR #9, not shipped agent/runtime capabilities. Vue is the first proposed adapter; each framework needs its own fixture and evidence. Follow [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) for the implementation index and keep the v0.1 release gate separate.
+These are draft contracts in PR #9. PR #16 adds a bounded, read-only project-profile inspector for static manifests, TypeScript JSONC aliases and source candidates. It does not resolve semantic token roles, component APIs, state ownership, runtime values or rendered behavior. The inspector is a repository utility; it does not provide a general-purpose agent or runtime engine. Vue is the first proposed adapter; each framework needs its own fixture and evidence. Follow [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) for the implementation index and keep the v0.1 release gate separate.
 
 ## What this is
 

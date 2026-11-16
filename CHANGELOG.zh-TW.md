@@ -10,6 +10,7 @@
 
 - 核心技能、roadmap、參考指南、範本與 context-aware UI 整合指南的繁體中文版本，並建立雙語寫作規範。
 - Issue #11 專案 profile 的提案 JSON Schema 與合成範例。它們定義資料契約，尚未實作掃描器。
+- 有限範圍的唯讀 project-profile inspector，可盤點靜態 package metadata、TypeScript JSONC alias、token 候選與來源 digest；語意角色與執行期行為仍未驗證。
 - 選用的 context-aware UI 架構、專案 profile/token 對照、狀態轉換、AST patch 與 declarative runtime UI 契約。
 - Vue/Tauri、渲染後視覺驗收與 MCP 指引，以及有輪數上限並明確記錄未執行情況的多條件修正流程。
 - Issue #8 的整合工作順序。這些文件不包含執行引擎，也不改動凍結的 v0.1 評估集。

@@ -1,6 +1,6 @@
 # Information Architecture
 
-[繁體中文版本](references/information-architecture.zh-TW.md)
+[繁體中文版本](information-architecture.zh-TW.md)
 
 Use this reference when the task involves sitemap, navigation, taxonomy, page grouping, findability, or content organization.
 

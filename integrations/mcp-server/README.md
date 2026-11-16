@@ -1,6 +1,6 @@
 # MCP Adapter Contract
 
-[繁體中文版本](integrations/mcp-server/README.zh-TW.md)
+[繁體中文版本](README.zh-TW.md)
 
 Status: **proposed architecture; no MCP server package is implemented**.
 
