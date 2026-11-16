@@ -1,5 +1,7 @@
 # Content Coverage Matrix
 
+[繁體中文版本](templates/content-coverage.zh-TW.md)
+
 Use this artifact before locking a wireframe or implementation.
 
 ## Page
