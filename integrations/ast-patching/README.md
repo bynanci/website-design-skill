@@ -1,5 +1,7 @@
 # AST-Guided UI Patch Contract
 
+[繁體中文版本](integrations/ast-patching/README.zh-TW.md)
+
 Status: **proposed optional integration; no parser or transform is implemented**.
 
 ## Purpose and limits
