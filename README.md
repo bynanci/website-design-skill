@@ -15,7 +15,7 @@ The project is intentionally independent of any specific AI model, design tool, 
 
 ## Documentation languages
 
-Core guidance and the optional UI-adapter contracts are available in English and Traditional Chinese. English uses clear, direct technical prose informed by ASD-STE100 Issue 9 where applicable; this repository does not claim formal compliance. ASD-STE100 does not define Traditional Chinese compliance. See [the bilingual writing policy](docs/WRITING-STYLE.md).
+English and Traditional Chinese versions are available for the README, core skill, roadmap, reference guides, templates, and optional UI-adapter contracts. Benchmark inputs, expected outputs, scoring rubric, raw evidence, and repository policy documents remain canonical English in this localization pass. English uses clear technical prose informed by ASD-STE100 Issue 9 where applicable; this repository does not claim formal compliance. ASD-STE100 does not define Traditional Chinese compliance. See [the bilingual writing policy](docs/WRITING-STYLE.md).
 
 ## Proposed direction: context-aware UI collaboration
 
