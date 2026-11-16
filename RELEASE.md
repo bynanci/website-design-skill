@@ -33,7 +33,7 @@ python3 scripts/validate_benchmarks.py
 python3 scripts/release_status.py
 ```
 
-The release-status command is diagnostic and exits successfully even when the release is not ready.
+The release-status command is diagnostic and exits successfully when valid evidence exists but the release is not ready. It first validates benchmark evidence and exits nonzero for malformed evidence, even without `--require-ready`.
 
 To use it as a hard gate:
 
