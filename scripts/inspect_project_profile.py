@@ -217,6 +217,7 @@ def config_files(root, sources, unknowns):
 def static_aliases(root, sources, unknowns, required_aliases):
     path = root / "tsconfig.json"
     aliases = []
+    config_available = False
     if not path.is_file():
         sources["tsconfig.json"] = {
             "path": "tsconfig.json",
@@ -231,6 +232,7 @@ def static_aliases(root, sources, unknowns, required_aliases):
         if text is not None:
             try:
                 config = json.loads(text)
+                config_available = isinstance(config, dict)
             except json.JSONDecodeError as exc:
                 unknowns.append("The root tsconfig.json is invalid JSON: " + str(exc))
         else:
@@ -301,7 +303,7 @@ def static_aliases(root, sources, unknowns, required_aliases):
                 {
                     "name": required,
                     "targets": [],
-                    "status": "missing",
+                    "status": "missing" if config_available else "unknown",
                     "evidencePaths": ["tsconfig.json"],
                 }
             )
