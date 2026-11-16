@@ -9,6 +9,9 @@
     "Official runs must already pass scripts/validate_benchmarks.py.",
     "Agent signature is provider/product/model.",
     "A criterion scored 0 by two or more official runs is treated as a shared contract ambiguity and blocks release.",
-    "Release readiness is diagnostic; human review of criterion-level failures remains required."
-  ]
+    "Release readiness is diagnostic; human review of criterion-level failures remains required.",
+    "Official results must use required_repository_commit; exploratory results may use other commits.",
+    "Raw benchmark outputs must be non-empty Markdown stored in their own run directory."
+  ],
+  "required_repository_commit": "7d64090710ef20f1d24cea6b46199391d3c09c18"
 }

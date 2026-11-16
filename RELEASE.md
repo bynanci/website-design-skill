@@ -11,6 +11,8 @@ The canonical policy lives in:
 For v0.1, release readiness currently requires:
 
 - at least 2 official benchmark runs;
+- every official run uses the exact frozen commit declared in `benchmarks/release-policy.json`;
+- raw evidence is non-empty, stays in its own run directory, and cannot be shared across benchmark cases;
 - at least 2 distinct agent signatures;
 - each official run scores at least 30/40;
 - all official runs use benchmark suite `0.1.0`;
@@ -31,7 +33,7 @@ python3 scripts/validate_benchmarks.py
 python3 scripts/release_status.py
 ```
 
-The release-status command is diagnostic and exits successfully even when the release is not ready.
+The release-status command is diagnostic and exits successfully when valid evidence exists but the release is not ready. It first validates benchmark evidence and exits nonzero for malformed evidence, even without `--require-ready`.
 
 To use it as a hard gate:
 

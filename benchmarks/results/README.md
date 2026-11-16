@@ -37,6 +37,14 @@ An `official` result must:
 - set `manual_edit` to `false`;
 - pass `python3 scripts/validate_benchmarks.py`.
 
+Additional evidence-integrity checks enforced by the validator:
+
+- Official runs must use the frozen commit named by `benchmarks/release-policy.json` (`required_repository_commit`).
+- The agent identity (provider/product/model), run date, interface, and capability profile must be present.
+- Every canonical case must use its own non-empty UTF-8 Markdown raw output.
+- Raw output paths must be relative and stay inside that run's directory; absolute paths, traversal, symlink escapes, and cross-run reuse are rejected.
+- Metadata checks do **not** prove the runner's context was independent or the output was unmodified. Reviewer evidence and clean-run procedures remain mandatory.
+
 If any requirement is not met, mark the run `exploratory`.
 
 ## Scoring

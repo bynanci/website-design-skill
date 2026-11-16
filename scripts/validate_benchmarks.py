@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
+from datetime import date
 import json
 import re
 import sys
@@ -115,10 +116,16 @@ def validate_release_policy(manifest: dict) -> None:
         "minimum_total_score_per_run",
         "block_on_shared_zero_criterion",
         "required_suite_version",
+        "required_repository_commit",
     }
     missing = required - policy.keys()
     if missing:
         fail("Release policy missing keys: " + ", ".join(sorted(missing)))
+
+    if not isinstance(policy["required_repository_commit"], str) or not re.fullmatch(
+        r"[0-9a-f]{40}", policy["required_repository_commit"]
+    ):
+        fail("Release policy required_repository_commit must be a 40-character SHA.")
 
     if policy["required_suite_version"] != manifest["suite_version"]:
         fail(
@@ -142,6 +149,8 @@ def validate_release_policy(manifest: dict) -> None:
     if minimum_score < 0 or minimum_score > manifest["total_max_score"]:
         fail("Release policy minimum_total_score_per_run is out of range.")
 
+    return policy
+
 
 def validate_result_template(manifest: dict) -> None:
     template = load_json(RESULT_TEMPLATE_PATH)
@@ -163,7 +172,76 @@ def validate_result_template(manifest: dict) -> None:
         fail("Benchmark result template aggregate max_score must match manifest.")
 
 
-def validate_result(run_dir: Path, result: dict, manifest: dict) -> None:
+def validate_raw_output_path(run_dir: Path, relative_path: str) -> None:
+    """Ensure scored evidence is an actual non-empty file inside its own run."""
+    rel_dir = run_dir.relative_to(ROOT)
+    if not isinstance(relative_path, str) or not relative_path.strip():
+        fail(f"{rel_dir}: raw_output_path must be a non-empty path.")
+
+    # Benchmark paths are repository-relative POSIX paths, even across platforms.
+    if "\\" in relative_path:
+        fail(f"{rel_dir}: raw_output_path must use forward slashes.")
+
+    candidate = Path(relative_path)
+    if (
+        candidate.is_absolute()
+        or ".." in candidate.parts
+        or candidate.parts[: len(rel_dir.parts)] != rel_dir.parts
+        or candidate.suffix != ".md"
+    ):
+        fail(f"{rel_dir}: raw output must be Markdown inside this run directory.")
+
+    raw_path = ROOT / candidate
+    if (
+        raw_path.is_symlink()
+        or not raw_path.is_file()
+        or not raw_path.resolve().is_relative_to(run_dir.resolve())
+    ):
+        fail(f"{rel_dir}: raw output is missing or escapes the run directory: {relative_path}")
+
+    try:
+        if not raw_path.read_text(encoding="utf-8").strip():
+            fail(f"{rel_dir}: raw output is empty: {relative_path}")
+    except (OSError, UnicodeError) as exc:
+        fail(f"{rel_dir}: unable to read raw output {relative_path}: {exc}")
+
+
+def validate_official_metadata(run_dir: Path, result: dict, policy: dict) -> None:
+    rel_dir = run_dir.relative_to(ROOT)
+
+    if result["repository_commit"] != policy["required_repository_commit"]:
+        fail(
+            f"{rel_dir}: official run must use pinned commit "
+            f"{policy['required_repository_commit']}."
+        )
+
+    agent = result["agent"]
+    if not isinstance(agent, dict) or any(
+        not isinstance(agent.get(key), str) or not agent[key].strip()
+        for key in ("provider", "product", "model")
+    ):
+        fail(f"{rel_dir}: official run requires provider/product/model identity.")
+
+    environment = result["environment"]
+    if not isinstance(environment, dict):
+        fail(f"{rel_dir}: official run requires environment metadata.")
+
+    run_date = environment.get("run_date")
+    if not isinstance(run_date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", run_date):
+        fail(f"{rel_dir}: official run requires an ISO YYYY-MM-DD run_date.")
+    try:
+        date.fromisoformat(run_date)
+    except ValueError:
+        fail(f"{rel_dir}: official run has an invalid run_date.")
+
+    if not isinstance(environment.get("interface"), str) or not environment["interface"].strip():
+        fail(f"{rel_dir}: official run requires environment.interface.")
+
+    if not isinstance(environment.get("capabilities"), dict) or not environment["capabilities"]:
+        fail(f"{rel_dir}: official run requires an explicit capability profile.")
+
+
+def validate_result(run_dir: Path, result: dict, manifest: dict, policy: dict) -> None:
     rel_dir = run_dir.relative_to(ROOT)
 
     required = {
@@ -200,11 +278,14 @@ def validate_result(run_dir: Path, result: dict, manifest: dict) -> None:
             f"manifest {manifest['suite_version']}."
         )
 
-    if result["status"] == "official" and result["manual_edit"] is not False:
-        fail(f"{rel_dir}: official runs require manual_edit=false.")
+    if result["status"] == "official":
+        if result["manual_edit"] is not False:
+            fail(f"{rel_dir}: official runs require manual_edit=false.")
+        validate_official_metadata(run_dir, result, policy)
 
     canonical = {case["id"]: case for case in manifest["cases"]}
     seen = set()
+    seen_raw_paths = set()
     aggregate_score = 0
 
     for case_result in result["cases"]:
@@ -219,9 +300,11 @@ def validate_result(run_dir: Path, result: dict, manifest: dict) -> None:
             fail(f"{rel_dir}: duplicate case result {case_id}.")
         seen.add(case_id)
 
-        raw_path = ROOT / case_result["raw_output_path"]
-        if not raw_path.exists():
-            fail(f"{rel_dir}: missing raw output {case_result['raw_output_path']}.")
+        raw_output_path = case_result["raw_output_path"]
+        validate_raw_output_path(run_dir, raw_output_path)
+        if raw_output_path in seen_raw_paths:
+            fail(f"{rel_dir}: raw output reused across cases: {raw_output_path}.")
+        seen_raw_paths.add(raw_output_path)
 
         expected_criteria = set(canonical[case_id]["rubric_criteria"])
         actual_criteria = set(case_result["scores"].keys())
@@ -254,7 +337,7 @@ def validate_result(run_dir: Path, result: dict, manifest: dict) -> None:
         fail(f"{rel_dir}: aggregate interpretation is required.")
 
 
-def validate_results(manifest: dict) -> None:
+def validate_results(manifest: dict, policy: dict) -> None:
     if not RESULTS_DIR.exists():
         fail("benchmarks/results directory is missing.")
 
@@ -267,14 +350,14 @@ def validate_results(manifest: dict) -> None:
         result_path = run_dir / "result.json"
         if not result_path.exists():
             fail(f"{run_dir.relative_to(ROOT)} is missing result.json.")
-        validate_result(run_dir, load_json(result_path), manifest)
+        validate_result(run_dir, load_json(result_path), manifest, policy)
 
 
 def main() -> None:
     manifest = validate_manifest()
-    validate_release_policy(manifest)
+    policy = validate_release_policy(manifest)
     validate_result_template(manifest)
-    validate_results(manifest)
+    validate_results(manifest, policy)
     print("Benchmark validation passed.")
 
 

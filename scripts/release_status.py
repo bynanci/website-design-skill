@@ -6,6 +6,13 @@ import argparse
 import json
 import sys
 
+from validate_benchmarks import (
+    validate_manifest,
+    validate_release_policy,
+    validate_result_template,
+    validate_results,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 BENCH = ROOT / "benchmarks"
 RESULTS = BENCH / "results"
@@ -39,8 +46,11 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    policy = load_json(BENCH / "release-policy.json")
-    manifest = load_json(BENCH / "manifest.json")
+    # Never report readiness for unvalidated or foreign-commit evidence.
+    manifest = validate_manifest()
+    policy = validate_release_policy(manifest)
+    validate_result_template(manifest)
+    validate_results(manifest, policy)
     runs = official_results()
 
     failures = []
@@ -123,6 +133,7 @@ def main() -> None:
     status = {
         "release_line": policy["release_line"],
         "suite_version": manifest["suite_version"],
+        "required_repository_commit": policy["required_repository_commit"],
         "ready": ready,
         "official_runs": len(runs),
         "distinct_agent_signatures": len(signatures),

@@ -22,5 +22,8 @@ jobs:
       - name: Validate benchmarks
         run: python3 scripts/validate_benchmarks.py
 
+      - name: Test benchmark evidence boundaries
+        run: python3 -m unittest discover -s tests -v
+
       - name: Report release readiness
         run: python3 scripts/release_status.py
