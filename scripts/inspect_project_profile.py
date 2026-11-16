@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path, PurePosixPath
@@ -109,7 +110,7 @@ def source_candidates(root):
     found = []
     seen = set()
     for base in roots:
-        for current, dirs, filenames in __import__("os").walk(base):
+        for current, dirs, filenames in os.walk(base):
             dirs[:] = sorted(
                 name
                 for name in dirs
