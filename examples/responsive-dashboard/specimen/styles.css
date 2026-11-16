@@ -211,6 +211,9 @@ dialog::backdrop{background:rgba(22,36,34,.42)}
   .brand small{font-size:7px;letter-spacing:.8px}
   .brand-mark{width:31px;height:31px}.avatar{width:31px;height:31px}
 }
+/* Long-content resilience at the reusable content layer. Do not silently truncate evidence. */
+.obs-content,.obs-content>p,.meeting-question p,.account-identity h2,.evidence-row a,.opportunity-list p{overflow-wrap:anywhere;min-width:0}
+
 /* Touch and keyboard ergonomics are part of the shared component contract. */
 .fixture-label-short{display:none}
 .quick-insight-link{display:none}
