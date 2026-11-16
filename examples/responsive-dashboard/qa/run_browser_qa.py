@@ -108,6 +108,14 @@ def main():
                     check(page.locator(".observation").count()==4,name+": visual-mode content parity")
                     page.screenshot(path=str(EVIDENCE/(name+"-cockpit.png")),
                                     full_page=True,animations="disabled")
+                if width<=390:
+                    shortcut=page.locator(".quick-insight-link")
+                    check(shortcut.is_visible(),name+": missing mobile AI task shortcut")
+                    shortcut.click()
+                    check(page.evaluate("location.hash")=="#observations",
+                          name+": AI task shortcut did not navigate to observations")
+                    target_y=page.locator("#observations").evaluate("(element)=>element.getBoundingClientRect().top")
+                    check(-5<=target_y<=60,name+": AI task shortcut does not reveal heading")
                 page.close()
 
             page=browser.new_page(viewport={"width":1366,"height":768},reduced_motion="reduce")
