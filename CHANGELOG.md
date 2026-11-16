@@ -44,6 +44,10 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 ### Changed
 
+- Enforce the v0.1 frozen benchmark commit for official evidence and validate identity/capability metadata.
+- Reject empty, cross-run, reused, absolute, or escaping raw benchmark files; release readiness now validates evidence before reporting.
+- Add regression tests for benchmark evidence integrity and run them in CI.
+
 - Core phase routing loads focused references and templates instead of relying only on the general workflow document
 - Repository validation enforces complete eval case pairs and the required end-to-end artifact chain
 - Benchmark validation enforces suite integrity, release-policy consistency, result-template consistency, raw-output preservation, canonical criteria, and aggregate-score consistency
