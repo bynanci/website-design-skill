@@ -1,5 +1,7 @@
 # Changelog
 
+[繁體中文版本](CHANGELOG.zh-TW.md)
+
 All notable changes to this project will be documented here.
 
 The project intends to follow Semantic Versioning once the public artifact contracts stabilize.
