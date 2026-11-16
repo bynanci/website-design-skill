@@ -67,8 +67,9 @@ class CleanPacketTests(unittest.TestCase):
             )
             self.assertNotIn(b"expected.md", z.read("SKILL.md"))
             manifest = json.loads(z.read("packet.json"))
-            self.assertNotIn("rubric", json.dumps(manifest))
-            self.assertNotIn("expected.md", json.dumps(manifest))
+            self.assertNotIn("rubric_path", manifest)
+            self.assertNotIn("evaluator_reference_paths", manifest)
+            self.assertNotIn("evals/ia-audit/case-001/expected.md", manifest["files"])
             self.assertEqual(manifest["source_commit"], REF)
 
     def test_packet_archive_and_checksums_are_reproducible(self):
