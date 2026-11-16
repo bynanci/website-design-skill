@@ -1,0 +1,9 @@
+{
+  // This fixture uses supported TypeScript JSONC syntax.
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+    },
+  },
+}

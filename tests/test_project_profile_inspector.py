@@ -1,6 +1,7 @@
 """Regression tests for the read-only project-profile inspector."""
 
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -9,6 +10,21 @@ from pathlib import Path
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "inspect_project_profile.py"
+FIXTURE_ROOT = Path(__file__).resolve().parents[1] / "examples" / "project-profile-vue"
+FIXTURE_PROFILE = FIXTURE_ROOT / "expected-profile.json"
+FIXTURE_ARGUMENTS = (
+    "--task",
+    "Inspect the dashboard status banner",
+    "--affected-path",
+    "src/components/StatusBanner.vue",
+    "--required-alias",
+    "@/components",
+    "--required-alias",
+    "@missing",
+    "--required-token=--color-warning",
+    "--required-token=--color-destructive",
+    "--required-token=--missing-token",
+)
 
 
 def run_inspector(root, *arguments):
@@ -116,6 +132,58 @@ class ProjectProfileInspectorTests(unittest.TestCase):
         self.assertEqual(config_record["status"], "observed")
         self.assertEqual(len(config_record["sha256"]), 64)
         self.assertTrue(any("not executed" in item for item in profile["unknowns"]))
+
+    def test_synthetic_vue_fixture_matches_recorded_profile(self):
+        result = run_inspector(FIXTURE_ROOT, *FIXTURE_ARGUMENTS)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        profile = json.loads(result.stdout)
+        expected = json.loads(FIXTURE_PROFILE.read_text(encoding="utf-8"))
+
+        self.assertEqual(profile, expected)
+        aliases = {alias["name"]: alias for alias in profile["aliases"]}
+        self.assertEqual(aliases["@/*"]["status"], "resolved")
+        self.assertEqual(aliases["@missing"]["status"], "missing")
+        tokens = {token["reference"]: token for token in profile["tokens"]}
+        self.assertEqual(tokens["--color-warning"]["status"], "unknown")
+        self.assertEqual(tokens["--color-destructive"]["status"], "unknown")
+        self.assertEqual(tokens["--missing-token"]["status"], "missing")
+        self.assertTrue(
+            any(component["path"] == "src/components/StatusBanner.vue"
+                for component in profile["components"])
+        )
+        self.assertTrue(
+            any(owner["path"] == "src/stores/dashboard.ts"
+                for owner in profile["stateOwners"])
+        )
+
+    def test_fixture_profile_refreshes_changed_source_digest(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            copied_root = Path(temporary) / "project-profile-vue"
+            shutil.copytree(FIXTURE_ROOT, copied_root)
+
+            before_result = run_inspector(copied_root, *FIXTURE_ARGUMENTS)
+            self.assertEqual(before_result.returncode, 0, before_result.stderr)
+            before = json.loads(before_result.stdout)
+
+            token_file = copied_root / "src" / "styles" / "tokens.scss"
+            token_file.write_text(
+                token_file.read_text(encoding="utf-8") + "\n// digest refresh probe\n",
+                encoding="utf-8",
+            )
+            after_result = run_inspector(copied_root, *FIXTURE_ARGUMENTS)
+            self.assertEqual(after_result.returncode, 0, after_result.stderr)
+            after = json.loads(after_result.stdout)
+
+        before_digests = {source["path"]: source.get("sha256") for source in before["sources"]}
+        after_digests = {source["path"]: source.get("sha256") for source in after["sources"]}
+        self.assertNotEqual(
+            before_digests["src/styles/tokens.scss"],
+            after_digests["src/styles/tokens.scss"],
+        )
+        self.assertEqual(
+            before_digests["src/components/StatusBanner.vue"],
+            after_digests["src/components/StatusBanner.vue"],
+        )
 
     def test_external_manifest_symlink_is_not_read(self):
         with tempfile.TemporaryDirectory() as external_dir:

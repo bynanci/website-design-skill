@@ -10,7 +10,7 @@ Website Design Skill 以跨平台改版方法、明確的交付契約與行為�
 
 第一個框架目標是 Vue。React、Svelte 等框架必須有各自的 adapter 與 conformance fixture，不能由共用規格推定相容。Runtime UI 是獨立的 P2 實驗，不是一般設計時工作的前置條件。
 
-細項任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整；#11–#15 分別追蹤專案 profile、Vue AST 修改、狀態轉換、響應式修正與 runtime troubleshooting panel。每個 child issue 是該工作的驗收依據。`scripts/inspect_project_profile.py` 已提供有限範圍的唯讀試點，可讀取靜態 manifest、TypeScript JSONC alias 與來源候選檔；語意 token、theme、元件 API、狀態所有權與 runtime 行為仍待 Issue #11 驗收。
+細項任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整；#11–#15 分別追蹤專案 profile、Vue AST 修改、狀態轉換、響應式修正與 runtime troubleshooting panel。每個 child issue 是該工作的驗收依據。`scripts/inspect_project_profile.py` 提供有限範圍的唯讀檢查；#11 現已加入合成 Vue fixture、已保存的 profile 輸出，以及檢查來源 digest 更新的回歸測試。Fixture 涵蓋靜態套件版本、JSONC alias、樣式 token 候選、dark theme override，以及元件/store/service 路徑候選。語意 token、import/theme 解析、公開元件 API、狀態所有權與渲染結果仍待 #11 驗收。
 
 ## v0.1：最小公開版本
 

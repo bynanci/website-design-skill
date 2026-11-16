@@ -1,0 +1,9 @@
+$color-warning-value: #8a5a00;
+$color-destructive-value: #a42332;
+
+:root {
+  --color-warning: #{$color-warning-value};
+  --color-destructive: #{$color-destructive-value};
+  --surface: #ffffff;
+  --foreground: #17202a;
+}
