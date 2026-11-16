@@ -37,6 +37,7 @@
       const announce=()=>feedback("mix-feedback",name+"："+value+" 萬元，占 "+percent+"%。");
       segment.addEventListener("focus",announce);
       segment.addEventListener("mouseenter",announce);
+      segment.addEventListener("click",announce);
       offset+=dash;
       const button=document.createElement("button");
       button.type="button";button.className="legend-item";
@@ -86,6 +87,35 @@
       trend.map(([,values])=>"<td>"+values[index]+"</td>").join("")+"</tr>"
     ).join("");
   }
+  /**
+   * One Tab stop per chart; arrow keys navigate data points. The expanded
+   * data table remains the durable reading alternative for every value.
+   * This avoids forcing users through 23 separate points just to reach
+   * the next section.
+   */
+  function rovingChart(kind){
+    const points=Array.from(document.querySelectorAll('[data-chart-point="'+kind+'"]'));
+    if(points.length===0)return;
+    const setCurrent=index=>{
+      points.forEach((point,i)=>point.setAttribute("tabindex",String(i===index?0:-1)));
+    };
+    points.forEach((point,index)=>{
+      point.setAttribute("tabindex",String(index===0?0:-1));
+      point.addEventListener("focus",()=>setCurrent(index));
+      point.addEventListener("keydown",event=>{
+        let next=index;
+        if(event.key==="ArrowRight"||event.key==="ArrowDown")next=(index+1)%points.length;
+        else if(event.key==="ArrowLeft"||event.key==="ArrowUp")next=(index+points.length-1)%points.length;
+        else if(event.key==="Home")next=0;
+        else if(event.key==="End")next=points.length-1;
+        else return;
+        event.preventDefault();
+        setCurrent(next);
+        points[next].focus();
+      });
+    });
+  }
+
   function direction(){
     document.querySelectorAll("[data-set-direction]").forEach(button=>{
       button.addEventListener("click",()=>{
@@ -125,5 +155,5 @@
     qs("#dialog-done").addEventListener("click",close);
     dialog.addEventListener("close",()=>{if(returnFocus){returnFocus.focus();returnFocus=null;}});
   }
-  buildMix();buildTrend();direction();notes();caseDialog();
+  buildMix();buildTrend();rovingChart("mix");rovingChart("trend");direction();notes();caseDialog();
 })();
