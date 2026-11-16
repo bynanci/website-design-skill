@@ -8,6 +8,13 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 ### Added
 
+- Draft optional context-aware UI architecture, scoped project profile and token mapping,
+  applicable state-transition, AST-patch and declarative runtime UI contracts.
+- Vue/Tauri, rendered visual-validation and MCP guidance connected to those contracts;
+  multi-condition repair includes finite budgets and explicit unrun evidence.
+- Proposed integration delivery sequence tracked under Issue #8; these documents
+  do not ship an execution engine or alter the frozen v0.1 suite.
+
 - Initial platform-agnostic `SKILL.md`
 - Core redesign workflow reference
 - Information architecture reference

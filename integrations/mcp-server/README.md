@@ -8,6 +8,11 @@ Expose selected website-design capabilities through Model Context Protocol so a 
 
 MCP offers server capabilities such as tools, resources, and prompts. This proposal does not prescribe a transport or SDK until a runnable implementation is selected. See the [MCP TypeScript SDK server guide](https://ts.sdk.modelcontextprotocol.io/v2/).
 
+The shared [context-aware architecture](../context-aware-ui/README.md) defines
+the project profile, change plan, patch and evidence records used by an adapter.
+MCP transports those operations; it does not supply framework understanding,
+semantic safety or authorization automatically.
+
 ## Suggested tool boundary
 
 A first implementation should prefer small, typed operations:
@@ -37,15 +42,16 @@ For remote transports, add authentication, per-user authorization, origin contro
 
 ## Dynamic UI pilot
 
-A zero-shot settings or debugging surface should be schema-driven and short-lived:
+Follow the separate [declarative runtime UI contract](../runtime-ui/README.md).
+The host supplies a minimized state snapshot, schema/component versions and a
+bounded action capability set. The adapter returns data, and the host validates
+it before using registered components to render a temporary panel.
 
-1. The host supplies a minimized state snapshot and an approved UI schema, not a dump of the entire process environment.
-2. The adapter returns a declarative layout assembled from a fixed component allowlist.
-3. The host renders that data in a sandboxed surface with strict input validation and no arbitrary code execution.
-4. The surface receives only the fields needed for the current task and has an explicit expiration / dismissal path.
-5. Any action that changes application state is previewed and confirmed through the host's normal authorization flow.
-
-Do not use `eval`, dynamically import generated modules into the privileged application, expose secrets to the model, or persist generated forms as trusted code. This design keeps the initial application shell light while avoiding arbitrary remote code execution.
+Generated templates/modules, raw HTML/CSS and arbitrary commands are outside
+this interface. State-changing actions use existing host authorization and
+re-check current state. Keep an accessible static fallback for invalid payloads,
+timeouts or unavailable models. Measure latency, cost and bundle impact before
+claiming that runtime generation makes an application lighter.
 
 ## Acceptance gates before shipping
 

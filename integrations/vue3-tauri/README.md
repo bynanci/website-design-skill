@@ -4,7 +4,7 @@ Status: **proposed integration contract; documentation only**. This directory do
 
 ## Purpose
 
-Translate the portable design artifacts into the conventions of an existing Vue 3 project. The adapter is opt-in: use it only when the user or repository identifies Vue 3, SCSS, and a Tauri desktop target.
+Translate the portable design artifacts into the conventions of an existing Vue 3 project. The adapter is opt-in: use the Vue mapping when the target repository identifies Vue 3, follow its actual styling conventions, and enable the SCSS/Tauri guidance only where those technologies are present.
 
 The adapter must fit the project it inspects. It must not impose one universal folder structure, alias table, component library, chart library, Tauri version, or desktop interaction model.
 
@@ -19,6 +19,24 @@ Before proposing code, inspect the project root and the relevant files that are 
 - `src-tauri/tauri.conf.json` and Rust/plugin configuration when desktop capabilities matter.
 
 Record missing files and unresolved details. Do not infer that a package, alias, runtime capability, or style token exists just because it would be convenient.
+
+## Context, tokens, state and patch boundaries
+
+Create a scoped [project profile](../context-aware-ui/project-profile.md) before
+proposing source changes. Resolve visual roles to observed tokens/components;
+record missing roles and theme/import evidence. Preserve the existing store,
+composable and service ownership described by the
+[state contract](../context-aware-ui/state-contract.md).
+
+For edits to an existing SFC, follow the
+[AST patch contract](../ast-patching/README.md): use the matching SFC/template/script
+parsers, identify unambiguous targets, preserve protected source ranges, refuse
+stale files, and verify behavior at the API boundary. MagicString is a source-range
+editing utility, not an AST parser. Record unsupported syntax instead of
+regenerating a whole file.
+
+These are proposed behaviors for a future adapter; the current directory ships
+guidance only.
 
 ## Project-aware output contract
 

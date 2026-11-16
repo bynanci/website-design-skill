@@ -38,6 +38,65 @@ A proposed implementation or screenshot does not, by itself, establish accessibi
 
 Playwright can capture screenshots and compare them with stable baselines; its documentation also notes that render output can vary by operating environment. Treat screenshot diffs as review evidence, not as a substitute for semantic and interaction checks. See [Playwright screenshots](https://playwright.dev/docs/screenshots) and [visual comparisons](https://playwright.dev/docs/test-snapshots).
 
+## Multi-condition acceptance matrix
+
+Extend the reproducible specimen in Issue #7 rather than creating a second
+unrelated dashboard runner. Freeze source revision, fixtures, fonts, locale,
+clock/animation policy and runtime for each run. Isolate browser contexts and
+application data when running conditions concurrently.
+
+The initial candidate matrix is:
+
+| Condition | Example target | Evidence required |
+|---|---|---|
+| Desktop | 1920×1080 and 1366×768 CSS viewport | Required content/actions and chart labels remain accessible |
+| Tablet | 768×1024 CSS viewport | Wrapping, order and input affordances |
+| Narrow page | 390×844 and 320×800 CSS viewport | Content parity and justified scrolling |
+| Narrow container | 320 CSS px card inside a wider page | Per-component layout; viewport-only rules are insufficient |
+| Floating editor panel | 480×360 CSS viewport, synthetic pilot only | Toolbar/menu access; actual product minimum remains to be discovered |
+| Theme/state | Supported themes, long labels, loading/empty/error/success | Contrast measurements, content and recovery paths |
+| Input | Keyboard/focus and supported pointer/touch conditions | Focus/hover data parity, menus/dialogs and chart table equivalents |
+| Browser zoom | 200% through a verified browser mechanism | Actual mechanism and effective viewport; mark unrun if unavailable |
+| Native desktop | Claimed Tauri OS/WebView/window conditions | Actual shell behavior, recorded separately from web rendering |
+
+These are proposed conditions, not captures or device results. Declare which
+combinations are required and which remain unrun; avoid implying exhaustive
+coverage from a few sample viewports.
+
+Playwright [emulation](https://playwright.dev/docs/emulation) can configure
+viewport, device scale, touch and color scheme. Device scale factor is not browser
+zoom. A smaller viewport can expose reflow problems, but is not proof of actual
+200% browser-zoom behavior. Browser rendering alone does not verify a Tauri
+titlebar, OS menu or native dialog.
+
+## Bounded responsive repair policy
+
+A future pilot may allow at most **two automatic patch/recheck iterations**,
+plus a configured wall-time/resource budget. Record the initial baseline and
+every attempted correction, including rejected or reverted changes.
+
+- Start with deterministic findings such as overflow, missing action reachability,
+  chart-label collisions and focus loss; use actual image review for visual issues.
+- Map findings to source and choose the highest appropriate reusable layer:
+  token, component, pattern or page. Flex/grid/media/container-query choices
+  require a content-based rationale.
+- Preserve content, action access, semantic structure and state/API contracts.
+  Do not resolve a failure by hiding data, disabling selection globally, clipping
+  the document with overflow rules, shrinking text below the agreed minimum,
+  relaxing thresholds or replacing a failing screenshot baseline.
+- Route corrections through the bounded patch contract and existing host write
+  authorization. Re-check the full declared matrix after a correction, not just
+  the original failing size.
+- Accept a candidate only when required deterministic checks pass and visual
+  findings have recorded disposition. An unavailable required capability keeps
+  the gate incomplete.
+- Stop on exhausted budget, oscillation, new regression, ambiguous behavior or a
+  protected-region change. Keep a known passing candidate when available; return
+  unresolved findings and an explicit rollback/conflict record.
+
+"Self-healing" describes this bounded repair experiment. It is not a guarantee of
+perfect layout at every possible size or of accessibility certification.
+
 ## Review record
 
 A future runner should preserve a compact record for every validation pass:

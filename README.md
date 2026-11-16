@@ -11,6 +11,19 @@ audit → information architecture → wireframe → visual direction
 
 The project is intentionally independent of any specific AI model, design tool, frontend framework, CMS, or hosting platform.
 
+## Proposed direction: context-aware UI collaboration
+
+The optional integration layer is being specified to help UI changes fit an
+existing project's design tokens, reusable components, state/API contracts and
+source boundaries. The [architecture proposal](integrations/context-aware-ui/README.md)
+covers token awareness, AST-guided patches, applicable state transitions,
+bounded visual repair and a separate declarative runtime UI experiment.
+
+These are draft contracts in PR #9, not shipped agent/runtime capabilities.
+Vue is the proposed first adapter; framework support must be demonstrated with
+its own fixtures. Follow Issue #8 for implementation and the existing v0.1
+release gate for core compatibility evidence.
+
 ## What this is
 
 - A repeatable website-redesign operating system for AI agents

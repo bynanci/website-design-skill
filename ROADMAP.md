@@ -4,6 +4,27 @@ Website Design Skill is developed as a platform-agnostic redesign methodology wi
 
 The roadmap separates **core contract stability** from **optional ecosystem integrations** so adoption can grow without coupling the skill to a specific model, design tool, frontend framework, CMS, or hosting platform.
 
+## Proposed evolution — Context-aware UI collaboration
+
+The integration layer is proposed to become a UI collaborator that understands
+the existing project's design system, components, state/API ownership and edit
+boundaries. The [architecture](integrations/context-aware-ui/README.md) defines
+five capability contracts: token/component fit, AST-guided patches, applicable
+state transitions, bounded responsive repair and declarative runtime UI.
+
+Start with inspectable project context and one Vue adapter. Generalize across
+frameworks after shared contracts survive independent adapter fixtures. Dynamic
+runtime UI is a separate P2 experiment with a host-controlled registry and
+fallback, not a prerequisite for design-time adoption.
+
+Implementation work is tracked under [Issue #8](https://github.com/bynanci/website-design-skill/issues/8):
+P0 [#11](https://github.com/bynanci/website-design-skill/issues/11) (project profile/tokens), [#12](https://github.com/bynanci/website-design-skill/issues/12) (Vue patch pilot) and
+[#13](https://github.com/bynanci/website-design-skill/issues/13) (state transitions), followed by P1 [#14](https://github.com/bynanci/website-design-skill/issues/14) (bounded
+responsive repair) and P2 [#15](https://github.com/bynanci/website-design-skill/issues/15) (declarative runtime panel).
+
+Design and release gates below remain independently verifiable. PR #9 contains
+the proposed contracts only.
+
 ## v0.1 — Minimum viable public release
 
 Goal: publish a small, defensible core that another agent can understand, execute, inspect, and evaluate.
@@ -61,7 +82,10 @@ Goal: make the core easier to adopt in different environments without moving pla
 Candidate work:
 
 - documented adapter contract under `integrations/`;
-- project-aware Vue 3 + SCSS generation guidance, with Tauri desktop behavior kept optional;
+- scoped project profiles with token/component provenance and state/API ownership;
+- project-aware Vue 3 + SCSS guidance, with Tauri desktop behavior kept optional;
+- AST-guided edits with revision checks, protected regions and idempotence;
+- applicable UI state/transition contracts that reuse existing stores and services;
 - a capability-gated browser-render / screenshot / visual-review loop with explicit evidence states;
 - an MCP adapter contract that separates read-only inspection, patch proposals, bounded execution, and authorized writes;
 - examples for repository-aware agents, visual/prototyping tools, and browser-capable research agents;
@@ -79,6 +103,8 @@ Goal: make redesign execution safer for larger existing systems.
 
 Candidate work:
 
+- bounded multi-condition repair with stopping, regression and rollback rules;
+- token drift and state-transition regression evidence on real adapter fixtures;
 - regression-oriented redesign checklist;
 - component migration planning;
 - design-system drift detection guidance;

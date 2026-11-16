@@ -2,10 +2,22 @@
 
 The core skill remains platform-agnostic. Optional adapters may translate its capability-based workflow into project- or tool-specific operations, but must not become dependencies of `SKILL.md` or redefine the methodology.
 
+## Proposed architecture
+
+[Context-aware UI collaboration](./context-aware-ui/README.md) connects the
+portable methodology to a scoped project profile, semantic token/component
+mapping, state transitions, bounded source edits and validation evidence.
+Vue is the first proposed implementation target; React/Svelte support and
+runtime rendering require their own evidence.
+
 ## Proposed adapter contracts
 
 These documents are specifications only; they do not imply an implemented generator, runner, server, or successful validation.
 
+- [Project profile and token mapping](./context-aware-ui/project-profile.md) — preserve source provenance, theme resolution, aliases and API/state ownership.
+- [Applicable UI states](./context-aware-ui/state-contract.md) — specify transitions, recovery and cancellation at the existing owner.
+- [AST-guided patching](./ast-patching/README.md) — locate supported syntax, preserve edit boundaries and refuse stale or ambiguous targets.
+- [Declarative runtime UI](./runtime-ui/README.md) — propose a temporary panel using registered components/actions and a static fallback.
 - [Vue 3 + SCSS + Tauri](./vue3-tauri/README.md) — inspect the target repository before mapping aliases, component paths, and desktop behavior.
 - [Rendered visual validation](./visual-validation/README.md) — render and capture only when browser, execution, and image-review capabilities are available; preserve evidence and limitations.
 - [MCP adapter](./mcp-server/README.md) — expose narrow design operations with explicit workspace, execution, and write boundaries.
