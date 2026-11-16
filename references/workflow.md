@@ -1,6 +1,6 @@
 # Website Redesign Workflow
 
-[繁體中文版本](references/workflow.zh-TW.md)
+[繁體中文版本](workflow.zh-TW.md)
 
 This document expands the core workflow referenced by `SKILL.md`.
 

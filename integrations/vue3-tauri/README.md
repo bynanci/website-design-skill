@@ -1,6 +1,6 @@
 # Vue 3 + SCSS + Tauri Adapter
 
-[繁體中文版本](integrations/vue3-tauri/README.zh-TW.md)
+[繁體中文版本](README.zh-TW.md)
 
 Status: **proposed integration contract; documentation only**. This directory does not contain a code generator or claim that generated UI has been run in Tauri.
 

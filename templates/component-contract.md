@@ -1,6 +1,6 @@
 # Component Contract
 
-[繁體中文版本](templates/component-contract.zh-TW.md)
+[繁體中文版本](component-contract.zh-TW.md)
 
 ## Component
 

@@ -1,6 +1,6 @@
 # Declarative Runtime UI Experiment
 
-[繁體中文版本](integrations/runtime-ui/README.zh-TW.md)
+[繁體中文版本](README.zh-TW.md)
 
 Status: **proposed P2 experiment; no runtime renderer or microfrontend system is implemented**.
 

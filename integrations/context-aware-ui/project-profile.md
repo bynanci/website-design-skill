@@ -1,5 +1,7 @@
 # Project Profile and Design-System Mapping
 
+[繁體中文](project-profile.zh-TW.md)
+
 Status: **proposed, reusable inspection record**. Populate it from a target repository; it is not a preloaded set of Mark-specific aliases or tokens. See the [proposed JSON Schema](project-profile.schema.json) and [illustrative example](project-profile.example.json). The example is synthetic and does not report a real project inspection.
 
 ## Snapshot and scope

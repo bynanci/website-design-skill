@@ -1,6 +1,6 @@
 # Applicable UI State and Transition Contract
 
-[繁體中文版本](integrations/context-aware-ui/state-contract.zh-TW.md)
+[繁體中文版本](state-contract.zh-TW.md)
 
 Status: **proposed contract for optional adapters**, not an implemented state-management package.
 
