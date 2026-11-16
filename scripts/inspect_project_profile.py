@@ -59,6 +59,17 @@ def relative_path(path, root):
 def read_source(path, root, sources, kind):
     rel = relative_path(path, root)
     try:
+        resolved = path.resolve(strict=True)
+        resolved.relative_to(root)
+    except (OSError, ValueError):
+        sources[rel] = {
+            "path": rel,
+            "kind": kind,
+            "status": "unsupported",
+            "detail": "Symlink target is missing or outside the approved workspace root.",
+        }
+        return None
+    try:
         raw = path.read_bytes()
     except OSError as exc:
         sources[rel] = {"path": rel, "kind": kind, "status": "unavailable", "detail": str(exc)}
@@ -110,7 +121,13 @@ def source_candidates(root):
                     continue
                 if path.name in {"package.json", "tsconfig.json"}:
                     continue
+                if path.is_symlink():
+                    continue
                 resolved = path.resolve()
+                try:
+                    resolved.relative_to(root)
+                except ValueError:
+                    continue
                 if resolved in seen:
                     continue
                 seen.add(resolved)
@@ -222,6 +239,10 @@ def static_aliases(root, sources, unknowns, required_aliases):
                         continue
                     combined = PurePosixPath(base_url, target)
                     normalized = str(combined)
+                    if PurePosixPath(normalized).is_absolute():
+                        normalized_targets.append("<absolute target omitted>")
+                        unknowns.append("Alias " + name + " uses an absolute target that was not inspected.")
+                        continue
                     normalized_targets.append(normalized)
                     probe = normalized.split("*", 1)[0].rstrip("/")
                     if (root / probe).exists():
@@ -338,6 +359,7 @@ def component_and_owner_candidates(paths, root, sources):
             )
         path_words = {part.lower() for part in PurePosixPath(rel).parts}
         if path_words.intersection(STATE_PATH_WORDS):
+            read_source(path, root, sources, "state-api-owner-candidate")
             owners.append(
                 {
                     "name": "Unconfirmed state/API owner candidate",
