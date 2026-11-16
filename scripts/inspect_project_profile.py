@@ -109,7 +109,14 @@ def source_candidates(root):
 
     found = []
     seen = set()
+    safe_roots = []
     for base in roots:
+        try:
+            base.resolve(strict=True).relative_to(root)
+        except (OSError, ValueError):
+            continue
+        safe_roots.append(base)
+    for base in safe_roots:
         for current, dirs, filenames in os.walk(base):
             dirs[:] = sorted(
                 name
@@ -156,10 +163,14 @@ def package_metadata(root, sources, unknowns):
         return {}
 
     try:
-        return json.loads(text)
+        package = json.loads(text)
     except json.JSONDecodeError as exc:
         unknowns.append("The root package.json is invalid JSON: " + str(exc))
         return {}
+    if not isinstance(package, dict):
+        unknowns.append("The root package.json must contain a JSON object.")
+        return {}
+    return package
 
 
 def stack_inventory(package, sources):
@@ -230,6 +241,9 @@ def static_aliases(root, sources, unknowns, required_aliases):
         options = config.get("compilerOptions", {}) if isinstance(config, dict) else {}
         paths = options.get("paths", {}) if isinstance(options, dict) else {}
         base_url = options.get("baseUrl", ".") if isinstance(options, dict) else "."
+        if not isinstance(base_url, str):
+            unknowns.append("tsconfig baseUrl is not a static string; aliases were not resolved against it.")
+            base_url = "."
         if isinstance(paths, dict):
             for name, target_values in sorted(paths.items()):
                 targets = target_values if isinstance(target_values, list) else []
@@ -240,13 +254,19 @@ def static_aliases(root, sources, unknowns, required_aliases):
                         continue
                     combined = PurePosixPath(base_url, target)
                     normalized = str(combined)
-                    if PurePosixPath(normalized).is_absolute():
-                        normalized_targets.append("<absolute target omitted>")
-                        unknowns.append("Alias " + name + " uses an absolute target that was not inspected.")
+                    if PurePosixPath(normalized).is_absolute() or ".." in PurePosixPath(normalized).parts:
+                        normalized_targets.append("<target outside workspace omitted>")
+                        unknowns.append("Alias " + name + " has a target outside the approved workspace; it was not inspected.")
                         continue
                     normalized_targets.append(normalized)
                     probe = normalized.split("*", 1)[0].rstrip("/")
-                    if (root / probe).exists():
+                    candidate = (root / probe).resolve()
+                    try:
+                        candidate.relative_to(root)
+                    except ValueError:
+                        unknowns.append("Alias " + name + " resolves outside the approved workspace; it was not inspected.")
+                        continue
+                    if candidate.exists():
                         existing_targets += 1
                 status = "resolved" if normalized_targets and existing_targets else "missing"
                 if len(normalized_targets) > 1 and existing_targets > 1:
@@ -337,6 +357,8 @@ def token_inventory(root, paths, sources, required_tokens, unknowns):
         )
     else:
         unknowns.append("No supported CSS/SCSS token declarations were detected in the scanned files.")
+    if len(tokens) > MAX_TOKEN_RECORDS:
+        unknowns.append("Token inventory reached the configured limit of " + str(MAX_TOKEN_RECORDS) + " records.")
     return sorted(tokens, key=lambda item: (item["reference"] or "", item["role"]))[:MAX_TOKEN_RECORDS]
 
 
@@ -358,7 +380,7 @@ def component_and_owner_candidates(paths, root, sources):
                     "evidencePaths": [rel],
                 }
             )
-        path_words = {part.lower() for part in PurePosixPath(rel).parts}
+        path_words = {Path(part).stem.lower() for part in PurePosixPath(rel).parts}
         if path_words.intersection(STATE_PATH_WORDS):
             read_source(path, root, sources, "state-api-owner-candidate")
             owners.append(
@@ -421,12 +443,20 @@ def main():
         unknowns.append("Vite aliases were not evaluated; only static tsconfig paths were inspected.")
     unknowns = list(dict.fromkeys(unknowns))
 
+    affected_paths = []
+    for value in args.affected_path:
+        candidate = PurePosixPath(value)
+        if candidate.is_absolute() or ".." in candidate.parts:
+            unknowns.append("An affected path was absolute or escaped the workspace and was omitted.")
+            continue
+        affected_paths.append(str(candidate))
+
     profile = {
         "profileVersion": "0.1",
         "workspace": {"id": root.name or "workspace", "root": "."},
         "task": {
             "request": args.task,
-            "affectedPaths": sorted(set(args.affected_path)),
+            "affectedPaths": sorted(set(affected_paths)),
         },
         "revision": {"commit": None, "dirty": None},
         "sources": sorted(sources.values(), key=lambda item: item["path"]),
