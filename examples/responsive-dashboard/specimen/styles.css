@@ -211,6 +211,35 @@ dialog::backdrop{background:rgba(22,36,34,.42)}
   .brand small{font-size:7px;letter-spacing:.8px}
   .brand-mark{width:31px;height:31px}.avatar{width:31px;height:31px}
 }
+/* Touch and keyboard ergonomics are part of the shared component contract. */
+.fixture-label-short{display:none}
+.direction-btn,.primary-btn,.text-btn,.icon-btn{min-height:44px}
+.text-btn{min-width:80px}
+.icon-btn{min-width:44px;min-height:44px}
+.text-action{display:inline-flex;align-items:center;min-height:44px;gap:4px}
+.legend-item{min-height:40px}
+.data-disclosure summary{display:flex;align-items:center;min-height:44px}
+.evidence-row a{display:inline-flex;align-items:center;min-height:34px}
+.obs-content>p{font-size:13px}
+.meeting-question p{font-size:13px}
+.evidence-row{font-size:12px}
+.chart-feedback{font-size:12px;line-height:1.6}
+@container dashboard (max-width:525px){
+  .panel-subtitle{font-size:13px}
+  .legend-item,.legend-item strong{font-size:12px}
+  .legend-item{min-height:44px}
+  .obs-content>p{font-size:13px}
+  .meeting-question p{font-size:13px}
+  .metric-foot{font-size:11px}
+}
+@media (max-width:600px){
+  .fixture-label-full{display:none}
+  .fixture-label-short{display:inline}
+  .fixture-label{max-width:none;white-space:nowrap;font-size:11px;letter-spacing:0}
+}
+@media (max-width:360px){
+  .brand small{display:none}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
