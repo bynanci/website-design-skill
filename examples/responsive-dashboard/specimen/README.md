@@ -20,9 +20,12 @@ Charts expose keyboard-focusable SVG points and accessible data tables.
 The native dialog supports Escape and focus restoration. The note form
 does not persist or send anything.
 
-Use ../qa/README.md to generate browser screenshots and QA data.
-Rendered output and accessibility require observed evidence; a CI pass
-is NOT screen-reader conformance or production readiness.
+Use [the QA runner](../qa/README.md) to generate screenshots and JSON;
+read the [measured 2026-11-16 QA review](../output/qa-review-2026-11-16.md).
+The latest verified Chromium workflow covers 7 responsive scenarios, keyboard
+chart navigation, dialog focus restoration and axe-core WCAG A/AA tagged
+checks at representative widths. CI passing is **not** screen-reader
+conformance, human visual approval or production readiness.
 
 This is a functional demonstration, not a real customer dashboard,
 authenticated product, or performance-tested deployment.
