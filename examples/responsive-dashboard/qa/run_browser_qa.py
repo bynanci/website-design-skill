@@ -92,7 +92,7 @@ def main():
                       });
                       return result.violations.map(v=>({
                         id:v.id,impact:v.impact,description:v.help,
-                        nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary})).slice(0,8)
+                        nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary})).slice(0,250)
                       }));
                     }""")
                     axe_reports.append({"scenario":name,"violations":violations})
