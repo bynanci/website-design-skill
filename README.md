@@ -1,5 +1,7 @@
 # Website Design Skill
 
+[English](README.md) · [繁體中文](README.zh-TW.md)
+
 A platform-agnostic Agent Skill for systematically redesigning existing websites.
 
 It helps AI agents move through:
@@ -11,6 +13,10 @@ audit → information architecture → wireframe → visual direction
 
 The project is intentionally independent of any specific AI model, design tool, frontend framework, CMS, or hosting platform.
 
+## Documentation languages
+
+Core guidance and the optional UI-adapter contracts are available in English and Traditional Chinese. English uses clear, direct technical prose informed by ASD-STE100 Issue 9 where applicable; this repository does not claim formal compliance. ASD-STE100 does not define Traditional Chinese compliance. See [the bilingual writing policy](docs/WRITING-STYLE.md).
+
 ## Proposed direction: context-aware UI collaboration
 
 The optional integration layer is being specified to help UI changes fit an
@@ -19,10 +25,7 @@ source boundaries. The [architecture proposal](integrations/context-aware-ui/REA
 covers token awareness, AST-guided patches, applicable state transitions,
 bounded visual repair and a separate declarative runtime UI experiment.
 
-These are draft contracts in PR #9, not shipped agent/runtime capabilities.
-Vue is the proposed first adapter; framework support must be demonstrated with
-its own fixtures. Follow Issue #8 for implementation and the existing v0.1
-release gate for core compatibility evidence.
+These are draft contracts in PR #9, not shipped agent/runtime capabilities. Vue is the first proposed adapter; each framework needs its own fixture and evidence. Follow [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) for the implementation index and keep the v0.1 release gate separate.
 
 ## What this is
 
