@@ -1,5 +1,7 @@
 # Navigation Comparison
 
+[繁體中文版本](templates/navigation-comparison.zh-TW.md)
+
 Use this artifact to compare the current information architecture, observed market patterns, and a proposed navigation structure.
 
 ## Scope
