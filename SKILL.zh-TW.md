@@ -67,7 +67,7 @@ description: >
 7. 風險與假設
 8. 驗收清單
 
-可搭配 templates/page-spec.md。
+可搭配 templates/page-spec.zh-TW.md。
 
 ## 修改範圍
 
@@ -89,4 +89,4 @@ description: >
 
 只有在資訊架構連貫、重要內容有交代、頁面模式可重用、設計規則與元件責任清楚、響應式行為已定義、可及性已檢查，且實作能持續擴充時，改版才算完成。畫面精緻本身不足以代表完成。
 
-完整階段模型請參閱 references/workflow.md。
+完整階段模型請參閱 references/workflow.zh-TW.md。
