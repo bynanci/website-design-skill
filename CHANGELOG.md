@@ -8,6 +8,11 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 ### Added
 
+- Optional v0.2 visual-direction comparison, responsive behavior, and token-extraction/migration templates.
+- Advisory visual-quality review reference with evidence-first checks.
+- Synthetic responsive account dashboard artifact chain.
+- Optional responsive-layout and accessibility behavioral pilot cases (excluded from the v0.1 benchmark manifest).
+
 - Initial platform-agnostic `SKILL.md`
 - Core redesign workflow reference
 - Information architecture reference
