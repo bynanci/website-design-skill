@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --prefix ../../integrations/vue-project-profile",
+  "buildCommand": "node ../../integrations/vue-project-profile/build-fixture.mjs project-profile-vue",
+  "outputDirectory": "dist",
+  "ignoreCommand": "exit 1"
+}

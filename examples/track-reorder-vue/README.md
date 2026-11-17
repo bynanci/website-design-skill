@@ -37,3 +37,16 @@ node integrations/vue-project-profile/render-reorder.mjs
 The shared harness copies this fixture to a temporary exclusive workspace. It verifies the unbound baseline, applies and type-checks the patch, builds the actual Vue app, exercises pointer/Tab/Space/Enter events, checks action/persistence counts and selection/playhead, confirms a second application is a no-op, then verifies byte-identical rollback. `artifacts/reorder-results.json` preserves the exact plan, source/tool versions, captures, assertions and unrun conditions. The original fixture remains unchanged.
 
 Persistence is an in-memory synthetic readback. No filesystem, media, FFmpeg or native-shell operation is exercised.
+
+## Synthetic deployment build
+
+The local `vercel.json` builds this unchanged synthetic fixture with the shared locked Vue tooling, rather than running the repository showcase command inside this directory. From this fixture directory, use:
+
+```sh
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --prefix ../../integrations/vue-project-profile
+node ../../integrations/vue-project-profile/build-fixture.mjs track-reorder-vue
+```
+
+The adapter accepts only the two reviewed fixture names, ignores target Vite configuration, preserves source files and writes the compiled entry/assets to this directory's `dist/`. This is a build of the original test baseline, not a production application or broader UI acceptance result. This configuration does not disable Git deployments; its ignored-build command requests a real build. See [deployment operations](../../docs/DEPLOYMENT.md).
+
+The baseline reorder buttons remain intentionally unbound. This build does not apply the source patch or claim working reorder interactions; the separate isolated patch/browser harness owns that verification.

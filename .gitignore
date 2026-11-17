@@ -8,3 +8,7 @@ node_modules/
 /dist/
 # Reproducible pilot output; reviewed evidence is copied to evidence/ explicitly.
 integrations/vue-project-profile/artifacts/
+
+# Built synthetic fixture outputs; source and evidence remain tracked.
+/examples/project-profile-vue/dist/
+/examples/track-reorder-vue/dist/

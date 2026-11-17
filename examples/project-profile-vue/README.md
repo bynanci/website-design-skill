@@ -38,3 +38,14 @@ python3 -m unittest discover -s tests -p 'test_project_profile_inspector.py' -v
 `profile-contract.json` is the reviewed intent contract. It maps warning and destructive-action roles to different observed tokens, names both themes, identifies the component and existing state/API owner, and scopes the one approved border-width literal. It supplies no runtime permission.
 
 Follow the optional pilot guide to install tooling, inspect the source graph and run the production render checks. CI preserves the generated profile, actual runtime versions, source hashes and captures. A missing browser or failed run remains an explicit failure or unrun condition.
+
+## Synthetic deployment build
+
+The local `vercel.json` builds this unchanged synthetic fixture with the shared locked Vue tooling, rather than running the repository showcase command inside this directory. From this fixture directory, use:
+
+```sh
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --prefix ../../integrations/vue-project-profile
+node ../../integrations/vue-project-profile/build-fixture.mjs project-profile-vue
+```
+
+The adapter accepts only the two reviewed fixture names, ignores target Vite configuration, preserves source files and writes the compiled entry/assets to this directory's `dist/`. This is a build of the original test baseline, not a production application or broader UI acceptance result. This configuration does not disable Git deployments; its ignored-build command requests a real build. See [deployment operations](../../docs/DEPLOYMENT.md).

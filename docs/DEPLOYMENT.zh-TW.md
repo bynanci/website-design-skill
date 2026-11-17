@@ -10,7 +10,7 @@
 
 Main 產生雙語文件入口。完整響應式 Dashboard fixture 存在時，另把五個已核准靜態檔案發布到 `/demos/dashboard/`。Builder 會清除舊輸出，main 不可殘留前一次 preview 的 Dashboard。公開 manifest 記錄來源與輸出檔案 digest；評估答案、benchmark 原始結果、logs、憑證與套件目錄不屬於公開資產。
 
-建置或部署展示頁不等於發布核心技能、不會建立版本 tag，也不滿足 #1／#6；PR #5 保留發布 gate。
+建置或部署展示頁不會發布核心技能或建立版本 tag。部署、獨立評估與版本發布各有自己的證據，詳見[發布流程](../RELEASE.md)。
 
 ## 單一 Vercel 部署專案
 
@@ -30,6 +30,14 @@ Main 產生雙語文件入口。完整響應式 Dashboard fixture 存在時，�
 三個重複專案（`-83bv`、`-o57d`、`-8ed8`）已設定暫停 preview、忽略 build step，其工具根目錄另包含 `git.deploymentEnabled: false`。保留部署歷史，後續只使用單一正式指定專案。
 
 Ignore script 只在已驗證的 diff 沒有變更部署輸入時略過，也包含用來判斷 preview 情境的 Dashboard 目錄是否存在。首次部署、淺層歷史缺少 object、revision 不一致或 Git 錯誤都要求建置。略過不等於部署成功；Vercel 仍把進入 ignored build step 後取消的部署計入部署配額。略過可節省建置工作，停用重複自動部署才會消除重複觸發。
+
+## 合成 Vue fixture 部署
+
+`examples/project-profile-vue` 與 `examples/track-reorder-vue` 有 Vue app 入口，但沒有獨立 build scripts 或工具 lockfile。以這些目錄為根的匯入不能執行 repository-root 的 `node site/build.mjs`。本地 Vercel 設定改為安裝共用鎖定工具，並使用對應的允許名稱執行 `integrations/vue-project-profile/build-fixture.mjs`。Vercel 必須保留完整 repository，才能存取相對路徑的共用工具。使用 Node22、Framework Other/null 與 `dist` 輸出；`ignoreCommand: exit 1` 要求真正建置，兩份設定均不會停用部署或把略過建置宣稱成功。
+
+有限範圍的 adapter 沿用既有 render harness 的固定 Vite/Vue plugin、`@/`、Vue 與 Pinia 解析，並使用 `configFile: false`。它只輸出到所選 fixture 的 `dist/`，拒絕其他名稱／路徑及 symlink 根目錄／輸出，並核對編譯前後的來源 hash。既有 Vue-pilot workflow 會 smoke-build 兩個入口與輸出資產，不改 package、來源或 expected 證據。Media-library fixture 繼續使用原有 harness，此修正不替它新增部署設定。
+
+這些是原樣合成測試基線，不是完整產品。Track-reorder 基線按鈕仍刻意未綁定事件，部署不會套用獨立 patch 或證明排序互動可用。本機建置成功也不能證明平台匯入有採用這些設定。接受每個匯入專案前，仍須記錄確切部署來源、實際 build log、READY 與 HTTP／資產結果；原本失敗狀態保留在歷史中。
 
 ## 驗證與合併
 

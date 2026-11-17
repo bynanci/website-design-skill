@@ -37,3 +37,16 @@ node integrations/vue-project-profile/render-reorder.mjs
 共用 harness 將 fixture 複製到暫存且獨占的 workspace，先驗證未綁定的基準，再套用 patch、執行型別檢查並 build 實際 Vue app。它測試 pointer、Tab、Space、Enter，檢查 action/persistence 次數與選取/playhead，確認第二次套用為 no-op，最後驗證 rollback 的 bytes 完全一致。`artifacts/reorder-results.json` 保存完整提案、來源/工具版本、截圖、斷言與未執行項目；原始 fixture 不會改動。
 
 Persistence 僅為記憶體中的合成 readback，不執行檔案系統、media、FFmpeg 或 native shell 操作。
+
+## 合成 fixture 部署建置
+
+此處的 `vercel.json` 使用共用且鎖定版本的 Vue 工具建置原樣合成 fixture，不會在子目錄錯跑 repository 展示頁指令。由此 fixture 目錄執行：
+
+```sh
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --prefix ../../integrations/vue-project-profile
+node ../../integrations/vue-project-profile/build-fixture.mjs track-reorder-vue
+```
+
+Adapter 只接受兩個已審查的 fixture 名稱，不載入 target Vite 設定，保留來源檔案並把編譯後入口／資產輸出到此目錄的 `dist/`。這只建置原始測試基線，不代表 production app 或更廣的 UI 驗收。此設定不會停用 Git 部署，ignored-build 指令會要求真正建置。詳見[部署操作](../../docs/DEPLOYMENT.zh-TW.md)。
+
+基線的排序按鈕仍刻意未綁事件。此建置不套用來源 patch，也不宣稱排序互動已完成；該驗證由獨立且隔離的 patch／browser harness 負責。

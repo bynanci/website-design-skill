@@ -44,6 +44,8 @@ jobs:
       - name: Install optional pilot tooling
         working-directory: integrations/vue-project-profile
         run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build the two synthetic import roots without source edits
+        run: node --test integrations/vue-project-profile/build-fixture.smoke.mjs
       - name: Test supported syntax and refusal conditions
         working-directory: integrations/vue-project-profile
         run: npm test
