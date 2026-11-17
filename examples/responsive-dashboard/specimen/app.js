@@ -1,16 +1,10 @@
 /* Synthetic public fixture: no network, persisted customer data or analytics. */
 (() => {
   "use strict";
-  const mix = [
-    ["雲端專線",302],["企業網路",226],["資訊安全",138],
-    ["資料中心",102],["其他服務",74]
-  ];
-  const months=["6 月","7 月","8 月","9 月","10 月","11 月"];
-  const trend=[
-    ["雲端專線",[82,88,91,101,108,121]],
-    ["企業網路",[78,79,77,80,81,84]],
-    ["資訊安全",[36,38,42,46,49,52]]
-  ];
+  const started = performance.now();
+  const mix = window.DashboardFixtureData.RevenueMix.mix;
+  const months = window.DashboardFixtureData.RevenueTrend.months;
+  const trend = window.DashboardFixtureData.RevenueTrend.trend;
   const qs = selector => document.querySelector(selector);
   const namespace="http://www.w3.org/2000/svg";
   function svg(parent,name,attrs,text){
@@ -155,5 +149,75 @@
     qs("#dialog-done").addEventListener("click",close);
     dialog.addEventListener("close",()=>{if(returnFocus){returnFocus.focus();returnFocus=null;}});
   }
+  /** One synthetic read owner; no network, storage or backend permission. */
+  function createDashboardOwner() {
+    const allowed = new Set(["loading", "empty", "error", "success"]);
+    const status = qs("#dashboard-status"), retry = qs("#dashboard-retry"), content = qs("#dashboard-content");
+    let state = "success", sequence = 0, timer = null, active = null, disposed = false, requests = 0;
+    const messages = { loading: "正在載入合成示範資料…", empty: "此條件沒有可顯示的合成資料。", error: "合成資料暫時無法載入，可重試恢復。", success: "已載入合成示範資料。" };
+    function render() {
+      status.textContent = messages[state];
+      status.setAttribute("role", state === "error" ? "alert" : "status");
+      qs("#dashboard-surface").setAttribute("aria-busy", String(state === "loading"));
+      content.hidden = state !== "success"; content.inert = state !== "success";
+      retry.setAttribute("aria-disabled", String(state === "loading"));
+      retry.textContent = state === "error" ? "重試載入" : "重新載入示範資料";
+      document.documentElement.dataset.fixtureState = state;
+    }
+    function cancel() {
+      sequence += 1; if (timer !== null) clearTimeout(timer); timer = null;
+      if (active) active.resolve({ outcome: "cancelled" }); active = null;
+    }
+    function setState(value) {
+      if (!allowed.has(value)) throw new Error("Unsupported fixture state");
+      if (disposed) return;
+      cancel(); state = value; render();
+    }
+    function refresh() {
+      if (disposed) return Promise.resolve({ outcome: "disposed" });
+      if (active) return active.promise;
+      const current = ++sequence; requests += 1; state = "loading"; render();
+      let resolve;
+      const promise = new Promise(done => { resolve = done; }); active = { promise, resolve };
+      timer = setTimeout(() => {
+        if (disposed || current !== sequence) return;
+        timer = null; active = null; state = "success"; render(); resolve({ outcome: "success" });
+      }, 30);
+      return promise;
+    }
+    function dispose() { cancel(); disposed = true; }
+    retry.addEventListener("click", () => { refresh(); });
+    render();
+    return { setState, refresh, dispose, snapshot: () => ({ state, requests, pending: Boolean(active), disposed, note: qs("#note-text").value }) };
+  }
+  function preferences() {
+    const theme = qs("#theme-toggle"), floating = qs("#floating-toggle"), panel = qs("#fixture-floating-panel");
+    function setTheme(value) {
+      if (!["light", "dark"].includes(value)) throw new Error("Unsupported theme");
+      document.documentElement.dataset.theme = value;
+      theme.setAttribute("aria-pressed", String(value === "dark")); theme.textContent = "深色模式";
+    }
+    function setFloating(value, restoreFocus = false) {
+      const active = value === true;
+      panel.hidden = !active; document.body.dataset.floating = String(active);
+      floating.setAttribute("aria-expanded", String(active));
+      floating.textContent = active ? "關閉驗收面板" : "開啟驗收面板";
+      if (restoreFocus) floating.focus();
+    }
+    theme.addEventListener("click", () => setTheme(document.documentElement.dataset.theme !== "dark" ? "dark" : "light"));
+    floating.addEventListener("click", () => setFloating(panel.hidden));
+    qs("#fixture-floating-close").addEventListener("click", () => setFloating(false, true));
+    const query = new URLSearchParams(location.search);
+    setTheme(query.get("theme") === "dark" ? "dark" : "light");
+    setFloating(query.get("floating") === "1");
+    return { setTheme, setFloating };
+  }
   buildMix();buildTrend();rovingChart("mix");rovingChart("trend");direction();notes();caseDialog();
+  const owner = createDashboardOwner(), preference = preferences();
+  const query = new URLSearchParams(location.search);
+  if (["loading", "empty", "error", "success"].includes(query.get("state"))) owner.setState(query.get("state"));
+  window.__DASHBOARD_FIXTURE__ = Object.freeze({ ...owner, ...preference });
+  window.addEventListener("pagehide", () => owner.dispose(), { once: true });
+  window.__DASHBOARD_PERFORMANCE__ = Object.freeze({ initializationMs: performance.now() - started, method: "performance.now around synchronous chart/control/state initialization; excludes browser navigation and data transfer" });
+  window.__DASHBOARD_READY__ = true;
 })();
