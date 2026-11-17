@@ -52,3 +52,5 @@ node integrations/vue-project-profile/render-media.mjs
 ```
 
 A session-wide permission denial remains blocked across filter edits, cancel and direct load attempts. A trusted new session must create a fresh owner; editing input does not reset permission state.
+
+The optional [runtime recovery pilot](../../integrations/runtime-ui/README.md) validates declarative data and binds one-use recovery capabilities to this existing owner. It defaults to static recovery; the browser harness uses local deterministic producers and measures static/dynamic bundle and UI cost. No external model is called.

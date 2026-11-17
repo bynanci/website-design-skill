@@ -10,10 +10,15 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 ### Added
 
+- Source-preserving bounded dashboard CSS restoration with a frozen 32-condition/native-zoom runner, complete baseline/candidate evidence and finite rollback/resource policy.
+- Isolated v0.2 pilot packets, separate rubric/result schema and evidence-integrity validation; no independent results are claimed.
+- Reusable native dashboard factories, synthetic recovery states, semantic themes and bilingual measured-evidence documentation.
 - Optional v0.2 visual-direction comparison, responsive behavior, and token-extraction/migration templates.
 - Advisory visual-quality review reference with evidence-first checks.
 - Synthetic responsive account dashboard artifact chain.
 - Optional responsive-layout and accessibility behavioral pilot cases (excluded from the v0.1 benchmark manifest).
+- Bounded declarative recovery prototype with recursive strict payload validation, live one-use host capabilities, text-only Vue rendering, static fallback and comparable production bundle/UI cost evidence.
+
 - Bounded Vue track-reorder patch with parsed targets, mandatory type checks, protected ranges, no-op/rollback and isolated-workspace preconditions; executable media-library transitions with stale/cancel/unmount protection and shared browser evidence.
 
 - Optional bounded Vue source-profile adapter with explicit role/owner contracts, scoped drift/refusal tests, and a separate production-build/theme-render evidence workflow.

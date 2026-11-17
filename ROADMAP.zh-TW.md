@@ -12,7 +12,11 @@ Website Design Skill 以跨平台改版方法、明確的交付契約與行為�
 
 細項任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整；每個子 Issue 是各工作的驗收依據。#11 現已包含合成 Vue fixture、範圍受限的 AST/來源檢查、明確語意角色契約、來源 API/owner 檢查、局部 drift 檢查及 production build/theme-render harness。[試點指南](integrations/vue-project-profile/README.zh-TW.md) 定義支援語法與證據格式；實際驗證結果由 CI 與 #11 記錄。
 
-有限軌道排序 patch（#12）與媒體庫 owner/service 轉換（#13）現已提供可執行 fixture 及共用 browser 證據 harness。Patch 必須使用隔離且獨占的 checkout。完整 dashboard 渲染與有限修正分別由 #7、#14 追蹤；runtime recovery 由 #15 追蹤。#1 仍需獨立乾淨 agent 輸出，draft PR #5 保留各自的發布 gate。
+#11–#13 的有限 Vue 試點及 #15 runtime recovery 已在 main 實作。Recovery 使用嚴格資料驗證、host 一次性 action、純文字 renderer 與靜態 fallback；實際 browser/build 證據由 #15 記錄，live model 傳輸仍未執行。
+
+選用 PR #5 preview 包含八組可重用 Dashboard 元件、32 項矩陣及額外的真正 200% 原生視窗擷取（#7）。#14 加入保留來源位元的單一 CSS 復原操作、最多兩輪 patch/recheck、來源/runtime 鎖定及時間／process／擷取預算。同一套 Dashboard runner 量測通過參考、注入的失敗基線及候選；此能力不等於通用 CSS 修復。具日期的雙語證據紀錄是實際驗收狀態的依據。
+
+#6 已有隔離且版本化的資料包、評分準則、嚴格結果驗證與完整性測試，獨立結果仍為零。#1 仍需兩個符合資格的乾淨 agent signature。Draft PR #5 保留獨立發布 gate，實作與 browser 測試不會取代這些證據。
 
 ## v0.1：最小公開版本
 

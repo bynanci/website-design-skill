@@ -14,3 +14,12 @@ li label { display: flex; gap: var(--space-3); align-items: center; padding-bloc
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+.recovery-entry { margin-block: var(--space-4); }
+.recovery-dialog { width: calc(100% - var(--space-6)); max-inline-size: var(--recovery-max-inline); padding: var(--space-6); border: var(--dialog-border); color: var(--foreground); background: var(--surface); }
+.recovery-dialog::backdrop { background: var(--dialog-backdrop); }
+.recovery-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.recovery-dialog-header h2 { margin: 0; }
+.recovery-group, .recovery-notice { margin-block: var(--space-3); }
+.recovery-notice[data-tone="warning"] { color: var(--color-warning); }
+.recovery-notice[data-tone="error"] { color: var(--color-destructive); }
