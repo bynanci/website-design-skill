@@ -8,6 +8,7 @@
 
 ### 新增
 
+- 明確的零相依靜態展示建置與 Vercel 部署契約、公開資產／來源檢查、main／preview HTTP／browser smoke，以及涵蓋外部部署的合併就緒報告。
 - 新增有限宣告式 recovery 原型，包含遞迴嚴格 payload 驗證、即時一次性 host capability、純文字 Vue renderer、靜態 fallback 與可比較的 production bundle/UI 成本證據。
 
 - 新增有限 Vue 軌道排序 patch、剖析 target、必要型別檢查、受保護範圍、no-op/rollback 與隔離 workspace 前提；另提供媒體庫過期/取消/卸載防護及共用 browser 證據。

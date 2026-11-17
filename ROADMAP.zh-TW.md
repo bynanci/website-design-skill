@@ -18,6 +18,10 @@ Website Design Skill 以跨平台改版方法、明確的交付契約與行為�
 
 #6 已有隔離且版本化的資料包、評分準則、嚴格結果驗證與完整性測試，獨立結果仍為零。#1 仍需兩個符合資格的乾淨 agent signature。Draft PR #5 保留獨立發布 gate，實作與 browser 測試不會取代這些證據。
 
+## 部署與外部檢查
+
+[#29](https://github.com/bynanci/website-design-skill/issues/29)追蹤錯誤的 Vite 工具根目錄、重複 Vercel 專案及平台限流。明確的靜態展示建置與 production output smoke 不等於核心發布就緒。需同時核對外部部署狀態與 GitHub Actions，只有綁定實際來源的 READY 部署才能完成該驗收項目。詳見[部署操作](docs/DEPLOYMENT.zh-TW.md)。
+
 ## v0.1：最小公開版本
 
 發布前需通過 repository validators，取得至少兩個符合規範的獨立 agent benchmark，且達到分數門檻；若不同 agent 在同一準則反覆失分，也要先處理核心契約歧義。目前 v0.1 仍以 release gate 為準，不可把可用性問題當成相容性分數。

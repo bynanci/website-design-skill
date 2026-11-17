@@ -10,6 +10,7 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 ### Added
 
+- Explicit dependency-free static showcase build and Vercel deployment contract, strict public asset/provenance checks, main/preview HTTP/browser smoke, and separate all-context merge-readiness reporting.
 - Bounded declarative recovery prototype with recursive strict payload validation, live one-use host capabilities, text-only Vue rendering, static fallback and comparable production bundle/UI cost evidence.
 
 - Bounded Vue track-reorder patch with parsed targets, mandatory type checks, protected ranges, no-op/rollback and isolated-workspace preconditions; executable media-library transitions with stale/cancel/unmount protection and shared browser evidence.

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bynanci/website-design-skill/site/manifest.schema.json",
+  "title": "Website Design Skill public build manifest",
+  "description": "Deterministic publication inventory. files excludes manifest.json to avoid a recursive digest. No environment, timestamp or private repository metadata is included.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "sourceCommit", "availableDemos", "dashboard", "inputs", "files"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "sourceCommit": { "type": ["string", "null"], "pattern": "^[a-f0-9]{40}$" },
+    "availableDemos": { "type": "array", "maxItems": 1, "uniqueItems": true, "items": { "const": "dashboard" } },
+    "dashboard": {
+      "type": "object", "additionalProperties": false,
+      "required": ["available", "status", "source"],
+      "properties": {
+        "available": { "type": "boolean" },
+        "status": { "enum": ["not-included", "synthetic-preview"] },
+        "source": { "enum": [null, "examples/responsive-dashboard/specimen"] }
+      }
+    },
+    "inputs": {
+      "type": "array", "minItems": 4, "maxItems": 9,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["path", "sha256"],
+        "properties": {
+          "path": { "enum": ["site/build.mjs", "site/index.html", "site/styles.css", "site/manifest.schema.json", "examples/responsive-dashboard/specimen/index.html", "examples/responsive-dashboard/specimen/styles.css", "examples/responsive-dashboard/specimen/fixture-data.js", "examples/responsive-dashboard/specimen/components.js", "examples/responsive-dashboard/specimen/app.js"] },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "files": {
+      "type": "array", "minItems": 2, "maxItems": 7,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["path", "sha256", "bytes"],
+        "properties": {
+          "path": { "enum": ["index.html", "styles.css", "demos/dashboard/index.html", "demos/dashboard/styles.css", "demos/dashboard/fixture-data.js", "demos/dashboard/components.js", "demos/dashboard/app.js"] },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "bytes": { "type": "integer", "minimum": 1, "maximum": 1048576 }
+        }
+      }
+    }
+  },
+  "allOf": [{
+    "if": { "properties": { "dashboard": { "properties": { "available": { "const": true } } } } },
+    "then": { "properties": { "availableDemos": { "const": ["dashboard"] }, "dashboard": { "properties": { "status": { "const": "synthetic-preview" }, "source": { "const": "examples/responsive-dashboard/specimen" } } }, "inputs": { "minItems": 9, "maxItems": 9 }, "files": { "minItems": 7, "maxItems": 7 } } },
+    "else": { "properties": { "availableDemos": { "const": [] }, "dashboard": { "properties": { "status": { "const": "not-included" }, "source": { "const": null } } }, "inputs": { "minItems": 4, "maxItems": 4 }, "files": { "minItems": 2, "maxItems": 2 } } }
+  }]
+}
