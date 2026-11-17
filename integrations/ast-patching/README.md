@@ -72,3 +72,7 @@ A failed proposal must leave project files untouched. If verification is perform
 A runnable Vue transform needs fixtures for TypeScript imports, local shadowing, existing handlers, comments, multiple style blocks, repeated/ambiguous nodes, malformed source, stale-file rejection, idempotent reapplication and rollback conflicts. Assert byte preservation outside edited ranges and behavior at the existing API boundary.
 
 React/JSX and Svelte require separate parser adapters, scope rules and conformance fixtures. For example, the [Babel parser](https://babeljs.io/docs/babel-parser) supports JSX and TypeScript syntax, but parser availability alone does not prove a correct React transform.
+
+## Implemented Vue pilot
+
+The optional [track-reorder fixture](../../examples/track-reorder-vue/README.md) implements one supported operation with current raw source digests, parsed targets, protected ranges, mandatory Vue/TypeScript checks, no-op reapplication and conflict-aware rollback. Application requires a host-isolated exclusive checkout. The shared browser harness preserves exact plans and verifies native events, side-effect counts, selection and playhead; supported syntax and unrun boundaries are explicit.

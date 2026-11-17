@@ -47,3 +47,7 @@ Vue SFC compiler utilities 可解析單檔元件；MagicString 用於修改來�
 Vue transform 需要 TypeScript import、區域 shadowing、既有 handler、註解、多個 style block、重複/歧義節點、錯誤語法、過期檔案、冪等重套與回復衝突 fixture。需檢查允許範圍外位元組未變，並在既有 API 邊界驗證行為。
 
 React/JSX 與 Svelte 需各自的 parser adapter、scope 規則與 conformance fixture。Parser 能解析語法，不等於 transform 正確。
+
+## 已實作的 Vue 試點
+
+選用的[軌道排序 fixture](../../examples/track-reorder-vue/README.zh-TW.md) 實作單一支援操作，包含當前原始來源 digest、剖析後的 target、受保護範圍、必要的 Vue/TypeScript 檢查、重複套用 no-op 與拒絕衝突的 rollback。套用必須使用 host 隔離且獨占的 checkout。共用 browser harness 保存完整提案，並驗證原生事件、副作用次數、選取與 playhead；支援語法與未執行邊界均明確列出。

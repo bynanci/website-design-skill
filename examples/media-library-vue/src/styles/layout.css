@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--foreground); background: var(--surface); font-family: system-ui, sans-serif; }
+.media-library { max-width: 50rem; margin-inline: auto; padding: var(--space-6); }
+.eyebrow { color: var(--color-warning); font-weight: 600; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+button, input { font: inherit; color: inherit; background: var(--surface); }
+button { padding: var(--space-2) var(--space-3); border: 1px solid currentColor; cursor: pointer; }
+button[aria-disabled="true"] { cursor: default; opacity: 0.7; }
+input[type="text"], .controls input { min-width: 0; max-width: 100%; padding: var(--space-2); border: 1px solid currentColor; }
+:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+ul { padding: 0; list-style: none; }
+li label { display: flex; gap: var(--space-3); align-items: center; padding-block: var(--space-3); overflow-wrap: anywhere; }
+.duration { margin-inline-start: auto; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

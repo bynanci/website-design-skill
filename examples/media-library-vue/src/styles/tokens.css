@@ -1,0 +1,18 @@
+:root {
+  --surface: #ffffff;
+  --foreground: #17202a;
+  --color-warning: #8a5a00;
+  --color-destructive: #a42332;
+  --color-focus: #2459b8;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+}
+:root[data-theme="dark"] {
+  --surface: #161a1f;
+  --foreground: #f1f4f5;
+  --color-warning: #f2c66d;
+  --color-destructive: #ff8b92;
+  --color-focus: #96beff;
+}

@@ -26,4 +26,8 @@
 
 - [合成 Vue 專案 Profile fixture](project-profile-vue/README.zh-TW.md)：為選用的唯讀 inspector 提供靜態輸入與已保存的檢查證據。它不會讓核心技能依賴 Vue，也不宣稱已完成渲染驗收。
 
+
+- [有限軌道排序 patch](track-reorder-vue/README.zh-TW.md)：來源保留與原生事件/action 證據。
+- [媒體庫狀態轉換](media-library-vue/README.zh-TW.md)：延遲讀取、取消、過期回應防護與鍵盤復原。
+
 範例不得依賴特定 AI 模型、設計工具或前端框架。

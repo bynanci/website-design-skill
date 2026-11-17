@@ -68,3 +68,7 @@ Exercise transitions through the actual public owner/API boundary using controll
 Required cases include: delayed initial load; empty response; recoverable error and retry; non-retryable failure; out-of-order completion; unmount/cancel; refresh failure with existing data; keyboard recovery and focus preservation. Include applicable permission and partial-data conditions.
 
 Record which transition was exercised, its expected invariant, runtime result and remaining gap. Screenshot evidence can support state presentation; behavior assertions are needed for transitions and side-effect counts.
+
+## Executable media-library fixture
+
+The [synthetic media-library fixture](../../examples/media-library-vue/README.md) exercises these transitions through one observed Pinia owner and an injectable read-only service. Its runtime tests and shared browser harness cover delayed loading, empty/success/partial responses, safe and non-retryable failure, duplicate-read coalescing, preserved data/selection/input, stale requests, cancellation and disposal. Browser evidence records native keyboard recovery, focus, status/error semantics and reduced motion. Native media services and side-effecting writes remain outside this fixture.

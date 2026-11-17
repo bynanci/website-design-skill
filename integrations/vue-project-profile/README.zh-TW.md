@@ -46,3 +46,7 @@ node render.mjs ../../examples/project-profile-vue
 靜態角色證據與瀏覽器量測各自保存。Theme 檢查通過仍不足以證明完整 dashboard 品質、狀態轉換行為、輔助科技支援或官方跨 agent 發布證據。
 
 外部 scoped Vue 樣式仍不支援，不可用來確認全域 theme 宣告。
+
+## 有限修改與狀態轉換
+
+相同的選用工具現已包含[軌道排序 patch](../../examples/track-reorder-vue/README.zh-TW.md) 與[媒體庫轉換](../../examples/media-library-vue/README.zh-TW.md) fixture。`npm test` 執行所有支援來源、patch 與 owner/service 回歸測試；`npm run verify:interactions` 透過共用 browser harness build 並操作兩個案例。Actions artifact 保存完整 patch 提案、runtime/來源身份、轉換斷言、截圖與未執行項目。

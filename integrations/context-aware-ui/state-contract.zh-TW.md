@@ -51,3 +51,7 @@ Loading、empty、error、success 是非同步資料介面的基本狀態，應�
 透過實際公開 owner/API 邊界與可控制的合成 fixture 驗證轉換，不以四張互不相連的截圖代替。
 
 至少涵蓋延遲載入、空資料、可復原與不可復原錯誤、重試、亂序完成、卸載/取消、已有資料時刷新失敗、鍵盤復原與焦點保留，以及適用的 permission 和 partial-data 狀態。記錄每項轉換、預期不變條件、runtime 結果與尚存缺口。截圖可呈現狀態；轉換與副作用次數需有行為斷言。
+
+## 可執行的媒體庫 fixture
+
+[合成媒體庫 fixture](../../examples/media-library-vue/README.zh-TW.md) 透過單一已確認的 Pinia owner 與可注入的唯讀 service 執行狀態轉換。Runtime 測試及共用 browser harness 涵蓋延遲載入、空/成功/部分回應、安全重試與不可重試的失敗、重複讀取合併、資料/選取/輸入保留、過期請求、取消與 dispose。瀏覽器證據記錄原生鍵盤復原、焦點、status/error 語意與 reduced motion。Native media service 與有寫入副作用的操作不在此 fixture 範圍內。
