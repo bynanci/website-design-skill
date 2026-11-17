@@ -6,6 +6,9 @@ No real device, native 200% zoom, screen reader, or WCAG certification is claime
 """
 import json
 import os
+import hashlib
+import platform
+from importlib.metadata import version
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -16,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ENTRY = (ROOT / "specimen/index.html").resolve().as_uri()
 EVIDENCE = Path(os.environ.get("DASHBOARD_QA_OUTPUT", str(ROOT / "evidence")))
 EVIDENCE.mkdir(parents=True, exist_ok=True)
+CHROMIUM_EXECUTABLE = os.environ.get("DASHBOARD_CHROMIUM_EXECUTABLE")
 SCENARIOS = [
     ("desktop-wide", 1920, 1080), ("desktop-laptop", 1366, 768),
     ("split-pane", 768, 1000), ("mobile-390", 390, 844), ("mobile-320", 320, 700),
@@ -26,6 +30,35 @@ REQUIRED = ["#account-name",".metrics","#observations","#mix-heading",
 records = []
 axe_reports = []
 failures = []
+
+
+def provenance(browser=None):
+    """Identify the actual inspected files and runtime, including local edits."""
+    source_paths = [
+        ROOT / "specimen" / name for name in ("index.html", "styles.css", "app.js")
+    ] + [Path(__file__).resolve()]
+    return {
+        "sources": [
+            {"path": path.relative_to(ROOT).as_posix(),
+             "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+            for path in source_paths
+        ],
+        "runtime": {
+            "python": platform.python_version(),
+            "playwright": version("playwright"),
+            "chromium": browser.version if browser is not None else None,
+            "executable": CHROMIUM_EXECUTABLE or "Playwright-managed Chromium",
+            "axe_core": json.loads(
+                (AXE_BUNDLE.parent / "package.json").read_text(encoding="utf-8")
+            )["version"] if AXE_BUNDLE.is_file() else None,
+        },
+        "github_actions": {
+            "repository": os.environ.get("GITHUB_REPOSITORY"),
+            "checkout_sha": os.environ.get("GITHUB_SHA"),
+            "run_id": os.environ.get("GITHUB_RUN_ID"),
+            "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+        },
+    }
 
 
 def check(ok, message):
@@ -61,7 +94,10 @@ def intersect(a, b):
 def main():
     check(AXE_BUNDLE.is_file(), "axe-core bundle missing from CI installation")
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(
+            headless=True, executable_path=CHROMIUM_EXECUTABLE
+        )
+        observed_provenance = provenance(browser)
         try:
             for name,width,height in SCENARIOS:
                 page = browser.new_page(viewport={"width":width,"height":height},reduced_motion="reduce")
@@ -217,6 +253,7 @@ def main():
             browser.close()
     report={
         "source":"public synthetic account dashboard","timestamp_utc":datetime.now(timezone.utc).isoformat(),
+        "provenance":observed_provenance,
         "browser":"Playwright Chromium headless","rendered_cases":len(records),
         "notes":["Screenshots captured but automated checks are not human visual approval.",
                  "200% zoom uses effective CSS-width proxy, not native browser zoom.",
@@ -231,4 +268,23 @@ def main():
 
 
 if __name__=="__main__":
-    main()
+    try:
+        main()
+    except Exception as error:
+        # A launch/setup failure is evidence of an unavailable run, not a pass.
+        report = {
+            "source": "public synthetic account dashboard",
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "provenance": provenance(),
+            "passed": False,
+            "rendered_cases": len(records),
+            "checks": records,
+            "axe_audits": axe_reports,
+            "failures": failures,
+            "execution_error": {"type": type(error).__name__, "message": str(error)},
+            "notes": ["Execution did not complete; absent results are not passing checks."],
+        }
+        (EVIDENCE / "qa-results.json").write_text(
+            json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        raise

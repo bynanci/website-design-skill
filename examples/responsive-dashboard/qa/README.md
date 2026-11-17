@@ -4,6 +4,7 @@ Install Playwright and its Chromium runtime:
 
     python -m pip install 'playwright==1.56.0'
     python -m playwright install --with-deps chromium
+    npm install --no-save --no-package-lock axe-core@4.10.3
     python examples/responsive-dashboard/qa/run_browser_qa.py
 
 Run this script from the repository root, or use the "Dashboard specimen
@@ -11,6 +12,19 @@ browser QA" GitHub workflow. It renders the **public synthetic** HTML
 specimen via file://, writes viewport/full-page screenshots, and emits
 machine-readable evidence to examples/responsive-dashboard/evidence/.
 The GitHub workflow uploads the screenshots and raw JSON as an artifact.
+
+The JSON records SHA-256 digests for the three specimen sources and the QA
+runner, plus the actual Python, Playwright, Chromium and axe-core versions.
+GitHub Actions metadata identifies the checkout and run when available. Use
+the digests to check local edits; a commit label alone cannot identify them.
+If setup or launch fails, `qa-results.json` records `passed: false`, the
+execution error and completed-case count; missing results are not passes.
+
+To use an existing Chromium executable in a local environment, set
+`DASHBOARD_CHROMIUM_EXECUTABLE=/absolute/path/to/chromium`. The override is
+recorded in the evidence and is not equivalent to the CI browser version.
+Use `DASHBOARD_QA_OUTPUT=/absolute/output/path` to keep generated captures
+outside the source tree.
 
 Test matrix: 1920x1080, 1366x768, 768 CSS px, 390 CSS px, 320 CSS px,
 narrow embedded 360 CSS px container, a 683 CSS px effective-width

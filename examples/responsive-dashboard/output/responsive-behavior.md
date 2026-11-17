@@ -1,7 +1,10 @@
-# Harbor Account Workspace — Proposed Responsive Contract
+# Harbor Account Workspace — Responsive Contract and Evidence
 
 Source: [synthetic input](../input/current-page.md).
-Status: **proposal**, not rendered or device tested.
+Status: the standalone synthetic specimen has prior Chromium rendering and
+scripted interaction evidence. The [QA review](qa-review-2026-11-16.md) records
+its source/run/artifact provenance and remaining gaps. Physical devices,
+native browser zoom and screen readers remain untested.
 
 ## Content priority and equivalence
 
@@ -23,14 +26,16 @@ not remove content. Every disclosure must retain a named accessible control.
 
 | Scenario | Proposed adaptation | Verification still required |
 |---|---|---|
-| 1920 x 1080 | Two main columns; observations wider than charts; KPI strip | Readability, page hierarchy and whitespace |
-| 1366 x 768 | Reduce decorative padding, not text; show top tasks first; allow lower detail to scroll if necessary | Whether full-page no-scroll is realistic |
-| 768 CSS px | One primary column plus optional adjacent KPI region if content fits | Actual container width and long labels |
-| 390 / 320 CSS px | Single column; full observation text; chart data access and case detail | Reflow, no accidental clipping, focus order |
-| 200% zoom | Treat as reduced available CSS width, not as guaranteed mobile state | Reflow, dialog bounds, keyboard, text resize |
-| Narrow embedded panel | Component reacts to **container** pressure | Nested legend, actions, responsive surfaces |
+| 1920 x 1080 | Specimen uses two main columns, wider observations and a KPI strip | Human readability and hierarchy review |
+| 1366 x 768 | Full content remains scrollable; recorded document height is 2722px | Product-owner acceptance of the scrolling trade-off |
+| 768 CSS px | Primary content reflows to one column | More locales and realistic long values |
+| 390 / 320 CSS px | Single-column content, tabular chart data and local case-table scroll | Full manual focus order and physical touch review |
+| 200% zoom | A 683 CSS px proxy was captured; native zoom remains unrun | Actual browser zoom, dialog bounds and text resize |
+| Narrow embedded panel | A 360 CSS px dashboard container was captured | Full nested bounds and focus assertions in both directions |
 
-Breakpoints are deliberately not fixed before measuring the rendered layout.
+The specimen uses container-query thresholds at 1190, 875, 525 and 340 CSS
+px. These are implementation choices checked at the recorded conditions,
+not proven breakpoints for arbitrary target products or content.
 
 ## Charts, tables and actions
 
@@ -45,27 +50,28 @@ Breakpoints are deliberately not fixed before measuring the rendered layout.
 - NotesEditor must preserve unsaved text and communicate saving, error and
   validation states.
 
-## Desktop no-scroll trade-off
+## Desktop scrolling trade-off
 
-A single 1366 x 768 screen is a **preference** that competes with full AI
-observation text, chart legends, interaction and useful typography. Proposed
-compromise: keep account identity, high-priority observations and meeting
-action prominent, with supporting charts/cases reachable through deliberate
-scrolling or approved disclosure. Obtain explicit product-owner approval
-before hiding or collapsing anything essential.
+A single 1366 x 768 screen remains a **preference**. The rendered specimen
+does not achieve it: its recorded full-page height is 2722px. It preserves
+the full text, evidence, charts and case actions. The mobile shortcut links
+directly to AI observations. Product-owner acceptance of this scrolling
+trade-off and a human visual-direction decision remain open.
 
-## Validation plan (no checks claimed)
+## Validation evidence and open checks
 
 | Test | Expected outcome | Evidence status |
 |---|---|---|
-| 1920 x 1080 / 1366 x 768 screenshots | Clear hierarchy, readable chart/legend, no overlap | Not tested |
-| 768 / 390 / 320 CSS px screenshots | All required modules reachable, text reflows | Not tested |
-| 200% desktop zoom | No truncated observation or unreachable action | Not tested |
-| Keyboard-only path | Evidence links, filters, tables and save action operable | Not tested |
-| Touch path | No hover-only tooltips or row actions | Not tested |
+| 1920 x 1080 / 1366 x 768 screenshots | Content present; no chart/legend intersection or global overflow | Prior automated checks passed; human design acceptance open |
+| 768 / 390 / 320 CSS px screenshots | Required groups remain; text reflows | Prior automated checks passed for the synthetic content |
+| 200% desktop zoom | No truncated observation or unreachable action | Not tested natively; the CSS-width proxy is recorded separately |
+| Keyboard chart and dialog paths | Arrow/Home/End navigation; Enter/Escape and focus return | Prior scripted checks passed; full manual traversal remains open |
+| Touch path | Visible row actions and adequate primary controls | Scripted size/visibility checks passed; physical device use not tested |
 | Screen reader/manual chart review | Category/series meaning and full figures accessible | Not tested |
-| Long text, zero data, failed requests | Layout and feedback understandable | Not tested |
+| Long strings | Observation/evidence/account strings remain within 320px | Prior synthetic stress check passed |
+| Empty/loading/error requests | Layout and recovery remain understandable | Not tested; current specimen is static and synchronous |
+| Both visual directions | Content and interaction parity at all supported conditions | Laptop/390px captures exist; full matrix still open |
 
-Release gate: do not claim responsive or accessibility success until rendered
-evidence exists for representative conditions and any content trade-off is
-approved.
+Issue #7 remains open until missing conditions, reusable component integration
+and human decisions have evidence. Prior automated results cover the recorded
+fictional specimen and runtime; they do not certify a production page.
