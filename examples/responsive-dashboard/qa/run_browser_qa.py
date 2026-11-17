@@ -250,7 +250,7 @@ def independent_component_checks(page):
         DashboardComponents.create('RevenueMix',{title:'Probe mix',mix:[['Probe A',40],['Probe B',60]]},{idPrefix:'reuse-mix-'}),
         DashboardComponents.create('RevenueTrend',{title:'Probe trend',months:['A','B'],trend:[['Probe trend',[3,9]]]},{idPrefix:'reuse-trend-'}),
         DashboardComponents.create('NotesEditor',{title:'Probe notes'},{idPrefix:'reuse-notes-'}),
-        DashboardComponents.create('CaseTable',{items:[['PROBE-101','Probe service','一般','Probe owner','12/31','Probe ready','查看詳情']]},{idPrefix:'reuse-cases-'})
+        DashboardComponents.create('CaseTable',{items:[['PROBE-101','Probe service','一般','Probe owner','12/31','Probe ready','開啟獨立案件']]},{idPrefix:'reuse-cases-'})
       );
       document.body.append(host);
     }""")
@@ -311,6 +311,14 @@ def independent_component_checks(page):
     details["notes"] = {"status": page.locator("#reuse-notes-note-status").inner_text(), "urlUnchanged": page.url == original_url}
     case_button = host.locator('[data-case="PROBE-101"]')
     check(case_button.count() == 1, "reused CaseTable ignored supplied case identity")
+    check(host.locator('[data-component="CaseTable"] .pill-outline').inner_text() == "01 件處理中",
+          "reused CaseTable count ignored supplied rows")
+    check(case_button.inner_text() == "開啟獨立案件", "reused CaseTable ignored supplied action label")
+    empty_cases = page.evaluate("""() => {
+      const empty=DashboardComponents.create('CaseTable',{items:[]},{idPrefix:'empty-cases-'});
+      return {count:empty.querySelector('.pill-outline').textContent,rows:empty.querySelectorAll('tbody tr').length};
+    }""")
+    check(empty_cases == {"count": "00 件處理中", "rows": 0}, "empty CaseTable count disagrees with its rows")
     case_button.focus()
     page.keyboard.press("Enter")
     check(page.locator("#case-dialog").evaluate("e=>e.open"), "reused CaseTable native Enter did not open the host dialog")
