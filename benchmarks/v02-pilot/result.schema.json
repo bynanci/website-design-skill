@@ -1,0 +1,1066 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "suite_version",
+    "run_id",
+    "status",
+    "source_commit",
+    "agent",
+    "environment",
+    "manual_edit",
+    "isolation",
+    "availability",
+    "generation_finished_at",
+    "reviewer",
+    "cases",
+    "aggregate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2-pilot.1"
+    },
+    "suite_version": {
+      "const": "0.2-pilot.1"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "unavailable"
+      ]
+    },
+    "source_commit": {
+      "const": "7f7148a0752718ba3fb363c019441a6d5ca91f15"
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "product",
+        "model"
+      ],
+      "properties": {
+        "provider": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "product": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_date",
+        "interface",
+        "capabilities"
+      ],
+      "properties": {
+        "run_date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "interface": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "file_read",
+            "file_write",
+            "code_execution",
+            "browser",
+            "image_review",
+            "network"
+          ],
+          "properties": {
+            "file_read": {
+              "enum": [
+                "available",
+                "unavailable",
+                "unknown"
+              ]
+            },
+            "file_write": {
+              "enum": [
+                "available",
+                "unavailable",
+                "unknown"
+              ]
+            },
+            "code_execution": {
+              "enum": [
+                "available",
+                "unavailable",
+                "unknown"
+              ]
+            },
+            "browser": {
+              "enum": [
+                "available",
+                "unavailable",
+                "unknown"
+              ]
+            },
+            "image_review": {
+              "enum": [
+                "available",
+                "unavailable",
+                "unknown"
+              ]
+            },
+            "network": {
+              "enum": [
+                "available",
+                "unavailable",
+                "unknown"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "manual_edit": {
+      "const": false
+    },
+    "isolation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independent_context",
+        "evaluator_files_exposed",
+        "prior_outputs_exposed",
+        "record_path",
+        "record_sha256"
+      ],
+      "properties": {
+        "independent_context": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "evaluator_files_exposed": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "prior_outputs_exposed": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "record_path": {
+          "const": "isolation.md"
+        },
+        "record_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reason",
+        "details"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "available",
+            "unavailable"
+          ]
+        },
+        "reason": {
+          "enum": [
+            null,
+            "subscription_blocked",
+            "access_failure",
+            "unsupported_environment",
+            "model_identity_unavailable",
+            "evaluator_context_contaminated"
+          ]
+        },
+        "details": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "generation_finished_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "reviewer": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "scored_at"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "scored_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      ]
+    },
+    "cases": {
+      "type": "array",
+      "maxItems": 2
+    },
+    "aggregate": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "score",
+            "max_score",
+            "interpretation"
+          ],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 36
+            },
+            "max_score": {
+              "const": 36
+            },
+            "interpretation": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bynanci/website-design-skill/blob/main/benchmarks/v02-pilot/result.schema.json",
+  "title": "Isolated v0.2 pilot result (not official v0.1 evidence)",
+  "description": "The zero-dependency validator additionally verifies raw file containment/digests, isolation, timing, quotes and aggregates.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "completed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "agent": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "provider",
+              "product",
+              "model"
+            ],
+            "properties": {
+              "provider": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "product": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "model": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          },
+          "generation_finished_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewer": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "scored_at"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "scored_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "isolation": {
+            "properties": {
+              "independent_context": {
+                "const": true
+              },
+              "evaluator_files_exposed": {
+                "const": false
+              },
+              "prior_outputs_exposed": {
+                "const": false
+              }
+            }
+          },
+          "availability": {
+            "properties": {
+              "status": {
+                "const": "available"
+              },
+              "reason": {
+                "const": null
+              }
+            }
+          },
+          "cases": {
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "raw_output_path",
+                  "raw_sha256",
+                  "scores",
+                  "critical_errors"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "responsive-layout-001"
+                  },
+                  "raw_output_path": {
+                    "const": "raw/responsive-layout-001.md"
+                  },
+                  "raw_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "scores": {
+                    "type": "array",
+                    "minItems": 9,
+                    "prefixItems": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-01"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-02"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-03"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-04"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-05"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-06"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-07"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-08"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "RL-09"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      }
+                    ],
+                    "items": false
+                  },
+                  "critical_errors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "code",
+                        "evidence_quote",
+                        "note"
+                      ],
+                      "properties": {
+                        "code": {
+                          "enum": [
+                            "required-content-hidden",
+                            "hover-or-color-only",
+                            "unsupported-success-claim"
+                          ]
+                        },
+                        "evidence_quote": {
+                          "type": "string"
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "raw_output_path",
+                  "raw_sha256",
+                  "scores",
+                  "critical_errors"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "accessibility-001"
+                  },
+                  "raw_output_path": {
+                    "const": "raw/accessibility-001.md"
+                  },
+                  "raw_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "scores": {
+                    "type": "array",
+                    "minItems": 9,
+                    "prefixItems": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-01"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-02"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-03"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-04"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-05"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-06"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-07"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-08"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "criterion",
+                          "score",
+                          "evidence_quote",
+                          "note"
+                        ],
+                        "properties": {
+                          "criterion": {
+                            "const": "AX-09"
+                          },
+                          "score": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2
+                          },
+                          "evidence_quote": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string",
+                            "minLength": 1,
+                            "pattern": "\\S"
+                          }
+                        }
+                      }
+                    ],
+                    "items": false
+                  },
+                  "critical_errors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "code",
+                        "evidence_quote",
+                        "note"
+                      ],
+                      "properties": {
+                        "code": {
+                          "enum": [
+                            "missing-keyboard-path",
+                            "missing-dialog-focus-recovery",
+                            "unsupported-conformance-claim"
+                          ]
+                        },
+                        "evidence_quote": {
+                          "type": "string"
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "items": false
+          },
+          "aggregate": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "score",
+              "max_score",
+              "interpretation"
+            ],
+            "properties": {
+              "score": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 36
+              },
+              "max_score": {
+                "const": 36
+              },
+              "interpretation": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "generation_finished_at": {
+            "const": null
+          },
+          "reviewer": {
+            "const": null
+          },
+          "cases": {
+            "maxItems": 0
+          },
+          "aggregate": {
+            "const": null
+          },
+          "availability": {
+            "properties": {
+              "status": {
+                "const": "unavailable"
+              },
+              "reason": {
+                "enum": [
+                  "subscription_blocked",
+                  "access_failure",
+                  "unsupported_environment",
+                  "model_identity_unavailable",
+                  "evaluator_context_contaminated"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
