@@ -1,0 +1,6 @@
+:root[data-theme="dark"] {
+  --color-warning: #f2c66d;
+  --color-destructive: #ff8b92;
+  --surface: #161a1f;
+  --foreground: #f1f4f5;
+}

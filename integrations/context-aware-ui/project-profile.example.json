@@ -1,0 +1,171 @@
+{
+  "profileVersion": "0.1",
+  "workspace": {
+    "id": "synthetic-vue-dashboard",
+    "root": "."
+  },
+  "task": {
+    "request": "Map the warning action and reusable dashboard components",
+    "affectedPaths": [
+      "src/components/WarningNotice.vue",
+      "src/styles/tokens.scss"
+    ]
+  },
+  "revision": {
+    "commit": null,
+    "dirty": true
+  },
+  "sources": [
+    {
+      "path": "package.json",
+      "kind": "package-manifest",
+      "status": "illustrative",
+      "detail": "Synthetic example; not collected from a live repository."
+    },
+    {
+      "path": "tsconfig.json",
+      "kind": "typescript-config",
+      "status": "illustrative"
+    },
+    {
+      "path": "src/styles/tokens.scss",
+      "kind": "scss-tokens",
+      "status": "illustrative"
+    }
+  ],
+  "stack": [
+    {
+      "name": "Vue",
+      "version": "3.x",
+      "evidencePaths": [
+        "package.json"
+      ]
+    },
+    {
+      "name": "Vite",
+      "version": "5.x",
+      "evidencePaths": [
+        "package.json",
+        "vite.config.ts"
+      ]
+    },
+    {
+      "name": "SCSS",
+      "version": null,
+      "evidencePaths": [
+        "package.json",
+        "src/styles/tokens.scss"
+      ]
+    }
+  ],
+  "aliases": [
+    {
+      "name": "@common",
+      "targets": [
+        "src/common"
+      ],
+      "status": "resolved",
+      "evidencePaths": [
+        "tsconfig.json"
+      ]
+    },
+    {
+      "name": "@viz",
+      "targets": [
+        "src/visualizations"
+      ],
+      "status": "resolved",
+      "evidencePaths": [
+        "tsconfig.json"
+      ]
+    }
+  ],
+  "tokens": [
+    {
+      "role": "warning",
+      "reference": "$color-warning",
+      "syntax": "SCSS variable",
+      "status": "resolved",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "evidencePaths": [
+        "src/styles/tokens.scss"
+      ]
+    },
+    {
+      "role": "destructive-action",
+      "reference": "--color-danger",
+      "syntax": "CSS custom property",
+      "status": "theme-dependent",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "evidencePaths": [
+        "src/styles/tokens.scss"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "responsibility": "Warning notice",
+      "path": "src/components/WarningNotice.vue",
+      "publicApi": [
+        "tone",
+        "title",
+        "description"
+      ],
+      "states": [
+        "default",
+        "dismissible"
+      ],
+      "evidencePaths": [
+        "src/components/WarningNotice.vue"
+      ]
+    },
+    {
+      "responsibility": "Revenue visualization",
+      "path": "src/visualizations/RevenueMix.vue",
+      "publicApi": [
+        "series",
+        "period"
+      ],
+      "states": [
+        "loading",
+        "empty",
+        "error",
+        "success"
+      ],
+      "evidencePaths": [
+        "src/visualizations/RevenueMix.vue"
+      ]
+    }
+  ],
+  "stateOwners": [
+    {
+      "name": "dashboard data",
+      "kind": "Pinia store",
+      "path": "src/stores/dashboard.ts",
+      "evidencePaths": [
+        "src/stores/dashboard.ts"
+      ]
+    }
+  ],
+  "capabilities": {
+    "read": "available",
+    "parse": "unknown",
+    "patchProposal": "unknown",
+    "patchWrite": "unavailable",
+    "build": "unknown",
+    "render": "unavailable",
+    "imageReview": "unavailable",
+    "nativeShell": "unavailable"
+  },
+  "unknowns": [
+    "All source paths and values are illustrative.",
+    "The actual theme import chain and computed token values are not verified.",
+    "No project command has been run."
+  ]
+}
