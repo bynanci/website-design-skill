@@ -92,7 +92,8 @@ try {
   assert.equal(await deniedButton.getAttribute('aria-disabled'), 'true');
   await deniedButton.focus();
   await deniedButton.press('Enter');
-  await deniedButton.click();
+  // Deliberately bypass actionability to test the owner guard on a forbidden click.
+  await deniedButton.click({ force: true });
   assert.equal((await requests(denied)).length, 1);
   assert.equal((await state(denied)).error.retryable, false);
   await capture(denied, 'non-retryable-permission');
