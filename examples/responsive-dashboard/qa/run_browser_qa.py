@@ -309,6 +309,7 @@ def independent_component_checks(page):
         page.mouse.move(position["x"], position["y"])
         pointer = page.locator(feedback_id).inner_text()
         check(pointer == keyboard, kind + ": reused pointer/keyboard local feedback differs")
+        page.mouse.move(0, 0)
         point.focus()
         page.keyboard.press("ArrowRight")
         next_value = page.locator(feedback_id).inner_text()
