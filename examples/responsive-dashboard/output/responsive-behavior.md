@@ -1,77 +1,42 @@
-# Harbor Account Workspace — Responsive Contract and Evidence
+# Harbor Dashboard — responsive behavior contract
 
-Source: [synthetic input](../input/current-page.md).
-Status: the standalone synthetic specimen has prior Chromium rendering and
-scripted interaction evidence. The [QA review](qa-review-2026-11-16.md) records
-its source/run/artifact provenance and remaining gaps. Physical devices,
-native browser zoom and screen readers remain untested.
+[繁體中文](responsive-behavior.zh-TW.md)
+
+The current native specimen implements the behavior below. The [2026-11-17 QA record](qa-review-2026-11-17.md) tracks results for its exact candidate. Earlier measured heights in the 2026-11-16 report remain historical; do not reuse them as measurements of this revised layout.
 
 ## Content priority and equivalence
 
-| Content | Wide layout | Narrow layout | Preservation rule |
+| Group | Wide behavior | Narrow behavior | Invariant |
 |---|---|---|---|
-| Account summary | Compact header | First block, key fields wrap | Contact and status remain accessible |
-| AI observations 01–04 | Primary reading column | Immediate full-width section after summary | Preserve ordering, source, unknowns, and question |
-| Human note | Adjacent to observation workflow | After observations, with save feedback | No hidden save action |
-| KPIs | Compact row | Two-up or stacked, based on measured content | Keep labels and full values |
-| Revenue mix | Supporting visual column | Full-width chart followed by data representation | Legend and category meaning stay accessible |
-| Revenue trend | Supporting visual column | Full-width with readable series control | Preserve all series and point values |
-| Opportunities | Lower supporting panel | Section after revenue, may disclose details | Mark suggestions as suggestions |
-| Cases | Lower panel | Table with local horizontal scroll or row detail | All statuses, owners and row actions remain accessible |
+| Account summary | Full identity and contact fields | Wrap without truncating names | Identity/contact remain reachable |
+| Metrics | Four-column strip where space permits | Two-column grid | Preserve labels, values and units |
+| Observations | Primary reading column | Full-width ordered list and direct mobile shortcut | Preserve all claims, evidence and questions |
+| Revenue mix | Supporting chart/legend region | Legend reflows; table remains available | All five categories and exact values survive |
+| Revenue trend | Multi-series graphic and key | Scales within container with table alternative | Preserve all three series and eighteen points |
+| Opportunities | Supporting panel | Full-width list | Keep uncertainty explicit |
+| Cases | Full table with visible buttons | Local horizontal scroll | Preserve each field and action |
+| Notes | Beside the observation workflow | Follows primary content | Preserve the mounted field through synthetic recovery |
 
-The narrow layout may **reorder** sections to support the AM workflow but does
-not remove content. Every disclosure must retain a named accessible control.
+Container thresholds at 1190, 875, 525 and 340 CSS px are implementation choices for this fixture. They are not universal breakpoints. The floating acceptance panel reserves desktop space and enters document flow at narrower viewport widths; required visible actions must remain unobscured.
 
-## Candidate layout conditions
+## State and interaction ownership
 
-| Scenario | Proposed adaptation | Verification still required |
-|---|---|---|
-| 1920 x 1080 | Specimen uses two main columns, wider observations and a KPI strip | Human readability and hierarchy review |
-| 1366 x 768 | Full content remains scrollable; recorded document height is 2722px | Product-owner acceptance of the scrolling trade-off |
-| 768 CSS px | Primary content reflows to one column | More locales and realistic long values |
-| 390 / 320 CSS px | Single-column content, tabular chart data and local case-table scroll | Full manual focus order and physical touch review |
-| 200% zoom | A 683 CSS px proxy was captured; native zoom remains unrun | Actual browser zoom, dialog bounds and text resize |
-| Narrow embedded panel | A 360 CSS px dashboard container was captured | Full nested bounds and focus assertions in both directions |
+The synthetic read owner renders loading, empty, error and success, with a keyboard-operable retry and status/alert semantics. Unavailable content is hidden and inert. Repeated refresh calls coalesce; recovery preserves the note input. Persisted page-transition probes suspend/resume the retained owner; nonpersisted hide disposes it. This does not test a production API or real BFCache navigation.
 
-The specimen uses container-query thresholds at 1190, 875, 525 and 340 CSS
-px. These are implementation choices checked at the recorded conditions,
-not proven breakpoints for arbitrary target products or content.
+Charts offer one roving Tab stop each, Arrow/Home/End navigation, local named feedback and full numeric tables. The runner exercises real exposed pointer targets rather than assuming an SVG bounding-box center is interactive. Dialog focus enters its title, stays within explicit Tab boundaries and returns to the trigger after close. Emulated touch checks tap-visible chart/case controls.
 
-## Charts, tables and actions
+## Declared condition matrix
 
-- RevenueCompositionChart: legend can move below chart, wrap, or enter an
-  explicitly labeled disclosure; values also remain available in a table.
-- RevenueTrendChart: do not hide a series to "make the chart fit"; offer
-  series selection with full data access, keyboard focus and readable labels.
-- CasesTable: local scroll has an affordance and stable row/column headings,
-  or row-detail layout retains every field and action.
-- All hover-only actions must have visible keyboard/focus and touch paths.
-- Observation evidence links must have descriptive accessible names.
-- NotesEditor must preserve unsaved text and communicate saving, error and
-  validation states.
+Twenty viewport/direction/theme combinations plus twelve interaction, state, container, floating, touch and long-copy conditions make the 32-condition browser matrix. Two separate headed Chromium captures check actual native 200% page zoom for editorial light/dark. The 683px effective-width proxy is retained as a different condition.
 
-## Desktop scrolling trade-off
+Six axe-core scans cover editorial at 1366/390/320 CSS px in both themes. Raw Navigation/Paint Timing fields are observations from this file fixture, with no speed or production budget claim. The dated report must identify completed, failed and unrun checks before acceptance.
 
-A single 1366 x 768 screen remains a **preference**. The rendered specimen
-does not achieve it: its recorded full-page height is 2722px. It preserves
-the full text, evidence, charts and case actions. The mobile shortcut links
-directly to AI observations. Product-owner acceptance of this scrolling
-trade-off and a human visual-direction decision remain open.
+## Desktop scrolling and open decisions
 
-## Validation evidence and open checks
+Editorial remains the author's default for observation/evidence reading. Full-content single-screen operation at 1366×768 is not promised. Keep required text, data and actions, then record a human decision about scrolling and density using current captures.
 
-| Test | Expected outcome | Evidence status |
-|---|---|---|
-| 1920 x 1080 / 1366 x 768 screenshots | Content present; no chart/legend intersection or global overflow | Prior automated checks passed; human design acceptance open |
-| 768 / 390 / 320 CSS px screenshots | Required groups remain; text reflows | Prior automated checks passed for the synthetic content |
-| 200% desktop zoom | No truncated observation or unreachable action | Not tested natively; the CSS-width proxy is recorded separately |
-| Keyboard chart and dialog paths | Arrow/Home/End navigation; Enter/Escape and focus return | Prior scripted checks passed; full manual traversal remains open |
-| Touch path | Visible row actions and adequate primary controls | Scripted size/visibility checks passed; physical device use not tested |
-| Screen reader/manual chart review | Category/series meaning and full figures accessible | Not tested |
-| Long strings | Observation/evidence/account strings remain within 320px | Prior synthetic stress check passed |
-| Empty/loading/error requests | Layout and recovery remain understandable | Not tested; current specimen is static and synchronous |
-| Both visual directions | Content and interaction parity at all supported conditions | Laptop/390px captures exist; full matrix still open |
+Not tested: physical devices, screen readers, native Tauri shell, real authentication/API/persistence, production performance, arbitrary locales/content, native zoom in cockpit, and real user task outcomes. Other hosts must inspect their own components/tokens and provide case-dialog actions before claiming integration.
 
-Issue #7 remains open until missing conditions, reusable component integration
-and human decisions have evidence. Prior automated results cover the recorded
-fictional specimen and runtime; they do not certify a production page.
+## Scope and rollback
+
+All styles belong to this standalone fixture; no production stylesheet is overridden. Direction and theme attributes select reviewed local rules; restore `editorial` and `light` to return to the default. Closing the floating panel restores its reserved space. Narrow-container and long-copy stress injections exist only in disposable QA pages. The bounded repair experiment edits only its copied `.mix-body` declaration and preserves exact before/after bytes; source conflicts stop rollback rather than overwriting another edit.

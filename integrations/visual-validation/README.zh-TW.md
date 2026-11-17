@@ -2,7 +2,7 @@
 
 [English](README.md) · 繁體中文
 
-**狀態：文件提案；本文件沒有實作 Playwright runner、截圖服務、vision model 或自動修正流程。**
+**狀態：選用整合契約，已有範圍明確的可執行試點。** [Dashboard QA 指南](../../examples/responsive-dashboard/qa/README.zh-TW.md) 實作凍結的 browser 矩陣及單一有限 CSS 復原操作。通用修正、vision-model 判斷與原生 shell 相容性仍在此試點之外。
 
 ## 目的
 

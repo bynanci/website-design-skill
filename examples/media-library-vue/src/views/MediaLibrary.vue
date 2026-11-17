@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from "vue";
 import StatusBanner from "../components/StatusBanner.vue";
+import RecoveryPanel from "../components/RecoveryPanel.vue";
 import { useMediaLibraryStore } from "../stores/media-library.js";
 
 const media = useMediaLibraryStore();
@@ -31,6 +32,8 @@ onBeforeUnmount(() => { media.dispose(); });
     <p role="status" aria-live="polite" data-testid="media-status">{{ media.message }}</p>
     <StatusBanner v-if="media.error" kind="destructive" :message="media.error.message" />
     <StatusBanner v-if="media.partial" kind="warning" message="The service marked this list as partial. Existing items remain usable." />
+
+    <RecoveryPanel />
 
     <section aria-labelledby="media-items-title">
       <h2 id="media-items-title">Available media</h2>

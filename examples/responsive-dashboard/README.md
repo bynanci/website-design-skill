@@ -1,35 +1,24 @@
-# Responsive Account Dashboard — Optional v0.2 Example
+# Responsive Account Dashboard — optional v0.2 specimen
 
-This public, **synthetic** fixture shows how to apply optional v0.2 artifact contracts
-to a dense B2B account dashboard **without silently losing content**.
+[繁體中文](README.zh-TW.md)
 
-It now includes an executable HTML/CSS/JavaScript specimen and GitHub Actions
-Chromium QA evidence. The original contract documents remain proposals; the
-browser tests cover the fictional specimen only, not a production account
-service, real data source, physical device or screen-reader certification.
+This public specimen applies the optional visual-direction, responsive and token contracts to synthetic account data. It provides eight reusable native template factories, two visual directions, light/dark themes and a synthetic loading/recovery owner.
 
-## Input
+The current browser runner declares 32 matrix conditions and two separate native 200% zoom captures. The [2026-11-17 evidence record](output/qa-review-2026-11-17.md) tracks the candidate and CI result. A declared check is not a passing result. The [2026-11-16 report](output/qa-review-2026-11-16.md) remains historical evidence for its earlier source.
 
-- [Current page and component inventory](input/current-page.md)
+## Start
 
-## Proposed outputs
+Open [specimen/index.html](specimen/index.html) in a modern browser. No build, backend, external font or network request is required. All names, dates and amounts are fictional.
 
-- [Responsive behavior contract](output/responsive-behavior.md)
-- [Visual-direction comparison](output/visual-direction-comparison.md)
-- [Token extraction and migration plan](output/design-token-extraction.md)
-- [Executable responsive Dashboard](specimen/README.md)
-- [Measured QA review (2026-11-16)](output/qa-review-2026-11-16.md)
-- [Reproducible browser-QA runner](qa/README.md)
+- [Synthetic input](input/current-page.md) preserves the original incomplete design brief.
+- [Component and host contracts](specimen/README.md) describe reuse and ownership.
+- [Responsive behavior](output/responsive-behavior.md) defines content parity and the test boundary.
+- [Visual directions](output/visual-direction-comparison.md) record the author's editorial-default judgment.
+- [Token inventory](output/design-token-extraction.md) maps actual CSS sources and consumers.
+- [QA commands](qa/README.md) generate measurements, screenshots and failure records.
 
-## What this demonstrates
+## Support boundary
 
-- Prioritize the primary account-manager task, not arbitrary card symmetry.
-- Explain desktop one-screen vs readable content trade-offs.
-- Preserve charts, evidence, actions, and text across narrow layouts.
-- Compare visual hypotheses on a locked content baseline.
-- Record observed fixture tokens with source evidence and keep target-product
-  token compatibility unresolved until that repository is inspected.
+The native factories are implemented in this standalone specimen. They do not establish Vue/React integration or compatibility with another product's component library. Account data, retries and page lifecycle are synthetic; notes remain in the mounted field and are never persisted or sent.
 
-This fixture is **not** a v0.1 benchmark case and must not be included in
-official 40-point clean-run inputs until the benchmark suite is separately
-versioned and approved.
+The specimen remains outside the official v0.1 40-point benchmark. Physical-device use, screen readers, native Tauri behavior, real customer integration and production performance are unrun. Human product acceptance remains separate from automated checks.

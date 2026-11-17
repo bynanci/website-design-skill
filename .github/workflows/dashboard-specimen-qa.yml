@@ -6,6 +6,9 @@ on:
       - "examples/responsive-dashboard/specimen/**"
       - "examples/responsive-dashboard/qa/**"
       - ".github/workflows/dashboard-specimen-qa.yml"
+      - "integrations/vue-project-profile/responsive.mjs"
+      - "integrations/vue-project-profile/responsive.test.mjs"
+      - "integrations/vue-project-profile/package-lock.json"
   workflow_dispatch:
 
 permissions:
@@ -20,6 +23,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: integrations/vue-project-profile/package-lock.json
+      - name: Install optional bounded repair tooling
+        working-directory: integrations/vue-project-profile
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Test bounded repair policy and source guardrails
+        run: node --test integrations/vue-project-profile/responsive.test.mjs
       - name: Install Playwright Chromium
         run: |
           python -m pip install 'playwright==1.56.0'
@@ -28,12 +41,16 @@ jobs:
         run: npm install --no-save --no-package-lock axe-core@4.10.3
       - name: Install native zoom desktop controls
         run: sudo apt-get update && sudo apt-get install -y xvfb xdotool imagemagick
-      - name: Run complete browser matrix and native page zoom
+      - name: Run accepted reference and bounded repair in one desktop session
         env:
           DASHBOARD_NATIVE_ZOOM: '1'
           DASHBOARD_MAX_CAPTURES: '40'
           DASHBOARD_MAX_SECONDS: '480'
-        run: xvfb-run -a -s '-screen 0 1920x1080x24' python examples/responsive-dashboard/qa/run_browser_qa.py
+        run: |
+          xvfb-run -a -s '-screen 0 1920x1080x24' sh -eu -c '
+            python examples/responsive-dashboard/qa/run_browser_qa.py
+            node examples/responsive-dashboard/qa/run_bounded_repair.mjs
+          '
       - name: Upload screenshots and raw measurements
         if: always()
         uses: actions/upload-artifact@v4

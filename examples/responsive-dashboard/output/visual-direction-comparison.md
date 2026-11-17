@@ -1,61 +1,28 @@
-# Harbor Account Workspace — Visual Directions
+# Harbor Dashboard — visual direction decision
 
-Sources: [synthetic input](../input/current-page.md) and
-[responsive contract](responsive-behavior.md).
-State: task-fit **hypotheses**, with two implemented CSS directions and prior
-Chromium captures. No brand research or user task study has been completed.
-The [QA review](qa-review-2026-11-16.md) identifies the source files, matching
-run and screenshot artifact. This document does not convert automated layout
-checks into human design acceptance.
+[繁體中文](visual-direction-comparison.zh-TW.md)
 
-## Locked structure
+Both directions are implemented on the same eight native components and frozen synthetic data. Task-fit claims remain **hypotheses**: no account-manager study, usage analytics or product-owner acceptance is supplied.
 
-Both options preserve the same eight required content groups, observation
-ordering and evidence-to-question workflow. The proposed responsive behavior
-and existing component inventory are shared.
+## Shared baseline
 
-## A — Quiet editorial operations
+`fixture-data.js` supplies text and values. The runner compares normalized required-content text across five widths, both directions and both themes. Both directions preserve observation order, evidence, questions, charts, tables, cases and notes. The [dated QA record](qa-review-2026-11-17.md) carries the current candidate's verification state.
 
-- Wider typography rhythm and explicit hierarchy for AI observations.
-- Few surfaces; use spacing and alignment before borders or shadows.
-- Account identity and meeting questions receive visual priority.
-- Charts use subdued supporting treatment, with legible legends and exact
-  value access.
-- Risk: supporting KPIs / cases may fall below the fold at laptop height.
-- Implementation: the specimen's shared DOM and CSS tokens provide this
-  default direction. No framework component integration has been tested.
-
-## B — Compact operational cockpit
-
-- Tighter density, explicit panel grouping and a more uniform grid.
-- Four KPIs plus chart overview emphasized above extensive reading.
-- Observation list remains fully accessible but requires careful line length
-  and disclosure choices to avoid truncation.
-- Risk: perceived scannability may improve at the expense of deep AI
-  observation reading; no evidence yet supports that trade-off.
-- Implementation: `data-direction="cockpit"` changes accent/chart colors,
-  radius and panel/observation spacing on the same DOM and data. The selector
-  is a specimen variant, not proof of integration with an existing product's
-  reusable component system.
-
-## Provisional comparison
-
-| Criterion | Observed evidence | Remaining decision or test |
+| Direction | Implemented difference | Trade-off |
 |---|---|---|
-| Meeting-preparation task fit | Both directions preserve the account, observation and evidence content | Compare task completion with account managers |
-| Visual difference | Laptop and 390px captures exist for both directions; CSS changes color, radius and density | Human review of hierarchy and legibility |
-| Content parity | The two modes use the same DOM; the runner checks four observations after switching | Broader content and interaction parity across both full matrices |
-| Narrow width | Editorial captures cover 320/390px and a 360px container | Cockpit 320px/container checks; native zoom for both |
-| Keyboard and chart access | Prior scripted chart navigation, dialog Enter/Escape and focus return checks passed | Screen-reader and manual keyboard review; both-mode coverage |
-| Product component compatibility | Standalone HTML/CSS/JS implements the specimen | Inspect and integrate actual reusable product components |
+| Editorial / 閱讀優先 | Default 12px panel radius and more reading space | Longer page; supporting sections require scrolling |
+| Cockpit / 營運總覽 | 7px panel radius, tighter panel/observation spacing and stronger metric border | Higher density may make extended observation reading harder |
 
-## Decision
+Light/dark theme is an independent preference. Both directions use the same semantic palette in each theme; cockpit no longer introduces a separate chart palette. No content is hidden to create the visual difference.
 
-Provisional preference: **A**, because the stated primary task requires
-reading AI observations and evidence before meeting actions. This preference
-is a design hypothesis, not a proven user outcome.
+## Author's default selection
 
-Remaining evidence: product-owner review of content priority and scrolling;
-both-direction matrix coverage; native browser zoom; screen-reader and manual
-keyboard checks; actual reusable component integration. The prior run covers
-an editorial 320px long-copy stress case, not all future text or locales.
+Keep **editorial** as the specimen default. The supplied primary task is to read the highest-priority observation, inspect evidence, prepare a question and record a human decision. Additional reading space supports that stated sequence, while the mobile shortcut makes observations directly reachable.
+
+This is the author's design judgment based on the supplied task. It is not a user-study result or stakeholder approval. Cockpit remains selectable for comparison. A product team can change the default after it records task outcomes and accepts the scrolling/density trade-off.
+
+## Review and limits
+
+The declared matrix compares content/geometry across both directions and themes; current CI outcome belongs in the dated report. Native 200% zoom currently checks editorial in light/dark, not every direction/theme combination. Independent chart/note instances are tested through supplied data and interaction. Native factories do not prove compatibility with another frontend framework.
+
+Before a product rollout, inspect actual captures, compare reading and evidence-discovery tasks with users, review screen-reader/manual keyboard behavior and confirm real content lengths. Preserve source hashes and the known passing candidate if a visual experiment regresses.

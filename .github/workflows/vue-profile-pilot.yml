@@ -10,6 +10,7 @@ on:
       - 'integrations/vue-project-profile/**'
       - 'scripts/inspect_project_profile.py'
       - 'integrations/context-aware-ui/project-profile.schema.json'
+      - 'integrations/runtime-ui/runtime-payload.schema.json'
       - '.github/workflows/vue-profile-pilot.yml'
   pull_request:
     paths:
@@ -19,6 +20,7 @@ on:
       - 'integrations/vue-project-profile/**'
       - 'scripts/inspect_project_profile.py'
       - 'integrations/context-aware-ui/project-profile.schema.json'
+      - 'integrations/runtime-ui/runtime-payload.schema.json'
       - '.github/workflows/vue-profile-pilot.yml'
 
 permissions:
@@ -57,6 +59,7 @@ jobs:
         run: |
           node integrations/vue-project-profile/render-reorder.mjs
           node integrations/vue-project-profile/render-media.mjs
+          node integrations/vue-project-profile/render-runtime.mjs
       - name: Preserve profile and rendered evidence
         if: always()
         uses: actions/upload-artifact@v4
