@@ -25,6 +25,30 @@ def require(condition, message):
         raise AssertionError(message)
 
 
+def chart_keyboard_feedback(page):
+    points = page.locator('[data-chart-point="mix"]')
+    # Focus may scroll an SVG under a stationary pointer, whose mouseenter
+    # then replaces the focused point's announcement. Isolate keyboard input.
+    page.mouse.move(0, 0)
+    points.first.scroll_into_view_if_needed()
+    points.first.evaluate("node => { if (node === document.activeElement) node.blur(); }")
+    points.first.focus()
+    for index in (0, 1):
+        fields = points.nth(index).get_attribute("aria-label").split("，")
+        require(len(fields) == 3, "mix chart label must identify name, amount and share")
+        expected = fields[0] + "：" + fields[1] + "，占 " + fields[2] + "。"
+        page.wait_for_function("""({index, expected}) => {
+          const points = [...document.querySelectorAll('[data-chart-point="mix"]')];
+          return document.activeElement === points[index] &&
+            points[index].getAttribute('tabindex') === '0' &&
+            points.filter(point => point.getAttribute('tabindex') === '0').length === 1 &&
+            document.querySelector('#mix-feedback').textContent === expected;
+        }""", arg={"index": index, "expected": expected})
+        if index == 0:
+            page.mouse.move(0, 0)
+            page.keyboard.press("ArrowRight")
+
+
 def smoke(root, expected, report_root, chromium_executable=None):
     from playwright.sync_api import sync_playwright
 
@@ -102,17 +126,15 @@ def smoke(root, expected, report_root, chromium_executable=None):
                 require(not page.locator("#case-dialog").evaluate("node => node.open"), "Escape did not close dialog")
                 require(page.evaluate("document.activeElement.dataset.case") == "CS-2026-081", "dialog did not restore trigger focus")
                 report["checks"].append("case-dialog-keyboard-round-trip")
-                point = page.locator('[data-chart-point="mix"]').first
-                point.focus()
-                first_feedback = page.locator("#mix-feedback").inner_text()
-                page.keyboard.press("ArrowRight")
-                require(page.locator("#mix-feedback").inner_text() != first_feedback, "chart keyboard action did not update feedback")
+                chart_keyboard_feedback(page)
                 report["checks"].append("chart-keyboard-feedback")
                 page.screenshot(path=str(report_root / "dashboard-desktop.png"), full_page=True)
                 page.set_viewport_size({"width": 390, "height": 844})
                 page.locator("#theme-toggle").click()
                 require(page.locator("#theme-toggle").get_attribute("aria-pressed") == "true", "mobile theme control unavailable")
                 require(page.locator("#dashboard-content").is_visible(), "mobile dashboard content missing")
+                chart_keyboard_feedback(page)
+                report["checks"].append("mobile-chart-keyboard-feedback")
                 page.screenshot(path=str(report_root / "dashboard-mobile.png"), full_page=True)
                 report["checks"].append("mobile-content-and-theme-ready")
             require(not report["pageErrors"], f"browser runtime errors: {report['pageErrors']}")
