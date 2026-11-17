@@ -1,5 +1,7 @@
 # Page Specification
 
+[繁體中文版本](page-spec.zh-TW.md)
+
 ## Page
 
 ## Goal

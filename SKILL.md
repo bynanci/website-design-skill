@@ -11,6 +11,8 @@ description: >
 
 # Website Design
 
+[繁體中文版本](SKILL.zh-TW.md)
+
 Use this skill to redesign an existing website as a coherent system rather than as a collection of independently styled pages.
 
 ## Operating principles
