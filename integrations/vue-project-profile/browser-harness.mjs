@@ -34,11 +34,12 @@ export async function runtimeVersions(browser) {
   }
   return { node: process.version, chromium: browser.version(), packages };
 }
-export async function fixtureServer(root, name) {
+export async function fixtureServer(root, name, { staticRecovery = false } = {}) {
   await mkdir(artifactRoot, { recursive: true });
   const config = {
     configFile: false, root, logLevel: 'warn', plugins: [vue()],
     resolve: { alias: [
+      ...(staticRecovery ? [{ find: "../components/RecoveryPanel.vue", replacement: path.join(root, "src/components/StaticRecoveryPanel.vue") }] : []),
       { find: /^@\//, replacement: `${root}/src/` },
       { find: /^vue$/, replacement: require.resolve('vue/dist/vue.esm-bundler.js') },
       { find: /^pinia$/, replacement: require.resolve('pinia/dist/pinia.mjs') },

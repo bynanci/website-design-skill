@@ -52,3 +52,5 @@ node integrations/vue-project-profile/render-media.mjs
 ```
 
 整個 session 的權限拒絕會在修改篩選、取消及直接 load 後維持阻擋。可信任的新 session 應建立新的 owner；修改輸入不會重設權限狀態。
+
+選用的 [runtime recovery 試點](../../integrations/runtime-ui/README.zh-TW.md) 驗證宣告式資料，並將一次性復原 capability 綁定此既有 owner。預設採靜態復原；browser harness 使用本地確定性 producer，比較靜態/動態 bundle 與 UI 成本，未呼叫外部模型。

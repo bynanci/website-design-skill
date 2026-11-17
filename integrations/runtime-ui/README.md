@@ -1,79 +1,77 @@
-# Declarative Runtime UI Experiment
+# Declarative Runtime Recovery Pilot
 
-[繁體中文版本](README.zh-TW.md)
+[繁體中文](README.zh-TW.md)
 
-Status: **proposed P2 experiment; no runtime renderer or microfrontend system is implemented**.
+Status: **bounded synthetic implementation**. The media fixture has a strict data validator, a host capability boundary, a trusted Vue renderer and static recovery. Live model transport and inference cost are not tested.
 
-## Purpose
+## Run the pilot
 
-A host may request a temporary troubleshooting or settings panel for a specific state. The model proposes a declarative UI tree; the host validates and renders it using already trusted components and action handlers.
+Install the optional [Vue tooling](../vue-project-profile/README.md), then run from the repository root:
 
-This is a separate runtime boundary from design-time source editing. MCP is one possible transport, not a requirement for the renderer or an authorization mechanism by itself.
+```sh
+node --test integrations/vue-project-profile/runtime.test.mjs
+node integrations/vue-project-profile/render-runtime.mjs
+```
 
-Vue's [security guidance](https://vuejs.org/guide/best-practices/security) explains why untrusted component templates can execute code. Treat model output and error logs as untrusted data. Do not compile generated Vue templates, JSX, JavaScript, arbitrary HTML, CSS, expressions, module URLs or native commands inside the application.
+The browser harness produces `artifacts/runtime-results.json` and captures. `--build-only` compares production bundles without claiming browser results. The fixture uses trusted local JSON producers for valid, malformed, oversized, unavailable, delayed and timed-out generation. The normal fixture defaults to static recovery.
 
-## Host contract
+## Host and permission boundary
 
-- Negotiate an explicit schema version, registered component versions, allowed tokens and action capabilities.
-- Supply a minimized, redacted state snapshot with a stable error code and correlation identifier.
-- Treat log text as data, never as instructions that can enlarge the tool/action allowlist.
-- Validate every nested node, property, enum, length, count and depth; reject unknown fields.
-- Resolve component names through a fixed registry; each component has its own allowed props.
-- Select actions from a registry with typed parameters and per-request host authorization. A model-supplied action ID is a request, not permission.
-- Re-check the current state/version before any mutation. Block stale or replayed actions and use the host's confirmation rules.
-- Use a bounded, dismissible surface. Keep focus placement/restoration, keyboard navigation, errors and reduced motion consistent with the application.
-- Fall back to a static error panel if generation times out, is unavailable, or fails validation. A user must be able to dismiss the panel and continue the supported recovery workflow.
-- Use trusted local illustrations selected by asset ID when useful; raw model HTML, arbitrary images and remote URLs are not accepted.
+`createRecoveryHost()` receives trusted callbacks for the current owner snapshot, existing `retry()` action, clock and optional generation service. It sends only an approved error code, a usable-data boolean, a retry-permission boolean, request/state identifiers and fixed version metadata. Item names, filters, logs, credentials and raw diagnostic text are excluded.
 
-## Illustrative response
+The host accepts only `ui-panel/0.1` with registry `media-recovery/0.1`. Components are fixed at version 1: `Group`, `Notice` and `ActionButton`. The only action is `retryMediaRead` with an empty parameter object. It delegates to the existing Pinia owner; it cannot add an API, filesystem or native command.
 
-This example documents intent only. A future implementation must provide a strict schema and host-side validation before consuming it.
+The host creates a one-use action token after validation. A token never comes from the producer. Activation checks the live owner revision, current error/permission, expiry and request capability. It revokes old capabilities before abort callbacks and checks authority again after synchronous observers. Clock rollback, stale/replayed actions and malformed parameters are refused.
+
+This is a same-origin JavaScript boundary. It is not a process sandbox against other trusted application code. MCP can transport data but does not grant authority. A real host must enforce its own authentication, confirmation and isolation rules.
+
+## Strict payload contract
+
+See [runtime-payload.schema.json](runtime-payload.schema.json) and the executable validator in `examples/media-library-vue/src/runtime/contract.js`.
+
+| Limit | Value |
+|---|---:|
+| Serialized UTF-8 payload | 8,192 bytes |
+| Total nodes | 32 |
+| Tree depth | 4 |
+| Children per group or root | 8 |
+| Aggregate text | 4,096 UTF-8 bytes |
+| Producer expiry | 1–60,000 ms |
+| Host action expiry | At most 30,000 ms in this fixture |
+| UI generation timeout | 1,500 ms; shorter deterministic test cases |
+
+Reject unknown properties at every level. Reject code/template/HTML/CSS/expression/URL/native-command fields, arbitrary components/actions and invalid versions. Bound the input length before allocating a UTF-8 buffer, then check the exact byte count.
+
+All text remains opaque. Vue renders it with text interpolation; HTML-looking or expression-looking text is not compiled. There is no image component in this pilot, so remote images and asset URLs are unavailable. A later illustration feature needs a fixed local asset registry.
+
+## Supported response
 
 ```json
 {
   "schemaVersion": "ui-panel/0.1",
+  "registryVersion": "media-recovery/0.1",
   "requestId": "synthetic-case-01",
   "stateVersion": "media-state-4",
-  "expiresAfterMs": 60000,
+  "expiresAfterMs": 30000,
   "nodes": [
-    {
-      "type": "Notice",
-      "props": {
-        "tone": "warning",
-        "title": "Media preview unavailable",
-        "text": "The selected item could not be previewed."
-      }
-    },
-    {
-      "type": "ActionButton",
-      "props": {
-        "label": "Show troubleshooting details"
-      },
-      "action": {
-        "id": "showTroubleshootingDetails",
-        "params": {
-          "errorId": "synthetic-error-01"
-        }
-      }
-    }
+    {"type":"Notice","props":{"tone":"warning","title":"Suggested recovery","text":"The existing read owner can retry the current request."}},
+    {"type":"ActionButton","props":{"label":"Retry media read"},"action":{"id":"retryMediaRead","params":{}}}
   ]
 }
 ```
 
-The host clamps expiry to its configured budget. The action registry binds this error ID to the current request and determines whether details may be displayed. Component tone resolves through approved design tokens. All displayed strings are rendered as text.
+The request and state values must match the host request. The host clamps expiry and adds its private token to the validated render view. That decorated view is an internal host record, not a producer payload. Generated guidance is labelled as a suggestion.
 
-Errors expose only approved details; generated diagnoses are labelled as suggestions and linked to trusted diagnostic evidence where available.
+## Failure and keyboard behavior
 
-## Research-test error pilot
+Invalid payload, timeout, unavailable generation, expired actions and changed state fall back to current static recovery. Dismissal, cancellation and unmount invalidate pending generation even when a producer ignores abort. Non-retryable permission states provide no retry action.
 
-For a future N-01 troubleshooting experiment, first obtain the actual case's input/error/recovery contract. This proposal does not assume what N-01 means or invent study evidence.
+The bounded native dialog has a stable close control, Escape dismissal, keyboard action access and focus restoration. If retry makes the opener unavailable, focus returns to the existing media-load control. The same shared browser harness checks text escaping, redacted inputs, native events, replay/expiry/permission refusal and the unmount microtask boundary.
 
-Use a synthetic exception and a pre-registered safe action. Check valid rendering, unknown components/actions/props, nested oversized payloads, malicious log text, injected code/URL fields, expired/replayed actions, unavailable model and focus restoration. Keep raw participant data outside the request unless explicitly approved.
+## Cost and evidence
 
-## Runtime cost and support gate
+The harness builds the same production fixture twice, substituting a static recovery component for the dynamic component through a fixed trusted build alias. It records raw/gzip JS and CSS bytes. It measures cold opening separately, then two warmups and 20 open-to-Vue-DOM-commit samples for each build, with raw samples, median, p95 and range.
 
-A dynamic panel can add model latency, network dependency, schema/registry code and maintenance cost. A smaller initial bundle is a hypothesis to measure, not a guaranteed result.
+Declared gates are p95 at most 250 ms for the local fixture producer and at most 64 KiB additional gzip JavaScript. Payload limits and all correctness gates remain enforced. These are bounded prototype budgets, not a production performance claim or a promise of a smaller application bundle.
 
-Before a runtime pilot is accepted, record schema conformance, static-fallback availability, latency/cost budget, payload limits, accessibility behavior and the actual host isolation/permission boundary. Benchmark against a static recovery panel.
-
-To call this a microfrontend system would require additional packaging, dependency isolation, lifecycle, deployment and version-compatibility contracts. This experiment establishes only a declarative panel boundary.
+No external model is called. Fixture inference cost is zero; live model latency and monetary cost remain null with an explicit unrun reason. Source/tool hashes, actual runtime versions, commands, failure records and captures are preserved in the workflow artifact. Process isolation, live model integration, assistive technology, physical devices and native-shell parity require separate evidence.

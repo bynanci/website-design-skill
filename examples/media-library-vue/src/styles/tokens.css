@@ -4,6 +4,9 @@
   --color-warning: #8a5a00;
   --color-destructive: #a42332;
   --color-focus: #2459b8;
+  --recovery-max-inline: 42rem;
+  --dialog-border: thin solid currentColor;
+  --dialog-backdrop: rgb(0 0 0 / 45%);
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
