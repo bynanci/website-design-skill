@@ -238,6 +238,9 @@ def chart_keyboard_hover(page):
         page.wait_for_function("({selector, expected}) => document.querySelector(selector).textContent === expected",
                                arg={"selector": feedback_id, "expected": keyboard})
         check(page.locator(feedback_id).inner_text() == keyboard, kind + ": pointer/keyboard value mismatch")
+    # Pointer parity is complete. Isolate the following keyboard navigation
+    # from hover events caused by focus scrolling under a stationary pointer.
+    page.mouse.move(0, 0)
     page.locator('[data-chart-point="mix"]').first.focus()
     page.keyboard.press("ArrowRight")
     check("企業網路" in page.locator("#mix-feedback").inner_text(), "donut ArrowRight missing next value")
