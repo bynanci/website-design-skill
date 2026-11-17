@@ -38,3 +38,14 @@ python3 -m unittest discover -s tests -p 'test_project_profile_inspector.py' -v
 `profile-contract.json` 是經審查的意圖契約。它將警告與破壞性操作分別對應至不同的既有 token，指定兩個 theme、元件及既有 state/API owner，並為唯一獲准的邊線寬度 literal 限定範圍。它不提供執行期權限。
 
 依選用試點指南安裝工具、檢查來源圖並執行 production render 檢查。CI 保存生成的 profile、實際 runtime 版本、來源 hash 與截圖。瀏覽器不可用或執行失敗時，仍須明確標記失敗或未執行。
+
+## 合成 fixture 部署建置
+
+此處的 `vercel.json` 使用共用且鎖定版本的 Vue 工具建置原樣合成 fixture，不會在子目錄錯跑 repository 展示頁指令。由此 fixture 目錄執行：
+
+```sh
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --prefix ../../integrations/vue-project-profile
+node ../../integrations/vue-project-profile/build-fixture.mjs project-profile-vue
+```
+
+Adapter 只接受兩個已審查的 fixture 名稱，不載入 target Vite 設定，保留來源檔案並把編譯後入口／資產輸出到此目錄的 `dist/`。這只建置原始測試基線，不代表 production app 或更廣的 UI 驗收。此設定不會停用 Git 部署，ignored-build 指令會要求真正建置。詳見[部署操作](../../docs/DEPLOYMENT.zh-TW.md)。

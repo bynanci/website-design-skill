@@ -10,7 +10,7 @@ Run `node site/build.mjs` from repository root. No package installation, Python,
 
 Main produces the bilingual documentation landing page. A checkout containing the complete responsive dashboard also publishes its five approved static assets under `/demos/dashboard/`. The builder cleans old output; a main build must not retain an earlier preview's dashboard. The public manifest identifies the source and output file digests. Evaluation answers, raw benchmark results, logs, credentials and dependency directories are not public assets.
 
-Building or deploying this showcase does not release the core skill, create a version tag or satisfy Issues #1/#6. PR #5 retains its release gates.
+Building or deploying this showcase does not release the core skill or create a version tag. Deployment, independent evaluation and version publication have separate evidence; see [the release process](../RELEASE.md).
 
 ## Canonical Vercel project
 
@@ -30,6 +30,14 @@ The root `vercel.json` records the build/output behavior. Root Directory is a pr
 The three duplicate projects (`-83bv`, `-o57d`, `-8ed8`) have preview builds paused and an ignored build step. Their tooling root also contains `git.deploymentEnabled: false`. Keep their deployment history; use the one canonical project for new work.
 
 The ignore script skips only a verified diff with unchanged deployment inputs, including the dashboard directory whose presence selects the preview variant. The first deployment, missing shallow-history objects, inconsistent revisions or Git errors require a build. A skip is not a successful deployment. Vercel counts deployments canceled by an ignored build step toward deployment quotas; the skip saves build work, while disabling duplicate automatic deployments removes the duplicate triggers.
+
+## Synthetic Vue fixture deployments
+
+The `examples/project-profile-vue` and `examples/track-reorder-vue` directories contain Vue app entries but no independent build scripts or tooling lockfiles. Imports rooted there cannot run the repository-root `node site/build.mjs` command. Their local Vercel configs instead install the shared locked tooling and run `integrations/vue-project-profile/build-fixture.mjs` with the corresponding allowlisted fixture name. Vercel must retain the complete repository so the relative shared-tooling paths are available. Use Node22, framework Other/null and output `dist`; `ignoreCommand: exit 1` requests an actual build. Neither configuration disables deployments or declares an ignored build successful.
+
+The bounded adapter uses the same fixed Vite/Vue-plugin, `@/`, Vue and Pinia resolution as the existing render harness, with `configFile: false`. It writes only the selected fixture's `dist/`, refuses other names/paths and symlinked roots/output, and checks source hashes before/after compilation. The existing Vue-pilot workflow smoke-builds both entries and their emitted assets without changing the packages, source or expected evidence. The media-library fixture continues to use its existing harness; this repair does not add a deployment configuration for it.
+
+These are unchanged synthetic test baselines, not full products. In particular, the track-reorder baseline's buttons remain intentionally unbound: deploying it does not apply the separate patch or establish working reorder behavior. Local build success does not prove a provider import uses these settings. Record the exact deployed source, actual build log, READY state and HTTP/assets before accepting each imported project. Existing failing statuses remain part of the history.
 
 ## Verification and merge
 
