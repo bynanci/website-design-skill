@@ -242,13 +242,15 @@ def independent_component_checks(page):
     """Exercise newly created instances, not only their initial DOM markup."""
     original_url = page.url
     original_note = page.locator("#note-status").inner_text()
+    original_cases = page.locator("#dashboard-content [data-case]").evaluate_all("nodes=>nodes.map(node=>node.dataset.case)")
     page.evaluate("""() => {
       const host=document.createElement('div');host.id='component-reuse-probe';
       host.style.width='min(800px,100%)';host.style.marginInline='auto';
       host.append(
         DashboardComponents.create('RevenueMix',{title:'Probe mix',mix:[['Probe A',40],['Probe B',60]]},{idPrefix:'reuse-mix-'}),
         DashboardComponents.create('RevenueTrend',{title:'Probe trend',months:['A','B'],trend:[['Probe trend',[3,9]]]},{idPrefix:'reuse-trend-'}),
-        DashboardComponents.create('NotesEditor',{title:'Probe notes'},{idPrefix:'reuse-notes-'})
+        DashboardComponents.create('NotesEditor',{title:'Probe notes'},{idPrefix:'reuse-notes-'}),
+        DashboardComponents.create('CaseTable',{items:[['PROBE-101','Probe service','一般','Probe owner','12/31','Probe ready','查看詳情']]},{idPrefix:'reuse-cases-'})
       );
       document.body.append(host);
     }""")
@@ -307,6 +309,25 @@ def independent_component_checks(page):
     check(page.url == original_url and "本頁暫存" in page.locator("#reuse-notes-note-status").inner_text(),
           "standalone note native Enter submit did not stay local")
     details["notes"] = {"status": page.locator("#reuse-notes-note-status").inner_text(), "urlUnchanged": page.url == original_url}
+    case_button = host.locator('[data-case="PROBE-101"]')
+    check(case_button.count() == 1, "reused CaseTable ignored supplied case identity")
+    case_button.focus()
+    page.keyboard.press("Enter")
+    check(page.locator("#case-dialog").evaluate("e=>e.open"), "reused CaseTable native Enter did not open the host dialog")
+    check("PROBE-101" in page.locator("#case-dialog-title").inner_text(), "reused CaseTable dialog title ignored row identity")
+    case_description = page.locator("#case-dialog-description").inner_text()
+    check(all(value in case_description for value in ("Probe service", "Probe ready", "12/31")),
+          "reused CaseTable dialog ignored independent row props")
+    check(page.evaluate("document.activeElement.id") == "case-dialog-title", "reused CaseTable dialog initial focus")
+    page.keyboard.press("Escape")
+    check(not page.locator("#case-dialog").evaluate("e=>e.open"), "reused CaseTable dialog Escape close failed")
+    check(case_button.evaluate("e=>e===document.activeElement"), "reused CaseTable dialog did not restore its own trigger focus")
+    current_cases = page.locator("#dashboard-content [data-case]").evaluate_all("nodes=>nodes.map(node=>node.dataset.case)")
+    check(current_cases == original_cases and len(current_cases) == 3,
+          "reused CaseTable changed original case rows or identities")
+    details["cases"] = {"identity": "PROBE-101", "description": case_description,
+                        "focusRestored": case_button.evaluate("e=>e===document.activeElement"),
+                        "originalCases": current_cases}
     duplicates = page.evaluate("""() => {
       const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);
       return ids.filter((id,index)=>ids.indexOf(id)!==index);
