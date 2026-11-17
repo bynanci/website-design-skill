@@ -2,114 +2,7 @@
 (() => {
   "use strict";
   const started = performance.now();
-  const mix = window.DashboardFixtureData.RevenueMix.mix;
-  const months = window.DashboardFixtureData.RevenueTrend.months;
-  const trend = window.DashboardFixtureData.RevenueTrend.trend;
   const qs = selector => document.querySelector(selector);
-  const namespace="http://www.w3.org/2000/svg";
-  function svg(parent,name,attrs,text){
-    const element=document.createElementNS(namespace,name);
-    Object.entries(attrs).forEach(([key,value])=>element.setAttribute(key,String(value)));
-    if(text!==undefined)element.textContent=String(text);
-    parent.appendChild(element);return element;
-  }
-  function feedback(id,message){document.getElementById(id).textContent=message;}
-  function buildMix(){
-    const group=qs("#donut-segments"),legend=qs("#revenue-legend"),tbody=qs("#mix-data");
-    const radius=91,perimeter=2*Math.PI*radius,total=mix.reduce((sum,item)=>sum+item[1],0);
-    let offset=0;
-    svg(group,"circle",{cx:130,cy:130,r:radius,fill:"none",stroke:"var(--chart-track)","stroke-width":30});
-    mix.forEach(([name,value],index)=>{
-      const percent=(value/total*100).toFixed(1),dash=value/total*perimeter;
-      const segment=svg(group,"circle",{
-        cx:130,cy:130,r:radius,fill:"none",stroke:"var(--chart-"+(index+1)+")",
-        "stroke-width":30,"stroke-dasharray":dash+" "+(perimeter-dash),
-        "stroke-dashoffset":-offset,transform:"rotate(-90 130 130)",
-        tabindex:0,role:"img","aria-label":name+"，"+value+" 萬元，"+percent+"%",
-        "data-chart-point":"mix","data-series":name
-      });
-      const announce=()=>feedback("mix-feedback",name+"："+value+" 萬元，占 "+percent+"%。");
-      segment.addEventListener("focus",announce);
-      segment.addEventListener("mouseenter",announce);
-      segment.addEventListener("click",announce);
-      offset+=dash;
-      const button=document.createElement("button");
-      button.type="button";button.className="legend-item";
-      button.innerHTML='<span class="legend-chip c'+(index+1)+'" aria-hidden="true"></span><span>'+name+'</span><strong>'+percent+'%</strong>';
-      button.setAttribute("aria-label",name+"："+value+" 萬元，占 "+percent+"%");
-      button.addEventListener("click",announce);button.addEventListener("focus",announce);
-      legend.append(button);
-      const tr=document.createElement("tr");
-      tr.innerHTML='<th scope="row">'+name+"</th><td>"+value+"</td><td>"+percent+"%</td>";
-      tbody.append(tr);
-    });
-  }
-  function buildTrend(){
-    const graph=qs("#trend-svg"),legend=qs("#trend-key");
-    const left=50,top=18,width=590,height=206,min=0,max=150;
-    const x=index=>left+index*width/(months.length-1);
-    const y=value=>top+height-(value-min)/(max-min)*height;
-    [0,50,100,150].forEach(value=>{
-      const yy=y(value);
-      svg(graph,"line",{x1:left,y1:yy,x2:left+width,y2:yy,class:"gridline"});
-      svg(graph,"text",{x:38,y:yy+4,class:"axis-tick","text-anchor":"end"},value);
-    });
-    months.forEach((month,index)=>svg(graph,"text",{
-      x:x(index),y:top+height+26,class:"axis-tick","text-anchor":"middle"
-    },month));
-    trend.forEach(([name,values],index)=>{
-      const points=values.map((value,i)=>x(i)+","+y(value)).join(" ");
-      svg(graph,"polyline",{points,fill:"none",stroke:"var(--chart-"+(index+1)+")",
-        "stroke-width":3.2,"stroke-linejoin":"round","stroke-linecap":"round"});
-      const key=document.createElement("span");key.className="trend-key-item";
-      key.innerHTML='<span class="legend-chip c'+(index+1)+'" aria-hidden="true"></span>'+name;
-      legend.append(key);
-      values.forEach((value,i)=>{
-        const message=name+" "+months[i]+"："+value+" 萬元。";
-        const dot=svg(graph,"circle",{cx:x(i),cy:y(value),r:5.8,
-          fill:"var(--chart-"+(index+1)+")",stroke:"var(--surface)","stroke-width":2,
-          tabindex:0,role:"img","aria-label":message,
-          "data-chart-point":"trend","data-series":name,"data-month":months[i]});
-        ["focus","mouseenter","click"].forEach(event=>dot.addEventListener(event,
-          ()=>feedback("trend-feedback",message)));
-      });
-    });
-    qs("#trend-table-head").innerHTML='<tr><th scope="col">月份</th>'+
-      trend.map(([name])=>'<th scope="col">'+name+'（萬元）</th>').join("")+"</tr>";
-    qs("#trend-table-body").innerHTML=months.map((month,index)=>
-      '<tr><th scope="row">'+month+"</th>"+
-      trend.map(([,values])=>"<td>"+values[index]+"</td>").join("")+"</tr>"
-    ).join("");
-  }
-  /**
-   * One Tab stop per chart; arrow keys navigate data points. The expanded
-   * data table remains the durable reading alternative for every value.
-   * This avoids forcing users through 23 separate points just to reach
-   * the next section.
-   */
-  function rovingChart(kind){
-    const points=Array.from(document.querySelectorAll('[data-chart-point="'+kind+'"]'));
-    if(points.length===0)return;
-    const setCurrent=index=>{
-      points.forEach((point,i)=>point.setAttribute("tabindex",String(i===index?0:-1)));
-    };
-    points.forEach((point,index)=>{
-      point.setAttribute("tabindex",String(index===0?0:-1));
-      point.addEventListener("focus",()=>setCurrent(index));
-      point.addEventListener("keydown",event=>{
-        let next=index;
-        if(event.key==="ArrowRight"||event.key==="ArrowDown")next=(index+1)%points.length;
-        else if(event.key==="ArrowLeft"||event.key==="ArrowUp")next=(index+points.length-1)%points.length;
-        else if(event.key==="Home")next=0;
-        else if(event.key==="End")next=points.length-1;
-        else return;
-        event.preventDefault();
-        setCurrent(next);
-        points[next].focus();
-      });
-    });
-  }
-
   function direction(){
     document.querySelectorAll("[data-set-direction]").forEach(button=>{
       button.addEventListener("click",()=>{
@@ -119,15 +12,6 @@
           other.setAttribute("aria-pressed",String(other===button)));
       });
     });
-  }
-  function notes(){
-    qs("#note-form").addEventListener("submit",event=>{
-      event.preventDefault();
-      const input=qs("#note-text");
-      if(!input.value.trim()){feedback("note-status","請輸入會後判斷");input.focus();return;}
-      feedback("note-status","已在本頁暫存（未傳送到伺服器）");
-    });
-    qs("#note-text").addEventListener("input",()=>feedback("note-status","內容尚未儲存"));
   }
   function caseDialog(){
     const dialog=qs("#case-dialog"),title=qs("#case-dialog-title");
@@ -195,10 +79,22 @@
       }, 30);
       return promise;
     }
-    function dispose() { cancel(); disposed = true; }
+    function suspend() {
+      if (disposed) return;
+      const wasLoading = state === "loading";
+      cancel();
+      // The complete synthetic data is already mounted and can be shown again.
+      if (wasLoading) { state = "success"; render(); }
+    }
+    function resume() {
+      if (disposed) return;
+      if (state === "loading" && !active) state = "success";
+      render();
+    }
+    function dispose() { suspend(); disposed = true; }
     retry.addEventListener("click", () => { refresh(); });
     render();
-    return { setState, refresh, dispose, snapshot: () => ({ state, requests, pending: Boolean(active), disposed, note: qs("#note-text").value }) };
+    return { setState, refresh, suspend, resume, dispose, snapshot: () => ({ state, requests, pending: Boolean(active), disposed, note: qs("#note-text").value }) };
   }
   function preferences() {
     const theme = qs("#theme-toggle"), floating = qs("#floating-toggle"), panel = qs("#fixture-floating-panel");
@@ -222,12 +118,17 @@
     setFloating(query.get("floating") === "1");
     return { setTheme, setFloating };
   }
-  buildMix();buildTrend();rovingChart("mix");rovingChart("trend");direction();notes();caseDialog();
+  direction();caseDialog();
   const owner = createDashboardOwner(), preference = preferences();
   const query = new URLSearchParams(location.search);
   if (["loading", "empty", "error", "success"].includes(query.get("state"))) owner.setState(query.get("state"));
   window.__DASHBOARD_FIXTURE__ = Object.freeze({ ...owner, ...preference });
-  window.addEventListener("pagehide", () => owner.dispose(), { once: true });
-  window.__DASHBOARD_PERFORMANCE__ = Object.freeze({ initializationMs: performance.now() - started, method: "performance.now around synchronous chart/control/state initialization; excludes browser navigation and data transfer" });
+  window.addEventListener("pagehide", event => {
+    if (event.persisted) owner.suspend(); else owner.dispose();
+  });
+  window.addEventListener("pageshow", event => { if (event.persisted) owner.resume(); });
+  const controllerInitializationMs = performance.now() - started;
+  const componentInitializationMs = window.__DASHBOARD_COMPONENT_PERFORMANCE__.initializationMs;
+  window.__DASHBOARD_PERFORMANCE__ = Object.freeze({ initializationMs: componentInitializationMs + controllerInitializationMs, componentInitializationMs, controllerInitializationMs, method: "Sum of performance.now samples for component construction/chart/control initialization and the application controller; excludes script parsing, navigation and data transfer" });
   window.__DASHBOARD_READY__ = true;
 })();
