@@ -8,6 +8,8 @@
 
 ### 新增
 
+- 新增選用的有限 Vue 來源 profile adapter、明確角色/owner 契約、局部 drift 與拒絕條件測試，以及獨立的 production build/theme 渲染證據流程。
+
 - 核心技能、roadmap、參考指南、範本與 context-aware UI 整合指南的繁體中文版本，並建立雙語寫作規範。
 - Issue #11 專案 profile 的提案 JSON Schema 與合成範例。它們定義資料契約，尚未實作掃描器。
 - 有限範圍的唯讀 project-profile inspector，可盤點靜態 package metadata、TypeScript JSONC alias、token 候選與來源 digest；語意角色與執行期行為仍未驗證。
@@ -32,6 +34,8 @@
 - v0.1.0 發布追蹤 Issue #1
 
 ### 變更
+
+- 修正公開 clean-run packet 的過時 baseline，使其符合發布政策；回歸測試會防止操作文件再次偏離指定 commit。
 
 - 官方證據必須使用凍結的 v0.1 benchmark commit，並驗證執行者與能力資訊。
 - 發布檢查會拒絕空白、跨執行重用、絕對路徑或越界的 raw evidence。

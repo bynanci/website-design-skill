@@ -8,7 +8,11 @@ Repository:
 `https://github.com/bynanci/website-design-skill`
 
 Core commit:
-`64d0d9dfe4d56c94f20a885369164335c5629fc9`
+`7d64090710ef20f1d24cea6b46199391d3c09c18`
+
+This is the official baseline in `benchmarks/release-policy.json`. Use the
+packet builder described in [clean-packet-submission.md](clean-packet-submission.md)
+to package these pinned inputs without evaluator files.
 
 Suite:
 `0.1.0`

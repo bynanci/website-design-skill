@@ -21,7 +21,9 @@ fallback, not a prerequisite for design-time adoption.
 
 The [Issue #8 umbrella](https://github.com/bynanci/website-design-skill/issues/8) is an index only. Child issues #11–#15 are the source of truth for scope and acceptance criteria.
 
-Release gates remain independently verifiable. Main now contains the bilingual contract documentation, profile schema and bounded read-only inspector delivered by PRs #9 and #16. Issue #11 has an initial synthetic Vue fixture, a recorded profile output and regression coverage that checks source-digest refresh. The fixture covers static manifest versions, JSONC aliases, style-token candidates, a dark-theme override, and candidate component/store/service paths. Semantic token roles, import and theme resolution, component APIs, state ownership, and rendered behavior remain open under #11.
+Release gates remain independently verifiable. Main contains the bilingual contracts, portable profile schema and read-only inventory. Issue #11 now has a synthetic Vue fixture, bounded AST/source inspection, an explicit semantic-role contract, source/API ownership checks, scoped drift checks and a production-build/theme-render harness. The [pilot guide](integrations/vue-project-profile/README.md) defines its supported syntax and evidence. CI and Issue #11 record the actual verification results.
+
+The next integration work is the bounded Vue patch in #12, then state-transition evidence in #13. Dashboard rendering and bounded repair remain tracked by #7 and #14; runtime recovery is tracked by #15. Issue #1 still requires independent clean agent outputs, and draft PR #5 retains its separate release gates.
 
 ## v0.1 — Minimum viable public release
 

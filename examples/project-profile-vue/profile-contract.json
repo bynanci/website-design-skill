@@ -1,0 +1,48 @@
+{
+  "version": "0.1",
+  "themes": [
+    {
+      "name": "light",
+      "selector": ":root"
+    },
+    {
+      "name": "dark",
+      "selector": ":root[data-theme=\"dark\"]"
+    }
+  ],
+  "roles": [
+    {
+      "role": "warning",
+      "reference": "--color-warning",
+      "consumer": "src/components/StatusBanner.vue"
+    },
+    {
+      "role": "destructive-action",
+      "reference": "--color-destructive",
+      "consumer": "src/components/StatusBanner.vue"
+    }
+  ],
+  "components": [
+    {
+      "path": "src/components/StatusBanner.vue",
+      "responsibility": "Dashboard status feedback"
+    }
+  ],
+  "stateOwners": [
+    {
+      "path": "src/stores/dashboard.ts",
+      "export": "useDashboardStore",
+      "consumer": "src/views/DashboardView.vue",
+      "service": "src/services/dashboard-api.ts",
+      "action": "refresh"
+    }
+  ],
+  "allowedLiterals": [
+    {
+      "path": "src/components/StatusBanner.vue",
+      "property": "border-inline-start",
+      "value": "4px",
+      "reason": "Status indicator thickness; no semantic spacing token exists in this fixture."
+    }
+  ]
+}

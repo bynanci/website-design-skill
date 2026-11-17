@@ -3,6 +3,7 @@
 import hashlib
 import json
 from pathlib import Path
+import re
 import tempfile
 import unittest
 from unittest import mock
@@ -12,6 +13,17 @@ from scripts import build_clean_packets as pack
 
 
 REF = "7" * 40
+
+
+class PacketDocumentationTests(unittest.TestCase):
+    def test_public_packet_uses_the_official_release_baseline(self):
+        root = Path(__file__).resolve().parents[1]
+        policy = json.loads((root / "benchmarks/release-policy.json").read_text(encoding="utf-8"))
+        packet = (root / "benchmarks/clean-run-packet.md").read_text(encoding="utf-8")
+        documented_commit = re.search(r"Core commit:\s*`([0-9a-f]{40})`", packet)
+
+        self.assertIsNotNone(documented_commit, "Public packet must identify its core commit.")
+        self.assertEqual(documented_commit.group(1), policy["required_repository_commit"])
 
 
 class CleanPacketTests(unittest.TestCase):

@@ -10,7 +10,9 @@ Website Design Skill 以跨平台改版方法、明確的交付契約與行為�
 
 第一個框架目標是 Vue。React、Svelte 等框架必須有各自的 adapter 與 conformance fixture，不能由共用規格推定相容。Runtime UI 是獨立的 P2 實驗，不是一般設計時工作的前置條件。
 
-細項任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整；#11–#15 分別追蹤專案 profile、Vue AST 修改、狀態轉換、響應式修正與 runtime troubleshooting panel。每個 child issue 是該工作的驗收依據。`scripts/inspect_project_profile.py` 提供有限範圍的唯讀檢查；#11 現已加入合成 Vue fixture、已保存的 profile 輸出，以及檢查來源 digest 更新的回歸測試。Fixture 涵蓋靜態套件版本、JSONC alias、樣式 token 候選、dark theme override，以及元件/store/service 路徑候選。語意 token、import/theme 解析、公開元件 API、狀態所有權與渲染結果仍待 #11 驗收。
+細項任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整；每個子 Issue 是各工作的驗收依據。#11 現已包含合成 Vue fixture、範圍受限的 AST/來源檢查、明確語意角色契約、來源 API/owner 檢查、局部 drift 檢查及 production build/theme-render harness。[試點指南](integrations/vue-project-profile/README.zh-TW.md) 定義支援語法與證據格式；實際驗證結果由 CI 與 #11 記錄。
+
+下一階段先處理 #12 的有限 Vue patch，再補 #13 的狀態轉換證據。Dashboard 渲染與有限修正分別由 #7、#14 追蹤；runtime recovery 由 #15 追蹤。#1 仍需獨立乾淨 agent 輸出，draft PR #5 保留各自的發布 gate。
 
 ## v0.1：最小公開版本
 

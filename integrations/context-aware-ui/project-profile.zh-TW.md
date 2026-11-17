@@ -79,3 +79,9 @@ Token 參照以 `--` 開頭，請使用 `--required-token=--color-warning` 傳�
 [合成 Vue fixture](../../examples/project-profile-vue/README.zh-TW.md) 保存範圍受限的範例專案與唯讀 inspector 的實際輸出。回歸測試會比對該輸出，並確認來源檔變動時會產生新 digest，而未變動元件的 digest 保持一致。
 
 Fixture 使用 manifest 宣告的套件版本、JSONC alias、SCSS/CSS token 候選、dark theme override、Vue 元件、Pinia store 與 API service 路徑。它不安裝依賴、不執行 Vite 設定、不解析匯入或 theme 計算值、不剖析公開元件 API、不確認狀態所有權，也不渲染 app。這些項目仍應標記為 unknown。
+
+## Vue 來源剖析與 theme 渲染
+
+選用的 [Vue profile 試點](../vue-project-profile/README.zh-TW.md) 在唯讀盤點上加入範圍受限的來源 parser。經審查的意圖契約指定要驗證的語意角色與 owner；adapter 追蹤本地匯入、逐 theme 檢查宣告與 consumer、擷取支援的元件 props、檢查 Pinia/service 呼叫，並報告衝突、未知項目與限定範圍的 token drift。輸出沿用可攜 profile schema。
+
+獨立的 production build/browser harness 量測隨附 fixture 的 light/dark token consumer。來源宣告與計算結果各自保留；指南列出支援語法、拒絕條件、命令、依賴與證據位置。
