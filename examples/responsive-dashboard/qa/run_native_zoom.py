@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import subprocess
+import struct
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -39,8 +40,8 @@ def main():
     try:
         if int(os.environ.get("DASHBOARD_MAX_CAPTURES", "2")) < 2:
             raise RuntimeError("Native zoom requires a two-capture budget.")
-        if not os.environ.get("DISPLAY") or not shutil.which("xdotool"):
-            raise RuntimeError("Native zoom requires DISPLAY and xdotool; no viewport proxy is substituted.")
+        if not os.environ.get("DISPLAY") or (not shutil.which("xdotool") or not shutil.which("import")):
+            raise RuntimeError("Native zoom requires DISPLAY, xdotool and ImageMagick import; no viewport proxy is substituted.")
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=False,
                 executable_path=os.environ.get("DASHBOARD_CHROMIUM_EXECUTABLE"),
@@ -94,8 +95,19 @@ def main():
                 if time.monotonic() - started > max_seconds:
                     raise TimeoutError("Native zoom time budget exhausted")
                 filename = f"native-zoom-200-{theme}.png"
-                page.screenshot(path=str(OUTPUT / filename), full_page=True, animations="disabled")
+                # CDP full-page capture can clip the raster at native page zoom.
+                # Capture the real X11 window instead, including browser chrome.
+                page.evaluate("scrollTo(0, 0)")
+                page.wait_for_timeout(100)
+                subprocess.run(["import", "-window", window, str(OUTPUT / filename)], check=True, timeout=10)
+                png = (OUTPUT / filename).read_bytes()
+                assert png[:8] == b"\x89PNG\r\n\x1a\n", "Expected a PNG window capture"
+                pixel_width, pixel_height = struct.unpack(">II", png[16:24])
+                assert abs(pixel_width - after["outerWidth"]) <= 4, "Native window raster width was clipped"
+                assert abs(pixel_height - after["outerHeight"]) <= 4, "Native window raster height was clipped"
                 report["themes"].append({"theme": theme, "measurements": observed, "capture": filename,
+                    "capture_method": "X11 native browser-window raster (ImageMagick import); visible viewport with browser chrome, not a full-page CDP capture",
+                    "pixel_size": {"width": pixel_width, "height": pixel_height},
                     "sha256": hashlib.sha256((OUTPUT / filename).read_bytes()).hexdigest()})
             assert not errors, str(errors)
             report["page_errors"] = errors
