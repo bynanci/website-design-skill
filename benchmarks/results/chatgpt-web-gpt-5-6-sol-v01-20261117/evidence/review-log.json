@@ -1,0 +1,84 @@
+{
+  "criterion_score_recorded_at": "2026-11-17T13:39:30.908Z",
+  "latest_generation_completion_observed_at": "2026-11-17T13:34:42.704Z",
+  "initial_review_started_at": null,
+  "initial_review_start_note": "First read-only review action was not separately clocked; all cases had completed and raw outputs were supplied frozen before this reviewer was dispatched.",
+  "generation_before_review_basis": "Reviewer dispatched with all three frozen raw files only after latest captured completion; timestamps in generation-captures.json precede formal score record.",
+  "raw_integrity_checks": [
+    {
+      "case_id": "ia-audit-001",
+      "raw_filename": "ia-audit.md",
+      "bytes": 15630,
+      "sha256": "ab987db5fabf1d16d1e8605e0c04ce86c29ef15524be806801a0f59ecbc44ea0",
+      "matches_original_browser_download": true,
+      "matches_shared_capture": true
+    },
+    {
+      "case_id": "component-reuse-001",
+      "raw_filename": "component-reuse.md",
+      "bytes": 11264,
+      "sha256": "8a13523c5add6cddb1b714ac523e9afaa38cfae0c7d99e9c0ec6f5aa5ebf9cc5",
+      "matches_original_browser_download": true,
+      "matches_shared_capture": true
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "raw_filename": "end-to-end.md",
+      "bytes": 41301,
+      "sha256": "227b621493a991fda7a1f17297a2aa4b9d26e7d6234c46764922affb5898c5c6",
+      "matches_original_browser_download": true,
+      "matches_shared_capture": true
+    }
+  ],
+  "packet_verification": [
+    {
+      "case_id": "ia-audit-001",
+      "packet_filename": "ia-audit-001-pinned-7d64090710ef.zip",
+      "sha256": "9b7ac973b4d4c0c78c4b6d95d36f92ee4f957bdd404bea5d1d0aa95b4aa871a1",
+      "all_repository_members_byte_identical_to_pin": true,
+      "declared_member_set_and_manifest_hashes_verified": true,
+      "evaluator_files_absent": true
+    },
+    {
+      "case_id": "component-reuse-001",
+      "packet_filename": "component-reuse-001-pinned-7d64090710ef.zip",
+      "sha256": "8a6b6e13e281bb062fa73171ccd60310503d459d48be7a3e87b14da73ddc10b1",
+      "all_repository_members_byte_identical_to_pin": true,
+      "declared_member_set_and_manifest_hashes_verified": true,
+      "evaluator_files_absent": true
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "packet_filename": "end-to-end-b2b-001-pinned-7d64090710ef.zip",
+      "sha256": "e74bf010c1d723320e1cb2ed8aedd6f3c78f809bc878e82586674ebab75325f2",
+      "all_repository_members_byte_identical_to_pin": true,
+      "declared_member_set_and_manifest_hashes_verified": true,
+      "evaluator_files_absent": true
+    }
+  ],
+  "raw_files_modified": false,
+  "verification_completed_at": "2026-11-17T13:39:58.944Z",
+  "checks": [
+    {
+      "command": "python3 scripts/validate_benchmarks.py",
+      "exit_code": 0,
+      "result": "Benchmark validation passed."
+    },
+    {
+      "command": "python3 scripts/release_status.py --require-ready",
+      "exit_code": 0,
+      "result": {
+        "ready": true,
+        "official_runs": 2,
+        "distinct_agent_signatures": 2,
+        "failures": [],
+        "warnings": []
+      }
+    },
+    {
+      "command": "Draft202012Validator + FormatChecker and integrity checks",
+      "exit_code": 0,
+      "result": "Schema valid; 20 criterion quotes/rationales preserved; original download bytes unchanged; generation completion precedes formal criterion recording."
+    }
+  ]
+}

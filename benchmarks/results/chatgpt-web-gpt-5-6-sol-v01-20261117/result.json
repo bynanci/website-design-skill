@@ -1,0 +1,289 @@
+{
+  "schema_version": "1.0",
+  "run_id": "chatgpt-web-gpt-5-6-sol-v01-20261117",
+  "status": "official",
+  "repository_commit": "7d64090710ef20f1d24cea6b46199391d3c09c18",
+  "suite_version": "0.1.0",
+  "agent": {
+    "provider": "OpenAI",
+    "product": "ChatGPT web",
+    "model": "GPT-5.6 Sol",
+    "version": null,
+    "reasoning_effort": "Medium",
+    "identity_basis": "Literal selected UI model label and visible 5.6 Medium control; no backend/version inference."
+  },
+  "environment": {
+    "run_date": "2026-11-17",
+    "interface": "ChatGPT web UI; separate Temporary, Unpersonalized conversation per case; browser attachment and Markdown Download file",
+    "capabilities": {
+      "repository_read": false,
+      "repository_write": false,
+      "web_research": false,
+      "browser_render": false,
+      "image_generation": false,
+      "code_execution": "Packet-local file inspection and Markdown artifact generation; visible activity summaries available, underlying tool-call detail not archived. No frontend implementation supplied.",
+      "persistent_context": false,
+      "other": "One allowlisted ZIP upload per isolated case; web/connectors/outside files forbidden; task execution and raw file creation observed in remote web contexts."
+    },
+    "api_key_used": false,
+    "api_key_basis": "Browser controller observation of ChatGPT web execution; no API invocation or key required. This is not independent provider-internal telemetry.",
+    "generation_captures_path": "evidence/generation-captures.json",
+    "isolation_review_path": "isolation.md",
+    "packet_verification": [
+      {
+        "case_id": "ia-audit-001",
+        "packet_filename": "ia-audit-001-pinned-7d64090710ef.zip",
+        "sha256": "9b7ac973b4d4c0c78c4b6d95d36f92ee4f957bdd404bea5d1d0aa95b4aa871a1",
+        "all_repository_members_byte_identical_to_pin": true,
+        "declared_member_set_and_manifest_hashes_verified": true,
+        "evaluator_files_absent": true
+      },
+      {
+        "case_id": "component-reuse-001",
+        "packet_filename": "component-reuse-001-pinned-7d64090710ef.zip",
+        "sha256": "8a6b6e13e281bb062fa73171ccd60310503d459d48be7a3e87b14da73ddc10b1",
+        "all_repository_members_byte_identical_to_pin": true,
+        "declared_member_set_and_manifest_hashes_verified": true,
+        "evaluator_files_absent": true
+      },
+      {
+        "case_id": "end-to-end-b2b-001",
+        "packet_filename": "end-to-end-b2b-001-pinned-7d64090710ef.zip",
+        "sha256": "e74bf010c1d723320e1cb2ed8aedd6f3c78f809bc878e82586674ebab75325f2",
+        "all_repository_members_byte_identical_to_pin": true,
+        "declared_member_set_and_manifest_hashes_verified": true,
+        "evaluator_files_absent": true
+      }
+    ]
+  },
+  "manual_edit": false,
+  "cases": [
+    {
+      "id": "ia-audit-001",
+      "raw_output_path": "benchmarks/results/chatgpt-web-gpt-5-6-sol-v01-20261117/ia-audit.md",
+      "scores": {
+        "A1": 2,
+        "A2": 2,
+        "A3": 2,
+        "A4": 2,
+        "A5": 2,
+        "A6": 2
+      },
+      "notes": "12/12. Criterion quotes, exact raw line locations and rationale are preserved in scoring-notes.md and criterion_evidence.",
+      "criterion_evidence": [
+        {
+          "criterion": "A1",
+          "score": 2,
+          "quote": "The earliest unstable layer is information architecture",
+          "raw_line": 154,
+          "rationale": "Starts from IA findings and changes navigation structure only; explicitly excludes visual design and implementation."
+        },
+        {
+          "criterion": "A2",
+          "score": 2,
+          "quote": "`Healthcare` is an industry; `Enterprise` is an audience/company segment; `Getting Started` is a lifecycle/guidance destination",
+          "raw_line": 36,
+          "rationale": "Names all three incompatible grouping models correctly."
+        },
+        {
+          "criterion": "A3",
+          "score": 2,
+          "quote": "Users cannot infer a single rule for what belongs under Solutions, reducing predictability and future scalability",
+          "raw_line": 36,
+          "rationale": "Connects the mixed classification directly to predictability and scaling, with separate findability discussion."
+        },
+        {
+          "criterion": "A4",
+          "score": 2,
+          "quote": "Every required item is preserved or moved",
+          "raw_line": 150,
+          "rationale": "The disposition matrix explicitly covers all ten required items, including Contact/demo. Its demo-route sufficiency condition preserves the requirement rather than dropping it."
+        },
+        {
+          "criterion": "A5",
+          "score": 2,
+          "quote": "No competitor or external market references are available within the permitted case materials",
+          "raw_line": 45,
+          "rationale": "Does not invent analytics, research, or competitors. New structural labels and Enterprise company-size interpretation are proposals/assumptions with explicit validation conditions."
+        },
+        {
+          "criterion": "A6",
+          "score": 2,
+          "quote": "**By Industry** → Healthcare (**industry** model)",
+          "raw_line": 103,
+          "rationale": "States dominant logic for every major group, and separates Industry and Company Size into explicitly typed subgroups. Retaining Solutions as a discovery umbrella does not retain the original mixed sibling set."
+        }
+      ]
+    },
+    {
+      "id": "component-reuse-001",
+      "raw_output_path": "benchmarks/results/chatgpt-web-gpt-5-6-sol-v01-20261117/component-reuse.md",
+      "scores": {
+        "B1": 2,
+        "B2": 2,
+        "B3": 2,
+        "B4": 2,
+        "B5": 2,
+        "B6": 2
+      },
+      "notes": "12/12. Criterion quotes, exact raw line locations and rationale are preserved in scoring-notes.md and criterion_evidence.",
+      "criterion_evidence": [
+        {
+          "criterion": "B1",
+          "score": 2,
+          "quote": "## 1. Existing component inventory",
+          "raw_line": 13,
+          "rationale": "Maps all supplied inventory responsibilities before section mapping and the single new-component proposal."
+        },
+        {
+          "criterion": "B2",
+          "score": 2,
+          "quote": "The supplied inventory already covers the hero, logo proof, capability cards, metrics, case study, and final CTA.",
+          "raw_line": 9,
+          "rationale": "Explicit mapping reuses HeroSection, LogoWall, FeatureCard, MetricBand, CaseStudyFeature, and CTASection for their matching responsibilities."
+        },
+        {
+          "criterion": "B3",
+          "score": 2,
+          "quote": "The only requested pattern whose responsibility is not represented is the three-plan feature comparison table.",
+          "raw_line": 9,
+          "rationale": "Only PricingTable is proposed as new; it owns a generic plan-feature matrix that cards/metrics cannot cleanly represent."
+        },
+        {
+          "criterion": "B4",
+          "score": 2,
+          "quote": "The requested page does **not** justify Enterprise-specific versions",
+          "raw_line": 27,
+          "rationale": "Explicitly rejects page-named duplicates and leaves existing APIs unchanged."
+        },
+        {
+          "criterion": "B5",
+          "score": 2,
+          "quote": "| # | Requested section | Pattern | Component | Action | Justification |",
+          "raw_line": 33,
+          "rationale": "Every requested section has an explicit Reuse, Compose, or New action and a responsibility-based justification; all seven are covered."
+        },
+        {
+          "criterion": "B6",
+          "score": 2,
+          "quote": "Preserve table semantics and column relationships",
+          "raw_line": 89,
+          "rationale": "Defines native table row/column headers, accessible overflow and non-color-only distinctions; responsive matrix handling is specified, and no unsupported token change is proposed."
+        }
+      ]
+    },
+    {
+      "id": "end-to-end-b2b-001",
+      "raw_output_path": "benchmarks/results/chatgpt-web-gpt-5-6-sol-v01-20261117/end-to-end.md",
+      "scores": {
+        "C1": 2,
+        "C2": 2,
+        "C3": 2,
+        "C4": 2,
+        "C5": 2,
+        "C6": 2,
+        "C7": 2,
+        "C8": 2
+      },
+      "notes": "16/16. Criterion quotes, exact raw line locations and rationale are preserved in scoring-notes.md and criterion_evidence.",
+      "criterion_evidence": [
+        {
+          "criterion": "C1",
+          "score": 2,
+          "quote": "No analytics, user behavior, competitor conventions, code behavior, URLs, or visual-regression results are inferred.",
+          "raw_line": 30,
+          "rationale": "Missing analytics/research/market evidence remains unknown; metric values, proof, URLs and actual test results are not invented."
+        },
+        {
+          "criterion": "C2",
+          "score": 2,
+          "quote": "The earliest unstable layer is **STRUCTURE**",
+          "raw_line": 32,
+          "rationale": "Current-site audit and mixed-taxonomy findings precede proposed IA, page hierarchy and downstream visual constraints."
+        },
+        {
+          "criterion": "C3",
+          "score": 2,
+          "quote": "remove the ambiguous `Solutions` catch-all",
+          "raw_line": 192,
+          "rationale": "Moves Kubernetes and Enterprise to explicitly distinct top-level roles, and Start Here to utility/lifecycle guidance. Coherent Platform/Resources/Company submenus remain. Flattening has documented breadth/scalability risk but resolves the supplied false sibling taxonomy."
+        },
+        {
+          "criterion": "C4",
+          "score": 2,
+          "quote": "## Required site-content coverage",
+          "raw_line": 436,
+          "rationale": "Explicit matrix covers every one of the thirteen required content items, including Docs, Start Here, reliability metrics and Contact/demo, plus all current homepage items. No required item disappears."
+        },
+        {
+          "criterion": "C5",
+          "score": 2,
+          "quote": "- **Primary CTA:** Request Demo → existing contact/demo destination.",
+          "raw_line": 301,
+          "rationale": "Defines orientation → product/context fit → reliability/customer proof → guidance/resources/pricing → demo journey; primary, secondary and contextual CTA roles are explicit. Twelve sections are verbose but hierarchy is coherent."
+        },
+        {
+          "criterion": "C6",
+          "score": 2,
+          "quote": "## 6.1 Supplied component inventory",
+          "raw_line": 466,
+          "rationale": "Maps supplied components to all matching sections before conditional creation. Only an unlisted header is conditional on repository inspection; existing form must be inspected/reused, not replaced without evidence."
+        },
+        {
+          "criterion": "C7",
+          "score": 2,
+          "quote": "Frontend stack migration: **none**; explicitly out of scope.",
+          "raw_line": 585,
+          "rationale": "Respects the unknown existing frontend stack and conventions; orders semantic/content/layout/responsive work before typography/visual polish. Implementation is an ordered traceable plan, not falsely claimed execution."
+        },
+        {
+          "criterion": "C8",
+          "score": 2,
+          "quote": "# 9. VALIDATE — Artifact-level validation",
+          "raw_line": 640,
+          "rationale": "Explicit IA, content, component, responsive, accessibility, evidence and implementation checks distinguish spec verification from unperformed rendered tests. Per-section responsive/accessibility notes and remaining gates are concrete."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "score": 40,
+    "max_score": 40,
+    "interpretation": "Strong compatibility with all twenty frozen criteria clearly satisfied. Criterion-level evidence retained; no claim of implemented UX, rendered accessibility conformance, or future navigation scalability."
+  },
+  "review": {
+    "reviewer_role": "Separate post-generation evaluator /root/v01_second_reviewer",
+    "initial_review_started_at": null,
+    "initial_review_start_note": "First read-only review action was not separately clocked; all cases had completed and raw outputs were supplied frozen before this reviewer was dispatched.",
+    "criterion_score_recorded_at": "2026-11-17T13:39:30.908Z",
+    "latest_generation_completion_observed_at": "2026-11-17T13:34:42.704Z",
+    "review_notes_path": "scoring-notes.md",
+    "raw_integrity_checks": [
+      {
+        "case_id": "ia-audit-001",
+        "raw_filename": "ia-audit.md",
+        "bytes": 15630,
+        "sha256": "ab987db5fabf1d16d1e8605e0c04ce86c29ef15524be806801a0f59ecbc44ea0",
+        "matches_original_browser_download": true,
+        "matches_shared_capture": true
+      },
+      {
+        "case_id": "component-reuse-001",
+        "raw_filename": "component-reuse.md",
+        "bytes": 11264,
+        "sha256": "8a13523c5add6cddb1b714ac523e9afaa38cfae0c7d99e9c0ec6f5aa5ebf9cc5",
+        "matches_original_browser_download": true,
+        "matches_shared_capture": true
+      },
+      {
+        "case_id": "end-to-end-b2b-001",
+        "raw_filename": "end-to-end.md",
+        "bytes": 41301,
+        "sha256": "227b621493a991fda7a1f17297a2aa4b9d26e7d6234c46764922affb5898c5c6",
+        "matches_original_browser_download": true,
+        "matches_shared_capture": true
+      }
+    ],
+    "eligibility": "Official under current frozen policy, using archived UI evidence plus explicitly attributed live-controller observations. No disqualifying contamination, missing raw response, substitution or blocked generation was found."
+  }
+}

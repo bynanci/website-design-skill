@@ -1,0 +1,8 @@
+{
+  "label": "sol56-v01-b2b",
+  "model": "GPT-5.6 Sol",
+  "started_at": "2026-11-17T13:31:23.406Z",
+  "packet_path": "/workspace/shared/website-eval-inputs/end-to-end-b2b-001-pinned-7d64090710ef.zip",
+  "personalization": "Unpersonalized",
+  "temporary": true
+}

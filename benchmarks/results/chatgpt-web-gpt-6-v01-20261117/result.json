@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "run_id": "chatgpt-web-gpt-6-v01-20261117",
+  "status": "official",
+  "repository_commit": "7d64090710ef20f1d24cea6b46199391d3c09c18",
+  "suite_version": "0.1.0",
+  "agent": {
+    "provider": "OpenAI",
+    "product": "ChatGPT web",
+    "model": "GPT-6",
+    "version": null,
+    "effort": "Medium"
+  },
+  "environment": {
+    "run_date": "2026-11-17",
+    "interface": "ChatGPT web; new Temporary chat and Unpersonalized for each case; original Markdown browser downloads",
+    "capabilities": {
+      "repository_read": "Only uploaded pinned ZIP sources; no local/evaluator checkout",
+      "repository_write": false,
+      "uploaded_file_read": true,
+      "code_execution": "ZIP inspection and Markdown artifact creation observed in UI tool summaries",
+      "persistent_context": "Each case used a distinct Temporary/Unpersonalized chat; no parent or prior-case content supplied",
+      "web_research": "Prohibited by prompt; none observed in visible UI",
+      "browser_render": "Not used; no implementation render was supplied",
+      "image_generation": "Not used",
+      "downloadable_markdown": true,
+      "observation_limit": "Visible UI/tool summaries, not a complete provider-internal execution audit"
+    }
+  },
+  "manual_edit": false,
+  "generation_finished_at": "2026-11-17T13:28:15.962Z",
+  "reviewer": {
+    "id": "codex-independent-review:/root/release_evidence_audit",
+    "scored_at": "2026-11-17T13:36:27.187759Z"
+  },
+  "isolation_record": "isolation.md",
+  "cases": [
+    {
+      "id": "ia-audit-001",
+      "raw_output_path": "benchmarks/results/chatgpt-web-gpt-6-v01-20261117/ia-audit.md",
+      "raw_sha256": "4dbf31af88620a30c8353b9e1d4fce60f4105990b903e94005f5be15b0556ed5",
+      "scores": {
+        "A1": 2,
+        "A2": 2,
+        "A3": 2,
+        "A4": 2,
+        "A5": 2,
+        "A6": 2
+      },
+      "notes": "Independent pinned-rubric review: 12/12. Exact quotes, raw line locations and per-criterion rationale are preserved in evidence/review-log.json and scoring-notes.md. No raw content was edited."
+    },
+    {
+      "id": "component-reuse-001",
+      "raw_output_path": "benchmarks/results/chatgpt-web-gpt-6-v01-20261117/component-reuse.md",
+      "raw_sha256": "f71231d12956e268112d926121dab8c616ade47c0997ca792d37f9ac56a4f624",
+      "scores": {
+        "B1": 2,
+        "B2": 2,
+        "B3": 2,
+        "B4": 2,
+        "B5": 2,
+        "B6": 2
+      },
+      "notes": "Independent pinned-rubric review: 12/12. Exact quotes, raw line locations and per-criterion rationale are preserved in evidence/review-log.json and scoring-notes.md. No raw content was edited."
+    },
+    {
+      "id": "end-to-end-b2b-001",
+      "raw_output_path": "benchmarks/results/chatgpt-web-gpt-6-v01-20261117/end-to-end.md",
+      "raw_sha256": "89791553ebc0a9633cb2bc08a85c91d4a21f20998e57b235d5121fdd697e20cd",
+      "scores": {
+        "C1": 2,
+        "C2": 2,
+        "C3": 2,
+        "C4": 2,
+        "C5": 2,
+        "C6": 2,
+        "C7": 2,
+        "C8": 2
+      },
+      "notes": "Independent pinned-rubric review: 16/16. Exact quotes, raw line locations and per-criterion rationale are preserved in evidence/review-log.json and scoring-notes.md. No raw content was edited."
+    }
+  ],
+  "aggregate": {
+    "score": 40,
+    "max_score": 40,
+    "interpretation": "Strong compatibility for the pinned planning-artifact suite: all 20 criteria are explicit and evidence-bound. This is one official interface-model signature; a second eligible signature and criterion-level release review are still required. It is not a rendered/product accessibility or production-success result."
+  }
+}

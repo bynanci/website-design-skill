@@ -8,9 +8,12 @@ A runner can be unavailable or non-runnable without implying anything about Webs
 
 | Runner | Independent context | Repo-readable | Can hide evaluator files | Raw output retrievable | Status | Notes |
 |---|---|---|---|---|---|---|
+| ChatGPT web — GPT-6 and GPT-5.6 Sol | Yes; fresh Temporary, Unpersonalized chat per case | Pinned uploaded packet only | Yes; evaluator files excluded from packets | Yes; original Markdown downloads retained | Available for the recorded runs | Two model labels on one product; no API key. [Reviewed scores](compatibility-matrix.md); UI/operator evidence has the limits recorded in each run |
 | Replit Agent | Yes | Intended | Yes by instruction | Not reliably available in current environment | Unavailable | Clean-run attempt blocked by `requires_active_subscription`; earlier workspace retrieval also timed out |
 | Superpowers | No isolated runner exposed | No independent repo execution surface | N/A | N/A | Non-runner | Installed and enabled, but exposes methodology/skills behavior rather than a callable isolated agent execution environment |
 | Current ChatGPT conversation | No | Yes | No | Yes | Contaminated | Current context has already seen rubric/expected material, so it cannot produce an official clean result |
+
+The available ChatGPT web runs do not make the evaluator's current conversation clean. Formal UI execution qualifies only with input isolation, preserved raw output, recorded identity and separate review. Informal manual tests remain outside official compatibility evidence.
 
 ## Status definitions
 

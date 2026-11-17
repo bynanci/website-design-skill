@@ -1,0 +1,17 @@
+{
+  "label": "sol56-v01-ia",
+  "provider": "OpenAI",
+  "product": "ChatGPT web",
+  "model": "GPT-5.6 Sol",
+  "version": null,
+  "effort": "Medium",
+  "started_at": "2026-11-17T13:26:57.845Z",
+  "completion_observed_at": "2026-11-17T13:31:46.482Z",
+  "context_url": "https://chatgpt.com/c/6afc5617-2d98-83ec-a51c-b449e16c2fab?temporary-chat=true",
+  "original_download_path": "/opt/codex/downloads/7c17c023-0894-428f-9bc8-a5da68390ce5/358ea1e3-6329-4830-93f5-478e4ed81431",
+  "raw_path": "/workspace/shared/website-evaluation-evidence/sol56-v01-ia.md",
+  "raw_bytes": 15630,
+  "raw_sha256": "ab987db5fabf1d16d1e8605e0c04ce86c29ef15524be806801a0f59ecbc44ea0",
+  "capture_method": "Browser Download file; byte-identical capture",
+  "manual_edit": false
+}
