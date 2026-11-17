@@ -29,7 +29,7 @@ Main 產生雙語文件入口。完整響應式 Dashboard fixture 存在時，�
 
 三個重複專案（`-83bv`、`-o57d`、`-8ed8`）已設定暫停 preview、忽略 build step，其工具根目錄另包含 `git.deploymentEnabled: false`。保留部署歷史，後續只使用單一正式指定專案。
 
-Ignore script 只在已驗證的 diff 沒有變更部署輸入時略過。首次部署、淺層歷史缺少 object、revision 不一致或 Git 錯誤都要求建置。略過不等於部署成功；Vercel 仍把進入 ignored build step 後取消的部署計入部署配額。略過可節省建置工作，停用重複自動部署才會消除重複觸發。
+Ignore script 只在已驗證的 diff 沒有變更部署輸入時略過，也包含用來判斷 preview 情境的 Dashboard 目錄是否存在。首次部署、淺層歷史缺少 object、revision 不一致或 Git 錯誤都要求建置。略過不等於部署成功；Vercel 仍把進入 ignored build step 後取消的部署計入部署配額。略過可節省建置工作，停用重複自動部署才會消除重複觸發。
 
 ## 驗證與合併
 

@@ -21,7 +21,7 @@ def status(identifier, state="success", context="Vercel – project", **changes)
 
 def check(identifier, conclusion="success", name="validate", app_id=1, app="github-actions", **changes):
     return {"id": identifier, "head_sha": SHA, "name": name, "status": "completed", "conclusion": conclusion,
-            "app": {"id": app_id, "slug": app}, "html_url": "https://example.invalid/check", **changes}
+            "app": {"id": app_id, "slug": app}, "check_suite": {"id": 10}, "html_url": "https://example.invalid/check", **changes}
 
 
 class FakeClient:
@@ -76,13 +76,30 @@ class MergeReadinessTests(unittest.TestCase):
         self.assertEqual(report["commit_statuses"][0]["id"], 9)
         self.assertEqual(report["observed_history"]["statuses"], 2)
 
-    def test_newest_check_is_selected_per_name_and_app(self):
+    def test_newest_rerun_is_selected_within_the_same_suite_name_and_app(self):
         client = FakeClient([], [check(2), check(1, "failure"), check(3, "failure", app_id=2, app="external")])
         code, report = self.run_cli(client)
         self.assertEqual(code, 1)
         self.assertEqual(report["github_actions"][0]["id"], 2)
         self.assertEqual(report["external_checks"][0]["id"], 3)
         self.assertEqual(len(report["blocking"]), 1)
+
+    def test_successful_independent_workflow_cannot_hide_failed_same_named_job(self):
+        client = FakeClient([], [check(1, "failure", check_suite={"id": 10}), check(2, check_suite={"id": 20})])
+        code, report = self.run_cli(client, "--required-check", "validate")
+        self.assertEqual(code, 1)
+        self.assertEqual(len(report["github_actions"]), 2)
+        self.assertEqual(report["blocking"][0]["suite_id"], 10)
+        self.assertEqual(report["missing_required_checks"], [])
+
+    def test_missing_or_invalid_suite_identity_fails_closed(self):
+        for suite in (None, {}, {"id": None}, {"id": True}, {"id": 0}):
+            with self.subTest(suite=suite):
+                client = FakeClient([], [check(1, "failure", check_suite=suite), check(2)])
+                code, report = self.run_cli(client)
+                self.assertEqual(code, 2)
+                self.assertFalse(report["ready"])
+                self.assertIn("check-suite identity", report["error"])
 
     def test_duplicate_names_in_two_apps_both_have_to_pass(self):
         code, report = self.run_cli(FakeClient([], [check(1), check(2, app_id=2, app="other")]), "--required-check", "validate")

@@ -19,8 +19,8 @@ try {
     // A shallow clone may lack the old object. Never treat that as no changes.
     git(['cat-file', '-e', `${previous}^{commit}`]);
     const changed = git(['diff', '--no-ext-diff', '--no-textconv', '--name-only', '-z', previous, current, '--',
-      'site', 'vercel.json', 'scripts/vercel_ignore_build.mjs',
-      'examples/responsive-dashboard/specimen']);
+      'site', 'vercel.json', '.gitattributes', 'scripts/vercel_ignore_build.mjs',
+      'examples']);
     skip = changed.length === 0;
     reason = skip
       ? 'Verified deployment inputs unchanged; skip build.'

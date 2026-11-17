@@ -30,7 +30,7 @@ test('only a verified irrelevant diff skips; the first deployment builds', t => 
   assert.equal(f.run('').status, 1);
   const result = f.run(); assert.equal(result.status, 0); assert.match(result.stdout, /unchanged/);
 });
-for (const filename of ['site/page.html', 'site/new.css', 'vercel.json', 'scripts/vercel_ignore_build.mjs', 'examples/responsive-dashboard/specimen/app.js']) {
+for (const filename of ['site/page.html', 'site/new.css', 'vercel.json', 'scripts/vercel_ignore_build.mjs', 'examples/responsive-dashboard/specimen/app.js', 'examples/responsive-dashboard/README.md', '.gitattributes']) {
   test(`changes to ${filename} require an actual build`, t => {
     const f = fixture(t); f.commit(filename, 'changed');
     assert.equal(f.run().status, 1);
@@ -51,4 +51,15 @@ test('no Git checkout fails open to build without disclosing command errors', t 
   const f = fixture(t); rmSync(path.join(f.root, '.git'), { recursive: true, force: true });
   const result = spawnSync(process.execPath, [command], { cwd: f.root, encoding: 'utf8', env: { ...process.env, VERCEL_GIT_PREVIOUS_SHA: f.before } });
   assert.equal(result.status, 1); assert.match(result.stdout, /unavailable/); assert.equal(result.stderr, '');
+});
+
+test('a changed examples ancestor cannot be skipped after replacing its directory with a symlink', t => {
+  const f = fixture(t);
+  const previous = f.commit('examples/other/README.md', 'existing examples');
+  rmSync(path.join(f.root, 'examples'), { recursive: true, force: true });
+  f.git(['add', '-u']);
+  // Git permits a symlink tree entry; the site builder explicitly refuses it.
+  execFileSync('ln', ['-s', '/tmp', path.join(f.root, 'examples')]);
+  f.git(['add', 'examples']); f.git(['commit', '-qm', 'replace examples parent']);
+  assert.equal(f.run(previous).status, 1);
 });

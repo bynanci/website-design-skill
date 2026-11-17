@@ -29,7 +29,7 @@ The root `vercel.json` records the build/output behavior. Root Directory is a pr
 
 The three duplicate projects (`-83bv`, `-o57d`, `-8ed8`) have preview builds paused and an ignored build step. Their tooling root also contains `git.deploymentEnabled: false`. Keep their deployment history; use the one canonical project for new work.
 
-The ignore script skips only a verified diff with unchanged deployment inputs. The first deployment, missing shallow-history objects, inconsistent revisions or Git errors require a build. A skip is not a successful deployment. Vercel counts deployments canceled by an ignored build step toward deployment quotas; the skip saves build work, while disabling duplicate automatic deployments removes the duplicate triggers.
+The ignore script skips only a verified diff with unchanged deployment inputs, including the dashboard directory whose presence selects the preview variant. The first deployment, missing shallow-history objects, inconsistent revisions or Git errors require a build. A skip is not a successful deployment. Vercel counts deployments canceled by an ignored build step toward deployment quotas; the skip saves build work, while disabling duplicate automatic deployments removes the duplicate triggers.
 
 ## Verification and merge
 

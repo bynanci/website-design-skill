@@ -97,11 +97,14 @@ def summarize(repo, sha, statuses, checks, required=()):
             latest_statuses[context] = status
     for check in checks:
         app = check.get("app")
+        suite = check.get("check_suite")
         if check.get("head_sha") != sha:
             raise ReadinessError("A check run identifies another commit")
         if not isinstance(check.get("name"), str) or not check["name"].strip() or not isinstance(app, dict) or type(app.get("id")) is not int:
             raise ReadinessError("A check run lacks its name or application identity")
-        key = (app["id"], check["name"])
+        if not isinstance(suite, dict) or type(suite.get("id")) is not int or suite["id"] <= 0:
+            raise ReadinessError("A check run lacks its check-suite identity; independent workflows cannot be collapsed")
+        key = (app["id"], check["name"], suite["id"])
         previous = latest_checks.get(key)
         if previous is None or check["id"] > previous["id"]:
             latest_checks[key] = check
@@ -115,14 +118,14 @@ def summarize(repo, sha, statuses, checks, required=()):
         if not entry["passed"]:
             quota = name.casefold().startswith("vercel") and ("build-rate-limit" in str(entry["url"]) or "rate limit" in str(entry["description"]).casefold())
             report["blocking"].append({"kind": "commit-status", "name": name, "category": "vercel_build_rate_limit" if quota else "non-success-status", "state": entry["state"], "url": entry["url"]})
-    for (_, name), check in sorted(latest_checks.items()):
+    for (_, name, suite_id), check in sorted(latest_checks.items()):
         names.add(name)
         app = check["app"]
         provider = app.get("slug") or str(app["id"])
-        entry = {"name": name, "app": provider, "app_id": app["id"], "id": check["id"], "status": check.get("status"), "conclusion": check.get("conclusion"), "passed": check.get("status") == "completed" and check.get("conclusion") == "success", "url": check.get("html_url") or check.get("details_url")}
+        entry = {"name": name, "app": provider, "app_id": app["id"], "suite_id": suite_id, "id": check["id"], "status": check.get("status"), "conclusion": check.get("conclusion"), "passed": check.get("status") == "completed" and check.get("conclusion") == "success", "url": check.get("html_url") or check.get("details_url")}
         report["github_actions" if provider == "github-actions" else "external_checks"].append(entry)
         if not entry["passed"]:
-            report["blocking"].append({"kind": "check-run", "name": name, "app": provider, "status": entry["status"], "conclusion": entry["conclusion"], "url": entry["url"]})
+            report["blocking"].append({"kind": "check-run", "name": name, "app": provider, "suite_id": suite_id, "status": entry["status"], "conclusion": entry["conclusion"], "url": entry["url"]})
     report["missing_required_checks"] = sorted(set(required) - names)
     if report["missing_required_checks"]:
         report["blocking"].append({"kind": "missing-required-checks", "names": report["missing_required_checks"]})
