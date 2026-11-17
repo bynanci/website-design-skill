@@ -1,0 +1,173 @@
+{
+  "schema_version": "0.2-pilot.1",
+  "suite_version": "0.2-pilot.1",
+  "run_id": "chatgpt-web-gpt-5-6-sol-v02-20261117",
+  "status": "completed",
+  "source_commit": "7f7148a0752718ba3fb363c019441a6d5ca91f15",
+  "agent": {
+    "provider": "OpenAI",
+    "product": "ChatGPT web",
+    "model": "GPT-5.6 Sol"
+  },
+  "environment": {
+    "run_date": "2026-11-17",
+    "interface": "ChatGPT web UI; fresh Temporary/Unpersonalized chat per case; Medium effort; no API; hidden model version undisclosed (null in sidecar)",
+    "capabilities": {
+      "file_read": "available",
+      "file_write": "available",
+      "code_execution": "unknown",
+      "browser": "unknown",
+      "image_review": "unknown",
+      "network": "unknown"
+    }
+  },
+  "manual_edit": false,
+  "isolation": {
+    "independent_context": true,
+    "evaluator_files_exposed": false,
+    "prior_outputs_exposed": false,
+    "record_path": "isolation.md",
+    "record_sha256": "bcf565cb95a9731b2b548b69bb98a11ea27be47dab6343dd329bc0a37d63d0a1"
+  },
+  "availability": {
+    "status": "available",
+    "reason": null,
+    "details": "Both planning cases completed using packet inspection and Markdown artifact creation. Fresh Temporary/Unpersonalized settings, literal selected model and Medium effort are retained in evidence. No access/subscription block. Live product rendering/AT outcomes unavailable; unobserved provider capabilities unknown."
+  },
+  "generation_finished_at": "2026-11-17T13:40:06.698Z",
+  "reviewer": {
+    "id": "codex-independent-pilot-reviewer-/root/pilot_results_review",
+    "scored_at": "2026-11-17T13:46:42.303Z"
+  },
+  "cases": [
+    {
+      "id": "responsive-layout-001",
+      "raw_output_path": "raw/responsive-layout-001.md",
+      "raw_sha256": "6b03b59045b65b19839db387842e34efbd6ed7e6c637dd9f8b42a7971d279368",
+      "scores": [
+        {
+          "criterion": "RL-01",
+          "score": 2,
+          "evidence_quote": "Nothing required is removed at narrow widths. Reflow, wrapping, local overflow, and disclosure of equivalent alternate data views are allowed; silent hiding is not.",
+          "note": "§§1,3,9 enumerate all six modules, four ordered descriptions/evidence/questions, contact context and case fields/actions. Cross-scenario parity regression is a planned check; nothing required is omitted."
+        },
+        {
+          "criterion": "RL-02",
+          "score": 2,
+          "evidence_quote": "- **Primary task:** Review account context → scan KPIs → assess ordered AI observations and their evidence/follow-up questions → inspect revenue/service trends → review cases and act on a relevant row.",
+          "note": "Identity, KPIs and ordered observations/evidence/questions form a justified account-manager workflow before supporting charts and case follow-through; §§3,11 preserve/test logical order."
+        },
+        {
+          "criterion": "RL-03",
+          "score": 2,
+          "evidence_quote": "Therefore, the accepted planning compromise is: **attempt the single-screen desktop preference, but fail that preference rather than fail content completeness, legibility, or operability.** Whether 1366 × 768 can meet the preference is a validation question, not a fact.",
+          "note": "§8 rejects shrinking/truncation/hiding and accepts vertical scrolling; §11 requires a rendered 1366×768 outcome recorded as pass/fail and blocks implementation completion until checks."
+        },
+        {
+          "criterion": "RL-04",
+          "score": 2,
+          "evidence_quote": "- Chart series/value meaning has a non-hover equivalent via labels/legend and an accessible textual data representation.",
+          "note": "§§6–7 externalize/wrap legends and retain five categories/all trend series. Some donut data-view wording is conditional on API capability, but §7.6 unconditionally requires accessible textual chart meaning; §11 gates non-hover/non-color series meaning and category parity. Read together this is a mandatory alternative to implement, not permission to omit data."
+        },
+        {
+          "criterion": "RL-05",
+          "score": 2,
+          "evidence_quote": "- When required columns/actions no longer fit, use a `CaseTable` narrow variant that restructures each row vertically instead of removing fields.",
+          "note": "§§6–7 define vertical row restructuring with status/owner/due/actions and persistent controls. §11 narrow viewport, case-keyboard and content parity checks validate all fields/actions."
+        },
+        {
+          "criterion": "RL-06",
+          "score": 2,
+          "evidence_quote": "### 7.6 Keyboard and non-hover access\n\n- Logical focus order follows the logical module order even when visual columns change.\n- All links and controls have visible focus states.\n- No required information appears only on hover.\n- No required action appears only on hover.\n- Chart series/value meaning has a non-hover equivalent via labels/legend and an accessible textual data representation.\n- Reflow must not move focus unexpectedly or produce a different keyboard order from the reading order.\n- Touch users receive the same persistent row-action and evidence-link access as pointer/keyboard users.",
+          "note": "§6 Pointer/keyboard/touch contract plus §7.6 covers chart textual access, keyboard disclosures, focusable evidence and persistent row actions. §11 390px keyboard/touch-equivalent check and final focus/action gates apply across the reflowed page. No mandatory interaction remains hover-only."
+        },
+        {
+          "criterion": "RL-07",
+          "score": 2,
+          "evidence_quote": "These are **target behaviors for validation**, not observed breakpoints.",
+          "note": "§5 explicitly covers 1920×1080,1366×768,390/320 CSS px,200% zoom and narrow embedded panel, and §11 verifies all six. H5 and unknown transition widths distinguish proposals from measurements."
+        },
+        {
+          "criterion": "RL-08",
+          "score": 2,
+          "evidence_quote": "**None proposed.** The case can be planned through reuse, extension, bounded variants, and composition of existing components. Any later need for a new primitive must be justified only after inspecting the actual component APIs and states.",
+          "note": "§6 reviews each supplied component, chooses reuse/extension/variant/composition, and defers any new primitive until actual API inspection. Shared component fixes and parity checks constrain future implementation."
+        },
+        {
+          "criterion": "RL-09",
+          "score": 2,
+          "evidence_quote": "- **Validation status:** no tests have been executed; all outcomes remain untested.",
+          "note": "Supplied reports, design hypotheses, unknowns and pending checks are separated. No test result, breakpoint measurement, fit or WCAG success is asserted."
+        }
+      ],
+      "critical_errors": []
+    },
+    {
+      "id": "accessibility-001",
+      "raw_output_path": "raw/accessibility-001.md",
+      "raw_sha256": "b32693ddcc3feda08b6b6f8068ff81fb1bab7c1ba8a0c94442b6d3415dde0926",
+      "scores": [
+        {
+          "criterion": "AX-01",
+          "score": 1,
+          "evidence_quote": "| **P1** | Revenue trend tooltip opens only on mouse hover; no keyboard path. | `TrendChart` | Tooltip trigger may be bound only to pointer hover; chart marks may not be keyboard focusable or may lack a non-hover information path. | Extend `TrendChart` so every essential value currently exposed via hover has an equivalent keyboard-accessible path. Prefer a bounded, reusable chart interaction pattern: focusable data points/series where appropriate, with focus-triggered detail, plus a non-pointer method to obtain the same information. If the visual chart cannot provide robust semantic access alone, provide an accessible textual/table representation of the same data. | Reach chart information without mouse; traverse interactive points/series in a predictable order; open/read detail using keyboard; dismiss/move on without trapping focus. | Verify chart purpose and data are understandable; focused data points or the alternative representation expose category/time/value information in meaningful order; tooltip content is not hover-only or pointer-only. | Verify focused chart elements have clear focus treatment; tooltip/detail remains visible while keyboard focus requires it; content is not clipped at zoom/narrow containers. | Inspect event handlers for pointer-only logic; automated tools may identify some focusability/name issues but cannot establish that the data experience is complete or usable. |",
+          "note": "Keyboard/focus access and concrete keyboard/AT checks are explicit. Persistent/tabular data representation remains conditional (\"If the visual chart cannot provide robust semantic access alone\"; component contract likewise says \"if\"). A mandatory persistent equivalent independent of transient chart detail is not specified, so AX-01 is incomplete. Keyboard path itself is resolved; no missing-keyboard-path critical error."
+        },
+        {
+          "criterion": "AX-02",
+          "score": 1,
+          "evidence_quote": "| **P1** | Pie chart uses color alone to identify categories. | `PieChart` | Category distinction may rely solely on slice fill colors; legend/labels may not provide persistent textual or patterned differentiation. | Extend `PieChart` so category identity is communicated with text in a legend and/or direct labels, with a clear mapping from each category to its value. Color may remain supplementary, not exclusive. Where needed, expose the data through an accessible list/table representation. | If legend/slices are interactive, verify all actions and category details are keyboard reachable; if non-interactive, ensure keyboard is not unnecessarily required to understand the data. | Verify categories and values are announced without needing color interpretation and that relationships are understandable in a sensible reading order. | Test in grayscale/high-contrast-like viewing and with color perception differences in mind; verify labels/legend alone identify categories and remain readable/reflow correctly. | Static/code review can detect presence of legend/labels but not whether color is truly non-essential. Automated contrast checks require actual rendered colors and measurements, which are currently missing. |",
+          "note": "Labels/legend/value mapping and grayscale/high-contrast-like/color-perception verification are explicit. No test across product themes is specified anywhere in this artifact; full theme-and-color-vision requirement is incomplete."
+        },
+        {
+          "criterion": "AX-03",
+          "score": 1,
+          "evidence_quote": "| **P0** | Filter dialog opens while keyboard focus remains behind it. | `FilterDialog` | Dialog may not move focus to an appropriate element on open; modal semantics or focus containment may be incomplete. | Extend `FilterDialog` so opening it moves focus into the dialog to a predictable initial target, keeps keyboard interaction within the active modal while open, and exposes appropriate dialog semantics/name. Do not patch only this page. | Open using keyboard; verify focus immediately enters dialog; Tab/Shift+Tab traverse intended interactive elements without moving behind it; Escape behavior is verified if supported by the product interaction. | Verify dialog is announced with its accessible name/role and that reading/navigation starts in a sensible place inside the dialog. Confirm background content is not presented as the active interaction context while the modal is open. | Confirm a visible focus indicator is present on the initial and subsequent focus targets; dialog remains visually distinguishable from background at supported layouts/zoom. | Inspect rendered semantics and focus-management implementation; run an accessibility scan for dialog/name issues where supported. Automated results alone are insufficient for focus order/containment. |",
+          "note": "Placement, Tab/Shift+Tab containment, supported close paths and trigger restoration are checked. Escape is only checked \"if supported by the product interaction\"; it is not a required close behavior with an explicit acceptance condition. Focus recovery is nevertheless explicit, so missing-dialog-focus-recovery is not present."
+        },
+        {
+          "criterion": "AX-04",
+          "score": 2,
+          "evidence_quote": "**Responsibility:** Own the field control, persistent label/name association, and field states.\n\n**Accessibility contract**\n- Label/name is required by the API.\n- Placeholder is supplemental, never the only label.\n- Visible label is the default for the reported form case.\n- Required, error, disabled, and value states must remain available to keyboard and assistive technology when those states exist.",
+          "note": "The shared TextField owns persistent label/name association, visible label is required for this reported case, placeholder is supplemental, and validation explicitly checks broken label associations, real names and persistent visible text."
+        },
+        {
+          "criterion": "AX-05",
+          "score": 2,
+          "evidence_quote": "| **P2** | Decorative loading animation has no reduced-motion behavior. | `LoadingIndicator` | Animation may run unconditionally and may not react to the user’s reduced-motion preference; decorative status may also be conflated with status messaging. | Extend `LoadingIndicator` with a reduced-motion state that removes or substantially reduces non-essential decorative movement while preserving any required loading/status meaning. Keep decorative animation separate from semantic status text where applicable. | Verify loading does not steal focus and that keyboard interaction remains stable while loading begins/ends. | If the indicator conveys status, verify that status is announced appropriately without excessive repetition; if purely decorative, verify it is not announced as meaningful content. | Enable reduced-motion preference and confirm decorative motion is removed/reduced; verify a clear non-motion loading state remains. Also check default motion does not obscure content or create layout shift. | Inspect reduced-motion style/logic and animation properties. Automated scan may not establish the quality of the fallback; manual preference testing is required. |",
+          "note": "Reduced-motion fallback keeps status meaning; preference-on visual checks and semantic/decorative AT checks are explicit."
+        },
+        {
+          "criterion": "AX-06",
+          "score": 2,
+          "evidence_quote": "| **P1** | Evidence-source text link is visually present, but its label is only “here”. | `Link` plus page composition/content binding | Link component may allow non-descriptive accessible names; page composition may supply an ambiguous label without surrounding semantic context sufficient to identify purpose. | Preserve the evidence-source destination and business meaning, but change the rendered link text/accessibility name to identify its purpose or destination in context (for example, the evidence/source itself rather than “here”). Add a `Link` usage rule that link names must be meaningful in context and should not depend on generic “here/click” wording. | Tab through links and verify the evidence link can be identified from its focus state and name without needing mouse hover. | Review links in sequence/list-of-links navigation and confirm this link’s purpose is distinguishable from other links. | Verify descriptive text fits/refows without truncating essential meaning and retains visible focus treatment. | Automated tools may flag generic link text but cannot guarantee contextual clarity; include a link-name lint/review rule if the implementation stack supports it. |",
+          "note": "Descriptive source/purpose name preserves destination/business meaning; keyboard and screen-reader list-of-links checks establish clarity. Exact source wording correctly remains unknown."
+        },
+        {
+          "criterion": "AX-07",
+          "score": 2,
+          "evidence_quote": "No new component is justified by the supplied case facts.",
+          "note": "Each supplied component receives a justified shared responsibility, page composition only binds existing content, and no speculative component is added. Existing Link usage rule and component contracts prevent page-only rescue fixes."
+        },
+        {
+          "criterion": "AX-08",
+          "score": 2,
+          "evidence_quote": "Automated checks **cannot by themselves establish** usable focus order, successful focus trapping/restoration, comprehensible chart data, non-color dependence, appropriate reduced-motion quality, or overall conformance.",
+          "note": "Remediation matrix includes defect-specific keyboard, screen-reader, visual and automated checks; §§1–4 of validation give concrete manual conditions. Incomplete behaviors are scored separately under AX-01/02/03; verification is more than a generic audit."
+        },
+        {
+          "criterion": "AX-09",
+          "score": 2,
+          "evidence_quote": "**Current status: Plan complete; remediation not implemented or validated.**",
+          "note": "Initial evidence boundary and final status separate reported tester findings, hypothesized causes, proposals and missing rendered/browser/AT/contrast/conformance evidence. No implementation or audit success claimed."
+        }
+      ],
+      "critical_errors": []
+    }
+  ],
+  "aggregate": {
+    "score": 33,
+    "max_score": 36,
+    "interpretation": "Responsive 18/18; accessibility 15/18. AX-01 persistent data alternative, AX-02 theme verification and AX-03 unconditional Escape behavior remain incomplete; no listed critical error found. This is one eligible fresh web execution per case for the visible interface model, not a hidden revision claim, rendered/audited success, v0.1 score or release threshold."
+  }
+}

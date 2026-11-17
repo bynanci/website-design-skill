@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-11-17T13:48:13.048Z",
+  "pilot_validator": {
+    "command": "python3 scripts/validate_v02_pilot.py",
+    "exit_code": 0,
+    "stdout": "{\n  \"suite_version\": \"0.2-pilot.1\",\n  \"completed\": 2,\n  \"unavailable\": 0,\n  \"distinct_agent_signatures\": 2,\n  \"official_v01_evidence\": false\n}\n"
+  },
+  "pilot_tests": {
+    "command": "python3 -m unittest discover -s tests -p 'test_v02_pilot.py' -v",
+    "observed_exit_code": 0,
+    "observed_tests_run": 24,
+    "observed_result": "OK; all 24 tests passed in this reviewer session before documentation updates"
+  },
+  "json_schema": {
+    "validator": "jsonschema.Draft202012Validator with FormatChecker",
+    "schema": "benchmarks/v02-pilot/result.schema.json",
+    "results": {
+      "chatgpt-web-gpt-5-6-sol-v02-20261117": "PASS",
+      "chatgpt-web-gpt-6-v02-20261117": "PASS"
+    }
+  },
+  "raw_rechecked_byte_identical_to_original_downloads": true
+}
