@@ -50,3 +50,5 @@ The shared optional browser harness builds this fixture and exercises initial lo
 ```sh
 node integrations/vue-project-profile/render-media.mjs
 ```
+
+A session-wide permission denial remains blocked across filter edits, cancel and direct load attempts. A trusted new session must create a fresh owner; editing input does not reset permission state.

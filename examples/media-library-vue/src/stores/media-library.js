@@ -33,6 +33,7 @@ export const useMediaLibraryStore = defineStore("media-library", {
     load({ replace = false } = {}) {
       const runtime = control(this);
       if (runtime.disposed) return Promise.resolve({ outcome: "disposed" });
+      if (this.error?.code === "permission_denied") return Promise.resolve({ outcome: "not-retryable" });
       if (runtime.active && !replace) return runtime.active.promise;
       if (runtime.active) runtime.active.controller.abort();
       const sequence = ++runtime.sequence;
@@ -74,8 +75,9 @@ export const useMediaLibraryStore = defineStore("media-library", {
       runtime.sequence++;
       runtime.active?.controller.abort();
       runtime.active = null;
-      this.status = this.items.length ? "success" : "idle";
-      this.error = null;
+      const denied = this.error?.code === "permission_denied";
+      this.status = denied ? "error" : this.items.length ? "success" : "idle";
+      if (!denied) this.error = null;
     },
     dispose() {
       this.cancel();

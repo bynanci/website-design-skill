@@ -50,3 +50,5 @@ node inspect.mjs ../../examples/media-library-vue --entry src/main.js --contract
 ```sh
 node integrations/vue-project-profile/render-media.mjs
 ```
+
+整個 session 的權限拒絕會在修改篩選、取消及直接 load 後維持阻擋。可信任的新 session 應建立新的 owner；修改輸入不會重設權限狀態。

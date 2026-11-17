@@ -189,3 +189,18 @@ test('the bounded source adapter confirms one observed media owner, service and 
   assert.equal(result.evidence.stateOwners[0].serviceCallsInAction, 1);
   assert.equal(result.evidence.componentApis[0].status, 'source-confirmed');
 });
+
+test('session permission denial survives filter edits, cancel and direct read attempts', async t => {
+  const { store, deferred } = fixture(t);
+  const initial = store.load();
+  deferred.reject(1, 'permission_denied');
+  await initial;
+  store.setFilter('Evening');
+  store.cancel();
+  assert.equal(store.status, 'error');
+  assert.equal(store.error.code, 'permission_denied');
+  assert.equal(store.filter, 'Evening');
+  assert.deepEqual(await store.retry(), { outcome: 'not-retryable' });
+  assert.deepEqual(await store.load(), { outcome: 'not-retryable' });
+  assert.equal(deferred.requests().length, 1);
+});

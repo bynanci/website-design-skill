@@ -96,6 +96,13 @@ try {
   await deniedButton.click({ force: true });
   assert.equal((await requests(denied)).length, 1);
   assert.equal((await state(denied)).error.retryable, false);
+  await denied.locator('[data-testid="media-filter"]').fill('Evening');
+  await deniedButton.focus();
+  await deniedButton.press('Enter');
+  await deniedButton.click({ force: true });
+  await denied.evaluate(() => { __MEDIA_FIXTURE__.cancel(); __MEDIA_FIXTURE__.load(); });
+  assert.equal((await requests(denied)).length, 1);
+  assert.equal((await state(denied)).error.code, 'permission_denied');
   await capture(denied, 'non-retryable-permission');
   await denied.close();
 
