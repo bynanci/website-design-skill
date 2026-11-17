@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test inspect.test.mjs",
+    "test": "node --test *.test.mjs",
     "inspect": "node inspect.mjs ../../examples/project-profile-vue --entry src/main.ts --contract profile-contract.json",
-    "verify:render": "node render.mjs ../../examples/project-profile-vue"
+    "verify:render": "node render.mjs ../../examples/project-profile-vue",
+    "verify:interactions": "node render-reorder.mjs && node render-media.mjs"
   },
   "dependencies": {
     "@vue/compiler-sfc": "3.5.13",

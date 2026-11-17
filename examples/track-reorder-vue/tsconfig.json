@@ -1,0 +1,12 @@
+{
+  // The adapter reads this JSONC file. It never evaluates project configuration.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
+  },
+}

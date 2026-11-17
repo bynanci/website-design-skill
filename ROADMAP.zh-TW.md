@@ -12,7 +12,7 @@ Website Design Skill 以跨平台改版方法、明確的交付契約與行為�
 
 細項任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整；每個子 Issue 是各工作的驗收依據。#11 現已包含合成 Vue fixture、範圍受限的 AST/來源檢查、明確語意角色契約、來源 API/owner 檢查、局部 drift 檢查及 production build/theme-render harness。[試點指南](integrations/vue-project-profile/README.zh-TW.md) 定義支援語法與證據格式；實際驗證結果由 CI 與 #11 記錄。
 
-下一階段先處理 #12 的有限 Vue patch，再補 #13 的狀態轉換證據。Dashboard 渲染與有限修正分別由 #7、#14 追蹤；runtime recovery 由 #15 追蹤。#1 仍需獨立乾淨 agent 輸出，draft PR #5 保留各自的發布 gate。
+有限軌道排序 patch（#12）與媒體庫 owner/service 轉換（#13）現已提供可執行 fixture 及共用 browser 證據 harness。Patch 必須使用隔離且獨占的 checkout。完整 dashboard 渲染與有限修正分別由 #7、#14 追蹤；runtime recovery 由 #15 追蹤。#1 仍需獨立乾淨 agent 輸出，draft PR #5 保留各自的發布 gate。
 
 ## v0.1：最小公開版本
 

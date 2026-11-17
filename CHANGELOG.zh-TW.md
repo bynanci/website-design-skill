@@ -10,6 +10,8 @@
 
 - v0.2 選用的視覺方向比較、響應式行為與 token 擷取／遷移範本，以及視覺品質審查參考文件。
 - 合成 Dashboard、可重現 Chromium QA，以及獨立於 v0.1 官方案例的響應式與可及性 pilot。
+- 新增有限 Vue 軌道排序 patch、剖析 target、必要型別檢查、受保護範圍、no-op/rollback 與隔離 workspace 前提；另提供媒體庫過期/取消/卸載防護及共用 browser 證據。
+
 - 新增選用的有限 Vue 來源 profile adapter、明確角色/owner 契約、局部 drift 與拒絕條件測試，以及獨立的 production build/theme 渲染證據流程。
 
 - 核心技能、roadmap、參考指南、範本與 context-aware UI 整合指南的繁體中文版本，並建立雙語寫作規範。

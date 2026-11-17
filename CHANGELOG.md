@@ -14,6 +14,8 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - Advisory visual-quality review reference with evidence-first checks.
 - Synthetic responsive account dashboard artifact chain.
 - Optional responsive-layout and accessibility behavioral pilot cases (excluded from the v0.1 benchmark manifest).
+- Bounded Vue track-reorder patch with parsed targets, mandatory type checks, protected ranges, no-op/rollback and isolated-workspace preconditions; executable media-library transitions with stale/cancel/unmount protection and shared browser evidence.
+
 - Optional bounded Vue source-profile adapter with explicit role/owner contracts, scoped drift/refusal tests, and a separate production-build/theme-render evidence workflow.
 
 - Bilingual Traditional Chinese counterparts for the core skill, roadmap, reference guides, templates, and context-aware UI adapter guides, with a writing policy that distinguishes ASD-STE100-informed English from Chinese documentation.
