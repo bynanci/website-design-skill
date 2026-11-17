@@ -2,7 +2,7 @@
 
 [繁體中文](README.zh-TW.md)
 
-Status: **infrastructure ready; no real agent runs submitted**. This pilot covers the responsive-layout and accessibility planning cases in draft PR #5. It is separate from the frozen v0.1 benchmark and release policy.
+Status: **two real ChatGPT web runs generated and independently reviewed on 2026-11-17**. This pilot covers the responsive-layout and accessibility planning cases in draft PR #5. It is separate from the frozen v0.1 benchmark and release policy.
 
 | Contract | Value |
 |---|---|
@@ -11,7 +11,7 @@ Status: **infrastructure ready; no real agent runs submitted**. This pilot cover
 | Cases | `responsive-layout-001`, `accessibility-001` |
 | Scoring | 9 criteria per case, 0–2 each; separate total 36 |
 | Public release threshold | None; compare criterion-level findings and critical errors |
-| Completed real runs | 0 |
+| Completed real runs | 2; one fresh generation context per case in each run |
 
 The source commit fixes the public skill, optional templates and case inputs. The packager generates only operational metadata outside those pinned bytes. A source/prompt/criterion change requires a reviewed pilot version decision; do not silently move this pin. The validator rejects a different source commit.
 
@@ -53,6 +53,21 @@ The zero-dependency validator checks strict properties, the fixed version/pin, i
 
 Compare at least two eligible contexts without averaging away critical errors. Preserve failures and any shared critical issue. Review the reusable contract before rerunning; do not hide shared failures with agent-specific instructions. Availability records contribute no compatibility score. No pilot result becomes official v0.1 evidence.
 
-Issue #6 remains open until real independent outputs and reviewer scores exist. The results directory intentionally contains no submitted run.
+## Submitted findings — 2026-11-17
+
+| Visible interface model | Responsive layout | Accessibility | Pilot total | Listed critical errors |
+|---|---:|---:|---:|---|
+| [GPT-6](results/chatgpt-web-gpt-6-v02-20261117/result.json) | 18/18 | 18/18 | 36/36 | None found |
+| [GPT-5.6 Sol](results/chatgpt-web-gpt-5-6-sol-v02-20261117/result.json) | 18/18 | 15/18 | 33/36 | None found |
+
+Both runs used the no-API ChatGPT web interface at Medium effort. Every case started in a fresh Temporary/Unpersonalized chat with only its unchanged pinned ZIP and the same standard generation prompt. Reviewers checked each raw artifact against its original browser download and each packet source file against the pinned Git bytes. Exact criterion quotes, generation-before-scoring timestamps, context IDs, settings evidence, hashes, eligibility judgments and evidence limits are retained in each run's `result.json`, `isolation.md` and `evidence/` files. The pilot validator, all 24 pilot tests and the JSON Schema cross-check passed.
+
+Three GPT-5.6 Sol accessibility criteria remain partial (1/2 each), with follow-up findings retained rather than repaired in the raw output:
+
+- **AX-01:** Keyboard access is explicit, but a persistent/tabular data alternative is conditional. Require an explicit equivalent that remains available independently of transient chart detail.
+- **AX-02:** Grayscale/color-perception checks are present; verification across product themes is missing. Add a theme-specific category-meaning check.
+- **AX-03:** Focus placement, containment and restoration are explicit, but Escape is checked only if already supported. Specify Escape behavior and its acceptance check.
+
+No shared listed critical failure was found. These are two model-labeled planning runs, not a statistical comparison or a release threshold. The visible model labels do not disclose a hidden backend revision (`version: null` in capture sidecars), and expanded UI activity summaries are not exhaustive provider access logs. Eligibility is supported by the retained settings, packet boundary and controller observations, subject to those limits. Neither score establishes real-product rendering, device behavior, human assistive-technology testing or accessibility conformance. No pilot score becomes official v0.1 evidence or inherits its 30/40 threshold. These submissions provide real outputs and reviewer scores for the pilot evidence requirement tracked in Issue #6; issue/release disposition remains a separate decision.
 
 Completed runs cannot reuse raw file content or file identity across runs, even if the run ID or provider metadata changes. Identical outputs require a separate protocol review before they can support an independence claim; the validator does not silently count them as new executions.
