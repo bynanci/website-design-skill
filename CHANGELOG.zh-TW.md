@@ -8,6 +8,8 @@
 
 ### 新增
 
+- 新增有限宣告式 recovery 原型，包含遞迴嚴格 payload 驗證、即時一次性 host capability、純文字 Vue renderer、靜態 fallback 與可比較的 production bundle/UI 成本證據。
+
 - 新增有限 Vue 軌道排序 patch、剖析 target、必要型別檢查、受保護範圍、no-op/rollback 與隔離 workspace 前提；另提供媒體庫過期/取消/卸載防護及共用 browser 證據。
 
 - 新增選用的有限 Vue 來源 profile adapter、明確角色/owner 契約、局部 drift 與拒絕條件測試，以及獨立的 production build/theme 渲染證據流程。
