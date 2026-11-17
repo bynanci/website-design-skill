@@ -44,3 +44,5 @@ For an installed Chromium binary, set `CHROMIUM_EXECUTABLE_PATH`. A production b
 Output is written under `artifacts/`: the production build, two captures and `render-results.json`. The report contains source hashes, tooling hashes, installed versions, actual browser version, checks and unrun conditions. The GitHub Actions workflow preserves the JSON and captures under `vue-profile-evidence`. CI results and artifact links belong in the corresponding PR or Issue #11.
 
 Static role evidence and browser measurements are separate records. A passing theme check does not establish full dashboard quality, state-transition behavior, assistive-technology support or official cross-agent release evidence.
+
+Scoped external Vue styles remain unsupported; they cannot establish global theme declarations.

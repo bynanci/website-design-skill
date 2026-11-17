@@ -231,3 +231,26 @@ for (const macro of ['defineEmits<{ saved: [] }>();', 'defineModel<string>();'])
     assert.deepEqual(result.profile.components.find(item => item.path === 'src/components/StatusBanner.vue').publicApi, []);
   });
 }
+
+test('does not treat scoped external styles as global theme declarations', t => {
+  const root = project(t);
+  const tokenText = fs.readFileSync(path.join(root, 'src/styles/tokens.scss'), 'utf8');
+  const themeText = fs.readFileSync(path.join(root, 'src/styles/themes.css'), 'utf8');
+  fs.writeFileSync(path.join(root, 'src/components/scoped-tokens.scss'), tokenText + themeText);
+  edit(root, 'src/main.ts', text => text.replace('import "@/styles/tokens.scss";\n', '').replace('import "@/styles/themes.css";\n', ''));
+  edit(root, 'src/components/StatusBanner.vue', text => text + '\n<style scoped src="./scoped-tokens.scss"></style>\n');
+  const result = inspectProject(root);
+  assert.ok(result.evidence.roles.every(item => item.status === 'missing'));
+  assert.ok(result.evidence.unsupported.some(item => item.detail.includes('Scoped external styles')));
+});
+
+test('resolves alias-qualified Sass partial imports', t => {
+  const root = project(t);
+  fs.renameSync(path.join(root, 'src/styles/tokens.scss'), path.join(root, 'src/styles/_tokens.scss'));
+  fs.writeFileSync(path.join(root, 'src/styles/entry.scss'), '@use "@/styles/tokens";\n');
+  edit(root, 'src/main.ts', text => text.replace('@/styles/tokens.scss', '@/styles/entry.scss'));
+  const result = inspectProject(root);
+  assert.ok(result.evidence.reachablePaths.includes('src/styles/_tokens.scss'));
+  assert.ok(result.evidence.roles.every(item => item.status === 'theme-dependent'));
+  assert.deepEqual(result.evidence.findings, []);
+});

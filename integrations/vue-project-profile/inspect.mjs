@@ -166,7 +166,7 @@ export function inspect(rootInput, { entry = 'src/main.ts', contract: contractPa
       catch (error) {
         // Sass partials are an explicit bounded extension to local resolution.
         const partial = path.posix.join(path.posix.dirname(specifier), '_' + path.posix.basename(specifier));
-        try { target = resolveImport(relative, partial.startsWith('.') ? partial : './' + partial); }
+        try { target = resolveImport(relative, partial.startsWith('.') || partial.startsWith('@/') ? partial : './' + partial); }
         catch { finding('missing-import', relative, error.message); return; }
       }
       if (target) { evidence.imports.push({ from: relative, specifier: match[1], target, status: 'local-source' }); imports.push(target); }
@@ -190,7 +190,9 @@ export function inspect(rootInput, { entry = 'src/main.ts', contract: contractPa
       if (descriptor.script?.src || descriptor.scriptSetup?.src) throw new Error('External Vue scripts are unsupported');
       scriptText = descriptor.scriptSetup?.content || descriptor.script?.content || '';
       for (const style of descriptor.styles) {
-        if (style.src) { const target = resolveImport(relative, style.src); if (target) visit(target); }
+        if (style.src && style.scoped) {
+          evidence.unsupported.push({ path: relative, detail: 'Scoped external styles require scope-aware module analysis and are not accepted as global theme declarations.' });
+        } else if (style.src) { const target = resolveImport(relative, style.src); if (target) visit(target); }
         else for (const target of parseStyle(relative, style.content, !!style.scoped, style.loc.start.line - 1)) visit(target);
       }
     }

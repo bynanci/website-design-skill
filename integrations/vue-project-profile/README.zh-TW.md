@@ -44,3 +44,5 @@ node render.mjs ../../examples/project-profile-vue
 `artifacts/` 會包含 production build、兩張截圖與 `render-results.json`。報告保存來源與工具 hash、套件版本、實際瀏覽器版本、檢查結果及未執行項目。GitHub Actions 以 `vue-profile-evidence` 保存 JSON 與截圖；CI 結果與 artifact 連結記錄在對應 PR 或 Issue #11。
 
 靜態角色證據與瀏覽器量測各自保存。Theme 檢查通過仍不足以證明完整 dashboard 品質、狀態轉換行為、輔助科技支援或官方跨 agent 發布證據。
+
+外部 scoped Vue 樣式仍不支援，不可用來確認全域 theme 宣告。
