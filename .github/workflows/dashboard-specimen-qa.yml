@@ -26,8 +26,14 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Install pinned axe-core accessibility engine
         run: npm install --no-save --no-package-lock axe-core@4.10.3
-      - name: Run real-browser QA and automated accessibility checks
-        run: python examples/responsive-dashboard/qa/run_browser_qa.py
+      - name: Install native zoom desktop controls
+        run: sudo apt-get update && sudo apt-get install -y xvfb xdotool imagemagick
+      - name: Run complete browser matrix and native page zoom
+        env:
+          DASHBOARD_NATIVE_ZOOM: '1'
+          DASHBOARD_MAX_CAPTURES: '40'
+          DASHBOARD_MAX_SECONDS: '480'
+        run: xvfb-run -a -s '-screen 0 1920x1080x24' python examples/responsive-dashboard/qa/run_browser_qa.py
       - name: Upload screenshots and raw measurements
         if: always()
         uses: actions/upload-artifact@v4
