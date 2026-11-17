@@ -173,8 +173,12 @@ demonstrates the contracts, supported by [Chromium/axe-core QA evidence](example
 [accessibility](evals/accessibility/).
 
 These are deliberately excluded from the official v0.1 40-point benchmark
-manifest. They are proposals for v0.2 adoption and do not represent verified
-cross-agent compatibility or production implementation. Automated accessibility
+manifest. Issue #7's scoped implementation is complete: eight reusable component
+groups, a 32-condition acceptance matrix and an actual 200% native browser zoom
+capture. PR #5 remains a draft. Issue #6 still requires independent pilot runs
+and scoring. Physical-device, screen-reader and human task studies have not run.
+These artifacts remain proposals for v0.2 adoption; they do not establish
+cross-agent compatibility or production acceptance. Automated accessibility
 observations apply only to the recorded synthetic specimen and runtime.
 
 ## Evaluations

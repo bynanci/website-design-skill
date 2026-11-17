@@ -55,7 +55,7 @@ python3 scripts/check_merge_readiness.py --repo bynanci/website-design-skill --s
 
 此預覽新增[視覺方向比較](templates/visual-direction-comparison.md)、[響應式行為](templates/responsive-behavior.md)與[設計 token 擷取／遷移](templates/design-token-extraction.md)三項選用交付契約，以及[可執行合成 Dashboard](examples/responsive-dashboard/README.md)。[QA 紀錄](examples/responsive-dashboard/output/qa-review-2026-11-16.md)保存 Chromium 渲染、鍵盤與自動可及性檢查的來源與限制。
 
-這些項目不列入 v0.1 官方 40 分 benchmark。PR #5 維持 draft，Issue #6 追蹤獨立 pilot 評估，Issue #7 追蹤可重用元件、實際瀏覽器縮放及人工驗收等未完成工作。自動檢查結果不代表跨 agent 相容性、正式可及性合規或產品部署驗收。
+這些項目不列入 v0.1 官方 40 分 benchmark。Issue #7 的限定範圍已完成：八組可重用元件、32 項驗收矩陣及真正的 200% 原生瀏覽器縮放擷取。PR #5 維持 draft；Issue #6 的獨立 pilot 執行與評分仍未完成。實體裝置、螢幕閱讀器與真人任務研究尚未執行。自動檢查結果不代表跨 agent 相容性、正式可及性合規或產品部署驗收。
 
 ## 文件語言與寫作規範
 
