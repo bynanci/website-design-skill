@@ -1,0 +1,24 @@
+{
+  "version": "0.1",
+  "themes": [
+    { "name": "light", "selector": ":root" },
+    { "name": "dark", "selector": ":root[data-theme=\"dark\"]" }
+  ],
+  "roles": [
+    { "role": "warning", "reference": "--color-warning", "consumer": "src/components/StatusBanner.vue" },
+    { "role": "destructive-action", "reference": "--color-destructive", "consumer": "src/components/StatusBanner.vue" }
+  ],
+  "components": [
+    { "path": "src/components/StatusBanner.vue", "responsibility": "Status and error feedback shared by media states" }
+  ],
+  "stateOwners": [
+    { "path": "src/stores/media-library.js", "export": "useMediaLibraryStore", "consumer": "src/views/MediaLibrary.vue", "service": "src/services/media-api.js", "action": "load" }
+  ],
+  "allowedLiterals": [
+    { "path": "src/components/StatusBanner.vue", "property": "border-inline-start", "value": "4px", "reason": "Existing status-indicator thickness reused from the profile fixture." },
+    { "path": "src/styles/layout.css", "property": "max-width", "value": "50rem", "reason": "Bounded panel width for this synthetic specimen." },
+    { "path": "src/styles/layout.css", "property": "border", "value": "1px", "reason": "Native control boundary thickness." },
+    { "path": "src/styles/layout.css", "property": "outline", "value": "3px", "reason": "Visible keyboard focus thickness." },
+    { "path": "src/styles/layout.css", "property": "outline-offset", "value": "3px", "reason": "Focus ring separation from the control boundary." }
+  ]
+}

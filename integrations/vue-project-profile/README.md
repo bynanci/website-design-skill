@@ -46,3 +46,7 @@ Output is written under `artifacts/`: the production build, two captures and `re
 Static role evidence and browser measurements are separate records. A passing theme check does not establish full dashboard quality, state-transition behavior, assistive-technology support or official cross-agent release evidence.
 
 Scoped external Vue styles remain unsupported; they cannot establish global theme declarations.
+
+## Bounded patches and state transitions
+
+The same optional tooling now includes the [track-reorder patch](../../examples/track-reorder-vue/README.md) and [media-library transition](../../examples/media-library-vue/README.md) fixtures. `npm test` runs all supported source, patch and owner/service regression tests. `npm run verify:interactions` builds and exercises both through the shared browser harness. The Actions artifact preserves exact patch plans, runtime/source identity, transition assertions, captures and unrun conditions.
