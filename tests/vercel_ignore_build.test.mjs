@@ -30,7 +30,7 @@ test('only a verified irrelevant diff skips; the first deployment builds', t => 
   assert.equal(f.run('').status, 1);
   const result = f.run(); assert.equal(result.status, 0); assert.match(result.stdout, /unchanged/);
 });
-for (const filename of ['site/page.html', 'site/new.css', 'vercel.json', 'scripts/vercel_ignore_build.mjs', 'examples/responsive-dashboard/specimen/app.js', 'examples/responsive-dashboard/README.md', '.gitattributes']) {
+for (const filename of ['site/page.html', 'site/new.css', 'vercel.json', 'scripts/vercel_ignore_build.mjs', 'examples/responsive-dashboard/specimen/app.js', 'examples/responsive-dashboard/README.md', '.gitattributes', '.github/workflows/static-site-deploy.yml']) {
   test(`changes to ${filename} require an actual build`, t => {
     const f = fixture(t); f.commit(filename, 'changed');
     assert.equal(f.run().status, 1);

@@ -79,6 +79,14 @@ jobs:
       - name: Build current checkout for deployment
         run: node site/build.mjs
 
+      - name: Smoke actual current-checkout output
+        run: |
+          dashboard_expected=absent
+          if [ -d examples/responsive-dashboard ]; then dashboard_expected=available; fi
+          python tests/static_site_deploy_browser.py \
+            --root dist --expect-dashboard "$dashboard_expected" \
+            --report '${{ runner.temp }}/static-site-reports/current'
+
       - name: Upload static build and smoke evidence
         if: always()
         uses: actions/upload-artifact@v4

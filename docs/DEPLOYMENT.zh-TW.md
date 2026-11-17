@@ -33,7 +33,7 @@ Ignore script 只在已驗證的 diff 沒有變更部署輸入時略過，也包
 
 ## 驗證與合併
 
-Static-site workflow 會建置 main 與已固定的完整 Dashboard 情境，檢查公開檔案清單、站內連結／資產及 MIME，並用 Chromium 操作實際 served production output，保存 artifacts 與來源識別。這些結果與 Vercel 平台狀態分開記錄。
+Static-site workflow 會建置 main 與已固定的完整 Dashboard 情境，檢查公開檔案清單、站內連結／資產及 MIME，並用 Chromium 操作實際 served production output，保存 artifacts 與來源識別；另外建置並檢查目前 checkout，避免只測固定 fixture 而漏掉當次 Dashboard 變更。這些結果與 Vercel 平台狀態分開記錄。
 
 核對完整 candidate SHA 的所有 commit statuses 與 check runs：
 

@@ -33,7 +33,7 @@ The ignore script skips only a verified diff with unchanged deployment inputs, i
 
 ## Verification and merge
 
-The static-site workflow builds main and the pinned complete dashboard variant, checks the output allowlist, local links/assets and MIME types, and exercises the served production output in Chromium. It preserves its artifacts and source identity. This is separate from Vercel's provider status.
+The static-site workflow builds main and the pinned complete dashboard variant, checks the output allowlist, local links/assets and MIME types, and exercises the served production output in Chromium. It also builds and browser-tests the current checkout, so a changed dashboard cannot pass by testing only the pinned contract fixture. It preserves its artifacts and source identity. This is separate from Vercel's provider status.
 
 Inspect all commit statuses and check runs for the exact candidate:
 

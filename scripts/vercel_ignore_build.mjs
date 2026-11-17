@@ -20,6 +20,7 @@ try {
     git(['cat-file', '-e', `${previous}^{commit}`]);
     const changed = git(['diff', '--no-ext-diff', '--no-textconv', '--name-only', '-z', previous, current, '--',
       'site', 'vercel.json', '.gitattributes', 'scripts/vercel_ignore_build.mjs',
+      '.github/workflows/static-site-deploy.yml', 'tests/static_site_deploy_browser.py', 'tests/test_static_site_deploy.mjs',
       'examples']);
     skip = changed.length === 0;
     reason = skip
