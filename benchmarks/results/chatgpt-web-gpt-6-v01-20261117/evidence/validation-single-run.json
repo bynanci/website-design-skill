@@ -1,0 +1,34 @@
+{
+  "scope": "Isolated unchanged-file snapshot containing only the completed GPT-6 run; the shared checkout also contains an unfinished second run directory.",
+  "validator": {
+    "exit_code": 0,
+    "stdout": "Benchmark validation passed.\n",
+    "stderr": ""
+  },
+  "release_status": {
+    "exit_code": 1,
+    "report": {
+      "release_line": "v0.1",
+      "suite_version": "0.1.0",
+      "required_repository_commit": "7d64090710ef20f1d24cea6b46199391d3c09c18",
+      "ready": false,
+      "official_runs": 1,
+      "distinct_agent_signatures": 1,
+      "failures": [
+        "official runs: 1 < 2",
+        "distinct agent signatures: 1 < 2"
+      ],
+      "warnings": []
+    },
+    "stderr": ""
+  },
+  "script_sha256": {
+    "validate_benchmarks.py": "7a4b0ee2070c11804ef4cb47da28c67eb408b833847430436ef9386cfb09e210",
+    "release_status.py": "a9e6a21470fe7626c6e26ad82b315ed1c27db3fc7569e681187125ebfbcf6101"
+  },
+  "raw_sha256": {
+    "ia-audit.md": "4dbf31af88620a30c8353b9e1d4fce60f4105990b903e94005f5be15b0556ed5",
+    "component-reuse.md": "f71231d12956e268112d926121dab8c616ade47c0997ca792d37f9ac56a4f624",
+    "end-to-end.md": "89791553ebc0a9633cb2bc08a85c91d4a21f20998e57b235d5121fdd697e20cd"
+  }
+}

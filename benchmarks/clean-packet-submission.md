@@ -50,11 +50,24 @@ alone cannot prove an agent's context was clean.
 
 ## Current limitations
 
-This repository has not yet received two eligible independent agents'
-complete raw outputs. The local assistant or a model that has read expected
-results or the rubric is **contaminated** for the official benchmark.
+As of 2026-11-17, two complete runs have passed independent review and
+repository validation: [GPT-6](results/chatgpt-web-gpt-6-v01-20261117/) and
+[GPT-5.6 Sol](results/chatgpt-web-gpt-5-6-sol-v01-20261117/), each 40/40.
+Both used ChatGPT web, with a fresh Temporary, Unpersonalized chat per case
+and no API key. They represent two selected model labels on one product,
+not cross-vendor or all-platform compatibility. See the
+[compatibility matrix](compatibility-matrix.md) for evidence limits.
+
+These formal UI runs preserve raw downloads, isolation records, execution
+metadata and separate criterion-level reviews. Informal manual tests do not
+qualify merely because they use the same product. The local assistant or a
+model that has read expected results or the rubric remains **contaminated**
+for generating official evidence.
 
 A blocked subscription or inaccessible model interface is **runner
-unavailable**, not evidence of skill failure. Do not mark Issue #1 complete
-until independent execution identity, exact raw evidence, and release gate
-checks are all verified.
+unavailable**, not evidence of skill failure. The local strict release gate now
+reports ready with two official runs and two distinct signatures, without
+failures or warnings in the 2026-11-17 snapshot. Before publication, verify CI
+and required external checks for the exact candidate, complete public merge
+and follow [RELEASE.md](../RELEASE.md). [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) and
+[GitHub Releases](https://github.com/bynanci/website-design-skill/releases) are the publication record; local readiness alone does not establish publication.

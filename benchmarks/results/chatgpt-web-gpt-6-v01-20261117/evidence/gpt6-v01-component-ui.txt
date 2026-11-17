@@ -1,0 +1,128 @@
+Browser tab: 3, Title: "Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.", URL: "https://chatgpt.com/c/6afc54b3-e728-83ee-91bc-90dcd7bb5a25?temporary-chat=true".
+0 AXWebArea URL: chatgpt.com/c/6afc54b3-e728-83ee-91bc-90dcd7bb5a25?temporary-chat=true, Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.
+	1 container
+		2 container root
+			3 container
+				20 link Description: Skip to content, Value: chatgpt.com/c/6afc54b3-e728-83ee-91bc-90dcd7bb5a25?temporary-chat=true#_r_4l_
+				5 container
+					6 container app-shell-sidebar
+						7 container App navigation
+							8 button (collapsed) Home, Secondary Actions: Expand
+							9 button (collapsed) Space, Secondary Actions: Expand
+							10 button (collapsed) Scheduled, Secondary Actions: Expand
+							11 button (collapsed) Plugins, Secondary Actions: Expand
+							12 pop up button (collapsed) Explore, Secondary Actions: Expand
+							13 button Sites
+							14 button Maps
+							15 button Images
+							16 button (collapsed) Codex, Secondary Actions: Expand
+							17 container
+								18 pop up button (collapsed) Description: Usage, ID: radix-_r_3l_, Secondary Actions: Expand
+								19 pop up button (collapsed) Description: Open profile menu, ID: radix-_R_4nef9ndqd9iqeprb347l9arad5_, Secondary Actions: Expand
+					21 container
+						22 button New chat
+							23 image
+						24 text Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.
+						25 image
+						26 text Temporary chat
+						27 button (disabled) Save chat
+						98 checkbox Description: Toggle pinned summary, Value: 0
+							99 image
+					28 container
+						29 container Conversation
+							30 container
+								31 heading You said:, Value: 4
+									32 text You said:
+								33 button component-reuse-001-pinned-7d64090710ef.zip
+								34 image
+								35 text component-reuse-001-pinned-7d64090710ef.zip File
+								36 text Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.
+								37 button Copy message
+								54 button Edit message
+								100 button (expanded) Worked for 2m 37s, Secondary Actions: Collapse
+									101 text Worked for 2m 37s
+									102 image
+								132 text I’ll inspect the packet’s file list, read its  SKILL.md  and  packet.json , then complete the case using only the permitted packet materials. I’ll save the result as a UTF-8 Markdown file.
+								129 text Inspected benchmark archives and drafted enterprise component reuse specification
+								55 heading ChatGPT said:, Value: 4
+									56 text ChatGPT said:
+								57 heading Enterprise landing page — component reuse plan, Value: 2
+									58 text Enterprise landing page — component reuse plan
+								59 container
+									60 text Case: component-reuse-001
+								61 container
+									62 text The proposed page uses all seven existing component types and introduces  one new reusable component:  PlanComparisonTable .
+								63 text The seven requested sections map to existing components wherever responsibilities already match. The plan comparison table is the only requirement that cannot be represented cleanly by the supplied inventory.
+								64 table
+									65 row
+										66 cell
+											67 text Decision
+										68 cell
+											69 text Result
+									70 row
+										71 cell
+											72 text Page sections
+										73 cell
+											74 text 7
+									75 row
+										76 cell
+											77 text Existing component types reused
+										78 cell
+											79 text 7
+									80 row
+										81 cell
+											82 text Existing components requiring modification
+										83 cell
+											84 text 0
+									85 row
+										86 cell
+											87 text New reusable components
+										88 cell
+											89 text 1
+									90 row
+										91 cell
+											92 text Page-specific components
+										93 cell
+											94 text 0
+								95 text The design preserves the requested section sequence and CTA hierarchy. It does not introduce speculative customer names, logos, statistics, case-study claims, plan names, or feature entitlements.
+								96 text The result includes the section-to-component mapping, justification for each decision, the new component contract, content coverage, responsive and accessibility requirements, assumptions, risks, and validation criteria.
+								103 image
+								104 text Completed — Markdown deliverable
+								105 link Open Download the complete Enterprise component mapping (.md)
+									106 text Download the complete Enterprise component mapping 
+									107 container
+										108 text (.md)
+										109 image
+								110 container
+									111 text The UTF-8 file contains the full 207-line specification, including the reusable  PlanComparisonTable  contract and validation checklist.
+								112 container
+									113 text Validation status:  Component mapping complete. Implementation testing and factual content verification remain uncompleted because the necessary source materials were not provided. No external sources were accessed, and no implementation code was written.
+								114 button Open preview of component-reuse-001-result.md
+								115 text component-reuse-001-result.md
+								116 text Document
+								130 button Download file
+								118 button Copy
+									119 image
+								120 checkbox Description: Read aloud, Value: 0
+								121 button Sources
+								122 pop up button (collapsed) Description: More actions, ID: radix-_r_6v_, Secondary Actions: Expand
+							39 text ChatGPT can make mistakes. Check important info.
+							40 container
+								97 button Scroll to bottom
+								41 heading Latest response, Value: 4
+									42 text Latest response
+								43 container
+									44 container
+										45 button (collapsed) Description: Add files and more, Secondary Actions: Expand
+										46 text entry area (settable) Description: Ask ChatGPT, Value: 
+
+											47 container
+												131 text Ask ChatGPT
+										49 pop up button (collapsed) Description: Select ChatGPT model, ID: radix-_r_5n_, Secondary Actions: Expand
+											50 text Medium
+										51 button Dictate
+										124 button (disabled) Send
+											125 image
+		126 text Response complete
+
+The focused UI element is 100 button (expanded) Worked for 2m 37s, Secondary Actions: Collapse

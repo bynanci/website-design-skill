@@ -2,11 +2,14 @@
 
 [English](CHANGELOG.md) · 繁體中文
 
-本專案的公開 artifact 契約穩定後，將以語意化版本管理正式版本。尚未發布穩定版本。
+本專案的公開 artifact 契約穩定後，將以語意化版本管理正式版本。版本發布紀錄以 [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) 為準。
 
 ## [未發布]
 
 ### 新增
+
+- ChatGPT web 上兩次完成獨立審查的官方 v0.1 benchmark，所選模型標籤為 GPT-6 與 GPT-5.6 Sol。兩次均使用凍結 suite `0.1.0` 與核心 commit `7d64090710ef20f1d24cea6b46199391d3c09c18`，各得 40/40。原始執行與評分連結見[相容性矩陣](benchmarks/compatibility-matrix.md)。
+- [v0.1.0 雙語發布說明草案](docs/releases/v0.1.0.zh-TW.md)，列出證據邊界與待辦。2026-11-17 快照中的本機嚴格證據 gate 已通過；發布依檢查清單辦理，紀錄以 [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) 與 [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) 為準。
 
 - 明確的零相依靜態展示建置與 Vercel 部署契約、公開資產／來源檢查、main／preview HTTP／browser smoke，以及涵蓋外部部署的合併就緒報告。
 - 新增有限宣告式 recovery 原型，包含遞迴嚴格 payload 驗證、即時一次性 host capability、純文字 Vue renderer、靜態 fallback 與可比較的 production bundle/UI 成本證據。

@@ -10,6 +10,9 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 ### Added
 
+- Two independently reviewed official v0.1 benchmark runs on ChatGPT web, using the selected model labels GPT-6 and GPT-5.6 Sol. Each run scores 40/40 on frozen suite `0.1.0` at core commit `7d64090710ef20f1d24cea6b46199391d3c09c18`. See the [compatibility matrix](benchmarks/compatibility-matrix.md) for raw-run and scoring links.
+- [Bilingual draft v0.1.0 release notes](docs/releases/v0.1.0.md) with evidence boundaries and remaining publication steps. The local strict evidence gate passes in the 2026-11-17 snapshot; publication follows the release checklist, with [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) and [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) as the publication record.
+
 - Explicit dependency-free static showcase build and Vercel deployment contract, strict public asset/provenance checks, main/preview HTTP/browser smoke, and separate all-context merge-readiness reporting.
 - Bounded declarative recovery prototype with recursive strict payload validation, live one-use host capabilities, text-only Vue rendering, static fallback and comparable production bundle/UI cost evidence.
 

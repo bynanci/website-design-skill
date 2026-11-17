@@ -21,7 +21,7 @@ English and Traditional Chinese versions are available for the README, core skil
 
 The optional [integration architecture](integrations/context-aware-ui/README.md) connects project tokens, reusable components, state/API ownership and bounded source edits. Scoped Vue inspection, track-reorder editing, media transitions and declarative recovery now have executable fixtures and browser evidence on main. The v0.2 preview adds the rendered dashboard and one reviewed CSS restoration operation. Each capability has explicit syntax, host and evidence limits; other frameworks require separate adapters.
 
-[Issue #8](https://github.com/bynanci/website-design-skill/issues/8) records these completed pilots. The independent v0.1 and v0.2 agent-evaluation gates remain open in #1/#6. Deployment is tracked separately in [#29](https://github.com/bynanci/website-design-skill/issues/29).
+[Issue #8](https://github.com/bynanci/website-design-skill/issues/8) records these completed pilots. The 2026-11-17 evidence snapshot for the v0.1 benchmark gate in #1 contains two reviewed official runs. The separate [v0.2 pilot in #6](https://github.com/bynanci/website-design-skill/issues/6) has two completed, independently reviewed and validated runs in the preview worktree: GPT-6 scores 36/36 and GPT-5.6 Sol scores 33/36. GPT-5.6 Sol receives partial scores on AX-01, AX-02 and AX-03; neither run has a critical error. Issue #6 records its publication and merge state. Deployment is tracked separately in [#29](https://github.com/bynanci/website-design-skill/issues/29).
 
 ## Build the static showcase
 
@@ -218,7 +218,9 @@ Runner availability and skill compatibility are tracked separately. A subscripti
 
 The tested agent must not receive evaluator reference files or the rubric during generation.
 
-No official cross-agent result is committed until the raw output and metadata pass repository validation.
+As of 2026-11-17, two independently reviewed official runs pass repository validation: [GPT-6](benchmarks/results/chatgpt-web-gpt-6-v01-20261117/) and [GPT-5.6 Sol](benchmarks/results/chatgpt-web-gpt-5-6-sol-v01-20261117/), each scoring 40/40. These are two selected model labels on one product, ChatGPT web, not cross-vendor evidence. Each case used a fresh Temporary, Unpersonalized chat and a pinned input packet; no API key was used. See the [compatibility matrix](benchmarks/compatibility-matrix.md) for scores and evidence limits.
+
+These formal UI runs preserve raw downloads, isolation records, metadata and separate criterion-level reviews. Informal manual tests do not qualify as official compatibility evidence.
 
 ## Validation
 
@@ -230,7 +232,7 @@ python3 scripts/validate_benchmarks.py
 python3 scripts/release_status.py
 ```
 
-All three commands run in CI. The first two are hard validators; `release_status.py` reports readiness without failing while official clean runs are still missing.
+All three commands run in CI. The first two are hard validators. `release_status.py` validates evidence and reports readiness; use `--require-ready` to fail when the release gate is not met.
 
 Validation covers:
 
@@ -282,13 +284,15 @@ Platform-specific adapters remain optional and outside the core methodology.
 
 ## Status
 
-**v0.1 release candidate infrastructure.**
+**v0.1 release candidate with a passing local evidence gate (2026-11-17).**
 
 The methodology, artifacts, behavioral evals, end-to-end fixture, benchmark protocol, result contract, release gate, and CI enforcement are now present.
 
 The first external runner attempt established runner-availability evidence only: Replit Agent could not complete a reproducible run in the current environment because a narrowed retry required an active subscription. That attempt is not scored and does not count as compatibility evidence.
 
-No official cross-agent runs are claimed yet. The repository should remain untagged until clean runs satisfy the release policy.
+The strict local gate reports ready with two official runs, two distinct agent signatures, no failures and no warnings. Both runs evaluate suite `0.1.0` at frozen core commit `7d64090710ef20f1d24cea6b46199391d3c09c18`. Later adapters and tests on main are separate evidence and were not included in these benchmark inputs.
+
+Before publishing, verify CI and required external checks for the exact candidate, complete public merge, then follow the release-tag procedure in [RELEASE.md](RELEASE.md). [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) and [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) are the publication record. In the 2026-11-17 snapshot, deployment quota remains active in [#29](https://github.com/bynanci/website-design-skill/issues/29), with follow-up scheduled for 2026-11-18 at 19:10 Asia/Taipei. See the [draft v0.1.0 release notes](docs/releases/v0.1.0.md) for the evidence scope and remaining work.
 
 See [SKILL.md](./SKILL.md) for the agent operating contract.
 
