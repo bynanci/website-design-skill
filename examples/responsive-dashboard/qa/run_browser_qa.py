@@ -222,7 +222,10 @@ def chart_keyboard_hover(page):
               }
               throw new Error('Trend marker has no exposed pointer target');
             }""")
-        page.mouse.move(position["x"], position["y"])
+        bounds = point.bounding_box()
+        # Locator.hover rechecks stable geometry and event reception before the
+        # native move; raw page.mouse coordinates can stale after scroll anchoring.
+        point.hover(position={"x": position["x"] - bounds["x"], "y": position["y"] - bounds["y"]})
         page.wait_for_function("({selector, expected}) => document.querySelector(selector).textContent === expected",
                                arg={"selector": feedback_id, "expected": keyboard})
         check(page.locator(feedback_id).inner_text() == keyboard, kind + ": pointer/keyboard value mismatch")
