@@ -27,7 +27,8 @@ service, real data source, physical device or screen-reader certification.
 - Explain desktop one-screen vs readable content trade-offs.
 - Preserve charts, evidence, actions, and text across narrow layouts.
 - Compare visual hypotheses on a locked content baseline.
-- Propose semantic tokens without inventing current values or claiming tests.
+- Record observed fixture tokens with source evidence and keep target-product
+  token compatibility unresolved until that repository is inspected.
 
 This fixture is **not** a v0.1 benchmark case and must not be included in
 official 40-point clean-run inputs until the benchmark suite is separately
