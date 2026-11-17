@@ -257,7 +257,7 @@ def independent_component_checks(page):
     check(host.locator('[data-chart-point="trend"]').count() == 2, "reused trend lacks its two independent points")
     mix_values = host.locator("#reuse-mix-mix-data tr td:first-of-type").all_text_contents()
     check([int(value) for value in mix_values] == [40, 60], "reused mix table ignored its supplied values")
-    check(host.locator(".donut-center-value").inner_text() == "100", "reused mix total ignored independent props")
+    check(host.locator(".donut-center-value").text_content() == "100", "reused mix total ignored independent props")
     trend_values = host.locator("#reuse-trend-trend-table-body tr td").all_text_contents()
     check([int(value) for value in trend_values] == [3, 9], "reused trend table ignored supplied values")
     details = {}
