@@ -213,7 +213,18 @@ def chart_keyboard_hover(page):
         else:
             page.mouse.move(0, 0)
             page.locator(feedback_id).evaluate("e=>{e.textContent='pointer probe pending'}")
-            point.hover()
+            # Nearby series markers can overlap their centres. Select an
+            # actually exposed point on this marker, then deliver a real move.
+            position = point.evaluate("""e => {
+              const cx=Number(e.getAttribute('cx')),cy=Number(e.getAttribute('cy')),
+                r=Number(e.getAttribute('r')),matrix=e.getScreenCTM();
+              for(const [dx,dy] of [[0,0],[0,-.7],[-.7,0],[.7,0],[0,.7]]){
+                const p=new DOMPoint(cx+dx*r,cy+dy*r).matrixTransform(matrix);
+                if(document.elementFromPoint(p.x,p.y)===e)return {x:p.x,y:p.y};
+              }
+              throw new Error('Trend marker has no exposed pointer target');
+            }""")
+            page.mouse.move(position["x"], position["y"])
         check(page.locator(feedback_id).inner_text() == keyboard, kind + ": pointer/keyboard value mismatch")
     page.locator('[data-chart-point="mix"]').first.focus()
     page.keyboard.press("ArrowRight")
