@@ -16,18 +16,21 @@
   function caseDialog(){
     const dialog=qs("#case-dialog"),title=qs("#case-dialog-title");
     let returnFocus=null;
-    const descriptions={
-      "CS-2026-081":"雲端專線延遲 · 高優先級。示範狀態：調查中。預定完成日：11/18。",
-      "CS-2026-076":"備援路由調整 · 一般優先級。示範狀態：待確認。預定完成日：11/20。",
-      "CS-2026-070":"服務監測報表 · 一般優先級。示範狀態：處理中。預定完成日：11/21。"
-    };
-    document.querySelectorAll("[data-case]").forEach(button=>button.addEventListener("click",()=>{
-      returnFocus=button;
-      const id=button.dataset.case;
-      title.textContent="案件 "+id;
-      qs("#case-dialog-description").textContent=descriptions[id];
+    // Delegate to the shared dialog host so later component instances receive
+    // the same native pointer/keyboard behavior as the initial dashboard.
+    document.addEventListener("click", event => {
+      const button = event.target instanceof Element ? event.target.closest('button[data-case]') : null;
+      if (!button || button.disabled || !button.closest('[data-component="CaseTable"]')) return;
+      const row = button.closest("tr"), cells = row ? Array.from(row.querySelectorAll("td")) : [];
+      if (cells.length !== 7 || dialog.open) return;
+      returnFocus = button;
+      const value = index => cells[index].textContent.trim();
+      title.textContent = "案件 " + button.dataset.case;
+      // Read the current instance's rendered, text-only props. Do not look up
+      // a fixed global fixture ID or copy another component's record.
+      qs("#case-dialog-description").textContent = value(1) + " · " + value(2) + "優先級。示範狀態：" + value(5) + "。預定完成日：" + value(4) + "。";
       dialog.showModal();title.focus();
-    }));
+    });
     const close=()=>dialog.close();
     qs("#close-dialog").addEventListener("click",close);
     qs("#dialog-done").addEventListener("click",close);
@@ -41,7 +44,7 @@
         : (current + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
       event.preventDefault(); controls[next].focus();
     });
-    dialog.addEventListener("close",()=>{if(returnFocus){returnFocus.focus();returnFocus=null;}});
+    dialog.addEventListener("close",()=>{if(returnFocus?.isConnected)returnFocus.focus();returnFocus=null;});
   }
   /** One synthetic read owner; no network, storage or backend permission. */
   function createDashboardOwner() {
