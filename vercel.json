@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "framework": null,
+  "installCommand": "node -e \"process.exit(0)\"",
+  "buildCommand": "node site/build.mjs",
+  "outputDirectory": "dist",
+  "ignoreCommand": "node scripts/vercel_ignore_build.mjs",
+  "trailingSlash": true,
+  "git": { "deploymentEnabled": true },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
+  ]
+}

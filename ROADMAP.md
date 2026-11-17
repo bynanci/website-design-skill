@@ -29,6 +29,10 @@ The optional PR #5 preview contains the reusable eight-group dashboard, a 32-con
 
 Issue #6 now has isolated versioned packets, a criterion rubric, strict result validation and integrity tests. It still has zero independent results. Issue #1 also requires two eligible clean agent signatures. Draft PR #5 remains under those independent release gates; implementation and browser tests do not replace them.
 
+## Deployment and external checks
+
+[Issue #29](https://github.com/bynanci/website-design-skill/issues/29) tracks the incorrect Vite tooling root, duplicate Vercel projects and provider rate limits. The explicit static showcase build and production-output smoke are separate from core release readiness. Inspect external deployment statuses as well as GitHub Actions; only an actual source-bound READY deployment can close that acceptance item. See [deployment operations](docs/DEPLOYMENT.md).
+
 ## v0.1 — Minimum viable public release
 
 Goal: publish a small, defensible core that another agent can understand, execute, inspect, and evaluate.
