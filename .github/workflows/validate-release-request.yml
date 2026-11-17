@@ -1,0 +1,39 @@
+name: Validate reviewed release request
+
+on:
+  pull_request:
+    paths:
+      - '.github/release-requests/**'
+      - '.github/workflows/publish-release.yml'
+      - '.github/workflows/validate-release-request.yml'
+      - 'scripts/publish_release.py'
+      - 'tests/test_publish_release.py'
+      - 'docs/releases/*.github.md'
+
+permissions:
+  contents: read
+  checks: read
+  statuses: read
+
+concurrency:
+  group: validate-release-request-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate-release-request:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test release boundaries
+        run: python3 -m unittest discover -s tests -p 'test_publish_release.py' -v
+      - name: Validate new release request without publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/publish_release.py --event-file "$GITHUB_EVENT_PATH"

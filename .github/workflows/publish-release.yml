@@ -1,0 +1,58 @@
+name: Publish reviewed release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/release-requests/*.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-reviewed-release
+  cancel-in-progress: false
+
+jobs:
+  validate-request:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      checks: read
+      statuses: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test release boundaries
+        run: python3 -m unittest discover -s tests -p 'test_publish_release.py' -v
+      - name: Validate new release request without publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/publish_release.py --event-file "$GITHUB_EVENT_PATH"
+
+  publish:
+    needs: validate-request
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      checks: read
+      statuses: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recheck and publish immutable request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/publish_release.py --event-file "$GITHUB_EVENT_PATH" --publish

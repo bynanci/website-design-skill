@@ -59,6 +59,60 @@ python3 scripts/release_status.py --require-ready
    - known limitations;
    - breaking-contract risks for the next version.
 
+## Reviewed release requests
+
+The `Publish reviewed release` workflow publishes a versioned request merged into
+main. It uses GitHub's short-lived repository token; maintainers do not need to
+provide a personal token or sign in through an automation browser. Only the publish
+job has `contents: write`. Read-only candidate checks use `checks: read` and
+`statuses: read`; no secret, OIDC or workflow-write permission is requested.
+
+Publication has two steps:
+
+1. Merge release infrastructure and final GitHub-ready notes. Wait for the exact
+   main candidate's validation, browser smoke and canonical Vercel status to pass.
+   The candidate's frozen benchmark evidence must also pass the hard release gate.
+2. Add `.github/release-requests/v0.1.0.json` in a separate reviewed change. Set
+   `candidate_sha` to that prior full commit SHA and `notes_sha256` to the SHA-256
+   of its tracked UTF-8 `docs/releases/v0.1.0.github.md` file. Merge the request only
+   after its read-only validation passes.
+
+```json
+{
+  "tag": "v0.1.0",
+  "candidate_sha": "FULL_40_CHARACTER_CANDIDATE_SHA",
+  "notes_path": "docs/releases/v0.1.0.github.md",
+  "notes_sha256": "FULL_64_CHARACTER_NOTES_SHA256"
+}
+```
+
+The example contains placeholders and is not a valid publish request. The runner
+accepts one new versioned request per change and rejects edits, deletions, unknown
+fields, abbreviated SHAs, symlinks, relative release-body links and mismatched
+notes hashes. The candidate must be an ancestor of current main and precede the
+request commit. Its workflow tree must equal current main's workflow tree: GitHub's
+repository token cannot create releases whose target changes workflow files
+relative to the default branch. See [GitHub's release API permission rule](https://docs.github.com/en/rest/releases/releases#create-a-release).
+
+The runner reuses the unchanged repository validators and exact-commit readiness
+inspector. It requires successful real Actions `validate` and `smoke` checks plus
+`Vercel – vue-project-profile`, with every other observed context also successful.
+Because the publication target precedes its request, the publisher does not wait
+on its own running job. A moved main branch stops publication before mutation.
+
+An existing tag or published release is accepted only when it has the requested
+commit and exact notes body. Conflicting tags, draft/prerelease states or body
+changes stop the process; the workflow never force-moves tags or overwrites a
+public release. API errors stop without automatic retry. After a timeout or partial
+failure, inspect the remote tag and release before requesting another attempt.
+Repeated execution of an identical completed request is a verified no-op.
+
+Pull requests run boundary tests and read-only request validation. Only a push to
+main that adds a request can publish. A token-created tag/release does not trigger
+additional workflows automatically; all required tests run before publication.
+The initial supported release policy is the existing v0.1 line; other lines need
+an explicit policy and version review.
+
 ## Versioning
 
 Use Semantic Versioning for public artifact contracts.
