@@ -193,9 +193,18 @@ def chart_keyboard_hover(page):
         check(sum(point.get_attribute("tabindex") == "0" for point in points.all()) == 1,
               kind + ": expected one roving Tab stop")
         point = points.first
-        point.focus()
-        keyboard = page.locator(feedback_id).inner_text()
+        # Keep the pointer outside the charts before focus scrolls the page;
+        # scrolling under a stationary pointer can overwrite focus feedback.
+        page.mouse.move(0, 0)
         point.scroll_into_view_if_needed()
+        point.evaluate("e => { if (e === document.activeElement) e.blur(); }")
+        point.focus()
+        label = point.get_attribute("aria-label")
+        expected = label if kind == "trend" else (lambda fields: fields[0] + "：" + fields[1] + "，占 " + fields[2] + "。")(label.split("，"))
+        page.wait_for_function("({selector, expected}) => document.querySelector(selector).textContent === expected",
+                               arg={"selector": feedback_id, "expected": expected})
+        keyboard = page.locator(feedback_id).inner_text()
+        check(keyboard == expected, kind + ": focused point and announced value disagree")
         page.mouse.move(0, 0)
         page.locator(feedback_id).evaluate("e=>{e.textContent='pointer probe pending'}")
         # Recompute after changing feedback: its wrapping may move the SVG
@@ -268,6 +277,8 @@ def independent_component_checks(page):
     details = {}
     for kind, feedback_id in (("mix", "#reuse-mix-mix-feedback"), ("trend", "#reuse-trend-trend-feedback")):
         point = host.locator('[data-chart-point="' + kind + '"]').first
+        page.mouse.move(0, 0)
+        point.scroll_into_view_if_needed()
         point.focus()
         keyboard = page.locator(feedback_id).inner_text()
         check("Probe" in keyboard, kind + ": reused chart focus did not announce local props")
