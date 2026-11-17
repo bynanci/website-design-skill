@@ -221,3 +221,13 @@ test('does not evaluate dynamic Vite configuration', t => {
   fs.writeFileSync(path.join(root, 'vite.config.ts'), 'throw new Error("must not execute");\n');
   assert.equal(inspectProject(root).evidence.roles.length, 2);
 });
+
+for (const macro of ['defineEmits<{ saved: [] }>();', 'defineModel<string>();']) {
+  test(`extra compiler API remains unknown: ${macro}`, t => {
+    const root = project(t);
+    edit(root, 'src/components/StatusBanner.vue', text => text.replace('</script>', `${macro}\n</script>`));
+    const result = inspectProject(root);
+    assert.equal(result.evidence.componentApis[0].status, 'unknown');
+    assert.deepEqual(result.profile.components.find(item => item.path === 'src/components/StatusBanner.vue').publicApi, []);
+  });
+}

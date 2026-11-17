@@ -257,7 +257,14 @@ export function inspect(rootInput, { entry = 'src/main.ts', contract: contractPa
       const call = calls.length === 1 ? calls[0] : null;
       const topLevel = call && (ts.isExpressionStatement(call.parent) && call.parent.parent === module.source || ts.isVariableDeclaration(call.parent) && call.parent.initializer === call && ts.isVariableDeclarationList(call.parent.parent) && ts.isVariableStatement(call.parent.parent.parent) && call.parent.parent.parent.parent === module.source);
       const props = topLevel && call.typeArguments?.length === 1 ? call.typeArguments[0] : null;
-      if (module.descriptor?.template?.content.includes('<slot') || module.source.statements.some(statement => statement.getText(module.source).includes('defineEmits(') || statement.getText(module.source).includes('defineSlots(') || statement.getText(module.source).includes('defineExpose('))) supported = false;
+      // Extra compiler macros can add events, models or exposed APIs. Their
+      // presence makes this props-only adapter incomplete, even with TS generics.
+      let extraPublicApi = false;
+      walk(module.source, node => {
+        if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)
+          && ['defineEmits', 'defineSlots', 'defineExpose', 'defineModel', 'defineOptions'].includes(node.expression.text)) extraPublicApi = true;
+      });
+      if (module.descriptor?.template?.content.includes('<slot') || extraPublicApi) supported = false;
       if (!props || !ts.isTypeLiteralNode(props)) supported = false;
       else for (const prop of props.members) {
         const type = ts.isPropertySignature(prop) && describe(prop.type);
