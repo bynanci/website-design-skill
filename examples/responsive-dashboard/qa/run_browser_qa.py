@@ -196,25 +196,23 @@ def chart_keyboard_hover(page):
         point.focus()
         keyboard = page.locator(feedback_id).inner_text()
         point.scroll_into_view_if_needed()
+        page.mouse.move(0, 0)
+        page.locator(feedback_id).evaluate("e=>{e.textContent='pointer probe pending'}")
+        # Recompute after changing feedback: its wrapping may move the SVG
+        # through scroll anchoring. Hit-test the painted target before moving.
         if kind == "mix":
-            # A circle's bounding-box center is not its visible arc. Move to the
-            # midpoint of this segment to dispatch a real pointer enter event.
             position = point.evaluate("""e => {
               const dash=Number(e.getAttribute('stroke-dasharray').split(/[ ,]+/)[0]);
-              const offset=Math.abs(Number(e.getAttribute('stroke-dashoffset')));
-              const radius=Number(e.getAttribute('r')), angle=(offset+dash/2)/radius;
-              const p=new DOMPoint(Number(e.getAttribute('cx'))+radius*Math.cos(angle),
-                Number(e.getAttribute('cy'))+radius*Math.sin(angle)).matrixTransform(e.getScreenCTM());
-              return {x:p.x,y:p.y};
+              const offset=Math.abs(Number(e.getAttribute('stroke-dashoffset'))),r=Number(e.getAttribute('r'));
+              for(const fraction of [.5,.25,.75]) {
+                const angle=(offset+dash*fraction)/r;
+                const p=new DOMPoint(Number(e.getAttribute('cx'))+r*Math.cos(angle),
+                  Number(e.getAttribute('cy'))+r*Math.sin(angle)).matrixTransform(e.getScreenCTM());
+                if(document.elementFromPoint(p.x,p.y)===e)return {x:p.x,y:p.y};
+              }
+              throw new Error('Mix segment has no exposed pointer target');
             }""")
-            page.mouse.move(0, 0)
-            page.locator(feedback_id).evaluate("e=>{e.textContent='pointer probe pending'}")
-            page.mouse.move(position["x"], position["y"])
         else:
-            page.mouse.move(0, 0)
-            page.locator(feedback_id).evaluate("e=>{e.textContent='pointer probe pending'}")
-            # Nearby series markers can overlap their centres. Select an
-            # actually exposed point on this marker, then deliver a real move.
             position = point.evaluate("""e => {
               const cx=Number(e.getAttribute('cx')),cy=Number(e.getAttribute('cy')),
                 r=Number(e.getAttribute('r')),matrix=e.getScreenCTM();
@@ -224,7 +222,9 @@ def chart_keyboard_hover(page):
               }
               throw new Error('Trend marker has no exposed pointer target');
             }""")
-            page.mouse.move(position["x"], position["y"])
+        page.mouse.move(position["x"], position["y"])
+        page.wait_for_function("({selector, expected}) => document.querySelector(selector).textContent === expected",
+                               arg={"selector": feedback_id, "expected": keyboard})
         check(page.locator(feedback_id).inner_text() == keyboard, kind + ": pointer/keyboard value mismatch")
     page.locator('[data-chart-point="mix"]').first.focus()
     page.keyboard.press("ArrowRight")
