@@ -238,6 +238,88 @@ def chart_keyboard_hover(page):
     check("雲端專線" in page.locator("#trend-feedback").inner_text() and "6 月" in page.locator("#trend-feedback").inner_text(), "trend Home target")
 
 
+def independent_component_checks(page):
+    """Exercise newly created instances, not only their initial DOM markup."""
+    original_url = page.url
+    original_note = page.locator("#note-status").inner_text()
+    page.evaluate("""() => {
+      const host=document.createElement('div');host.id='component-reuse-probe';
+      host.style.width='min(800px,100%)';host.style.marginInline='auto';
+      host.append(
+        DashboardComponents.create('RevenueMix',{title:'Probe mix',mix:[['Probe A',40],['Probe B',60]]},{idPrefix:'reuse-mix-'}),
+        DashboardComponents.create('RevenueTrend',{title:'Probe trend',months:['A','B'],trend:[['Probe trend',[3,9]]]},{idPrefix:'reuse-trend-'}),
+        DashboardComponents.create('NotesEditor',{title:'Probe notes'},{idPrefix:'reuse-notes-'})
+      );
+      document.body.append(host);
+    }""")
+    host = page.locator("#component-reuse-probe")
+    check(host.locator('[data-chart-point="mix"]').count() == 2, "reused mix lacks its two independent points")
+    check(host.locator('[data-chart-point="trend"]').count() == 2, "reused trend lacks its two independent points")
+    mix_values = host.locator("#reuse-mix-mix-data tr td:first-of-type").all_text_contents()
+    check([int(value) for value in mix_values] == [40, 60], "reused mix table ignored its supplied values")
+    check(host.locator(".donut-center-value").inner_text() == "100", "reused mix total ignored independent props")
+    trend_values = host.locator("#reuse-trend-trend-table-body tr td").all_text_contents()
+    check([int(value) for value in trend_values] == [3, 9], "reused trend table ignored supplied values")
+    details = {}
+    for kind, feedback_id in (("mix", "#reuse-mix-mix-feedback"), ("trend", "#reuse-trend-trend-feedback")):
+        point = host.locator('[data-chart-point="' + kind + '"]').first
+        point.focus()
+        keyboard = page.locator(feedback_id).inner_text()
+        check("Probe" in keyboard, kind + ": reused chart focus did not announce local props")
+        point.scroll_into_view_if_needed()
+        page.mouse.move(0, 0)
+        if kind == "mix":
+            position = point.evaluate("""e => {
+              const dash=Number(e.getAttribute('stroke-dasharray').split(/[ ,]+/)[0]);
+              const offset=Math.abs(Number(e.getAttribute('stroke-dashoffset'))),r=Number(e.getAttribute('r'));
+              const angle=(offset+dash/2)/r;
+              const p=new DOMPoint(Number(e.getAttribute('cx'))+r*Math.cos(angle),
+                Number(e.getAttribute('cy'))+r*Math.sin(angle)).matrixTransform(e.getScreenCTM());
+              return {x:p.x,y:p.y};
+            }""")
+        else:
+            position = point.evaluate("""e => {
+              const cx=Number(e.getAttribute('cx')),cy=Number(e.getAttribute('cy')),r=Number(e.getAttribute('r')),m=e.getScreenCTM();
+              for(const [dx,dy] of [[0,0],[0,-.7],[-.7,0],[.7,0],[0,.7]]) {
+                const p=new DOMPoint(cx+dx*r,cy+dy*r).matrixTransform(m);
+                if(document.elementFromPoint(p.x,p.y)===e)return {x:p.x,y:p.y};
+              }
+              throw new Error('Reused trend marker has no exposed pointer target');
+            }""")
+        page.locator(feedback_id).evaluate("e=>{e.textContent='independent pointer pending'}")
+        page.mouse.move(position["x"], position["y"])
+        pointer = page.locator(feedback_id).inner_text()
+        check(pointer == keyboard, kind + ": reused pointer/keyboard local feedback differs")
+        point.focus()
+        page.keyboard.press("ArrowRight")
+        next_value = page.locator(feedback_id).inner_text()
+        check(("Probe B" in next_value if kind == "mix" else "B" in next_value and "9" in next_value),
+              kind + ": reused keyboard navigation did not reach supplied next value")
+        details[kind] = {"keyboard": keyboard, "pointer": pointer, "next": next_value}
+    page.locator("#reuse-notes-note-text").fill("獨立元件的本地筆記。")
+    page.locator("#reuse-notes-note-form button").click()
+    check(page.url == original_url, "standalone note submit navigated away")
+    check("本頁暫存" in page.locator("#reuse-notes-note-status").inner_text(), "standalone note lacks its own submit/status behavior")
+    check(page.locator("#note-status").inner_text() == original_note, "standalone note mutated the original note status")
+    page.locator("#reuse-notes-note-text").fill("獨立元件的鍵盤送出。")
+    page.locator("#reuse-notes-note-form button").focus()
+    page.keyboard.press("Enter")
+    check(page.url == original_url and "本頁暫存" in page.locator("#reuse-notes-note-status").inner_text(),
+          "standalone note native Enter submit did not stay local")
+    details["notes"] = {"status": page.locator("#reuse-notes-note-status").inner_text(), "urlUnchanged": page.url == original_url}
+    duplicates = page.evaluate("""() => {
+      const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);
+      return ids.filter((id,index)=>ids.indexOf(id)!==index);
+    }""")
+    check(not duplicates, "reused components introduced duplicate IDs: " + json.dumps(duplicates))
+    check(page.locator('#dashboard-content [data-chart-point="mix"]').count() == 5
+          and page.locator('#dashboard-content [data-chart-point="trend"]').count() == 18,
+          "creating chart instances changed the original chart points")
+    details["duplicateIds"] = duplicates
+    page.evaluate("document.querySelector('#component-reuse-probe').remove()")
+    return details
+
+
 def interactions(browser):
     page = open_page(browser)
     reuse = page.evaluate("""() => {
@@ -254,6 +336,7 @@ def interactions(browser):
           "component props did not remain plain text")
     check(reuse["probeAria"] == 'probe-account-name' and reuse["originalName"] == 'Harbor Cloud',
           "component ID scope or independent props mutated the existing instance")
+    reuse["independentInstances"] = independent_component_checks(page)
     chart_keyboard_hover(page)
     for panel, rows, expected in ((".chart-panel", "#mix-data tr", 5), (".trend-panel", "#trend-table-body tr", 6)):
         page.locator(panel + " details summary").click()
@@ -306,7 +389,33 @@ def state_checks(browser):
         check(page.evaluate("document.activeElement.id") == "dashboard-retry", state + ": retry focus was lost")
         check(page.locator("#note-text").input_value() == "本地輸入必須在復原後保留。", state + ": note input lost after recovery")
         common_checks(page, "state-" + state + "-recovered")
-    record(page, "state-success-recovery", state_snapshot=page.evaluate("__DASHBOARD_FIXTURE__.snapshot()"), initial_snapshot=initial)
+    lifecycle = page.evaluate("""() => {
+      const before=__DASHBOARD_FIXTURE__.snapshot();
+      __DASHBOARD_FIXTURE__.refresh();
+      dispatchEvent(new PageTransitionEvent('pagehide',{persisted:true}));
+      return {before,persistedHide:__DASHBOARD_FIXTURE__.snapshot(),
+        method:'Actual browser dispatch of synthetic PageTransitionEvent lifecycle probes; not a real BFCache navigation measurement'};
+    }""")
+    paused = lifecycle["persistedHide"]
+    check(not paused["disposed"] and not paused["pending"] and paused["state"] != "loading",
+          "persisted pagehide left the owner disposed or stuck loading")
+    page.evaluate("dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}))")
+    page.locator("#dashboard-retry").focus()
+    page.keyboard.press("Enter")
+    page.wait_for_function("__DASHBOARD_FIXTURE__.snapshot().state === 'success' && !__DASHBOARD_FIXTURE__.snapshot().pending")
+    lifecycle["resumed"] = page.evaluate("__DASHBOARD_FIXTURE__.snapshot()")
+    check(not lifecycle["resumed"]["disposed"] and lifecycle["resumed"]["requests"] == paused["requests"] + 1,
+          "persisted page restore did not permit a fresh successful read")
+    record(page, "state-success-recovery", state_snapshot=lifecycle["resumed"], initial_snapshot=initial, page_lifecycle=lifecycle)
+    disposed = page.evaluate("""async () => {
+      dispatchEvent(new PageTransitionEvent('pagehide',{persisted:false}));
+      const before=__DASHBOARD_FIXTURE__.snapshot(),result=await __DASHBOARD_FIXTURE__.refresh();
+      return {before,result,after:__DASHBOARD_FIXTURE__.snapshot()};
+    }""")
+    lifecycle["nonPersistedHide"] = disposed
+    check(disposed["before"]["disposed"] and disposed["result"].get("outcome") == "disposed"
+          and disposed["after"]["requests"] == disposed["before"]["requests"],
+          "nonpersisted pagehide did not prevent later reads")
     page.close()
 
 
