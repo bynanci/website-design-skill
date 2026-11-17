@@ -1,0 +1,92 @@
+name: Static Site Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - codex/roadmap-v02-visual-responsive-preview-20261116
+  pull_request:
+    paths:
+      - site/**
+      - vercel.json
+      - scripts/vercel_ignore_build.mjs
+      - tests/*deploy*
+      - tests/vercel_ignore_build.test.mjs
+      - examples/responsive-dashboard/specimen/**
+      - .github/workflows/static-site-deploy.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: static-site-deploy-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out build source
+        uses: actions/checkout@v4
+
+      # This accepted preview contains the real frozen Dashboard; main is
+      # intentionally allowed to omit it. The test copies inputs into scratch
+      # roots and never updates either checkout's fixture or repair contract.
+      - name: Check out reviewed Dashboard source
+        uses: actions/checkout@v4
+        with:
+          ref: 1a2a0aa653ddabff3d5a709ed0fd4a0a4a781052
+          path: .preview-source
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify main and preview static build contracts
+        env:
+          STATIC_SITE_PREVIEW_ROOT: ${{ github.workspace }}/.preview-source
+          STATIC_SITE_SMOKE_ARTIFACTS: ${{ runner.temp }}/static-site-built
+        run: node --test tests/test_static_site_deploy.mjs tests/vercel_ignore_build.test.mjs
+
+      - name: Install deployment browser smoke tooling
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+
+      - name: Smoke main landing over HTTP
+        run: >-
+          python tests/static_site_deploy_browser.py
+          --root '${{ runner.temp }}/static-site-built/main'
+          --expect-dashboard absent
+          --report '${{ runner.temp }}/static-site-reports/main'
+
+      - name: Smoke preview Dashboard over HTTP
+        run: >-
+          python tests/static_site_deploy_browser.py
+          --root '${{ runner.temp }}/static-site-built/preview'
+          --expect-dashboard available
+          --report '${{ runner.temp }}/static-site-reports/preview'
+
+      - name: Build current checkout for deployment
+        run: node site/build.mjs
+
+      - name: Upload static build and smoke evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-site-deploy-${{ github.sha }}
+          path: |
+            dist/
+            ${{ runner.temp }}/static-site-built/
+            ${{ runner.temp }}/static-site-reports/
+          if-no-files-found: error
+          retention-days: 14
