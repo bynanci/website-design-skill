@@ -144,7 +144,7 @@ try {
     await open(literal, 'generated');
     assert.equal(await literal.locator('.recovery-dialog img, .recovery-dialog script, .recovery-dialog iframe').count(), 0);
     assert.equal(await literal.evaluate(() => globalThis.__INJECTED__ === undefined), true);
-    assert.ok((await literal.locator('.recovery-notice').inner_text()).includes('<img'));
+    assert.ok((await literal.locator('.recovery-notice').innerText()).includes('<img'));
     await capture(literal, 'literal-text-escaped');
     await literal.keyboard.press('Escape');
     assert.equal(await literal.locator('[data-testid="recovery-open"]').evaluate(e => e === document.activeElement), true);
