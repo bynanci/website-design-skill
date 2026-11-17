@@ -88,8 +88,9 @@ pilot cases for responsive layout and accessibility.
 
 They are **not** required by the v0.1 skill, do **not** change canonical
 v0.1 benchmark inputs or rubric, and must not be scored as official v0.1
-compatibility evidence. Broader fixtures, formal evaluation criteria, and
-core routing changes require a separate versioned decision after v0.1.
+compatibility evidence. The isolated v0.2 rubric and packets are versioned
+separately under #6. Broader fixtures, future criterion changes and core routing
+changes require their own versioned decisions and release review.
 
 ## v0.3 — Interoperability and adapters
 
