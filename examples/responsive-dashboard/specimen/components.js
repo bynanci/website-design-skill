@@ -198,7 +198,9 @@
         cells[2].querySelector(".severity").className = "severity " + (item[2] === "高" ? "high" : "normal");
         cells[5].querySelector(".case-state").textContent = String(item[5]);
         cells[6].querySelector("button").setAttribute("data-case", String(item[0]));
+        cells[6].querySelector("button").textContent = String(item[6]);
       });
+      text(root, ".pill-outline", String(props.items.length).padStart(2, "0") + " 件處理中");
     }
   };
   function prefixIds(root, prefix) {
