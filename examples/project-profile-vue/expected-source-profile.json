@@ -1,0 +1,509 @@
+{
+  "profile": {
+    "profileVersion": "0.1",
+    "workspace": {
+      "id": "project-profile-vue",
+      "root": "."
+    },
+    "task": {
+      "request": "Inspect declared Vue roles, public APIs and state ownership",
+      "affectedPaths": [
+        "src/main.ts"
+      ]
+    },
+    "revision": {
+      "commit": null,
+      "dirty": null
+    },
+    "sources": [
+      {
+        "path": "package.json",
+        "kind": "package-manifest",
+        "status": "observed",
+        "sha256": "8a59c404dad4b0edc978c5e9841126825a439fffb2ce652652115f321044b70d"
+      },
+      {
+        "path": "profile-contract.json",
+        "kind": "inspection-contract",
+        "status": "observed",
+        "sha256": "68f74be2eeb2c5dc0c5edfd6785112b4148ba08eace20b85250e02edf992bae4"
+      },
+      {
+        "path": "src/components/StatusBanner.vue",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "f39852a695d5679655f7ab24771130c2a319a33c734e7394062e233475af21fc"
+      },
+      {
+        "path": "src/main.ts",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "0d39fdfac497c10b84925171dcf549d19101ebf7e429a7652ab1f0db4ec51108"
+      },
+      {
+        "path": "src/services/dashboard-api.ts",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "5a71e298e670c52a39d7a567401ab8d5762c512f6d723eff73aa5cafff7c61e6"
+      },
+      {
+        "path": "src/stores/dashboard.ts",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "57b8cbdc0a7d12694f75d695acf5fe7e881588b2e53f505ecf959bd481d1a56b"
+      },
+      {
+        "path": "src/styles/themes.css",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "8d028a186b8b4dca0258b5c58d61e9cd83509069664d213b87cf1ddb4601f550"
+      },
+      {
+        "path": "src/styles/tokens.scss",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "741b2a08ae13695d205438f047bfec2367cbf80dd155f3acd14c9ba14063a5c2"
+      },
+      {
+        "path": "src/views/DashboardView.vue",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "b340138c389e1d786e4d464f516112f3af981f9542e76b05046e4988b2cca46a"
+      },
+      {
+        "path": "tsconfig.json",
+        "kind": "parsed-source",
+        "status": "observed",
+        "sha256": "c354840870bb4ee4cd04f8fe3c7a449a75b0e8e076541d6909bb9c0242121937"
+      },
+      {
+        "path": "vite.config.ts",
+        "kind": "static-config-candidate",
+        "status": "observed",
+        "sha256": "de762ca32e702ff4521c17d31660419a2be2a6e6ec8b1e1e183fce000c63e098"
+      }
+    ],
+    "stack": [
+      {
+        "name": "vue",
+        "version": "3.5.13",
+        "evidencePaths": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "vite",
+        "version": "6.0.5",
+        "evidencePaths": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "typescript",
+        "version": "5.7.3",
+        "evidencePaths": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "sass",
+        "version": "1.83.0",
+        "evidencePaths": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "pinia",
+        "version": "2.3.0",
+        "evidencePaths": [
+          "package.json"
+        ]
+      }
+    ],
+    "aliases": [
+      {
+        "name": "@/*",
+        "targets": [
+          "src/*"
+        ],
+        "status": "resolved",
+        "evidencePaths": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "tokens": [
+      {
+        "role": "unmapped:$color-destructive-value",
+        "reference": "$color-destructive-value",
+        "syntax": "SCSS variable",
+        "status": "unknown",
+        "themes": [],
+        "evidencePaths": [
+          "src/styles/tokens.scss"
+        ]
+      },
+      {
+        "role": "unmapped:$color-warning-value",
+        "reference": "$color-warning-value",
+        "syntax": "SCSS variable",
+        "status": "unknown",
+        "themes": [],
+        "evidencePaths": [
+          "src/styles/tokens.scss"
+        ]
+      },
+      {
+        "role": "unmapped:--color-destructive",
+        "reference": "--color-destructive",
+        "syntax": "CSS custom property",
+        "status": "unknown",
+        "themes": [],
+        "evidencePaths": [
+          "src/styles/themes.css",
+          "src/styles/tokens.scss"
+        ]
+      },
+      {
+        "role": "unmapped:--color-warning",
+        "reference": "--color-warning",
+        "syntax": "CSS custom property",
+        "status": "unknown",
+        "themes": [],
+        "evidencePaths": [
+          "src/styles/themes.css",
+          "src/styles/tokens.scss"
+        ]
+      },
+      {
+        "role": "unmapped:--foreground",
+        "reference": "--foreground",
+        "syntax": "CSS custom property",
+        "status": "unknown",
+        "themes": [],
+        "evidencePaths": [
+          "src/styles/themes.css",
+          "src/styles/tokens.scss"
+        ]
+      },
+      {
+        "role": "unmapped:--surface",
+        "reference": "--surface",
+        "syntax": "CSS custom property",
+        "status": "unknown",
+        "themes": [],
+        "evidencePaths": [
+          "src/styles/themes.css",
+          "src/styles/tokens.scss"
+        ]
+      },
+      {
+        "role": "warning",
+        "reference": "--color-warning",
+        "syntax": "CSS custom property",
+        "status": "theme-dependent",
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "evidencePaths": [
+          "profile-contract.json",
+          "src/components/StatusBanner.vue",
+          "src/styles/themes.css",
+          "src/styles/tokens.scss"
+        ]
+      },
+      {
+        "role": "destructive-action",
+        "reference": "--color-destructive",
+        "syntax": "CSS custom property",
+        "status": "theme-dependent",
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "evidencePaths": [
+          "profile-contract.json",
+          "src/components/StatusBanner.vue",
+          "src/styles/themes.css",
+          "src/styles/tokens.scss"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "responsibility": "Dashboard status feedback",
+        "path": "src/components/StatusBanner.vue",
+        "publicApi": [
+          "kind: \"warning\" | \"destructive\"",
+          "message: string"
+        ],
+        "states": [],
+        "evidencePaths": [
+          "src/components/StatusBanner.vue",
+          "profile-contract.json"
+        ]
+      },
+      {
+        "responsibility": "Unclassified Vue component candidate: DashboardView",
+        "path": "src/views/DashboardView.vue",
+        "publicApi": [],
+        "states": [],
+        "evidencePaths": [
+          "src/views/DashboardView.vue"
+        ]
+      }
+    ],
+    "stateOwners": [
+      {
+        "name": "Unconfirmed state/API owner candidate",
+        "kind": "path-name heuristic; not confirmed",
+        "path": "src/services/dashboard-api.ts",
+        "evidencePaths": [
+          "src/services/dashboard-api.ts"
+        ]
+      },
+      {
+        "name": "useDashboardStore",
+        "kind": "Pinia source owner; action refresh",
+        "path": "src/stores/dashboard.ts",
+        "evidencePaths": [
+          "profile-contract.json",
+          "src/services/dashboard-api.ts",
+          "src/stores/dashboard.ts",
+          "src/views/DashboardView.vue"
+        ]
+      }
+    ],
+    "capabilities": {
+      "read": "available",
+      "parse": "available",
+      "patchProposal": "unknown",
+      "patchWrite": "unavailable",
+      "build": "unknown",
+      "render": "unavailable",
+      "imageReview": "unavailable",
+      "nativeShell": "unknown"
+    },
+    "unknowns": [
+      "vite.config.ts was inventoried but not executed or parsed; dynamic configuration values remain unknown.",
+      "Token names are static candidates only. Semantic roles, imports, theme resolution, computed values, and contrast were not verified.",
+      "Vue file paths are component candidates only; props, events, slots, and public APIs were not parsed.",
+      "State/API owner candidates were inferred from path names only and require source review.",
+      "Vite aliases were not evaluated; only static tsconfig paths were inspected.",
+      "This bounded adapter verifies source declarations and import reachability only. Computed theme values, accessibility, contrast and runtime behavior require separate build/render evidence."
+    ]
+  },
+  "evidence": {
+    "imports": [
+      {
+        "from": "src/main.ts",
+        "specifier": "vue",
+        "target": null,
+        "status": "external-uninspected"
+      },
+      {
+        "from": "src/main.ts",
+        "specifier": "pinia",
+        "target": null,
+        "status": "external-uninspected"
+      },
+      {
+        "from": "src/main.ts",
+        "specifier": "@/styles/tokens.scss",
+        "target": "src/styles/tokens.scss",
+        "status": "local-source"
+      },
+      {
+        "from": "src/main.ts",
+        "specifier": "@/styles/themes.css",
+        "target": "src/styles/themes.css",
+        "status": "local-source"
+      },
+      {
+        "from": "src/main.ts",
+        "specifier": "@/views/DashboardView.vue",
+        "target": "src/views/DashboardView.vue",
+        "status": "local-source"
+      },
+      {
+        "from": "src/views/DashboardView.vue",
+        "specifier": "vue",
+        "target": null,
+        "status": "external-uninspected"
+      },
+      {
+        "from": "src/views/DashboardView.vue",
+        "specifier": "@/components/StatusBanner.vue",
+        "target": "src/components/StatusBanner.vue",
+        "status": "local-source"
+      },
+      {
+        "from": "src/views/DashboardView.vue",
+        "specifier": "@/stores/dashboard",
+        "target": "src/stores/dashboard.ts",
+        "status": "local-source"
+      },
+      {
+        "from": "src/stores/dashboard.ts",
+        "specifier": "pinia",
+        "target": null,
+        "status": "external-uninspected"
+      },
+      {
+        "from": "src/stores/dashboard.ts",
+        "specifier": "@/services/dashboard-api",
+        "target": "src/services/dashboard-api.ts",
+        "status": "local-source"
+      }
+    ],
+    "roles": [
+      {
+        "role": "warning",
+        "reference": "--color-warning",
+        "consumer": "src/components/StatusBanner.vue",
+        "status": "theme-dependent",
+        "consumers": [
+          {
+            "reference": "--color-warning",
+            "property": "border-inline-start",
+            "selector": ".status-banner",
+            "line": 20,
+            "fallback": false
+          }
+        ],
+        "themes": [
+          {
+            "name": "light",
+            "selector": ":root",
+            "declarations": [
+              {
+                "reference": "--color-warning",
+                "value": "#{$color-warning-value}",
+                "selector": ":root",
+                "path": "src/styles/tokens.scss",
+                "line": 5,
+                "scoped": false,
+                "conditional": false
+              }
+            ]
+          },
+          {
+            "name": "dark",
+            "selector": ":root[data-theme=\"dark\"]",
+            "declarations": [
+              {
+                "reference": "--color-warning",
+                "value": "#f2c66d",
+                "selector": ":root[data-theme=\"dark\"]",
+                "path": "src/styles/themes.css",
+                "line": 2,
+                "scoped": false,
+                "conditional": false
+              }
+            ]
+          }
+        ],
+        "verification": "source-declarations-only"
+      },
+      {
+        "role": "destructive-action",
+        "reference": "--color-destructive",
+        "consumer": "src/components/StatusBanner.vue",
+        "status": "theme-dependent",
+        "consumers": [
+          {
+            "reference": "--color-destructive",
+            "property": "border-color",
+            "selector": ".status-banner[data-kind=\"destructive\"]",
+            "line": 24,
+            "fallback": false
+          }
+        ],
+        "themes": [
+          {
+            "name": "light",
+            "selector": ":root",
+            "declarations": [
+              {
+                "reference": "--color-destructive",
+                "value": "#{$color-destructive-value}",
+                "selector": ":root",
+                "path": "src/styles/tokens.scss",
+                "line": 6,
+                "scoped": false,
+                "conditional": false
+              }
+            ]
+          },
+          {
+            "name": "dark",
+            "selector": ":root[data-theme=\"dark\"]",
+            "declarations": [
+              {
+                "reference": "--color-destructive",
+                "value": "#ff8b92",
+                "selector": ":root[data-theme=\"dark\"]",
+                "path": "src/styles/themes.css",
+                "line": 3,
+                "scoped": false,
+                "conditional": false
+              }
+            ]
+          }
+        ],
+        "verification": "source-declarations-only"
+      }
+    ],
+    "componentApis": [
+      {
+        "path": "src/components/StatusBanner.vue",
+        "status": "source-confirmed",
+        "props": [
+          {
+            "name": "kind",
+            "type": "\"warning\" | \"destructive\"",
+            "required": true
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": true
+          }
+        ]
+      }
+    ],
+    "stateOwners": [
+      {
+        "path": "src/stores/dashboard.ts",
+        "export": "useDashboardStore",
+        "consumer": "src/views/DashboardView.vue",
+        "service": "src/services/dashboard-api.ts",
+        "action": "refresh",
+        "status": "source-confirmed",
+        "serviceCallsInAction": 1,
+        "ownerCallsInConsumer": 1,
+        "verification": "import-and-call-AST; runtime-not-executed"
+      }
+    ],
+    "drift": [],
+    "findings": [],
+    "unsupported": [],
+    "reachablePaths": [
+      "src/components/StatusBanner.vue",
+      "src/main.ts",
+      "src/services/dashboard-api.ts",
+      "src/stores/dashboard.ts",
+      "src/styles/themes.css",
+      "src/styles/tokens.scss",
+      "src/views/DashboardView.vue"
+    ],
+    "unrun": [
+      "target configuration execution",
+      "computed theme resolution",
+      "browser rendering",
+      "contrast and accessibility measurements",
+      "state transition execution"
+    ]
+  }
+}

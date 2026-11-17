@@ -10,6 +10,8 @@ The project intends to follow Semantic Versioning once the public artifact contr
 
 ### Added
 
+- Optional bounded Vue source-profile adapter with explicit role/owner contracts, scoped drift/refusal tests, and a separate production-build/theme-render evidence workflow.
+
 - Bilingual Traditional Chinese counterparts for the core skill, roadmap, reference guides, templates, and context-aware UI adapter guides, with a writing policy that distinguishes ASD-STE100-informed English from Chinese documentation.
 - Proposed JSON Schema and synthetic example for the project profile tracked by Issue #11; these define a data contract and do not implement a project scanner.
 - Bounded read-only project-profile inspector for static package metadata, TypeScript JSONC aliases, token candidates and evidence digests; semantic roles and runtime behavior remain unverified.
@@ -58,6 +60,8 @@ The project intends to follow Semantic Versioning once the public artifact contr
 - General bug-report and methodology-proposal issue forms
 
 ### Changed
+
+- Correct the public clean-run packet baseline to match the release policy; regression coverage prevents the instructions from drifting from that pin.
 
 - Enforce the v0.1 frozen benchmark commit for official evidence and validate identity/capability metadata.
 - Reject empty, cross-run, reused, absolute, or escaping raw benchmark files; release readiness now validates evidence before reporting.

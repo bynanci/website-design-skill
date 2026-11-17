@@ -55,7 +55,7 @@
       "path": "src/views/DashboardView.vue",
       "kind": "vue-component-candidate",
       "status": "observed",
-      "sha256": "7738de90f68c638e595cabf26d68309bc0ea54ed0dd03e9344bcfe60cb2fa33e"
+      "sha256": "b340138c389e1d786e4d464f516112f3af981f9542e76b05046e4988b2cca46a"
     },
     {
       "path": "tsconfig.json",

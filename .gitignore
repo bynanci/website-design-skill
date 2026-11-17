@@ -3,3 +3,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+__pycache__/
+node_modules/
+# Reproducible pilot output; reviewed evidence is copied to evidence/ explicitly.
+integrations/vue-project-profile/artifacts/

@@ -128,3 +128,9 @@ The command emits JSON that follows project-profile.schema.json. Static token de
 The [synthetic Vue fixture](../../examples/project-profile-vue/README.md) preserves a bounded example repository and the exact output of the read-only inspector. Its regression tests compare the output and verify that a changed source file receives a new digest while an unchanged component digest remains stable.
 
 The fixture uses declared dependency versions, a JSONC alias, SCSS/CSS token candidates, a dark-theme override, a Vue component, a Pinia store and an API service path. It does not install dependencies, execute Vite configuration, resolve imports or computed themes, parse public component APIs, confirm state ownership, or render the application. Treat those results as unknown.
+
+## Parsed Vue source and rendered themes
+
+The optional [Vue profile pilot](../vue-project-profile/README.md) adds a bounded source parser to the read-only inventory. A reviewed intent contract names the semantic roles and owners to verify. The adapter traces local imports, checks per-theme declarations and consumer use, extracts supported component props, checks Pinia/service calls, and reports conflicts, unknowns and scoped token drift. It preserves the portable profile schema.
+
+A separate production-build/browser harness measures the supplied fixture's light/dark token consumers. Source declarations remain distinct from computed evidence. The adapter's supported syntax, refusal conditions, commands, dependencies and evidence locations are documented in its guide.
