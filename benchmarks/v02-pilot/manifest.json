@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.2-pilot.1",
+  "suite_version": "0.2-pilot.1",
+  "source_repository": "bynanci/website-design-skill",
+  "source_commit": "7f7148a0752718ba3fb363c019441a6d5ca91f15",
+  "guidance_paths": [
+    "SKILL.md",
+    "references/workflow.md",
+    "references/information-architecture.md",
+    "references/component-architecture.md",
+    "templates/project-context.md",
+    "templates/page-spec.md",
+    "templates/navigation-comparison.md",
+    "templates/content-coverage.md",
+    "templates/component-contract.md",
+    "templates/responsive-behavior.md",
+    "templates/visual-direction-comparison.md",
+    "templates/design-token-extraction.md"
+  ],
+  "cases": [
+    {
+      "id": "responsive-layout-001",
+      "input_paths": [
+        "evals/responsive-layout/case-001/input.md"
+      ],
+      "evaluator_reference_paths": [
+        "evals/responsive-layout/case-001/expected.md"
+      ],
+      "criteria": [
+        {
+          "id": "RL-01",
+          "description": "Content parity across all six required modules"
+        },
+        {
+          "id": "RL-02",
+          "description": "Account-manager priority and evidence/question workflow"
+        },
+        {
+          "id": "RL-03",
+          "description": "Readable desktop no-scroll trade-off"
+        },
+        {
+          "id": "RL-04",
+          "description": "Narrow chart legend, series and data alternatives"
+        },
+        {
+          "id": "RL-05",
+          "description": "Narrow table information and action access"
+        },
+        {
+          "id": "RL-06",
+          "description": "Keyboard, focus, touch and non-hover parity"
+        },
+        {
+          "id": "RL-07",
+          "description": "Viewport, zoom and embedded-container condition matrix"
+        },
+        {
+          "id": "RL-08",
+          "description": "Reuse and justified component responsibilities"
+        },
+        {
+          "id": "RL-09",
+          "description": "Evidence honesty and untested outcomes"
+        }
+      ],
+      "critical_error_codes": [
+        "required-content-hidden",
+        "hover-or-color-only",
+        "unsupported-success-claim"
+      ],
+      "max_score": 18
+    },
+    {
+      "id": "accessibility-001",
+      "input_paths": [
+        "evals/accessibility/case-001/input.md"
+      ],
+      "evaluator_reference_paths": [
+        "evals/accessibility/case-001/expected.md"
+      ],
+      "criteria": [
+        {
+          "id": "AX-01",
+          "description": "Tooltip keyboard path and persistent data alternative"
+        },
+        {
+          "id": "AX-02",
+          "description": "Non-color chart category meaning"
+        },
+        {
+          "id": "AX-03",
+          "description": "Dialog placement, containment, close and focus restoration"
+        },
+        {
+          "id": "AX-04",
+          "description": "Associated visible/programmatic form label"
+        },
+        {
+          "id": "AX-05",
+          "description": "Reduced motion with retained status communication"
+        },
+        {
+          "id": "AX-06",
+          "description": "Meaningful evidence-link name"
+        },
+        {
+          "id": "AX-07",
+          "description": "Reusable component/token responsibility"
+        },
+        {
+          "id": "AX-08",
+          "description": "Per-defect keyboard/manual/screen-reader verification"
+        },
+        {
+          "id": "AX-09",
+          "description": "Reported facts, hypotheses and missing evidence"
+        }
+      ],
+      "critical_error_codes": [
+        "missing-keyboard-path",
+        "missing-dialog-focus-recovery",
+        "unsupported-conformance-claim"
+      ],
+      "max_score": 18
+    }
+  ],
+  "total_max_score": 36,
+  "release_gate": false
+}
