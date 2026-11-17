@@ -30,15 +30,32 @@ Website Design Skill 是一套與工具及前端框架無關的網站改版方�
 
 ## Context-aware UI 整合進度
 
-[整合層索引](integrations/README.zh-TW.md)描述如何讀取專案既有設計 token、元件、狀態與 API 所有權，並提出有界限的修改與驗收紀錄。PR #16 加入有限範圍的唯讀 project-profile inspector，可盤點靜態 manifest、TypeScript JSONC alias 與來源候選檔。它不會解析語意 token 角色、元件 API、狀態所有權、執行期值或渲染行為，也不提供通用 agent 或 runtime engine。AST 修改器、Playwright runner、MCP server 與 runtime renderer 仍是提案能力。
+[整合架構](integrations/context-aware-ui/README.zh-TW.md)連結專案 token、可重用元件、狀態／API 所有權及有限來源修改。Main 已有範圍明確的 Vue 盤點、軌道排序修改、媒體狀態轉換及宣告式復原 fixture 與 browser 證據；v0.2 preview 另提供可渲染 Dashboard 與單一已審查 CSS 復原操作。每項能力均有限定語法、host 與證據邊界，其他框架需各自驗證。
 
-實作任務由 [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) 統整，細項為 #11–#15。核心 v0.1 發布證據與 v0.2 實作仍依各自的 release gate 管理。
+[Issue #8](https://github.com/bynanci/website-design-skill/issues/8)記錄已完成試點；#1／#6 的獨立 agent 評估 gate 保持開啟。部署另由 [#29](https://github.com/bynanci/website-design-skill/issues/29)追蹤。
+
+## 建置靜態展示頁
+
+```sh
+node site/build.mjs
+python3 -m http.server 8000 --directory dist
+```
+
+Builder 只用 Node 內建功能及明確公開檔案清單。Main 產生雙語技能／文件入口；preview 在完整 fixture 存在時另包含合成 Dashboard。選用的 Vue 盤點／測試工具目錄不是 Vite app 入口。部署請以 repository root 及[部署指南](docs/DEPLOYMENT.zh-TW.md)為準。
+
+GitHub Actions 成功不等於外部部署成功。合併前需核對完整 candidate SHA 的所有 statuses 與 check runs：
+
+```sh
+python3 scripts/check_merge_readiness.py --repo bynanci/website-design-skill --sha <完整-commit-sha> --required-check validate
+```
+
+預期部署 Vercel 的候選另加 `--required-check 'Vercel – vue-project-profile'`。檢查失敗、pending、缺漏或證據不完整都會回傳非零；工具不會改寫平台狀態或 repository 保護規則。
 
 ## v0.2 選用預覽
 
 此預覽新增[視覺方向比較](templates/visual-direction-comparison.md)、[響應式行為](templates/responsive-behavior.md)與[設計 token 擷取／遷移](templates/design-token-extraction.md)三項選用交付契約，以及[可執行合成 Dashboard](examples/responsive-dashboard/README.md)。[QA 紀錄](examples/responsive-dashboard/output/qa-review-2026-11-16.md)保存 Chromium 渲染、鍵盤與自動可及性檢查的來源與限制。
 
-這些項目不列入 v0.1 官方 40 分 benchmark。PR #5 維持 draft，Issue #6 追蹤獨立 pilot 評估，Issue #7 追蹤可重用元件、實際瀏覽器縮放及人工驗收等未完成工作。自動檢查結果不代表跨 agent 相容性、正式可及性合規或產品部署驗收。
+這些項目不列入 v0.1 官方 40 分 benchmark。Issue #7 的限定範圍已完成：八組可重用元件、32 項驗收矩陣及真正的 200% 原生瀏覽器縮放擷取。PR #5 維持 draft；Issue #6 的獨立 pilot 執行與評分仍未完成。實體裝置、螢幕閱讀器與真人任務研究尚未執行。自動檢查結果不代表跨 agent 相容性、正式可及性合規或產品部署驗收。
 
 ## 文件語言與寫作規範
 

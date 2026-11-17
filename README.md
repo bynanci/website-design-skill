@@ -17,15 +17,28 @@ The project is intentionally independent of any specific AI model, design tool, 
 
 English and Traditional Chinese versions are available for the README, core skill, roadmap, change history, reference guides, templates, and optional UI-adapter contracts. Benchmark inputs, expected outputs, scoring rubric, raw evidence, and repository policy documents remain canonical English in this localization pass. English uses clear technical prose informed by ASD-STE100 Issue 9 where applicable; this repository does not claim formal compliance. ASD-STE100 does not define Traditional Chinese compliance. See [the bilingual writing policy](docs/WRITING-STYLE.md).
 
-## Proposed direction: context-aware UI collaboration
+## Context-aware UI collaboration
 
-The optional integration layer is being specified to help UI changes fit an
-existing project's design tokens, reusable components, state/API contracts and
-source boundaries. The [architecture proposal](integrations/context-aware-ui/README.md)
-covers token awareness, AST-guided patches, applicable state transitions,
-bounded visual repair and a separate declarative runtime UI experiment.
+The optional [integration architecture](integrations/context-aware-ui/README.md) connects project tokens, reusable components, state/API ownership and bounded source edits. Scoped Vue inspection, track-reorder editing, media transitions and declarative recovery now have executable fixtures and browser evidence on main. The v0.2 preview adds the rendered dashboard and one reviewed CSS restoration operation. Each capability has explicit syntax, host and evidence limits; other frameworks require separate adapters.
 
-These are draft contracts in PR #9. PR #16 adds a bounded, read-only project-profile inspector for static manifests, TypeScript JSONC aliases and source candidates. It does not resolve semantic token roles, component APIs, state ownership, runtime values or rendered behavior. The inspector is a repository utility; it does not provide a general-purpose agent or runtime engine. Vue is the first proposed adapter; each framework needs its own fixture and evidence. Follow [Issue #8](https://github.com/bynanci/website-design-skill/issues/8) for the implementation index and keep the v0.1 release gate separate.
+[Issue #8](https://github.com/bynanci/website-design-skill/issues/8) records these completed pilots. The independent v0.1 and v0.2 agent-evaluation gates remain open in #1/#6. Deployment is tracked separately in [#29](https://github.com/bynanci/website-design-skill/issues/29).
+
+## Build the static showcase
+
+```sh
+node site/build.mjs
+python3 -m http.server 8000 --directory dist
+```
+
+The builder uses Node built-ins and an explicit public-asset allowlist. Main produces the bilingual skill/documentation landing page; the preview also includes its synthetic dashboard when the complete fixture is present. The optional Vue inspection/test directory is not a Vite application entry. Use repository root and the explicit [deployment guide](docs/DEPLOYMENT.md).
+
+A successful GitHub Actions run does not establish a successful external deployment. Before merging, inspect all statuses and check runs for the exact candidate:
+
+```sh
+python3 scripts/check_merge_readiness.py --repo bynanci/website-design-skill --sha <full-commit-sha> --required-check validate
+```
+
+For a candidate expected to deploy on Vercel, also require `--required-check 'Vercel – vue-project-profile'`. The report fails on unsuccessful, pending, missing or incomplete evidence; it does not change provider statuses or repository protection rules.
 
 ## What this is
 
@@ -160,8 +173,12 @@ demonstrates the contracts, supported by [Chromium/axe-core QA evidence](example
 [accessibility](evals/accessibility/).
 
 These are deliberately excluded from the official v0.1 40-point benchmark
-manifest. They are proposals for v0.2 adoption and do not represent verified
-cross-agent compatibility or production implementation. Automated accessibility
+manifest. Issue #7's scoped implementation is complete: eight reusable component
+groups, a 32-condition acceptance matrix and an actual 200% native browser zoom
+capture. PR #5 remains a draft. Issue #6 still requires independent pilot runs
+and scoring. Physical-device, screen-reader and human task studies have not run.
+These artifacts remain proposals for v0.2 adoption; they do not establish
+cross-agent compatibility or production acceptance. Automated accessibility
 observations apply only to the recorded synthetic specimen and runtime.
 
 ## Evaluations

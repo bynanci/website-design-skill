@@ -13,6 +13,7 @@
 - 可重用的原生 Dashboard factories、合成復原狀態、語意明暗主題及雙語量測證據文件。
 - v0.2 選用的視覺方向比較、響應式行為與 token 擷取／遷移範本，以及視覺品質審查參考文件。
 - 合成 Dashboard、可重現 Chromium QA，以及獨立於 v0.1 官方案例的響應式與可及性 pilot。
+- 明確的零相依靜態展示建置與 Vercel 部署契約、公開資產／來源檢查、main／preview HTTP／browser smoke，以及涵蓋外部部署的合併就緒報告。
 - 新增有限宣告式 recovery 原型，包含遞迴嚴格 payload 驗證、即時一次性 host capability、純文字 Vue renderer、靜態 fallback 與可比較的 production bundle/UI 成本證據。
 
 - 新增有限 Vue 軌道排序 patch、剖析 target、必要型別檢查、受保護範圍、no-op/rollback 與隔離 workspace 前提；另提供媒體庫過期/取消/卸載防護及共用 browser 證據。
