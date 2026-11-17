@@ -1,0 +1,17 @@
+{
+  "label": "gpt6-v01-component",
+  "provider": "OpenAI",
+  "product": "ChatGPT web",
+  "model": "GPT-6",
+  "version": null,
+  "effort": "Medium",
+  "started_at": "2026-11-17T13:20:58.268Z",
+  "completion_observed_at": "2026-11-17T13:25:36.281Z",
+  "context_url": "https://chatgpt.com/c/6afc54b3-e728-83ee-91bc-90dcd7bb5a25?temporary-chat=true",
+  "original_download_path": "/opt/codex/downloads/7c17c023-0894-428f-9bc8-a5da68390ce5/dd16b95f-3685-4faa-a306-a54312ab70db",
+  "raw_path": "/workspace/shared/website-evaluation-evidence/gpt6-v01-component.md",
+  "raw_bytes": 22332,
+  "raw_sha256": "f71231d12956e268112d926121dab8c616ade47c0997ca792d37f9ac56a4f624",
+  "capture_method": "Browser Download file; byte-identical capture",
+  "manual_edit": false
+}

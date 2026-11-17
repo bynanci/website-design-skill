@@ -27,11 +27,11 @@ The scoped Vue pilots #11–#13 and runtime recovery #15 are implemented on main
 
 The optional PR #5 preview contains the reusable eight-group dashboard, a 32-condition matrix and separate actual 200% native-window captures (#7). Issue #14 adds one source-preserving CSS restoration operation, at most two patch/recheck iterations, frozen source/runtime evidence and finite time/process/capture limits. The same dashboard runner measures its passing reference, injected failing baseline and candidates; it does not provide general CSS repair. Dated bilingual evidence records identify the actual acceptance state.
 
-Issue #6 now has isolated versioned packets, a criterion rubric, strict result validation and integrity tests. It still has zero independent results. Issue #1 also requires two eligible clean agent signatures. Draft PR #5 remains under those independent release gates; implementation and browser tests do not replace them.
+Issue #6 has isolated versioned packets, a criterion rubric, strict result validation and integrity tests. The separate [v0.2 pilot in #6](https://github.com/bynanci/website-design-skill/issues/6) has two completed, independently reviewed and validated runs merged in [PR #33](https://github.com/bynanci/website-design-skill/pull/33): GPT-6 scores 36/36 and GPT-5.6 Sol scores 33/36. GPT-5.6 Sol receives partial scores on AX-01, AX-02 and AX-03; neither run has a critical error. Issue #6 records its publication and merge state. Issue #1 now has two independently reviewed official v0.1 runs: [GPT-6](benchmarks/results/chatgpt-web-gpt-6-v01-20261117/) and [GPT-5.6 Sol](benchmarks/results/chatgpt-web-gpt-5-6-sol-v01-20261117/), each 40/40 on one ChatGPT web product. The local strict evidence gate passes. These runs use frozen core commit `7d64090710ef20f1d24cea6b46199391d3c09c18`; later adapters and tests on main remain separate evidence. PR #5 tracks integration of the optional v0.2 contracts under their independent release gates; implementation and browser tests do not replace evaluation evidence.
 
 ## Deployment and external checks
 
-[Issue #29](https://github.com/bynanci/website-design-skill/issues/29) tracks the incorrect Vite tooling root, duplicate Vercel projects and provider rate limits. The explicit static showcase build and production-output smoke are separate from core release readiness. Inspect external deployment statuses as well as GitHub Actions; only an actual source-bound READY deployment can close that acceptance item. See [deployment operations](docs/DEPLOYMENT.md).
+[Issue #29](https://github.com/bynanci/website-design-skill/issues/29) tracks the incorrect Vite tooling root, duplicate Vercel projects and provider rate limits. The explicit static showcase build and production-output smoke are separate from core release readiness. Inspect external deployment statuses as well as GitHub Actions; only an actual source-bound READY deployment can close that acceptance item. Issue #29 is closed after the accepted main and preview merge heads each obtained their own canonical READY deployment with exact source manifests, asset hashes, HTTP/browser checks and all-context readiness. The scheduled retry is paused. This acceptance applies to those recorded heads; later candidates require their own checks. See [deployment operations](docs/DEPLOYMENT.md).
 
 ## v0.1 — Minimum viable public release
 
@@ -60,7 +60,7 @@ v0.1 is ready only when:
 - every official run meets the release score threshold;
 - no shared zero-score criterion indicates an unresolved core-contract ambiguity.
 
-Until those gates pass, the repository remains a release candidate rather than a tagged public release.
+The strict evidence gate passes with two official runs and two distinct signatures, without failures or warnings. [v0.1.0 was published on 2026-11-18 (Asia/Taipei)](https://github.com/bynanci/website-design-skill/releases/tag/v0.1.0) at commit `e33c7414de44cf537c9a59113fd8f393352af5bc` after exact-candidate CI and external checks. [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) is closed. See the [release notes](docs/releases/v0.1.0.md) and [release process](RELEASE.md); later versions require their own accepted candidate and reviewed request.
 
 ## v0.2 — Broader redesign coverage
 

@@ -1,0 +1,14 @@
+Browser tab: 5, Title: "ChatGPT", URL: "https://chatgpt.com/?temporary-chat=true".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 44-45, 47-53
++										47 text Ask ChatGPT
++									48 container
++										49 text 5.6 Medium
++			50 container
++				51 text Locked, opens access options Usage limit reached
++				52 GPT-6, Value: 0
++				53 GPT-5.6 Sol, Value: 1
++					54 text GPT-5.6 Sol
++					55 image
++				56 (disabled) Pro, Value: 0
+The focused UI element is 0 AXWebArea ChatGPT, URL: chatgpt.com/?temporary-chat=true

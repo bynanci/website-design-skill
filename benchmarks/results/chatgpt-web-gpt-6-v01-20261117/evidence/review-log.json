@@ -1,0 +1,352 @@
+{
+  "reviewer_id": "codex-independent-review:/root/release_evidence_audit",
+  "scored_at": "2026-11-17T13:36:27.187759Z",
+  "latest_generation_completion_observed_at": "2026-11-17T13:28:15.962Z",
+  "order": "All three original downloads and capture hashes were frozen before this output review and score record; evaluator protocol materials were pre-read separately and were never supplied to generators.",
+  "repository_commit": "7d64090710ef20f1d24cea6b46199391d3c09c18",
+  "suite_version": "0.1.0",
+  "eligibility": {
+    "disposition": "accepted-official-with-disclosed-observation-limits",
+    "basis": [
+      "Separate real Temporary chats with unique URLs and one canonical ZIP each",
+      "Capture operator observed GPT-6 Medium and Unpersonalized before each Send in the live controller transcript",
+      "Archived completion AX views retain Temporary labels, single attachment names, standard prompt, file-tool summaries and original download controls",
+      "All three committed raw candidates are byte-identical to original browser downloads and capture SHA-256 values",
+      "Generation contexts were not supplied the parent/evaluator conversation or local checkout; no external/evaluator access was observed"
+    ],
+    "limits": [
+      "The pre-send model and Unpersonalized selections were observed live by the capture operator but not retained as separate per-case screenshots",
+      "The archived completion AX views and IA image alone do not independently prove those pre-send settings",
+      "Interface model label is GPT-6; a hidden backend revision is not disclosed and version is null",
+      "Visible UI/tool summaries are not a complete provider-internal file/network audit; no external sources were observed, not cryptographically proven absent"
+    ],
+    "operator_observation_source": "Root capture operator's actual browser-controller interaction transcript in this session; summarized in generation-captures.json"
+  },
+  "raw_sha256_before": {
+    "ia-audit.md": "4dbf31af88620a30c8353b9e1d4fce60f4105990b903e94005f5be15b0556ed5",
+    "component-reuse.md": "f71231d12956e268112d926121dab8c616ade47c0997ca792d37f9ac56a4f624",
+    "end-to-end.md": "89791553ebc0a9633cb2bc08a85c91d4a21f20998e57b235d5121fdd697e20cd"
+  },
+  "criteria": [
+    {
+      "case_id": "ia-audit-001",
+      "criterion": "A1",
+      "title": "Correct workflow layer",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "**Phase:** STRUCTURE (information architecture and navigation only)",
+          "line": 4
+        }
+      ],
+      "rationale": "The response stays at IA/navigation and explicitly excludes code and visual implementation."
+    },
+    {
+      "case_id": "ia-audit-001",
+      "criterion": "A2",
+      "title": "Mixed taxonomy detection",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Healthcare (industry), Enterprise (organization/audience), Getting Started (lifecycle) are siblings",
+          "line": 44
+        }
+      ],
+      "rationale": "It identifies all three supplied incompatible classification dimensions explicitly."
+    },
+    {
+      "case_id": "ia-audit-001",
+      "criterion": "A3",
+      "title": "User-impact explanation",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Users cannot consistently predict what belongs under Solutions; onboarding is particularly misplaced",
+          "line": 44
+        }
+      ],
+      "rationale": "It connects the mixed taxonomy to predictability and orientation, labeling effects as hypotheses rather than measured confusion."
+    },
+    {
+      "case_id": "ia-audit-001",
+      "criterion": "A4",
+      "title": "Content integrity",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "10/10 required entries explicitly mapped; zero intentional content deletions",
+          "line": 162
+        }
+      ],
+      "rationale": "The coverage matrix gives Monitor, Automate, Healthcare, Enterprise, Getting Started, Blog, Case Studies, Pricing, About and Contact/demo explicit destinations; the conditional demo route preserves Contact."
+    },
+    {
+      "case_id": "ia-audit-001",
+      "criterion": "A5",
+      "title": "Evidence discipline",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "No live website, analytics, competitor sites, user research, CMS inventory, or implementation was available or consulted.",
+          "line": 6
+        },
+        {
+          "quote": "`By organization` is a provisional taxonomy that should be renamed if the actual page proves otherwise.",
+          "line": 145
+        }
+      ],
+      "rationale": "No unsupported analytics/research/competitor results appear. New grouping labels and route assumptions are explicitly provisional, with validation conditions."
+    },
+    {
+      "case_id": "ia-audit-001",
+      "criterion": "A6",
+      "title": "Grouping rationale",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Products = capability; Solutions explicitly separated by industry vs organization; Resources = content type; Getting Started = lifecycle",
+          "line": 157
+        }
+      ],
+      "rationale": "Every major group has a user question and membership rule. The nested Solutions headings explicitly separate industry and organization facets; lifecycle guidance is removed from that grouping."
+    },
+    {
+      "case_id": "component-reuse-001",
+      "criterion": "B1",
+      "title": "Inventory-first behavior",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "The action order is **Reuse \u2192 Extend \u2192 Variant \u2192 Compose \u2192 New**.",
+          "line": 19
+        }
+      ],
+      "rationale": "The mapping is grounded in all supplied component responsibilities before the new comparison responsibility is justified."
+    },
+    {
+      "case_id": "component-reuse-001",
+      "criterion": "B2",
+      "title": "Existing component reuse",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Seven distinct existing component types are used:",
+          "line": 31
+        },
+        {
+          "quote": "No existing component API change or new variant is required based on the supplied requirements.",
+          "line": 31
+        }
+      ],
+      "rationale": "The section table explicitly reuses HeroSection, LogoWall, FeatureCard, MetricBand, CaseStudyFeature and CTASection; SectionHeader is optional composition."
+    },
+    {
+      "case_id": "component-reuse-001",
+      "criterion": "B3",
+      "title": "New-component restraint",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "None of the seven existing components owns a matrix of feature rows crossed with plan columns.",
+          "line": 28
+        },
+        {
+          "quote": "One generic new comparison component is therefore the smallest justified addition.",
+          "line": 149
+        }
+      ],
+      "rationale": "PlanComparisonTable is the sole proposed new component, with clear row/column semantics and a reason cards/metrics cannot cleanly substitute."
+    },
+    {
+      "case_id": "component-reuse-001",
+      "criterion": "B4",
+      "title": "No page-specific duplicates",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Do not add `EnterpriseHero`, `EnterpriseFeatureCard`, `EnterpriseMetricBand`, `EnterpriseCaseStudy`, `EnterpriseLogoWall`, or `EnterpriseCTA`",
+          "line": 162
+        }
+      ],
+      "rationale": "It explicitly refuses page-named duplicates and avoids using an enterprise variant as a page identity tag."
+    },
+    {
+      "case_id": "component-reuse-001",
+      "criterion": "B5",
+      "title": "Action rationale",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "**Reuse**; **Compose** as a three-card group",
+          "line": 25
+        },
+        {
+          "quote": "**New**, with optional **Compose**",
+          "line": 28
+        }
+      ],
+      "rationale": "All seven sections receive explicit reuse/compose/new decisions and explanations tied to responsibilities. No unsubstantiated extensions or variants are introduced."
+    },
+    {
+      "case_id": "component-reuse-001",
+      "criterion": "B6",
+      "title": "System implications",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Keep semantic table structure and enable horizontal scrolling if needed; preserve all feature values and labels.",
+          "line": 114
+        },
+        {
+          "quote": "**No token changes can be justified or verified.**",
+          "line": 166
+        }
+      ],
+      "rationale": "The comparison contract covers keyboard scrolling, header associations, complete values, zoom, focus and non-color availability; token changes remain evidence-gated."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C1",
+      "title": "Evidence integrity",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Analytics, user research and competitor evidence absent",
+          "line": 24
+        },
+        {
+          "quote": "No conversion uplift, performance improvement or accessibility conformance is claimed.",
+          "line": 27
+        }
+      ],
+      "rationale": "The evidence ledger preserves missing research, copy, metrics, routes, token values and implementation facts as unknown; numeric or user-study outcomes are not invented."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C2",
+      "title": "Audit before redesign",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "## 1. DISCOVER \u2014 project context and current-site audit",
+          "line": 31
+        },
+        {
+          "quote": "## 5. EXPLORE \u2014 bounded visual directions (same IA and wireframe)",
+          "line": 328
+        }
+      ],
+      "rationale": "Source-backed structural audit and IA/content mapping precede the bounded visual hypotheses; the output does not substitute styling for structural diagnosis."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C3",
+      "title": "IA consistency",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Split into Use Cases / Enterprise / Start Here",
+          "line": 138
+        }
+      ],
+      "rationale": "Kubernetes technical context, Enterprise audience and Start Here lifecycle no longer remain interchangeable siblings under Solutions. Product names and public Pricing stay reachable."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C4",
+      "title": "Content coverage",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "All 13 required categories have destinations.",
+          "line": 260
+        },
+        {
+          "quote": "Do not delete unless equivalent tested form/path exists",
+          "line": 252
+        }
+      ],
+      "rationale": "Both the C01-C13 register and detailed disposition table account for all required content, including underlying contact form, proof, metrics, Docs and About. No category is silently removed."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C5",
+      "title": "Page hierarchy",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "understand \u2192 select product/use case \u2192 verify proof \u2192 review buying information \u2192 request a demo",
+          "line": 10
+        },
+        {
+          "quote": "homepage hero **Explore products** = primary learning step and **Request demo** = secondary hero action",
+          "line": 182
+        }
+      ],
+      "rationale": "The homepage gives a coherent evaluation journey and distinguishes the persistent primary demo conversion from the hero's learning action and subordinate proof/pricing links. The rubric does not prescribe an exact hero CTA order."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C6",
+      "title": "Component governance",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "The proposed page map creates **zero proven new component needs**.",
+          "line": 364
+        }
+      ],
+      "rationale": "The ten-component inventory and page/section mapping precede conditional new-component decisions. No new homepage component is authorized without an observed gap; page-specific copies and token proliferation are explicitly avoided."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C7",
+      "title": "Implementation discipline",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Keep implementation aligned with existing frontend stack; no migration proposed.",
+          "line": 420
+        },
+        {
+          "quote": "Implement semantic page structures and accurate text first, followed by responsive layout and styles in the existing stack",
+          "line": 436
+        }
+      ],
+      "rationale": "It preserves the existing stack, gives traceable content/route/component dependencies, and sequences structural implementation before visual refinement."
+    },
+    {
+      "case_id": "end-to-end-b2b-001",
+      "criterion": "C8",
+      "title": "Validation discipline",
+      "score": 2,
+      "evidence": [
+        {
+          "quote": "Keyboard traversal, focus, zoom/reflow, form error association, text alternatives, contrast, screen reader testing",
+          "line": 456
+        },
+        {
+          "quote": "Baseline-versus-proposed screenshots and functional/content regression log",
+          "line": 458
+        }
+      ],
+      "rationale": "The gate matrix and concrete acceptance checks separately cover evidence, IA/content parity, component reuse, responsive behavior, accessibility and regressions while explicitly marking actual tests unperformed."
+    }
+  ],
+  "aggregate": {
+    "score": 40,
+    "max_score": 40
+  },
+  "non_scoring_observations": [
+    "IA uses explicit nested industry/organization facets; their usefulness remains a stated hypothesis rather than empirical success",
+    "The B2B hero learning CTA differs from the illustrative expected artifact but preserves an explicit coherent conversion hierarchy; exact golden wording/order is not required",
+    "Length and additional visual hypotheses earn no bonus; only rubric behavior is scored",
+    "No rendered, research, accessibility-conformance or production outcome is established by this planning benchmark"
+  ],
+  "validation": {
+    "result_schema": "passed",
+    "direct_single_run_validator": "passed",
+    "whole_shared_checkout": "Both standard validator and release check currently stop on unfinished second-run directory missing result.json; no modification to that directory was made.",
+    "isolated_completed_run_snapshot": "Standard validator passed; --require-ready returned 1 only for one official run and one signature, with no warnings. See validation-single-run.json."
+  }
+}

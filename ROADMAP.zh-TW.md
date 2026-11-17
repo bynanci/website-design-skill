@@ -16,15 +16,15 @@ Website Design Skill 以跨平台改版方法、明確的交付契約與行為�
 
 選用 PR #5 preview 包含八組可重用 Dashboard 元件、32 項矩陣及額外的真正 200% 原生視窗擷取（#7）。#14 加入保留來源位元的單一 CSS 復原操作、最多兩輪 patch/recheck、來源/runtime 鎖定及時間／process／擷取預算。同一套 Dashboard runner 量測通過參考、注入的失敗基線及候選；此能力不等於通用 CSS 修復。具日期的雙語證據紀錄是實際驗收狀態的依據。
 
-#6 已有隔離且版本化的資料包、評分準則、嚴格結果驗證與完整性測試，獨立結果仍為零。#1 仍需兩個符合資格的乾淨 agent signature。Draft PR #5 保留獨立發布 gate，實作與 browser 測試不會取代這些證據。
+#6 已有隔離且版本化的資料包、評分準則、嚴格結果驗證與完整性測試。獨立的 [#6 v0.2 pilot](https://github.com/bynanci/website-design-skill/issues/6) 已完成兩次執行、獨立審查與驗證，並於 [PR #33](https://github.com/bynanci/website-design-skill/pull/33) 合併：GPT-6 得 36/36，GPT-5.6 Sol 得 33/36。GPT-5.6 Sol 的 AX-01、AX-02、AX-03 為部分得分，兩次均無 critical error；發布與合併狀態以 #6 為準。#1 已有兩次完成獨立審查的官方 v0.1 執行：[GPT-6](benchmarks/results/chatgpt-web-gpt-6-v01-20261117/) 與 [GPT-5.6 Sol](benchmarks/results/chatgpt-web-gpt-5-6-sol-v01-20261117/)，均來自同一 ChatGPT web 產品，各得 40/40。本機嚴格證據 gate 已通過。這些執行使用凍結核心 commit `7d64090710ef20f1d24cea6b46199391d3c09c18`；main 後續的 adapter 與測試仍屬另一組證據。PR #5 追蹤 v0.2 選用契約的整合與獨立發布 gate，實作與 browser 測試不會取代評估證據。
 
 ## 部署與外部檢查
 
-[#29](https://github.com/bynanci/website-design-skill/issues/29)追蹤錯誤的 Vite 工具根目錄、重複 Vercel 專案及平台限流。明確的靜態展示建置與 production output smoke 不等於核心發布就緒。需同時核對外部部署狀態與 GitHub Actions，只有綁定實際來源的 READY 部署才能完成該驗收項目。詳見[部署操作](docs/DEPLOYMENT.zh-TW.md)。
+[#29](https://github.com/bynanci/website-design-skill/issues/29)追蹤錯誤的 Vite 工具根目錄、重複 Vercel 專案及平台限流。明確的靜態展示建置與 production output smoke 不等於核心發布就緒。需同時核對外部部署狀態與 GitHub Actions，只有綁定實際來源的 READY 部署才能完成該驗收項目。#29 已結案：接受的 main 與 preview 合併版本各有自己的 canonical READY 部署，來源 manifest、資產雜湊、HTTP／browser 及 all-context readiness 均通過，原訂重試已暫停。該驗收只適用已記錄版本，後續候選仍須通過自己的檢查。詳見[部署操作](docs/DEPLOYMENT.zh-TW.md)。
 
 ## v0.1：最小公開版本
 
-發布前需通過 repository validators，取得至少兩個符合規範的獨立 agent benchmark，且達到分數門檻；若不同 agent 在同一準則反覆失分，也要先處理核心契約歧義。目前 v0.1 仍以 release gate 為準，不可把可用性問題當成相容性分數。
+發布前需通過 repository validators，取得至少兩個符合規範的獨立 agent benchmark，且達到分數門檻；若不同 agent 在同一準則反覆失分，也要先處理核心契約歧義。截至 2026-11-17，本機嚴格證據 gate 回報兩次官方執行、兩個不同 signature，沒有 failure 或 warning。[v0.1.0 已於 2026-11-18（Asia/Taipei）發布](https://github.com/bynanci/website-design-skill/releases/tag/v0.1.0)，tag 固定在 commit `e33c7414de44cf537c9a59113fd8f393352af5bc`，確切 candidate 的 CI 與外部檢查均已通過，[Issue #1](https://github.com/bynanci/website-design-skill/issues/1) 已結案。詳見[發布說明](docs/releases/v0.1.0.zh-TW.md)與[發布流程](RELEASE.md)；後續版本須有自己的候選驗收與審查請求。不可把可用性問題當成相容性分數。
 
 ## v0.2：擴大改版情境
 
@@ -32,9 +32,9 @@ Website Design Skill 以跨平台改版方法、明確的交付契約與行為�
 
 ### v0.2 選用 pilot 交付物
 
-PR #5 preview 提供視覺方向比較、responsive/container/zoom 行為、token 擷取契約、可重用合成 Dashboard 及響應式／可及性案例。#7 已提供 32 項矩陣、實際 200% 原生縮放與已記錄的預設方向選擇；#14 已提供同一 runner 的有限復原證據。#6 的隔離資料包與評分契約已備妥，獨立執行與評分仍未完成；實體裝置、螢幕閱讀器與真人任務研究保持未執行。
+PR #5 preview 提供視覺方向比較、responsive/container/zoom 行為、token 擷取契約、可重用合成 Dashboard 及響應式／可及性案例。#7 已提供 32 項矩陣、實際 200% 原生縮放與已記錄的預設方向選擇；#14 已提供同一 runner 的有限復原證據。#6 的隔離資料包與評分契約已備妥。獨立的 [#6 v0.2 pilot](https://github.com/bynanci/website-design-skill/issues/6) 已完成兩次執行、獨立審查與驗證，並於 [PR #33](https://github.com/bynanci/website-design-skill/pull/33) 合併：GPT-6 得 36/36，GPT-5.6 Sol 得 33/36。GPT-5.6 Sol 的 AX-01、AX-02、AX-03 為部分得分，兩次均無 critical error；發布與合併狀態以 #6 為準。實體裝置、螢幕閱讀器與真人任務研究保持未執行。
 
-這些交付物不改動 v0.1 核心流程、凍結案例或評分規則，不可計為官方 v0.1 相容性證據。PR #5 仍須通過其既有 draft 與版本驗收 gate。
+這些交付物不改動 v0.1 核心流程、凍結案例或評分規則，不可計為官方 v0.1 相容性證據。PR #5 依獨立的版本與整合驗收 gate 管理。
 
 ## v0.3：互通性與 adapters
 
