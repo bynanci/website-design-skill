@@ -147,6 +147,16 @@
     const close=()=>dialog.close();
     qs("#close-dialog").addEventListener("click",close);
     qs("#dialog-done").addEventListener("click",close);
+    dialog.addEventListener("keydown", event => {
+      if (event.key !== "Tab" || !dialog.open) return;
+      const controls = Array.from(dialog.querySelectorAll('button,a[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'))
+        .filter(element => !element.disabled && element.getClientRects().length);
+      if (!controls.length) { event.preventDefault(); title.focus(); return; }
+      const current = controls.indexOf(document.activeElement);
+      const next = current < 0 ? (event.shiftKey ? controls.length - 1 : 0)
+        : (current + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
+      event.preventDefault(); controls[next].focus();
+    });
     dialog.addEventListener("close",()=>{if(returnFocus){returnFocus.focus();returnFocus=null;}});
   }
   /** One synthetic read owner; no network, storage or backend permission. */
