@@ -21,7 +21,7 @@ English and Traditional Chinese versions are available for the README, core skil
 
 The optional [integration architecture](integrations/context-aware-ui/README.md) connects project tokens, reusable components, state/API ownership and bounded source edits. Scoped Vue inspection, track-reorder editing, media transitions and declarative recovery now have executable fixtures and browser evidence on main. The v0.2 preview adds the rendered dashboard and one reviewed CSS restoration operation. Each capability has explicit syntax, host and evidence limits; other frameworks require separate adapters.
 
-[Issue #8](https://github.com/bynanci/website-design-skill/issues/8) records these completed pilots. The 2026-11-17 evidence snapshot for the v0.1 benchmark gate in #1 contains two reviewed official runs. The separate [v0.2 pilot in #6](https://github.com/bynanci/website-design-skill/issues/6) has two completed, independently reviewed and validated runs in the preview worktree: GPT-6 scores 36/36 and GPT-5.6 Sol scores 33/36. GPT-5.6 Sol receives partial scores on AX-01, AX-02 and AX-03; neither run has a critical error. Issue #6 records its publication and merge state. Deployment is tracked separately in [#29](https://github.com/bynanci/website-design-skill/issues/29).
+[Issue #8](https://github.com/bynanci/website-design-skill/issues/8) records these completed pilots. The 2026-11-17 evidence snapshot for the v0.1 benchmark gate in #1 contains two reviewed official runs. The separate [v0.2 pilot in #6](https://github.com/bynanci/website-design-skill/issues/6) has two completed, independently reviewed and validated runs merged in [PR #33](https://github.com/bynanci/website-design-skill/pull/33): GPT-6 scores 36/36 and GPT-5.6 Sol scores 33/36. GPT-5.6 Sol receives partial scores on AX-01, AX-02 and AX-03; neither run has a critical error. Issue #6 records its publication and merge state. Deployment is tracked separately in [#29](https://github.com/bynanci/website-design-skill/issues/29).
 
 ## Build the static showcase
 
@@ -30,7 +30,7 @@ node site/build.mjs
 python3 -m http.server 8000 --directory dist
 ```
 
-The builder uses Node built-ins and an explicit public-asset allowlist. Main produces the bilingual skill/documentation landing page; the preview also includes its synthetic dashboard when the complete fixture is present. The optional Vue inspection/test directory is not a Vite application entry. Use repository root and the explicit [deployment guide](docs/DEPLOYMENT.md).
+The builder uses Node built-ins and an explicit public-asset allowlist. It publishes the bilingual skill/documentation landing page and includes the synthetic dashboard only when its complete fixture is present. The optional Vue inspection/test directory is not a Vite application entry. Use repository root and the explicit [deployment guide](docs/DEPLOYMENT.md).
 
 A successful GitHub Actions run does not establish a successful external deployment. Before merging, inspect all statuses and check runs for the exact candidate:
 
@@ -156,6 +156,28 @@ project context
 ```
 
 The fixture intentionally omits analytics, user research, and competitor evidence so unsupported assumptions are visible instead of silently invented.
+
+## Optional v0.2 contracts (not part of the v0.1 release gate)
+
+Three additional **opt-in** artifacts extend visual and responsive design work
+without changing the frozen v0.1 core contract:
+
+- [Visual direction comparison](templates/visual-direction-comparison.md)
+- [Responsive behavior](templates/responsive-behavior.md)
+- [Design token extraction / migration](templates/design-token-extraction.md)
+
+The [visual quality reference](references/visual-quality.md) provides review
+criteria. An [executable synthetic account dashboard](examples/responsive-dashboard/)
+demonstrates the contracts, supported by [Chromium/axe-core QA evidence](examples/responsive-dashboard/output/qa-review-2026-11-17.md). Pilot behavioral cases cover
+[responsive layout](evals/responsive-layout/) and
+[accessibility](evals/accessibility/).
+
+These are deliberately excluded from the official v0.1 40-point benchmark
+manifest. Issue #7's scoped implementation is complete: eight reusable component
+groups, a 32-condition acceptance matrix and an actual 200% native browser zoom
+capture. [Issue #6](https://github.com/bynanci/website-design-skill/issues/6) is complete with two independent pilot runs and criterion-level reviews. These results remain separate from the v0.1 release gate. Physical-device, screen-reader and human task studies have not run.
+The contracts are optional v0.2 additions tracked in [PR #5](https://github.com/bynanci/website-design-skill/pull/5); their evidence does not establish all-platform compatibility or production UX efficacy. Automated accessibility
+observations apply only to the recorded synthetic specimen and runtime.
 
 ## Evaluations
 
@@ -284,7 +306,7 @@ Platform-specific adapters remain optional and outside the core methodology.
 
 ## Status
 
-**v0.1 release candidate with a passing local evidence gate (2026-11-17).**
+**[v0.1.0 is published](https://github.com/bynanci/website-design-skill/releases/tag/v0.1.0) (2026-11-18, Asia/Taipei). Optional v0.2 additions remain unreleased.**
 
 The methodology, artifacts, behavioral evals, end-to-end fixture, benchmark protocol, result contract, release gate, and CI enforcement are now present.
 
@@ -292,7 +314,7 @@ The first external runner attempt established runner-availability evidence only:
 
 The strict local gate reports ready with two official runs, two distinct agent signatures, no failures and no warnings. Both runs evaluate suite `0.1.0` at frozen core commit `7d64090710ef20f1d24cea6b46199391d3c09c18`. Later adapters and tests on main are separate evidence and were not included in these benchmark inputs.
 
-Before publishing, verify CI and required external checks for the exact candidate, complete public merge, then follow the release-tag procedure in [RELEASE.md](RELEASE.md). [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) and [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) are the publication record. In the 2026-11-17 snapshot, deployment quota remains active in [#29](https://github.com/bynanci/website-design-skill/issues/29), with follow-up scheduled for 2026-11-18 at 19:10 Asia/Taipei. See the [draft v0.1.0 release notes](docs/releases/v0.1.0.md) for the evidence scope and remaining work.
+The [v0.1.0 release](https://github.com/bynanci/website-design-skill/releases/tag/v0.1.0) targets commit `e33c7414de44cf537c9a59113fd8f393352af5bc`. Its reviewed release request passed read-only validation before publication; the workflow verified the tag and exact release body. [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) is closed. Later releases must follow the same exact-candidate checks in [RELEASE.md](RELEASE.md). [Deployment issue #29](https://github.com/bynanci/website-design-skill/issues/29) is closed: the accepted main and preview merge heads each have their own canonical READY deployment, matching source manifests and asset hashes, passing HTTP/browser checks and all-context readiness. The scheduled retry is paused. A later candidate must pass its own checks. See the [v0.1.0 release notes](docs/releases/v0.1.0.md) for the evidence scope and remaining work.
 
 See [SKILL.md](./SKILL.md) for the agent operating contract.
 

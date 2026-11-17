@@ -1,0 +1,17 @@
+{
+  "label": "gpt6-v02-accessibility",
+  "provider": "OpenAI",
+  "product": "ChatGPT web",
+  "model": "GPT-6",
+  "version": null,
+  "effort": "Medium",
+  "started_at": "2026-11-17T13:33:28.527Z",
+  "completion_observed_at": "2026-11-17T13:39:12.378Z",
+  "context_url": "https://chatgpt.com/c/6afc57a8-2a44-83e8-a099-bcf24a8aea0e?temporary-chat=true",
+  "original_download_path": "/opt/codex/downloads/7c17c023-0894-428f-9bc8-a5da68390ce5/6831bd66-7da4-4a0b-bfea-1ecc10bd4029",
+  "raw_path": "/workspace/shared/website-evaluation-evidence/gpt6-v02-accessibility.md",
+  "raw_bytes": 26367,
+  "raw_sha256": "bae741b46a9053d2c5b1e4396292f0252c19c36140f670af8380d2965a841d0f",
+  "capture_method": "Browser viewer Download; byte-identical Markdown artifact",
+  "manual_edit": false
+}

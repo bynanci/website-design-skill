@@ -1,0 +1,173 @@
+{
+  "schema_version": "0.2-pilot.1",
+  "suite_version": "0.2-pilot.1",
+  "run_id": "chatgpt-web-gpt-6-v02-20261117",
+  "status": "completed",
+  "source_commit": "7f7148a0752718ba3fb363c019441a6d5ca91f15",
+  "agent": {
+    "provider": "OpenAI",
+    "product": "ChatGPT web",
+    "model": "GPT-6"
+  },
+  "environment": {
+    "run_date": "2026-11-17",
+    "interface": "ChatGPT web UI; fresh Temporary/Unpersonalized chat per case; Medium effort; no API; hidden model version undisclosed (null in sidecar)",
+    "capabilities": {
+      "file_read": "available",
+      "file_write": "available",
+      "code_execution": "unknown",
+      "browser": "unknown",
+      "image_review": "unknown",
+      "network": "unknown"
+    }
+  },
+  "manual_edit": false,
+  "isolation": {
+    "independent_context": true,
+    "evaluator_files_exposed": false,
+    "prior_outputs_exposed": false,
+    "record_path": "isolation.md",
+    "record_sha256": "de6224e319dc053def8cb24c1e9cb894cc5d841b813941d70c17dd5a5ca74fbc"
+  },
+  "availability": {
+    "status": "available",
+    "reason": null,
+    "details": "Both planning cases completed using packet inspection and Markdown artifact creation. Fresh Temporary/Unpersonalized settings, literal selected model and Medium effort are retained in evidence. No access/subscription block. Live product rendering/AT outcomes unavailable; unobserved provider capabilities unknown."
+  },
+  "generation_finished_at": "2026-11-17T13:39:12.378Z",
+  "reviewer": {
+    "id": "codex-independent-pilot-reviewer-/root/pilot_results_review",
+    "scored_at": "2026-11-17T13:46:42.249Z"
+  },
+  "cases": [
+    {
+      "id": "responsive-layout-001",
+      "raw_output_path": "raw/responsive-layout-001.md",
+      "raw_sha256": "fa35cb56b65bd9f668553db5f44b95e65188f4b30d93bda01f8d3b9b1ca05ea3",
+      "scores": [
+        {
+          "criterion": "RL-01",
+          "score": 2,
+          "evidence_quote": "- **Six required modules:** (1) account identity/contact context, (2) four KPI summaries—revenue, trend, cases, renewal status, (3) four **ordered** AI observations, each with an evidence link and suggested follow-up question, (4) five-category revenue composition chart and legend, (5) multiple-series service revenue trend, and (6) cases table with status, owner, due date, and row actions.",
+          "note": "All six modules and their fields/actions are itemized, preserved across wide/narrow rows and checked in the coverage/regression gates (§§1–2,5)."
+        },
+        {
+          "criterion": "RL-02",
+          "score": 2,
+          "evidence_quote": "**Proposed compromise:** Make account identity, four KPIs, and the beginning of the ordered observation sequence immediately findable; keep the remaining observations, charts, and cases in a predictable vertical flow with clear section headings. Use measured spacing efficiency and sensible multi-column chart layout only when tested. Accept desktop vertical scrolling when content pressure requires it. An optional sticky anchor/section navigation is **not** required and should not be added without evidence or a reuse audit.",
+          "note": "Identity and KPIs orient the user; ordered observations with evidence/questions precede supporting charts and cases. The proposed compromise and content gate keep the task path reviewable."
+        },
+        {
+          "criterion": "RL-03",
+          "score": 2,
+          "evidence_quote": "**Decision gate:** Product owner must accept that no-scroll is a non-blocking aspiration, while **content completeness, no overlap/clipping, functional parity, and non-hover operability** are blocking requirements. A single-screen claim cannot be approved without a representative populated render and measurements.",
+          "note": "§4 rejects forced fit and shrinking/removing content, accepts vertical scrolling, and requires populated-render measurements plus product review."
+        },
+        {
+          "criterion": "RL-04",
+          "score": 2,
+          "evidence_quote": "4. Ensure each chart has an accessible name, short description of its purpose, and a keyboard-reachable **View data** disclosure or equivalent table. Table headers identify categories/time points and series; unavailable values remain unavailable rather than estimated. Display chart-value units and date granularity only when actual source data provides them.",
+          "note": "§3 explicitly separates legends, retains five categories and all trend series, and requires a keyboard-reachable named structured data view. §5 checks category/series parity against the fixture."
+        },
+        {
+          "criterion": "RL-05",
+          "score": 2,
+          "evidence_quote": "- At narrow **container** widths, first test a labeled row-stack composition displaying each case's status, owner, due date, and actions, with the case identity available if supplied. Preserve a coherent semantic association per row. Do not pretend cards are an accessible table unless they retain correct structure and navigation.",
+          "note": "§3 defines labeled row-stacks with status/owner/due/actions and a bounded keyboard-scrollable native-table fallback; §5 verifies fields, actions, touch and focus."
+        },
+        {
+          "criterion": "RL-06",
+          "score": 2,
+          "evidence_quote": "- **Keyboard and non-hover:** All links, disclosure triggers, chart alternative controls, table scroll affordances, and row actions must be operable without pointer hover. Native interactive elements preferred; Enter activates links/buttons, Space activates buttons, and Escape closes an actual dismissible popup if one exists. Avoid custom keyboard patterns unless the UI genuinely requires them.",
+          "note": "§3 covers chart focus/touch equivalents, named evidence links, row actions, keyboard disclosures, visible/restored focus and touch targets. §5 verifies chart equivalence, touch/keyboard actions and disclosure states."
+        },
+        {
+          "criterion": "RL-07",
+          "score": 2,
+          "evidence_quote": "**Container-pressure triggers to implement and verify:** KPI tile contents no longer fit without collision; chart marks and legend compete for the same plot space; multi-series legends become ambiguous or overflow; case columns/actions need impractically narrow widths; observation text would be clipped. Reflow at these points, rather than encoding the above scenario widths as already validated breakpoints.",
+          "note": "§2 matrix names 1920×1080,1366×768,390/320 CSS px,200% zoom and narrow panel. §5 gives pending checks for each. Content-pressure triggers are proposals, not observed breakpoints."
+        },
+        {
+          "criterion": "RL-08",
+          "score": 2,
+          "evidence_quote": "**Reuse sequence:** reuse → extend → variant → compose → new. Compose existing `SectionHeading`, charts, and `DisclosurePanel` for optional textual chart-data views before proposing a new primitive. **No new reusable component is justified yet.** A shared chart-data-view primitive should be considered only if inspection shows neither chart can expose equivalent data using its existing contract or composition; the actual API is unknown.",
+          "note": "§3 reviews all eight supplied components, favors extension/composition, and permits a new shared data-view primitive only after API inspection establishes a reusable gap. §5 component-system gate verifies this."
+        },
+        {
+          "criterion": "RL-09",
+          "score": 2,
+          "evidence_quote": "**Outcome:** A complete **proposed responsive behavior contract and executable validation plan**, not a validated redesign. No test passes, final breakpoints, production functionality, or implementation completion are asserted.",
+          "note": "Reported defects, untested hypotheses, unavailable product evidence and pending checks remain distinct throughout; no rendered, measured or conformance success is asserted."
+        }
+      ],
+      "critical_errors": []
+    },
+    {
+      "id": "accessibility-001",
+      "raw_output_path": "raw/accessibility-001.md",
+      "raw_sha256": "bae741b46a9053d2c5b1e4396292f0252c19c36140f670af8380d2965a841d0f",
+      "scores": [
+        {
+          "criterion": "AX-01",
+          "score": 2,
+          "evidence_quote": "| **P0 / A3** | Revenue trend tooltip is hover-only; keyboard users cannot reach its information | Event handling bound only to mouseenter; chart points lack keyboard focus; tooltip data has no persistent alternative | **`TrendChart` component** owns keyboard/touch-equivalent access to point/series information and meaningful non-hover presentation. Extend existing chart interaction to let users reach the same facts through focus/keyboard, and expose a concise accessible summary or structured data alternative. Do not make a transient tooltip the sole data source. **Page composition** passes existing labels, time periods, values and units unchanged. | Keyboard-only users can discover trend information without hover; no keyboard trap; focus and visible tooltip do not obscure each other. Screen reader can obtain series, axes/periods, values, and trend meaning in usable order. At touch/narrow view, same information remains accessible; verify focus/blur and Escape behavior of any interactive popup. |",
+          "note": "Focus/keyboard and touch equivalents plus a non-transient chart summary/data route are required; §5 requires all information-bearing series/points and values to be accessible, with manual/AT checks. No measured success claimed."
+        },
+        {
+          "criterion": "AX-02",
+          "score": 2,
+          "evidence_quote": "| **P1 / A4** | Pie chart categories are identified only by color; category meaning lost without color differentiation | Chart slices lack direct labels, patterns, usable legend, and/or accessible data equivalent | **`PieChart` component** supplies persistent text legend/category names tied to visual slices using more than hue (e.g., labels/patterns as suitable) plus an accessible equivalent with category/value/percentage as available in original data. Preserve original categories and values; do not invent percentages or labels. | In grayscale and non-color viewing, every category is identifiable. Keyboard and screen-reader paths expose each category and corresponding provided value. Legend remains readable on mobile/zoom; focus/selection states, if present, are not color-only. |",
+          "note": "Persistent category labels/non-hue mapping and category/value equivalents are explicit. A4 checks grayscale/no-color; §5 cross-page regression repeats reusable interactions across themes/high contrast and supported AT."
+        },
+        {
+          "criterion": "AX-03",
+          "score": 2,
+          "evidence_quote": "| **P0 / A1** | Filter dialog opens while keyboard focus stays behind it; users may operate obscured page content | Dialog opens visually without setting initial focus; overlay or focus management missing | **`FilterDialog` component** owns focus management; invoking **page composition** provides trigger ref and meaningful dialog title. On open move focus to an appropriate element inside; keep Tab/Shift+Tab within a modal; background must not be keyboard/assistive-tech interactive while modal is open. Expose correct dialog semantics and accessible title; support Escape and explicit Close/Apply/Cancel as appropriate to existing behavior, without inventing actions. | Keyboard open from trigger: focus enters dialog, stays inside for forward/reverse Tab, Escape or existing close control works, underlying controls cannot be activated. Screen reader announces dialog and name; reading/navigation doesn't expose background as active dialog content. Visual focus is apparent at all times, including at zoom/narrow widths. |",
+          "note": "A1 checks initial placement, forward/reverse containment, background isolation, Escape/close; A2 separately checks return to trigger on every close and rerender plus logical fallback."
+        },
+        {
+          "criterion": "AX-04",
+          "score": 2,
+          "evidence_quote": "| **P1 / A5** | Form field has only placeholder, no visible or programmatic label; purpose not reliably identifiable | `TextField` exposes placeholder but not bound label or accessible name | **`TextField` component** requires a persistent visible label with programmatic association (`label`/control ID or equivalent native mechanism); placeholder is an optional hint, not a label. **Page composition/content owner** supplies the existing field's actual purpose; it is **unknown** and must not be guessed. Ensure guidance, required state and errors are associated if present. | Accessible-name inspection and screen reader both announce real field label; visible label remains when value entered; clicking label focuses control; tab order, error/required announcements and zoom/reflow verified where applicable. |",
+          "note": "A visible persistent real label is explicitly bound via label/control ID; accessible-name, click-label, entered-value and assistive-technology checks are case specific."
+        },
+        {
+          "criterion": "AX-05",
+          "score": 2,
+          "evidence_quote": "| **P2 / A7** | Decorative loading animation ignores reduced-motion preference; may create unnecessary motion | `LoadingIndicator` animation has no preference-aware variant or motion token fallback | **`LoadingIndicator` component** detects/obeys reduced-motion preference and renders static or substantially reduced animation when enabled. Use shared **motion token** only if it already exists or repeated motion use is established; avoid page-only CSS override. Decorative animation should not produce noisy announcements; if an actual loading status must be conveyed, the status/announcement contract belongs to the owning asynchronous region, not the decoration alone. | Toggle system/browser reduced-motion setting and confirm decorative motion ceases or is appropriately reduced; loading status remains understandable through text/semantics where needed. Check visual states and screen-reader announcements for unnecessary repetition. |",
+          "note": "Component obeys reduced motion while async owner retains meaningful status; preference toggle and repeated-announcement checks cover both decorative and semantic states."
+        },
+        {
+          "criterion": "AX-06",
+          "score": 2,
+          "evidence_quote": "| **P1 / A6** | AI observation evidence-source text link is named “here”; its destination/purpose is unclear out of context | `Link` allows generic text without descriptive context; page copy chose weak anchor | **`Link` component** supports meaningful accessible link text and a visible focus treatment; **page content layer** supplies source-specific descriptive anchor text based on the *actual existing evidence source*. Prefer descriptive visible text that works in a screen-reader list of links; an accessible-name override alone is not the preferred substitute for understandable visible text. Preserve destination and observation meaning. | Keyboard reaches and activates the same destination; focus visible; screen-reader links list and visual scan convey destination/purpose without nearby prose. Verify link target/behavior and label against actual source, not fabricated name. |",
+          "note": "Source-grounded informative visible link name preserves actual destination and is checked in keyboard activation and the screen-reader links list."
+        },
+        {
+          "criterion": "AX-07",
+          "score": 2,
+          "evidence_quote": "**No new shared component is justified by the supplied evidence.** If inspection later shows a missing common chart-data alternative primitive, first consider composition from existing semantic table/list patterns. This is a conditional design option, not a finding. A global focus-visible style or motion semantic token may be an appropriate highest reusable layer **only after** token inventory identifies existing consumers; do not create speculative colors, durations, or tokens.",
+          "note": "§§2–3 assign all six observed components responsibilities and retain page-owned true content/trigger lifecycle. Shared focus/motion tokens need existing-consumer evidence; validation repeats all consumers."
+        },
+        {
+          "criterion": "AX-08",
+          "score": 2,
+          "evidence_quote": "**Pass conditions:** All reported defects have reproducible before/after evidence or are explicitly reclassified with rationale; each interaction has documented expected keyboard, assistive-tech, and visual behavior; no essential chart information is restricted to hover/color; modal focus works through open/close/re-render; actual labels and destinations are confirmed; shared component usage does not regress; open failures have owners and blocking decisions. Until verified, every outcome remains **Not tested**.",
+          "note": "§2 has per-defect keyboard/AT/visual checks; §5 repeats each test group and declares pending outcomes. Generic audits are only supplemental."
+        },
+        {
+          "criterion": "AX-09",
+          "score": 2,
+          "evidence_quote": "**Not performed:** No application changes, website/repository inspection, real test execution, WCAG success-criterion audit, contrast measurement, or verified before/after result. Neither the packet nor this plan establishes WCAG conformance.  ",
+          "note": "R/H/P/V distinction, proposed triage, missing browser/support matrix, contrast/AT results and conformance limits are explicit; no audit/conformance success claimed."
+        }
+      ],
+      "critical_errors": []
+    }
+  ],
+  "aggregate": {
+    "score": 36,
+    "max_score": 36,
+    "interpretation": "Responsive 18/18; accessibility 18/18. All 18 planning criteria explicitly supported; no listed critical error found. This is one eligible fresh web execution per case for the visible interface model, not a hidden revision claim, rendered/audited success, v0.1 score or release threshold."
+  }
+}

@@ -1,0 +1,56 @@
+Browser tab: 9, Title: "ChatGPT", URL: "https://chatgpt.com/?temporary-chat=true".
+0 AXWebArea ChatGPT, URL: chatgpt.com/?temporary-chat=true
+	1 container
+		2 container root
+			3 container
+				4 link Description: Skip to content, Value: chatgpt.com/?temporary-chat=true#_R_2lemhqd9iqeprb347l9arad5_
+				5 container
+					6 container app-shell-sidebar
+						7 container App navigation
+							8 button (collapsed) Home, Secondary Actions: Expand
+							9 button (collapsed) Space, Secondary Actions: Expand
+							10 button (collapsed) Scheduled, Secondary Actions: Expand
+							11 button (collapsed) Plugins, Secondary Actions: Expand
+							12 pop up button (collapsed) Explore, Secondary Actions: Expand
+							13 button Sites
+							14 button Maps
+							15 button Images
+							16 button (collapsed) Codex, Secondary Actions: Expand
+							17 container
+								18 pop up button (collapsed) Description: Usage, ID: radix-_r_3j_, Secondary Actions: Expand
+								19 pop up button (collapsed) Description: Open profile menu, ID: radix-_R_4nef9ndqd9iqeprb347l9arad5_, Secondary Actions: Expand
+					20 container
+						21 container
+							22 pop up button (collapsed) Unpersonalized, ID: radix-_r_t_, Secondary Actions: Expand
+								23 text Unpersonalized
+								24 image
+							25 button Turn off temporary chat
+								26 image
+					27 container
+						28 container
+							29 heading Temporary chat, Value: 1
+								30 text Temporary chat
+							31 text This chat will ignore memory, plugins, and custom instructions, and it won’t appear in your history
+						32 container
+							33 container
+								34 button (collapsed) Description: Add files and more, Secondary Actions: Expand
+								35 text entry area (settable) Description: Ask ChatGPT, Value: 
+
+									36 container
+										44 text Ask ChatGPT
+								38 pop up button (expanded) Description: Select ChatGPT model, ID: radix-_r_1b_, Secondary Actions: Collapse
+									45 text Medium
+								40 button Dictate
+								41 button (disabled) Send
+									42 image
+						43 text For safety, we may keep a copy of this chat for up to 30 days.
+		46 menu Select ChatGPT model, ID: radix-_r_1c_
+			47 container
+				48 text Locked, opens access options Usage limit reached
+				49 GPT-6, Value: 1
+					50 text GPT-6
+					51 image
+				52 GPT-5.6 Sol, Value: 0
+				53 (disabled) Pro, Value: 0
+
+The focused UI element is 0 AXWebArea ChatGPT, URL: chatgpt.com/?temporary-chat=true

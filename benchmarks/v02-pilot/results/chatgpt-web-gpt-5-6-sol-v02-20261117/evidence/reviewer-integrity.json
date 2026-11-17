@@ -1,0 +1,183 @@
+{
+  "reviewer_id": "codex-independent-pilot-reviewer-/root/pilot_results_review",
+  "checked_at": "2026-11-17T13:46:42.302Z",
+  "source_commit": "7f7148a0752718ba3fb363c019441a6d5ca91f15",
+  "raw_integrity": [
+    {
+      "case_id": "responsive-layout-001",
+      "original_download_path": "/opt/codex/downloads/7c17c023-0894-428f-9bc8-a5da68390ce5/81e9cd69-116b-4600-a378-bb2eb94cfd47",
+      "saved_raw_path": "raw/responsive-layout-001.md",
+      "size_bytes": 26394,
+      "sha256": "6b03b59045b65b19839db387842e34efbd6ed7e6c637dd9f8b42a7971d279368",
+      "original_byte_identical": true
+    },
+    {
+      "case_id": "accessibility-001",
+      "original_download_path": "/opt/codex/downloads/7c17c023-0894-428f-9bc8-a5da68390ce5/1842e926-a6b7-4f6d-b5d3-46d86ae23fbe",
+      "saved_raw_path": "raw/accessibility-001.md",
+      "size_bytes": 21627,
+      "sha256": "b32693ddcc3feda08b6b6f8068ff81fb1bab7c1ba8a0c94442b6d3415dde0926",
+      "original_byte_identical": true
+    }
+  ],
+  "packets": [
+    {
+      "case_id": "responsive-layout-001",
+      "supplied_path": "/workspace/shared/website-eval-inputs/responsive-layout-001-0.2-pilot.1-7f7148a07527.zip",
+      "sha256": "d17dff51dba50a7a7036ca3604be1966bd361bdf37c3a947f71b137c6a8cd878",
+      "source_files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "e69a9211313c33bd31dcd5a7679023d3f866771a124903d7168ead6d3123b106",
+          "size_bytes": 5673
+        },
+        {
+          "path": "evals/responsive-layout/case-001/input.md",
+          "sha256": "4b17df5338acc294fa9735dd2a62f04caf0501576af1a8b21e19edbd40400acc",
+          "size_bytes": 2165
+        },
+        {
+          "path": "references/component-architecture.md",
+          "sha256": "2be2a6ef82aa3ea90ab1dd66c97d8f5be614ea43423e82bf585e345dd9beabaf",
+          "size_bytes": 4479
+        },
+        {
+          "path": "references/information-architecture.md",
+          "sha256": "7248c76a8fe4300784fe6aa8e13054922fe72f75840bf8d61d10914d43c35ca8",
+          "size_bytes": 3801
+        },
+        {
+          "path": "references/workflow.md",
+          "sha256": "70340d18901618fdd7a88db9c3d9dcbdd2fed391ef42c0d68f396e7cb160edd3",
+          "size_bytes": 4578
+        },
+        {
+          "path": "templates/component-contract.md",
+          "sha256": "ea76eaf7e9a8257509ad9a71c84b1aa60c31e76adfdd90b0608b4dbba1e944fd",
+          "size_bytes": 1472
+        },
+        {
+          "path": "templates/content-coverage.md",
+          "sha256": "af0d7cfd52675134cd46a65cea41c3c53610af76645e2a5cf77a7c204806e023",
+          "size_bytes": 1132
+        },
+        {
+          "path": "templates/design-token-extraction.md",
+          "sha256": "10176555d968f75587c0b4e9ff1d6b554525620af44530a5d8a673434443b191",
+          "size_bytes": 2799
+        },
+        {
+          "path": "templates/navigation-comparison.md",
+          "sha256": "15214016416aa795d2201ada3bd82332be6b2a81dd8d0a536563615d4233b8f3",
+          "size_bytes": 1430
+        },
+        {
+          "path": "templates/page-spec.md",
+          "sha256": "32289a1d98d619c1b39f7cd22ca73b2ddd898466e4917495acfce9ce47f7d18b",
+          "size_bytes": 1045
+        },
+        {
+          "path": "templates/project-context.md",
+          "sha256": "d53d82180b4f833fd3415e0f47a55d71ea0f6725ac559b0f6102bc18d39abacd",
+          "size_bytes": 380
+        },
+        {
+          "path": "templates/responsive-behavior.md",
+          "sha256": "9d9a69cbfb23edde5996e73693395429ff0ea9981c202d9aa3116cd6ba1e214a",
+          "size_bytes": 3475
+        },
+        {
+          "path": "templates/visual-direction-comparison.md",
+          "sha256": "d62545fb8ca4173a9a6da283e64bbdd7a9615b0fa612799a50c7fdd09a658ef2",
+          "size_bytes": 3186
+        }
+      ],
+      "all_source_files_match_pinned_git_bytes": true,
+      "generated_metadata": "packet.json",
+      "evaluator_or_other_case_files": false
+    },
+    {
+      "case_id": "accessibility-001",
+      "supplied_path": "/workspace/shared/website-eval-inputs/accessibility-001-0.2-pilot.1-7f7148a07527.zip",
+      "sha256": "592a0c5b7d316ac12c48f4a55875391f530162a65b75cee8cbeba61787b34539",
+      "source_files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "e69a9211313c33bd31dcd5a7679023d3f866771a124903d7168ead6d3123b106",
+          "size_bytes": 5673
+        },
+        {
+          "path": "evals/accessibility/case-001/input.md",
+          "sha256": "70c46303214cc38eda9ed763592f21616bc6e60348477efd805bf7d2c150fcea",
+          "size_bytes": 1479
+        },
+        {
+          "path": "references/component-architecture.md",
+          "sha256": "2be2a6ef82aa3ea90ab1dd66c97d8f5be614ea43423e82bf585e345dd9beabaf",
+          "size_bytes": 4479
+        },
+        {
+          "path": "references/information-architecture.md",
+          "sha256": "7248c76a8fe4300784fe6aa8e13054922fe72f75840bf8d61d10914d43c35ca8",
+          "size_bytes": 3801
+        },
+        {
+          "path": "references/workflow.md",
+          "sha256": "70340d18901618fdd7a88db9c3d9dcbdd2fed391ef42c0d68f396e7cb160edd3",
+          "size_bytes": 4578
+        },
+        {
+          "path": "templates/component-contract.md",
+          "sha256": "ea76eaf7e9a8257509ad9a71c84b1aa60c31e76adfdd90b0608b4dbba1e944fd",
+          "size_bytes": 1472
+        },
+        {
+          "path": "templates/content-coverage.md",
+          "sha256": "af0d7cfd52675134cd46a65cea41c3c53610af76645e2a5cf77a7c204806e023",
+          "size_bytes": 1132
+        },
+        {
+          "path": "templates/design-token-extraction.md",
+          "sha256": "10176555d968f75587c0b4e9ff1d6b554525620af44530a5d8a673434443b191",
+          "size_bytes": 2799
+        },
+        {
+          "path": "templates/navigation-comparison.md",
+          "sha256": "15214016416aa795d2201ada3bd82332be6b2a81dd8d0a536563615d4233b8f3",
+          "size_bytes": 1430
+        },
+        {
+          "path": "templates/page-spec.md",
+          "sha256": "32289a1d98d619c1b39f7cd22ca73b2ddd898466e4917495acfce9ce47f7d18b",
+          "size_bytes": 1045
+        },
+        {
+          "path": "templates/project-context.md",
+          "sha256": "d53d82180b4f833fd3415e0f47a55d71ea0f6725ac559b0f6102bc18d39abacd",
+          "size_bytes": 380
+        },
+        {
+          "path": "templates/responsive-behavior.md",
+          "sha256": "9d9a69cbfb23edde5996e73693395429ff0ea9981c202d9aa3116cd6ba1e214a",
+          "size_bytes": 3475
+        },
+        {
+          "path": "templates/visual-direction-comparison.md",
+          "sha256": "d62545fb8ca4173a9a6da283e64bbdd7a9615b0fa612799a50c7fdd09a658ef2",
+          "size_bytes": 3186
+        }
+      ],
+      "all_source_files_match_pinned_git_bytes": true,
+      "generated_metadata": "packet.json",
+      "evaluator_or_other_case_files": false
+    }
+  ],
+  "image_pre_settings_inspected": true,
+  "ui_model_and_prechat_AX_inspected": true,
+  "limitations": [
+    "Model metadata is the literal visible interface label, not a hidden backend revision; capture version remains null.",
+    "Expanded visible UI activity summaries are not exhaustive provider tool/file/network logs.",
+    "Original browser-download bytes prove artifact integrity, not all provider-side actions.",
+    "No live fictional product, rendered implementation or assistive-technology results exist; this is plan-quality scoring."
+  ]
+}

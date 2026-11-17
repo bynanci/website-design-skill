@@ -2,14 +2,31 @@
 
 [English](CHANGELOG.md) · 繁體中文
 
-本專案的公開 artifact 契約穩定後，將以語意化版本管理正式版本。版本發布紀錄以 [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) 為準。
+本專案的公開 artifact 契約以語意化版本管理，已接受版本由實際 tag 與 Release 識別。版本發布紀錄以 [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) 為準。
 
 ## [未發布]
 
 ### 新增
 
+- 保留來源位元的有限 Dashboard CSS 復原，搭配凍結的 32 項／原生縮放 runner、完整基線／候選證據及有限回滾／資源政策。
+- 隔離的 v0.2 pilot 資料包、獨立評分／結果契約及證據完整性驗證。兩次獨立審查的執行已於 #33 合併：GPT-6 得 36/36，GPT-5.6 Sol 得 33/36。AX-01、AX-02、AX-03 保留部分得分，兩次均無 critical error。
+- 可重用的原生 Dashboard factories、合成復原狀態、語意明暗主題及雙語量測證據文件。
+- v0.2 選用的視覺方向比較、響應式行為與 token 擷取／遷移範本，以及視覺品質審查參考文件。
+- 合成 Dashboard、可重現 Chromium QA，以及獨立於 v0.1 官方案例的響應式與可及性 pilot。
+
+### 變更
+
+- 整合 v0.2 選用項目與已發布的 v0.1.0 基線，保留全部原始評估輸出與凍結契約。#6 pilot 與 #29 部署已完成，每個整合候選仍須通過自己的檢查。
+
+## [0.1.0] - 2026-11-18
+
+[正式發布](https://github.com/bynanci/website-design-skill/releases/tag/v0.1.0) · 07:03:58 Asia/Taipei · commit `e33c7414de44cf537c9a59113fd8f393352af5bc`
+
+### 新增
+
+- 兩階段發布請求，以嚴格 candidate 檢查、不可變的 notes hash 及 GitHub 短效 repository token 完成發布。
 - ChatGPT web 上兩次完成獨立審查的官方 v0.1 benchmark，所選模型標籤為 GPT-6 與 GPT-5.6 Sol。兩次均使用凍結 suite `0.1.0` 與核心 commit `7d64090710ef20f1d24cea6b46199391d3c09c18`，各得 40/40。原始執行與評分連結見[相容性矩陣](benchmarks/compatibility-matrix.md)。
-- [v0.1.0 雙語發布說明草案](docs/releases/v0.1.0.zh-TW.md)，列出證據邊界與待辦。2026-11-17 快照中的本機嚴格證據 gate 已通過；發布依檢查清單辦理，紀錄以 [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) 與 [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) 為準。
+- [v0.1.0 雙語發布說明](docs/releases/v0.1.0.zh-TW.md)，列出證據邊界、接受的 candidate 與已核實的發布紀錄，[Issue #1](https://github.com/bynanci/website-design-skill/issues/1) 已完成。
 
 - 明確的零相依靜態展示建置與 Vercel 部署契約、公開資產／來源檢查、main／preview HTTP／browser smoke，以及涵蓋外部部署的合併就緒報告。
 - 新增有限宣告式 recovery 原型，包含遞迴嚴格 payload 驗證、即時一次性 host capability、純文字 Vue renderer、靜態 fallback 與可比較的 production bundle/UI 成本證據。

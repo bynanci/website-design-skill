@@ -1,0 +1,39 @@
+name: Build isolated v0.2 pilot packets
+
+on:
+  pull_request:
+    paths:
+      - 'benchmarks/v02-pilot/**'
+      - 'scripts/build_v02_pilot_packets.py'
+      - 'scripts/validate_v02_pilot.py'
+      - 'tests/test_v02_pilot.py'
+      - '.github/workflows/v02-pilot-packets.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Validate the independent pilot contract and evidence
+        run: python3 scripts/validate_v02_pilot.py
+      - name: Test pilot evidence boundaries
+        run: python3 -m unittest discover -s tests -p 'test_v02_pilot.py' -v
+      - name: Build pinned evaluator-free input packets
+        run: python3 scripts/build_v02_pilot_packets.py --output-dir "$RUNNER_TEMP/v02-pilot-packets"
+      - name: Preserve input packets and checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: v02-pilot-clean-packets
+          path: ${{ runner.temp }}/v02-pilot-packets
+          if-no-files-found: error

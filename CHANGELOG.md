@@ -4,14 +4,33 @@
 
 All notable changes to this project will be documented here.
 
-The project intends to follow Semantic Versioning once the public artifact contracts stabilize.
+Public artifact contracts use Semantic Versioning. Published tags and releases identify the accepted version.
 
 ## [Unreleased]
 
 ### Added
 
+- Source-preserving bounded dashboard CSS restoration with a frozen 32-condition/native-zoom runner, complete baseline/candidate evidence and finite rollback/resource policy.
+- Isolated v0.2 pilot packets, separate rubric/result schema and evidence-integrity validation. Two independently reviewed runs are merged in #33: GPT-6 scores 36/36 and GPT-5.6 Sol scores 33/36. AX-01, AX-02 and AX-03 retain partial scores; neither run has a critical error.
+- Reusable native dashboard factories, synthetic recovery states, semantic themes and bilingual measured-evidence documentation.
+- Optional v0.2 visual-direction comparison, responsive behavior, and token-extraction/migration templates.
+- Advisory visual-quality review reference with evidence-first checks.
+- Synthetic responsive account dashboard artifact chain.
+- Optional responsive-layout and accessibility behavioral pilot cases (excluded from the v0.1 benchmark manifest).
+
+### Changed
+
+- Reconcile optional v0.2 work with the published v0.1.0 baseline, preserving all benchmark outputs and frozen contracts. Pilot #6 and deployment #29 are complete; each integration candidate still requires its own checks.
+
+## [0.1.0] - 2026-11-18
+
+[Published release](https://github.com/bynanci/website-design-skill/releases/tag/v0.1.0) · 07:03:58 Asia/Taipei · commit `e33c7414de44cf537c9a59113fd8f393352af5bc`
+
+### Added
+
+- Reviewed, two-stage release requests with strict candidate checks, immutable notes hashes and publication through GitHub's short-lived repository token.
 - Two independently reviewed official v0.1 benchmark runs on ChatGPT web, using the selected model labels GPT-6 and GPT-5.6 Sol. Each run scores 40/40 on frozen suite `0.1.0` at core commit `7d64090710ef20f1d24cea6b46199391d3c09c18`. See the [compatibility matrix](benchmarks/compatibility-matrix.md) for raw-run and scoring links.
-- [Bilingual draft v0.1.0 release notes](docs/releases/v0.1.0.md) with evidence boundaries and remaining publication steps. The local strict evidence gate passes in the 2026-11-17 snapshot; publication follows the release checklist, with [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) and [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) as the publication record.
+- [Bilingual v0.1.0 release notes](docs/releases/v0.1.0.md) with evidence boundaries, accepted candidate and verified publication record. [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) is complete.
 
 - Explicit dependency-free static showcase build and Vercel deployment contract, strict public asset/provenance checks, main/preview HTTP/browser smoke, and separate all-context merge-readiness reporting.
 - Bounded declarative recovery prototype with recursive strict payload validation, live one-use host capabilities, text-only Vue rendering, static fallback and comparable production bundle/UI cost evidence.

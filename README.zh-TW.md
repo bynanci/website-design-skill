@@ -32,7 +32,7 @@ Website Design Skill 是一套與工具及前端框架無關的網站改版方�
 
 [整合架構](integrations/context-aware-ui/README.zh-TW.md)連結專案 token、可重用元件、狀態／API 所有權及有限來源修改。Main 已有範圍明確的 Vue 盤點、軌道排序修改、媒體狀態轉換及宣告式復原 fixture 與 browser 證據；v0.2 preview 另提供可渲染 Dashboard 與單一已審查 CSS 復原操作。每項能力均有限定語法、host 與證據邊界，其他框架需各自驗證。
 
-[Issue #8](https://github.com/bynanci/website-design-skill/issues/8)記錄已完成試點；#1 的 v0.1 benchmark gate 在 2026-11-17 證據快照中已有兩次完成獨立審查的官方執行。獨立的 [#6 v0.2 pilot](https://github.com/bynanci/website-design-skill/issues/6) 在 preview worktree 已完成兩次執行、獨立審查與驗證：GPT-6 得 36/36，GPT-5.6 Sol 得 33/36。GPT-5.6 Sol 的 AX-01、AX-02、AX-03 為部分得分，兩次均無 critical error；發布與合併狀態以 #6 為準。部署另由 [#29](https://github.com/bynanci/website-design-skill/issues/29)追蹤。
+[Issue #8](https://github.com/bynanci/website-design-skill/issues/8)記錄已完成試點；#1 的 v0.1 benchmark gate 在 2026-11-17 證據快照中已有兩次完成獨立審查的官方執行。獨立的 [#6 v0.2 pilot](https://github.com/bynanci/website-design-skill/issues/6) 已完成兩次執行、獨立審查與驗證，並於 [PR #33](https://github.com/bynanci/website-design-skill/pull/33) 合併：GPT-6 得 36/36，GPT-5.6 Sol 得 33/36。GPT-5.6 Sol 的 AX-01、AX-02、AX-03 為部分得分，兩次均無 critical error；發布與合併狀態以 #6 為準。部署另由 [#29](https://github.com/bynanci/website-design-skill/issues/29)追蹤。
 
 ## 建置靜態展示頁
 
@@ -51,6 +51,12 @@ python3 scripts/check_merge_readiness.py --repo bynanci/website-design-skill --s
 
 預期部署 Vercel 的候選另加 `--required-check 'Vercel – vue-project-profile'`。檢查失敗、pending、缺漏或證據不完整都會回傳非零；工具不會改寫平台狀態或 repository 保護規則。
 
+## v0.2 選用預覽
+
+此預覽新增[視覺方向比較](templates/visual-direction-comparison.md)、[響應式行為](templates/responsive-behavior.md)與[設計 token 擷取／遷移](templates/design-token-extraction.md)三項選用交付契約，以及[可執行合成 Dashboard](examples/responsive-dashboard/README.md)。[QA 紀錄](examples/responsive-dashboard/output/qa-review-2026-11-17.md)保存 Chromium 渲染、鍵盤與自動可及性檢查的來源與限制。
+
+這些項目不列入 v0.1 官方 40 分 benchmark。Issue #7 的限定範圍已完成：八組可重用元件、32 項驗收矩陣及真正的 200% 原生瀏覽器縮放擷取。[Issue #6](https://github.com/bynanci/website-design-skill/issues/6) 已完成兩次獨立 pilot 執行與逐項審查，結果與 v0.1 發布 gate 分開管理。選用契約由 [PR #5](https://github.com/bynanci/website-design-skill/pull/5) 追蹤整合。實體裝置、螢幕閱讀器與真人任務研究尚未執行。自動檢查結果不代表跨 agent 相容性、正式可及性合規或產品部署驗收。
+
 ## 文件語言與寫作規範
 
 本次雙語範圍包含 README、核心技能、roadmap、核心參考文件、範本與選用 UI adapter 契約。Benchmark 輸入、預期輸出、評分量表、原始證據與 repository 政策文件仍維持英文版本。繁中使用台灣用語、固定術語與可操作步驟；英文參考 ASD-STE100 Issue 9 的清楚寫法，但本專案不宣稱正式合規。該標準不定義繁體中文合規。詳見[雙語寫作規範](docs/WRITING-STYLE.md)。
@@ -68,13 +74,15 @@ python3 scripts/check_merge_readiness.py --repo bynanci/website-design-skill --s
 
 ## v0.1 證據與發布狀態
 
+[v0.1.0 已於 2026-11-18（Asia/Taipei）發布](https://github.com/bynanci/website-design-skill/releases/tag/v0.1.0)，tag 固定在 commit `e33c7414de44cf537c9a59113fd8f393352af5bc`。目前選用的 v0.2 新增項目仍未單獨發布。
+
 截至 2026-11-17，[GPT-6](benchmarks/results/chatgpt-web-gpt-6-v01-20261117/) 與 [GPT-5.6 Sol](benchmarks/results/chatgpt-web-gpt-5-6-sol-v01-20261117/) 兩次官方執行均通過獨立審查與 repository 驗證，各得 40/40。這是同一 ChatGPT web 產品上的兩個所選模型標籤，不能推論跨供應商或所有平台相容。每個案例均使用全新的 Temporary、Unpersonalized 對話與指定輸入資料包，未使用 API key。
 
 正式 UI 執行保存原始下載、隔離紀錄、執行資訊及獨立逐項評分。一般人工操作測試不會自動成為官方相容性證據。完整分數與限制見[相容性矩陣](benchmarks/compatibility-matrix.md)。這些規劃交付物的評分不代表已完成真人研究、實作成效或可及性合規驗證。
 
 本機 `python3 scripts/release_status.py --require-ready` 回報 ready：兩次官方執行、兩個不同 agent signature，沒有 failure 或 warning。兩次均使用 suite `0.1.0` 與凍結核心 commit `7d64090710ef20f1d24cea6b46199391d3c09c18`；main 後續的 adapter 與測試屬於另一組證據，未納入本次 benchmark 輸入。
 
-發布前須核對確切 candidate 的 CI 與必要外部檢查、完成公開合併，再依 [RELEASE.md](RELEASE.md) 建立 release tag。發布紀錄以 [Issue #1](https://github.com/bynanci/website-design-skill/issues/1) 與 [GitHub Releases](https://github.com/bynanci/website-design-skill/releases) 為準。在 2026-11-17 快照中，[#29](https://github.com/bynanci/website-design-skill/issues/29) 的部署配額限制仍有效，預定於 2026-11-18 19:10（Asia/Taipei）追蹤。詳見 [v0.1.0 發布說明草案](docs/releases/v0.1.0.zh-TW.md)。
+本次發布請求先通過唯讀驗證，再由 workflow 發布並核實 tag 與完整 Release 內文，[Issue #1](https://github.com/bynanci/website-design-skill/issues/1) 已結案。後續版本仍須依 [RELEASE.md](RELEASE.md) 核對確切 candidate 的 CI 與必要外部檢查。[部署問題 #29](https://github.com/bynanci/website-design-skill/issues/29) 已結案：接受的 main 與 preview 合併版本各有自己的 canonical READY 部署，來源 manifest、資產雜湊、HTTP／browser 及 all-context readiness 均通過，原訂重試已暫停。後續候選仍須通過自己的檢查。詳見 [v0.1.0 發布說明](docs/releases/v0.1.0.zh-TW.md)。
 
 ## 相關文件
 

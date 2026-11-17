@@ -1,0 +1,8 @@
+{
+  "label": "gpt6-v02-responsive",
+  "model": "GPT-6",
+  "started_at": "2026-11-17T13:32:15.772Z",
+  "packet_path": "/workspace/shared/website-eval-inputs/responsive-layout-001-0.2-pilot.1-7f7148a07527.zip",
+  "personalization": "Unpersonalized",
+  "temporary": true
+}

@@ -4,6 +4,13 @@
 
 Examples should demonstrate the skill using synthetic or redistributable inputs.
 
+Available examples include the [optional responsive dashboard
+fixture](responsive-dashboard/), which pairs synthetic requirements with
+proposed responsive, visual-direction and design-token artifacts. Its
+prior Chromium evidence and remaining unrun conditions are recorded in the
+[QA review](responsive-dashboard/output/qa-review-2026-11-16.md). It is not part
+of the v0.1 canonical benchmark.
+
 Planned example categories:
 
 - corporate website

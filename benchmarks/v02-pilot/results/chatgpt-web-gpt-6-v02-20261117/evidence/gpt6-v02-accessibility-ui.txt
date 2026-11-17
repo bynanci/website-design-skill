@@ -1,0 +1,87 @@
+Browser tab: 9, Title: "Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.", URL: "https://chatgpt.com/c/6afc57a8-2a44-83e8-a099-bcf24a8aea0e?temporary-chat=true".
+0 AXWebArea URL: chatgpt.com/c/6afc57a8-2a44-83e8-a099-bcf24a8aea0e?temporary-chat=true, Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.
+	1 container
+		2 container root
+			3 container
+				4 link Description: Skip to content, Value: chatgpt.com/c/6afc57a8-2a44-83e8-a099-bcf24a8aea0e?temporary-chat=true#_r_51_
+				5 container
+					6 container app-shell-sidebar
+						7 container App navigation
+							8 button (collapsed) Home, Secondary Actions: Expand
+							9 button (collapsed) Space, Secondary Actions: Expand
+							10 button (collapsed) Scheduled, Secondary Actions: Expand
+							11 button (collapsed) Plugins, Secondary Actions: Expand
+							12 pop up button (collapsed) Explore, Secondary Actions: Expand
+							13 button Sites
+							14 button Maps
+							15 button Images
+							16 button (collapsed) Codex, Secondary Actions: Expand
+							17 container
+								18 pop up button (collapsed) Description: Usage, ID: radix-_r_3j_, Secondary Actions: Expand
+								19 pop up button (collapsed) Description: Open profile menu, ID: radix-_R_4nef9ndqd9iqeprb347l9arad5_, Secondary Actions: Expand
+					20 container
+						21 button New chat
+							22 image
+						685 text Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.
+						686 image
+						687 text Temporary chat
+						27 button Save chat
+					688 container
+						689 container Conversation
+							690 container
+								691 heading You said:, Value: 4
+									692 text You said:
+								693 button accessibility-001-0.2-pilot.1-7f7148a07527.zip
+								694 image
+								695 text accessibility-001-0.2-pilot.1-7f7148a07527.zip File
+								696 text Use the attached packet's SKILL.md as the governing skill. Read packet.json and complete its declared case using only the unchanged case inputs and public references/templates that the skill directs you to read. Do not access the web, connected sources, another conversation, evaluator references, expected.md, rubric.md, prior outputs, or files outside this one packet. Do not invent unavailable evidence. Return a complete task result suitable for evaluation. If a required capability is unavailable, state the limitation and continue with the strongest valid artifact you can produce without fabricating results. Preserve the complete result in a downloadable UTF-8 Markdown file if this interface supports it; otherwise return the full result in chat.
+								697 button Copy message
+								698 button Edit message
+								699 container
+									700 button (expanded) Worked for 3m 20s, Secondary Actions: Collapse
+									701 text Worked for 3m 20s
+								702 heading ChatGPT said:, Value: 4
+									703 text ChatGPT said:
+								704 text I’ll inspect the packet’s instructions and case inputs, then produce the requested result using only materials inside the archive. I won’t use external sources.
+								705 text Inspected ZIP contents, templates, and component contracts
+								706 heading ChatGPT said:, Value: 4
+									707 text ChatGPT said:
+								708 text The packet identifies seven reported accessibility defects. I’ll prioritize the interaction blockers, map fixes to the six existing components, and keep proposed checks separate from results that have not been tested.
+								709 text Wrote an accessibility remediation plan
+								710 heading ChatGPT said:, Value: 4
+									711 text ChatGPT said:
+								712 container
+									713 text Completed the accessibility remediation plan for  Case  accessibility-001 , using only the supplied packet and its declared references and templates.
+								714 image
+								715 text Complete remediation plan
+								716 text UTF-8 Markdown · 26 KB · 125 lines
+								717 button Download
+									718 text Download
+									719 image
+								720 text The artifact includes a prioritized assessment of all seven reported defects, reusable-component responsibilities, proposed corrections, keyboard and screen-reader checks, content-preservation requirements, missing verification evidence, and release-validation criteria.
+								721 container
+									722 text Important limitation:  No application implementation, accessibility testing, or WCAG conformance verification was performed. Reported defects, unverified causes, proposed fixes, and outstanding validation are explicitly distinguished.
+								723 text No external sources or evaluation references were accessed.
+								724 button Copy
+									725 image
+								726 checkbox Description: Read aloud, Value: 0
+								727 pop up button (collapsed) Description: More actions, ID: radix-_r_72_, Secondary Actions: Expand
+							728 text ChatGPT can make mistakes. Check important info.
+							729 container
+								730 heading Latest response, Value: 4
+									731 text Latest response
+								732 container
+									733 container
+										734 button (collapsed) Description: Add files and more, Secondary Actions: Expand
+										735 text entry area (settable) Description: Ask ChatGPT, Value: 
+
+											736 container
+												737 text Ask ChatGPT
+										738 pop up button (collapsed) Description: Select ChatGPT model, ID: radix-_r_63_, Secondary Actions: Expand
+											739 text Medium
+										740 button Dictate
+										741 button (disabled) Send
+											742 image
+		684 text Response complete
+
+The focused UI element is 700 button (expanded) Worked for 3m 20s, Secondary Actions: Collapse

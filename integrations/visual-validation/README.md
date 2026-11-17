@@ -2,7 +2,7 @@
 
 [繁體中文版本](README.zh-TW.md)
 
-Status: **proposed integration contract; documentation only**. No Playwright runner, screenshot service, vision model, or automatic code-fix loop is implemented by this document.
+Status: **optional integration contract with a scoped executable pilot**. The [dashboard QA guide](../../examples/responsive-dashboard/qa/README.md) implements the frozen browser matrix and one bounded CSS restoration operation. General repair, vision-model judgment and native-shell compatibility remain outside that pilot.
 
 ## Purpose
 
@@ -73,7 +73,7 @@ titlebar, OS menu or native dialog.
 
 ## Bounded responsive repair policy
 
-A future pilot may allow at most **two automatic patch/recheck iterations**,
+The scoped pilot allows at most **two automatic patch/recheck iterations**,
 plus a configured wall-time/resource budget. Record the initial baseline and
 every attempted correction, including rejected or reverted changes.
 

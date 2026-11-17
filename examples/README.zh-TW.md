@@ -24,6 +24,8 @@
 
 ## 已提供的整合 fixture
 
+- [選用響應式 Dashboard](responsive-dashboard/README.md)：合成需求、可執行 HTML/CSS/JS 與交付契約；[QA 紀錄](responsive-dashboard/output/qa-review-2026-11-16.md)區分既有自動檢查與未執行條件。此案例不列入官方 v0.1 benchmark。
+
 - [合成 Vue 專案 Profile fixture](project-profile-vue/README.zh-TW.md)：為選用的唯讀 inspector 提供靜態輸入與已保存的檢查證據。它不會讓核心技能依賴 Vue，也不宣稱已完成渲染驗收。
 
 
